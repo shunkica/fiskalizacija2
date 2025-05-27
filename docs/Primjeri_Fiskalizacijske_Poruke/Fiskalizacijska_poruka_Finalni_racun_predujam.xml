@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns1:EvidentirajERacunZahtjev xmlns:ns2="http://www.w3.org/2000/09/xmldsig#" xmlns:ns1="http://www.porezna-uprava.gov.hr/fin/2024/types/eFiskalizacija">
+    <ns1:Zaglavlje>
+        <ns1:vrstaERacuna>U</ns1:vrstaERacuna>
+    </ns1:Zaglavlje>
+    <ns1:ERacun>
+        <ns1:brojDokumenta>2-P1-1</ns1:brojDokumenta>
+        <ns1:datumIzdavanja>2025-06-15</ns1:datumIzdavanja>
+        <ns1:vrstaDokumenta>380</ns1:vrstaDokumenta>
+        <ns1:valutaERacuna>EUR</ns1:valutaERacuna>
+        <ns1:datumDospijecaPlacanja>2025-06-30</ns1:datumDospijecaPlacanja>
+        <ns1:vrstaPoslovnogProcesa>P1</ns1:vrstaPoslovnogProcesa>
+        <ns1:PrethodniERacun>
+            <ns1:brojDokumenta>1-P1-1</ns1:brojDokumenta>
+            <ns1:datumIzdavanja>2025-05-01</ns1:datumIzdavanja>
+        </ns1:PrethodniERacun>
+        <ns1:Izdavatelj>
+            <ns1:ime>Tvrtka A d.o.o.</ns1:ime>
+            <ns1:oibPorezniBroj>12345678901</ns1:oibPorezniBroj>
+        </ns1:Izdavatelj>
+        <ns1:Primatelj>
+            <ns1:ime>Tvrtka B d.o.o.</ns1:ime>
+            <ns1:oibPorezniBroj>11111111119</ns1:oibPorezniBroj>
+        </ns1:Primatelj>
+        <ns1:PrijenosSredstava>
+            <ns1:identifikatorRacunaZaPlacanje>HRXXXXXXXXXXXXXXXX</ns1:identifikatorRacunaZaPlacanje>
+        </ns1:PrijenosSredstava>
+        <ns1:DokumentUkupanIznos>
+            <ns1:neto>200.00</ns1:neto>
+            <ns1:iznosBezPdv>200.00</ns1:iznosBezPdv>
+            <ns1:pdv>50.00</ns1:pdv>
+            <ns1:iznosSPdv>250.00</ns1:iznosSPdv>
+            <ns1:placeniIznos>125.00</ns1:placeniIznos>
+            <ns1:iznosKojiDospijevaZaPlacanje>125.00</ns1:iznosKojiDospijevaZaPlacanje>
+        </ns1:DokumentUkupanIznos>
+        <ns1:RaspodjelaPdv>
+            <ns1:kategorijaPdv>S</ns1:kategorijaPdv>
+            <ns1:oporeziviIznos>200.00</ns1:oporeziviIznos>
+            <ns1:iznosPoreza>50.00</ns1:iznosPoreza>
+            <ns1:stopa>25</ns1:stopa>
+        </ns1:RaspodjelaPdv>
+        <ns1:StavkaERacuna>
+            <ns1:kolicina>1.000</ns1:kolicina>
+            <ns1:jedinicaMjere>H87</ns1:jedinicaMjere>
+            <ns1:artiklNetoCijena>200.000000</ns1:artiklNetoCijena>
+            <ns1:artiklOsnovnaKolicina>1.000</ns1:artiklOsnovnaKolicina>
+            <ns1:artiklJedinicaMjereZaOsnovnuKolicinu>H87</ns1:artiklJedinicaMjereZaOsnovnuKolicinu>
+            <ns1:artiklKategorijaPdv>S</ns1:artiklKategorijaPdv>
+            <ns1:artiklStopaPdv>25</ns1:artiklStopaPdv>
+            <ns1:artiklNaziv>Proizvod</ns1:artiklNaziv>
+            <ns1:ArtiklIdentifikatorKlasifikacija>
+                <ns1:identifikatorKlasifikacije>62.90.90</ns1:identifikatorKlasifikacije>
+                <ns1:identifikatorSheme>CG</ns1:identifikatorSheme>
+            </ns1:ArtiklIdentifikatorKlasifikacija>
+        </ns1:StavkaERacuna>
+        <ns1:indikatorKopije>false</ns1:indikatorKopije>
+    </ns1:ERacun>
+</ns1:EvidentirajERacunZahtjev>
