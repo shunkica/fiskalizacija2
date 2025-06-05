@@ -1,0 +1,6 @@
+<Context>
+  <Resource name="jdbc/edelivery" auth="Container" type="javax.sql.DataSource"
+            maxTotal="100" maxIdle="30" maxWaitMillis="10000"
+            username="domisml" password="domisml" driverClassName="com.mysql.cj.jdbc.Driver"
+            url="jdbc:mysql://domisml-db:3306/domisml"/>
+</Context>
