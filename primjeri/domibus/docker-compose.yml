@@ -1,36 +1,36 @@
 services:
-#  domibus-blue-db:
-#    build:
-#      context: .
-#      dockerfile: domibus-db.Dockerfile
-#    container_name: domibus-blue-db
-#    healthcheck:
-#      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
-#      interval: 5s
-#      timeout: 5s
-#      retries: 10
-#
-#  domibus-red-db:
-#    build:
-#      context: .
-#      dockerfile: domibus-db.Dockerfile
-#    container_name: domibus-red-db
-#    healthcheck:
-#      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
-#      interval: 5s
-#      timeout: 5s
-#      retries: 10
+  domibus-blue-db:
+    build:
+      context: .
+      dockerfile: domibus-db.Dockerfile
+    container_name: domibus-blue-db
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 5s
+      timeout: 5s
+      retries: 10
 
-#  domismp-db:
-#    build:
-#      context: .
-#      dockerfile: domismp-db.Dockerfile
-#    container_name: domismp-db
-#    healthcheck:
-#      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
-#      interval: 5s
-#      timeout: 5s
-#      retries: 10
+  domibus-red-db:
+    build:
+      context: .
+      dockerfile: domibus-db.Dockerfile
+    container_name: domibus-red-db
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  domismp-db:
+    build:
+      context: .
+      dockerfile: domismp-db.Dockerfile
+    container_name: domismp-db
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 5s
+      timeout: 5s
+      retries: 10
 
   domisml-db:
     build:
@@ -43,52 +43,52 @@ services:
       timeout: 5s
       retries: 10
 
-#  domibus-blue:
-#    build:
-#      context: .
-#      dockerfile: domibus.Dockerfile
-#    container_name: domibus-blue
-#    environment:
-#      - DOMIBUS_DB_HOST=domibus-blue-db
-#      - DOMIBUS_KEY_ALIAS=blue_gw
-#      - DOMIBUS_BLUE_HOSTNAME=domibus-blue
-#      - DOMIBUS_RED_HOSTNAME=domibus-red
-#    ports:
-#      - "8080:8080"
-#    volumes:
-#      - "./logs/blue:/opt/domibus/logs"
-#    depends_on:
-#      domibus-blue-db:
-#        condition: service_healthy
-#
-#  domibus-red:
-#    build:
-#      context: .
-#      dockerfile: domibus.Dockerfile
-#    container_name: domibus-red
-#    environment:
-#      - DOMIBUS_DB_HOST=domibus-red-db
-#      - DOMIBUS_KEY_ALIAS=red_gw
-#      - DOMIBUS_BLUE_HOSTNAME=domibus-blue
-#      - DOMIBUS_RED_HOSTNAME=domibus-red
-#    ports:
-#      - "8081:8080"
-#    volumes:
-#      - "./logs/red:/opt/domibus/logs"
-#    depends_on:
-#      domibus-red-db:
-#        condition: service_healthy
+  domibus-blue:
+    build:
+      context: .
+      dockerfile: domibus.Dockerfile
+    container_name: domibus-blue
+    environment:
+      - DOMIBUS_DB_HOST=domibus-blue-db
+      - DOMIBUS_KEY_ALIAS=blue_gw
+      - DOMIBUS_BLUE_HOSTNAME=domibus-blue
+      - DOMIBUS_RED_HOSTNAME=domibus-red
+    ports:
+      - "127.0.0.1:8081:8080"
+    volumes:
+      - "./logs/blue:/opt/domibus/logs"
+    depends_on:
+      domibus-blue-db:
+        condition: service_healthy
 
-#  domismp:
-#    build:
-#      context: .
-#      dockerfile: domismp.Dockerfile
-#    container_name: domismp
-#    ports:
-#      - "18080:8080"
-#    depends_on:
-#      domismp-db:
-#        condition: service_healthy
+  domibus-red:
+    build:
+      context: .
+      dockerfile: domibus.Dockerfile
+    container_name: domibus-red
+    environment:
+      - DOMIBUS_DB_HOST=domibus-red-db
+      - DOMIBUS_KEY_ALIAS=red_gw
+      - DOMIBUS_BLUE_HOSTNAME=domibus-blue
+      - DOMIBUS_RED_HOSTNAME=domibus-red
+    ports:
+      - "127.0.0.1:8082:8080"
+    volumes:
+      - "./logs/red:/opt/domibus/logs"
+    depends_on:
+      domibus-red-db:
+        condition: service_healthy
+
+  domismp:
+    build:
+      context: .
+      dockerfile: domismp.Dockerfile
+    container_name: domismp
+    ports:
+      - "127.0.0.1:8083:8080"
+    depends_on:
+      domismp-db:
+        condition: service_healthy
 
   domisml:
     build:
@@ -96,7 +96,7 @@ services:
       dockerfile: domisml.Dockerfile
     container_name: domisml
     ports:
-      - "28080:8080"
+      - "127.0.0.1:8084:8080"
     depends_on:
       domisml-db:
         condition: service_healthy

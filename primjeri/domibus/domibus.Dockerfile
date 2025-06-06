@@ -11,7 +11,8 @@ ADD https://repo1.maven.org/maven2/com/mysql/mysql-connector-j/8.4.0/mysql-conne
 WORKDIR /opt/domibus
 
 RUN echo "domibus.datasource.driverClassName=com.mysql.cj.jdbc.Driver" >> conf/domibus/domibus.properties && \
-    echo "domibus.datasource.url=" >> conf/domibus/domibus.properties
+    echo "domibus.datasource.url=" >> conf/domibus/domibus.properties && \
+    echo "domibus.passwordPolicy.defaultUser.autogeneratePassword=false" >> conf/domibus/domibus.properties
 
 ENV JAVA_OPTS "${JAVA_OPTS} -Ddomibus.config.location=/opt/domibus/conf/domibus -Dfile.encoding=UTF-8 -Xms128m -Xmx1024m"
 
