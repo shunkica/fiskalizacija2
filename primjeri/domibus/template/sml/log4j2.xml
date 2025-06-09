@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="30">
+
+  <Properties>
+    <Property name="LOG_PATTERN">%d{ISO8601}{Europe/Brussels} [%X{user}] [%X{requestId}] %-5p %c{1}:%L - %m%n</Property>
+  </Properties>
+
+  <Appenders>
+    <Console name="console" target="SYSTEM_OUT" follow="true">
+      <PatternLayout pattern="${LOG_PATTERN}"/>
+    </Console>
+  </Appenders>
+
+  <Loggers>
+    <!-- Set noisy libs to WARN -->
+<!--    <Logger name="org.apache.activemq" level="WARN" additivity="false"/>-->
+<!--    <Logger name="org.quartz" level="WARN" additivity="false"/>-->
+<!--    <Logger name="com.zaxxer.hikari.HikariPool" level="WARN" additivity="false"/>-->
+<!--    <Logger name="org.hibernate" level="WARN" additivity="false"/>-->
+
+    <Root level="DEBUG" additivity="false">
+      <AppenderRef ref="console"/>
+    </Root>
+  </Loggers>
+</Configuration>

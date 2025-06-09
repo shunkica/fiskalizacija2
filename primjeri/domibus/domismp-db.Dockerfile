@@ -8,9 +8,12 @@ RUN microdnf install -y unzip  \
     && microdnf remove -y unzip  \
     && microdnf clean all \
     && cp /tmp/db/smp-5.1.1/database-scripts/mysql5innodb.ddl /docker-entrypoint-initdb.d/1.sql \
-    && cp /tmp/db/smp-5.1.1/database-scripts/mysql5innodb-data.sql /docker-entrypoint-initdb.d/2.sql \
-    && rm -rf /tmp/db \
-    && chown -R mysql:mysql /docker-entrypoint-initdb.d/
+#    && cp /tmp/db/smp-5.1.1/database-scripts/mysql5innodb-data.sql /docker-entrypoint-initdb.d/2.sql \
+    && rm -rf /tmp/db
+
+COPY template/smp/smp-data.sql /docker-entrypoint-initdb.d/2.sql
+
+RUN chown -R mysql:mysql /docker-entrypoint-initdb.d/
 
 ENV MYSQL_ROOT_PASSWORD=domismp \
     MYSQL_DATABASE=domismp \

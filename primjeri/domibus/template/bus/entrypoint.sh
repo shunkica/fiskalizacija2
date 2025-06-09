@@ -10,6 +10,12 @@ fi
 sed -i "s/^domibus.database.serverName=.*/domibus.database.serverName=${DOMIBUS_DB_HOST}/" "$CONF_FILE"
 sed -i "s|^domibus.datasource.url=.*|domibus.datasource.url=jdbc:mysql://${DOMIBUS_DB_HOST}:${DOMIBUS_DB_PORT:-3306}/${DOMIBUS_DB_NAME:-domibus}?useSSL=false\&useLegacyDatetimeCode=false\&serverTimezone=UTC\&allowPublicKeyRetrieval=true|" "$CONF_FILE"
 
+#sed -i "s/^#domibus.dynamicdiscovery.useDynamicDiscovery=.*/domibus.dynamicdiscovery.useDynamicDiscovery=true/g"  "$CONF_FILE"
+#sed -i "s/^#domibus.dynamicdiscovery.client.specification=.*/domibus.dynamicdiscovery.client.specification=OASIS/g"  "$CONF_FILE"
+#sed -i "s/^#domibus.dynamicdiscovery.client.dns.lookup.types=.*/domibus.dynamicdiscovery.client.dns.lookup.types=NAPTR/g"  "$CONF_FILE"
+#sed -i "s/^#domibus.dynamicdiscovery.transportprofileas4=.*/domibus.dynamicdiscovery.transportprofileas4=eracun-transport-as4-v1_0/g"  "$CONF_FILE"
+
+[ -n "$DOMIBUS_SMLZONE" ] && sed -i "s/^#domibus.smlzone=.*/domibus.smlzone=${DOMIBUS_SMLZONE}/g"  "$CONF_FILE"
 [ -n "$DOMIBUS_DB_PORT" ] && sed -i "s/^domibus.database.port=.*/domibus.database.port=${DOMIBUS_DB_PORT}/" "$CONF_FILE"
 [ -n "$DOMIBUS_DB_NAME" ] && sed -i "s/^domibus.database.name=.*/domibus.database.name=${DOMIBUS_DB_NAME}/" "$CONF_FILE"
 [ -n "$DOMIBUS_DB_USER" ] && sed -i "s/^#domibus.datasource.user=.*/domibus.datasource.user=${DOMIBUS_DB_USER}/" "$CONF_FILE"
@@ -21,6 +27,5 @@ sed -i "s|^domibus.datasource.url=.*|domibus.datasource.url=jdbc:mysql://${DOMIB
 
 [ -n "$DOMIBUS_RED_HOSTNAME" ] && sed -i "s/red_hostname/${DOMIBUS_RED_HOSTNAME}/g" /opt/domibus/conf/pmodes/domibus-gw-sample-pmode-blue.xml
 [ -n "$DOMIBUS_BLUE_HOSTNAME" ] && sed -i "s/blue_hostname/${DOMIBUS_BLUE_HOSTNAME}/g" /opt/domibus/conf/pmodes/domibus-gw-sample-pmode-red.xml
-
 
 exec bin/catalina.sh run

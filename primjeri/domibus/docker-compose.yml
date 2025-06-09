@@ -1,47 +1,74 @@
+networks:
+  domibus-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
 services:
   domibus-blue-db:
     build:
       context: .
       dockerfile: domibus-db.Dockerfile
     container_name: domibus-blue-db
+    ports:
+        - "127.0.0.1:8301:3306"
     healthcheck:
       test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
       interval: 5s
       timeout: 5s
       retries: 10
+    networks:
+      domibus-network:
+        ipv4_address: 172.20.0.10
 
   domibus-red-db:
     build:
       context: .
       dockerfile: domibus-db.Dockerfile
     container_name: domibus-red-db
+    ports:
+        - "127.0.0.1:8302:3306"
     healthcheck:
       test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
       interval: 5s
       timeout: 5s
       retries: 10
+    networks:
+      domibus-network:
+        ipv4_address: 172.20.0.11
 
   domismp-db:
     build:
       context: .
       dockerfile: domismp-db.Dockerfile
     container_name: domismp-db
+    ports:
+        - "127.0.0.1:8303:3306"
     healthcheck:
       test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
       interval: 5s
       timeout: 5s
       retries: 10
+    networks:
+      domibus-network:
+        ipv4_address: 172.20.0.12
 
   domisml-db:
     build:
       context: .
       dockerfile: domisml-db.Dockerfile
     container_name: domisml-db
+    ports:
+        - "127.0.0.1:8304:3306"
     healthcheck:
       test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
       interval: 5s
       timeout: 5s
       retries: 10
+    networks:
+      domibus-network:
+        ipv4_address: 172.20.0.13
 
   domibus-blue:
     build:
@@ -53,6 +80,7 @@ services:
       - DOMIBUS_KEY_ALIAS=blue_gw
       - DOMIBUS_BLUE_HOSTNAME=domibus-blue
       - DOMIBUS_RED_HOSTNAME=domibus-red
+      - DOMIBUS_SMLZONE=hr.test.eracun.local
     ports:
       - "127.0.0.1:8081:8080"
     volumes:
@@ -60,6 +88,11 @@ services:
     depends_on:
       domibus-blue-db:
         condition: service_healthy
+    dns:
+      - 172.20.0.2
+    networks:
+      domibus-network:
+        ipv4_address: 172.20.0.20
 
   domibus-red:
     build:
@@ -71,6 +104,7 @@ services:
       - DOMIBUS_KEY_ALIAS=red_gw
       - DOMIBUS_BLUE_HOSTNAME=domibus-blue
       - DOMIBUS_RED_HOSTNAME=domibus-red
+      - DOMIBUS_SMLZONE=hr.test.eracun.local
     ports:
       - "127.0.0.1:8082:8080"
     volumes:
@@ -78,6 +112,11 @@ services:
     depends_on:
       domibus-red-db:
         condition: service_healthy
+    dns:
+      - 172.20.0.2
+    networks:
+      domibus-network:
+        ipv4_address: 172.20.0.21
 
   domismp:
     build:
@@ -86,9 +125,16 @@ services:
     container_name: domismp
     ports:
       - "127.0.0.1:8083:8080"
+    volumes:
+      - "./logs/smp:/opt/smp/logs"
     depends_on:
       domismp-db:
         condition: service_healthy
+    dns:
+      - 172.20.0.2
+    networks:
+      domibus-network:
+        ipv4_address: 172.20.0.30
 
   domisml:
     build:
@@ -97,6 +143,29 @@ services:
     container_name: domisml
     ports:
       - "127.0.0.1:8084:8080"
+    volumes:
+      - "./logs/sml:/opt/sml/logs"
     depends_on:
       domisml-db:
         condition: service_healthy
+      bind9:
+        condition: service_started
+    dns:
+      - 172.20.0.2
+    networks:
+      domibus-network:
+        ipv4_address: 172.20.0.31
+
+  bind9:
+    build:
+      context: .
+      dockerfile: bind9.Dockerfile
+    container_name: bind9
+    ports:
+      - "127.0.0.1:53:53/udp"
+      - "127.0.0.1:53:53/tcp"
+    networks:
+      domibus-network:
+        ipv4_address: 172.20.0.2
+        aliases:
+          - "test.eracun.local"

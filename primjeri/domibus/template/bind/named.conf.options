@@ -1,0 +1,43 @@
+options {
+	directory "/var/cache/bind";
+
+	// If there is a firewall between you and nameservers you want
+	// to talk to, you may need to fix the firewall to allow multiple
+	// ports to talk.  See http://www.kb.cert.org/vuls/id/800113
+
+    //========================================================================
+	// JRC: disable recursion search (this is Authoritative-Only dns server)
+	//========================================================================
+   allow-recursion   { none; };
+
+    recursion no;
+	fetch-glue no;
+    dnssec-enable no;
+    dnssec-validation no;
+    //========================================================================
+	// JRC: allow-transfer defines a match list e.g. IP address(es) that are
+    // allowed to transfer (copy) the zone information from the server (master
+    // or slave for the zone).
+	//========================================================================
+    allow-transfer { none; };
+
+	//========================================================================
+	// If BIND logs error messages about the root key being expired,
+	// you will need to update your keys.  See https://www.isc.org/bind-keys
+	//========================================================================
+
+    //========================================================================
+	// JRC: dnssec-lookaside auto; makes that named reads the DLV key from bind.keys the first time it executes. 
+    //========================================================================
+    // dnssec-lookaside auto;
+    //========================================================================
+	// JRC:The bindkeys-file line is needed only if your bind.keys file is in a location other than /etc/bind/bind.keys - if it's /etc/bind/bind.keys, it's loaded by default. 
+    //========================================================================
+    // bindkeys-file "/etc/bind/bind.keys";
+
+	auth-nxdomain no;    # conform to RFC1035
+	listen-on-v6 { none; };
+
+	querylog yes;
+};
+

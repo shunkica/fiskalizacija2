@@ -7,10 +7,14 @@ ADD https://repo1.maven.org/maven2/com/mysql/mysql-connector-j/8.4.0/mysql-conne
 
 RUN ln -s ${TOMCAT_HOME}/lib ${TOMCAT_HOME}/libs
 
-RUN echo "export CLASSPATH=\$CATALINA_HOME/smp" >> ${TOMCAT_HOME}/bin/setenv.sh
+RUN echo "export CLASSPATH=/opt/smp/config" >> ${TOMCAT_HOME}/bin/setenv.sh
 
-RUN mkdir -p ${TOMCAT_HOME}/smp
+RUN mkdir -p /opt/smp /opt/smp/config /opt/smp/logs /opt/smp/security /opt/smp/libs
 
-ADD template/smp.config.properties ${TOMCAT_HOME}/smp/smp.config.properties
+COPY template/smp/smp.config.properties /opt/smp/config/
+COPY template/smp/security/encryptionPrivateKey.private /opt/smp/security/
+COPY template/smp/security/keystore.p12 /opt/smp/security/
+COPY template/smp/security/truststore.p12 /opt/smp/security/
 
-VOLUME ${TOMCAT_HOME}/smp
+
+VOLUME /opt/smp/config

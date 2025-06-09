@@ -1,0 +1,12 @@
+key "test.domisml.local." {
+    algorithm hmac-sha256;
+    secret "Reukm5R1cQqEu2RM7ig8lvpNrqFyagoHyYXZr7zeLnw=";
+};
+
+zone "test.eracun.local" {
+    type master;
+    file "/etc/bind/db.test.eracun.local";
+    allow-query    { any; };
+    allow-transfer { any; };
+    allow-update   { key "test.domisml.local."; } ;
+};

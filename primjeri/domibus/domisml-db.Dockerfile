@@ -8,9 +8,11 @@ RUN microdnf install -y unzip  \
     && microdnf remove -y unzip  \
     && microdnf clean all \
     && cp /tmp/db/bdmsl-webapp-5.0/database-scripts/mysql.ddl /docker-entrypoint-initdb.d/1.sql \
-    && cp /tmp/db/bdmsl-webapp-5.0/database-scripts/mysql-data.sql /docker-entrypoint-initdb.d/2.sql \
+#    && cp /tmp/db/bdmsl-webapp-5.0/database-scripts/mysql-data.sql /docker-entrypoint-initdb.d/2.sql \
     && rm -rf /tmp/db \
     && chown -R mysql:mysql /docker-entrypoint-initdb.d/
+
+ADD template/sml/sml-data.sql /docker-entrypoint-initdb.d/2.sql
 
 ENV MYSQL_ROOT_PASSWORD=domisml \
     MYSQL_DATABASE=domisml \
