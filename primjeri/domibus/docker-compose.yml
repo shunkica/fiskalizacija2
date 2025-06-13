@@ -14,10 +14,10 @@ services:
     ports:
         - "127.0.0.1:8301:3306"
     healthcheck:
-      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      test: [ "CMD", "mysqladmin", "ping", "-h", "127.0.0.1" ]
       interval: 5s
       timeout: 5s
-      retries: 10
+      retries: 30
     networks:
       domibus-network:
         ipv4_address: 172.20.0.10
@@ -30,10 +30,10 @@ services:
     ports:
         - "127.0.0.1:8302:3306"
     healthcheck:
-      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      test: [ "CMD", "mysqladmin", "ping", "-h", "127.0.0.1" ]
       interval: 5s
       timeout: 5s
-      retries: 10
+      retries: 30
     networks:
       domibus-network:
         ipv4_address: 172.20.0.11
@@ -46,10 +46,10 @@ services:
     ports:
         - "127.0.0.1:8303:3306"
     healthcheck:
-      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      test: [ "CMD", "mysqladmin", "ping", "-h", "127.0.0.1" ]
       interval: 5s
       timeout: 5s
-      retries: 10
+      retries: 30
     networks:
       domibus-network:
         ipv4_address: 172.20.0.12
@@ -62,10 +62,10 @@ services:
     ports:
         - "127.0.0.1:8304:3306"
     healthcheck:
-      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      test: [ "CMD", "mysqladmin", "ping", "-h", "127.0.0.1" ]
       interval: 5s
       timeout: 5s
-      retries: 10
+      retries: 30
     networks:
       domibus-network:
         ipv4_address: 172.20.0.13
@@ -78,8 +78,6 @@ services:
     environment:
       - DOMIBUS_DB_HOST=domibus-blue-db
       - DOMIBUS_KEY_ALIAS=blue_gw
-      - DOMIBUS_BLUE_HOSTNAME=domibus-blue
-      - DOMIBUS_RED_HOSTNAME=domibus-red
       - DOMIBUS_SMLZONE=hr.test.eracun.local
     ports:
       - "127.0.0.1:8081:8080"
@@ -102,8 +100,6 @@ services:
     environment:
       - DOMIBUS_DB_HOST=domibus-red-db
       - DOMIBUS_KEY_ALIAS=red_gw
-      - DOMIBUS_BLUE_HOSTNAME=domibus-blue
-      - DOMIBUS_RED_HOSTNAME=domibus-red
       - DOMIBUS_SMLZONE=hr.test.eracun.local
     ports:
       - "127.0.0.1:8082:8080"
@@ -167,5 +163,3 @@ services:
     networks:
       domibus-network:
         ipv4_address: 172.20.0.2
-        aliases:
-          - "test.eracun.local"

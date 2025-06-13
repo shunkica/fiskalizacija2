@@ -25,7 +25,4 @@ sed -i "s|^domibus.datasource.url=.*|domibus.datasource.url=jdbc:mysql://${DOMIB
 [ -n "$DOMIBUS_KEY_PASSWORD" ] && sed -i "s/^domibus.security.key.private.password=.*/domibus.security.key.private.password=${DOMIBUS_KEY_PASSWORD}/" "$CONF_FILE"
 [ -n "$DOMIBUS_TRUSTSTORE_PASSWORD" ] && sed -i "s/^domibus.security.truststore.password=.*/domibus.security.truststore.password=${DOMIBUS_TRUSTSTORE_PASSWORD}/" "$CONF_FILE"
 
-[ -n "$DOMIBUS_RED_HOSTNAME" ] && sed -i "s/red_hostname/${DOMIBUS_RED_HOSTNAME}/g" /opt/domibus/conf/pmodes/domibus-gw-sample-pmode-blue.xml
-[ -n "$DOMIBUS_BLUE_HOSTNAME" ] && sed -i "s/blue_hostname/${DOMIBUS_BLUE_HOSTNAME}/g" /opt/domibus/conf/pmodes/domibus-gw-sample-pmode-red.xml
-
 exec bin/catalina.sh run
