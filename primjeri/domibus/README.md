@@ -10,12 +10,13 @@ Nakon prvog pokretanja potrebno je postaviti PMode fileove za obje domibus insta
 - instanca 1 (http://localhost:8081/domibus): `template/bus/pmode_blue.xml`
 - instanca 2 (http://localhost:8082/domibus): `template/bus/pmode_green.xml`
 
-# Portovi
+# Defaultni Portovi
 
 - `8081` - domibus instanca 1
 - `8082` - domibus instanca 2
 - `8083` - domismp
 - `8084` - domisml
+- `3000` - client
 
 # URL-ovi
 
@@ -23,21 +24,14 @@ Nakon prvog pokretanja potrebno je postaviti PMode fileove za obje domibus insta
 - `http://localhost:8082/domibus` - domibus instanca 2
 - `http://localhost:8083/smp/ui` - domismp
 - `http://localhost:8084/bdmsl` - domisml
+- `http://localhost:3000/client` - client
 
 # Korisnički računi
 
 - domibus - `admin` / `123456`
 - domismp - `system` / `123456` | `user` / `123456`
 
-# Testno slanje
-
-U direktoriju `client` nalazi se NodeJS aplikacija za testno slanje poruka između dvije domibus instance.
-
-```shell
-cd client
-npm install
-npm start
-```
+# Korištenje testnog klijenta za slanje poruka
 
 Za `Payload XML File` mogu se koristiti primjeri eRačuna iz direktorija `@/docs/Primjeri_eRacuna`.
 
