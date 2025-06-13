@@ -162,11 +162,14 @@ services:
         ipv4_address: ${NET_PREFIX:-172.20.0}.2
         
   client:
-    image: node:lts
+    build:
+      context: .
+      dockerfile: client.Dockerfile
     container_name: client
-    working_dir: /app
-    volumes:
-      - ./client:/app
-    command: npm run start
+    dns:
+      - ${NET_PREFIX:-172.20.0}.2
+    networks:
+      domibus-network:
+        ipv4_address: ${NET_PREFIX:-172.20.0}.100
     ports:
       - "127.0.0.1:${CLIENT_PORT:-3000}:3000"
