@@ -1,0 +1,35 @@
+      <eiz:EvidentirajOdbijanjeZahtjev  xmlns:eiz="http://www.porezna-uprava.gov.hr/fin/2024/types/eIzvjestavanje" xmlns:xd="http://www.w3.org/2000/09/xmldsig#" eiz:id="122321">
+         <eiz:Zaglavlje>
+            <eiz:datumVrijemeSlanja>2024-02-27T15:28:00.0000</eiz:datumVrijemeSlanja>
+         </eiz:Zaglavlje>
+         <eiz:Odbijanje>
+            <eiz:brojDokumenta>1234/2024/06</eiz:brojDokumenta>
+            <eiz:datumIzdavanja>2024-02-27</eiz:datumIzdavanja>
+            <eiz:oibPorezniBrojIzdavatelja>00000000001</eiz:oibPorezniBrojIzdavatelja>
+            <eiz:oibPorezniBrojPrimatelja>02994650199</eiz:oibPorezniBrojPrimatelja>
+            <eiz:datumOdbijanja>2024-02-28</eiz:datumOdbijanja>
+            <eiz:vrstaRazlogaOdbijanja>N</eiz:vrstaRazlogaOdbijanja>
+            <eiz:razlogOdbijanja>Greška u dostavljenom računu - neispravna stavka prema narudzbenici</eiz:razlogOdbijanja>
+         </eiz:Odbijanje>
+	<xd:Signature>
+		<xd:SignedInfo>
+			<xd:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+			<xd:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
+			<xd:Reference URI="#unique-request-id-12345">
+				<xd:Transforms>
+					<xd:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+					<xd:Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+				</xd:Transforms>
+				<xd:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+				<xd:DigestValue>4n6MLp...</xd:DigestValue>
+			</xd:Reference>
+		</xd:SignedInfo>
+		<xd:SignatureValue>vK9QFpDUkKv...</xd:SignatureValue>
+		<xd:KeyInfo>
+			<xd:X509Data>
+				<xd:X509Certificate>[BASE64 certifikat]
+				</xd:X509Certificate>
+			</xd:X509Data>
+		</xd:KeyInfo>
+	</xd:Signature>	
+     </eiz:EvidentirajOdbijanjeZahtjev>

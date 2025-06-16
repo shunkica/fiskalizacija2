@@ -1,0 +1,68 @@
+<eiz:EvidentirajIsporukuZaKojuNijeIzdanERacunZahtjev xmlns:eiz="http://www.porezna-uprava.gov.hr/fin/2024/types/eIzvjestavanje" xmlns:xd="http://www.w3.org/2000/09/xmldsig#" eiz:id="unique-request-id-12345">
+	<eiz:Zaglavlje>
+		<eiz:datumVrijemeSlanja>2024-11-06T10:15:00.0000</eiz:datumVrijemeSlanja>
+		<eiz:vrstaRacuna>IR</eiz:vrstaRacuna>
+	</eiz:Zaglavlje>
+	<eiz:Racun>
+		<eiz:brojDokumenta>1234/2024/01</eiz:brojDokumenta>
+		<eiz:datumIzdavanja>2024-09-02</eiz:datumIzdavanja>
+		<eiz:vrstaDokumenta>380</eiz:vrstaDokumenta>
+		<eiz:valutaRacuna>EUR</eiz:valutaRacuna>
+		<eiz:vrstaPoslovnogProcesa>P1</eiz:vrstaPoslovnogProcesa>
+		<eiz:Izdavatelj>
+			<eiz:ime>Tvrtka A d.o.o.</eiz:ime>
+			<eiz:oibPorezniBroj>02994650199</eiz:oibPorezniBroj>
+		</eiz:Izdavatelj>
+		<eiz:Primatelj>
+			<eiz:ime>Tvrtka B d.o.o.</eiz:ime>
+			<eiz:oibPorezniBroj>00000000001</eiz:oibPorezniBroj>
+		</eiz:Primatelj>
+		<eiz:DokumentUkupanIznos>
+			<eiz:neto>1000.00</eiz:neto>
+			<eiz:iznosBezPdv>1000.00</eiz:iznosBezPdv>
+			<eiz:pdv>250.00</eiz:pdv>
+			<eiz:iznosSPdv>1250.00</eiz:iznosSPdv>
+			<eiz:iznosKojiDospijevaZaPlacanje>1250.00</eiz:iznosKojiDospijevaZaPlacanje>
+		</eiz:DokumentUkupanIznos>
+		<eiz:RaspodjelaPdv>
+			<eiz:kategorijaPdv>S</eiz:kategorijaPdv>
+			<eiz:oporeziviIznos>1000.00</eiz:oporeziviIznos>
+			<eiz:iznosPoreza>250.00</eiz:iznosPoreza>
+			<eiz:stopa>25</eiz:stopa>
+		</eiz:RaspodjelaPdv>
+		<eiz:StavkaRacuna>
+			<eiz:kolicina>2</eiz:kolicina>
+			<eiz:jedinicaMjere>H87</eiz:jedinicaMjere>
+			<eiz:artiklNetoCijena>500.00</eiz:artiklNetoCijena>
+			<eiz:artiklKategorijaPdv>S</eiz:artiklKategorijaPdv>
+			<eiz:artiklStopaPdv>25</eiz:artiklStopaPdv>
+			<eiz:artiklNaziv>naziv artikla</eiz:artiklNaziv>
+			<eiz:ArtiklIdentifikatorKlasifikacija>
+				<eiz:identifikatorKlasifikacije>11.07.01</eiz:identifikatorKlasifikacije>
+				<eiz:identifikatorSheme>CG</eiz:identifikatorSheme>
+			</eiz:ArtiklIdentifikatorKlasifikacija>
+		</eiz:StavkaRacuna>
+		<eiz:indikatorKopije>false</eiz:indikatorKopije>
+	</eiz:Racun>
+	<xd:Signature>
+		<xd:SignedInfo>
+			<xd:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+			<xd:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
+			<xd:Reference URI="#unique-request-id-12345">
+				<xd:Transforms>
+					<xd:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+					<xd:Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+				</xd:Transforms>
+				<xd:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+				<xd:DigestValue>4n6MLp...</xd:DigestValue>
+			</xd:Reference>
+		</xd:SignedInfo>
+		<xd:SignatureValue>vK9QFpDUkKv...</xd:SignatureValue>
+		<xd:KeyInfo>
+			<xd:X509Data>
+				<xd:X509Certificate>[BASE64 certifikat]
+</xd:X509Certificate>
+			</xd:X509Data>
+		</xd:KeyInfo>
+	</xd:Signature>
+</eiz:EvidentirajIsporukuZaKojuNijeIzdanERacunZahtjev>

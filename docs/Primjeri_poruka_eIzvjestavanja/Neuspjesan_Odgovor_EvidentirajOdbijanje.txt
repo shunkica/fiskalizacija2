@@ -1,0 +1,36 @@
+      <eizv:EvidentirajOdbijanjeOdgovor xmlns:eizv="http://www.porezna-uprava.gov.hr/fin/2024/types/eIzvjestavanje" eizv:id="1e9e7b3c-b2e9-4a0e-9b50-2a0cfcc0551d">
+         <eizv:datumVrijemeSlanja>2024-02-28T09:26:40+02:00</eizv:datumVrijemeSlanja>
+         <eizv:Odgovor>
+            <eizv:idZahtjeva>22bc1e3e-feb4-47d5-95cd-2a0cfcc0bd71</eizv:idZahtjeva>
+            <eizv:prihvacenZahtjev>false</eizv:prihvacenZahtjev>
+       	    <eizv:greska>
+               <eizv:sifra>S010</eizv:sifra>
+               <eizv:redniBrojZapisa>1</eizv:redniBrojZapisa>
+               <eizv:opis>Već postoji zabilježen status odbijanja eRačuna s istim identifikatorom.</eizv:opis>
+            </eizv:greska>
+         </eizv:Odgovor>
+         <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+            <SignedInfo>
+               <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+               <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
+               <Reference URI="#1e9e7b3c-b2e9-4a0e-9b50-2a0cfcc0551d">
+                  <Transforms>
+                     <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+                     <Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+                  </Transforms>
+                  <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+                  <DigestValue>8zDDSOS...</DigestValue>
+               </Reference>
+            </SignedInfo>
+            <SignatureValue>ScXlDSsH7T7...</SignatureValue>
+            <KeyInfo>
+               <X509Data>
+                  <X509Certificate>[BASE64 certifikatg</X509Certificate>
+                  <X509IssuerSerial>
+                     <X509IssuerName>...</X509IssuerName>
+                     <X509SerialNumber>...</X509SerialNumber>
+                  </X509IssuerSerial>
+               </X509Data>
+            </KeyInfo>
+         </Signature>
+      </eizv:EvidentirajOdbijanjeOdgovor>

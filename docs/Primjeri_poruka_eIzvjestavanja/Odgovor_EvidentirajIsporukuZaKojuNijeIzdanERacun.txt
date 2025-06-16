@@ -1,0 +1,31 @@
+      <eizv:EvidentirajIsporukuZaKojuNijeIzdanERacunOdgovor xmlns:eizv="http://www.porezna-uprava.gov.hr/fin/2024/types/eIzvjestavanje" eizv:id="3a8712ee-b33c-4c68-88a0-2a0cfcc017a2">
+         <eizv:datumVrijemeSlanja>2025-06-20T09:15:43+02:00</eizv:datumVrijemeSlanja>
+         <eizv:Odgovor>
+            <eizv:idZahtjeva>3ac87da8-8056-40ec-9e68-2a0cfcc086b3</eizv:idZahtjeva>
+            <eizv:prihvacenZahtjev>true</eizv:prihvacenZahtjev>
+         </eizv:Odgovor>
+         <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+            <SignedInfo>
+               <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+               <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
+               <Reference URI="#3a8712ee-b33c-4c68-88a0-2a0cfcc017a2">
+                  <Transforms>
+                     <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+                     <Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+                  </Transforms>
+                  <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+                  <DigestValue>8zDDSOS...</DigestValue>
+               </Reference>
+            </SignedInfo>
+            <SignatureValue>ScXlDSsH7T7...</SignatureValue>
+            <KeyInfo>
+               <X509Data>
+                  <X509Certificate>[BASE64 certifikat]</X509Certificate>
+                  <X509IssuerSerial>
+                     <X509IssuerName>...</X509IssuerName>
+                     <X509SerialNumber>...</X509SerialNumber>
+                  </X509IssuerSerial>
+               </X509Data>
+            </KeyInfo>
+         </Signature>
+      </eizv:EvidentirajIsporukuZaKojuNijeIzdanERacunOdgovor>
