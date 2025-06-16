@@ -351,6 +351,11 @@
                     <xsd:documentation>Identifikacija ugovora koja mora biti jedinstvena u kontekstu specifičnog trgovinskog odnosa i za određeno razdoblje (BT-12 iz UBL 2.1).</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
+            <xsd:element name="datumIsporuke" type="tns:datum" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Datum na koji se obavlja ili dovršava isporuke robe ili usluga (BT-72 iz UBL 2.1).</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
             <xsd:element name="PrethodniRacun" type="tns:PrethodniRacun" minOccurs="0" maxOccurs="unbounded">
                 <xsd:annotation>
                     <xsd:documentation>Informacije o jednom ili više prethodnih računa (BG-3 iz UBL 2.1).</xsd:documentation>
@@ -576,9 +581,29 @@
                     <xsd:documentation>Naziv artikla (BT-153 iz UBL 2.1).</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
-            <xsd:element name="ArtiklIdentifikatorKlasifikacija" type="tns:ArtiklIdentifikatorKlasifikacija" maxOccurs="unbounded">
+            <xsd:element name="ArtiklIdentifikatorKlasifikacija" type="tns:ArtiklIdentifikatorKlasifikacija" minOccurs="0" maxOccurs="unbounded">
                 <xsd:annotation>
                     <xsd:documentation>CPA nomenklatura označava se oznakom 'CG'.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+	
+	<xsd:complexType name="ArtiklIdentifikatorKlasifikacija">
+        <xsd:sequence>
+            <xsd:element name="identifikatorKlasifikacije" type="tns:tekst10">
+                <xsd:annotation>
+                    <xsd:documentation>Vrijednost iz klasifikacije artikla po njegovom tipu ili prirodi (BT-158 iz UBL 2.1).</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="identifikatorSheme" type="tns:klasifikacijaArtikla">
+                <xsd:annotation>
+                    <xsd:documentation>Kod za klasifikaciju artikla po njegovom tipu ili prirodi po UNTDID 7143.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="verzijaSheme" type="tns:tekst10" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Verzija sheme.</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
         </xsd:sequence>

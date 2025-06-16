@@ -348,7 +348,7 @@
                     <xsd:documentation>Naziv artikla (BT-153 iz UBL 2.1).</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
-            <xsd:element name="ArtiklIdentifikatorKlasifikacija" type="tns:ArtiklIdentifikatorKlasifikacija" maxOccurs="unbounded">
+            <xsd:element name="ArtiklIdentifikatorKlasifikacija" type="tns:ArtiklIdentifikatorKlasifikacija" minOccurs="0" maxOccurs="unbounded">
                 <xsd:annotation>
                     <xsd:documentation>CPA nomenklatura označava se oznakom 'CG'.</xsd:documentation>
                 </xsd:annotation>
