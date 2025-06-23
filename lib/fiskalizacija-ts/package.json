@@ -9,13 +9,14 @@
     "build": "tsc",
     "dev": "tsc --watch",
     "clean": "rm -rf dist",
-    "test": "vitest",
-    "test:watch": "vitest --watch",
-    "test:coverage": "vitest --coverage"
+    "test": "vitest --exclude tests/external",
+    "test:watch": "vitest --watch --exclude tests/external",
+    "test:coverage": "vitest --coverage --exclude tests/external",
+    "test:external": "vitest run tests/external"
   },
   "dependencies": {
-    "libxml2-wasm": "^0.5.0",
-    "xml-crypto": "^6.1.2"
+    "libxml2-wasm": "git+https://github.com/shunkica/libxml2-wasm.git#c7092fb",
+    "xml-crypto": "git+https://github.com/shunkica/xml-crypto.git#014b0fb"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",

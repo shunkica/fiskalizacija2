@@ -1,10 +1,13 @@
+import {IEvidentirajERacunZahtjev} from "../../src";
+import {ZaglavljeFiskalizacija} from "../../src/models/xml/fiskalizacija";
+import {XmlSigner} from "../../src/util/signing";
+
 export class XmlTestProvider {
-  /**
-   * Basic UBL invoice with all required fields
-   */
-  static getBasicUblInvoice(): string {
-    return `<?xml version="1.0" encoding="UTF-8"?>
-<Invoice xmlns="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:cct="urn:un:unece:uncefact:data:specification:CoreComponentTypeSchemaModule:2" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns:hrextac="urn:hzn.hr:schema:xsd:HRExtensionAggregateComponents-1" xmlns:p3="urn:oasis:names:specification:ubl:schema:xsd:UnqualifiedDataTypes-2" xmlns:sac="urn:oasis:names:specification:ubl:schema:xsd:SignatureAggregateComponents-2" xmlns:sig="urn:oasis:names:specification:ubl:schema:xsd:CommonSignatureComponents-2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2 ../xsd/ubl/maindoc/UBL-Invoice-2.1.xsd ">
+    /**
+     * Basic UBL invoice with all required fields
+     */
+    static getBasicUblInvoice(): string {
+        return `<Invoice xmlns="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:cct="urn:un:unece:uncefact:data:specification:CoreComponentTypeSchemaModule:2" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns:hrextac="urn:hzn.hr:schema:xsd:HRExtensionAggregateComponents-1" xmlns:p3="urn:oasis:names:specification:ubl:schema:xsd:UnqualifiedDataTypes-2" xmlns:sac="urn:oasis:names:specification:ubl:schema:xsd:SignatureAggregateComponents-2" xmlns:sig="urn:oasis:names:specification:ubl:schema:xsd:CommonSignatureComponents-2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2 ../xsd/ubl/maindoc/UBL-Invoice-2.1.xsd ">
   <ext:UBLExtensions>
    <ext:UBLExtension>
    <ext:ExtensionContent>
@@ -130,14 +133,13 @@ export class XmlTestProvider {
  </cac:InvoiceLine>
 </Invoice>
 `;
-  }
+    }
 
-  /**
-   * Minimal UBL invoice with only required fields
-   */
-  static getMinimalUblInvoice(): string {
-    return `<?xml version="1.0" encoding="UTF-8"?>
-<Invoice xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+    /**
+     * Minimal UBL invoice with only required fields
+     */
+    static getMinimalUblInvoice(): string {
+        return `<Invoice xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
          xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2">
   <cbc:ID>MINIMAL-001</cbc:ID>
   <cbc:IssueDate>2024-01-15</cbc:IssueDate>
@@ -205,37 +207,35 @@ export class XmlTestProvider {
     </cac:Item>
   </cac:InvoiceLine>
 </Invoice>`;
-  }
+    }
 
-  /**
-   * Invalid invoice (missing required fields)
-   */
-  static getInvalidInvoice(): string {
-    return `<?xml version="1.0" encoding="UTF-8"?>
-<Invoice xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+    /**
+     * Invalid invoice (missing required fields)
+     */
+    static getInvalidInvoice(): string {
+        return `<Invoice xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
   <cbc:ID>INVALID-001</cbc:ID>
   <cbc:IssueDate>2024-01-15</cbc:IssueDate>
 </Invoice>`;
-  }
+    }
 
-  /**
-   * Mock XML request of EvidentirajERacunZahtjev type
-   */
-  static getEvidentirajERacunZahtjev(): string {
-    return `<?xml version="1.0" encoding="UTF-8"?>
-<efis:EvidentirajERacunZahtjev xmlns:efis="http://www.porezna-uprava.gov.hr/fin/2024/types/eFiskalizacija" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" efis:id="TEST-123">
+    /**
+     * Mock XML request of EvidentirajERacunZahtjev type
+     */
+    static getEvidentirajERacunZahtjev(): string {
+        return `<efis:EvidentirajERacunZahtjev xmlns:efis="http://www.porezna-uprava.gov.hr/fin/2024/types/eFiskalizacija" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" efis:id="TEST-123">
   <efis:Zaglavlje>
     <efis:datumVrijemeSlanja>2024-01-15T10:30:45.1234</efis:datumVrijemeSlanja>
     <efis:vrstaERacuna>I</efis:vrstaERacuna>
   </efis:Zaglavlje>
 </efis:EvidentirajERacunZahtjev>`;
-  }
+    }
 
-  /**
-   * Mock private key for testing (not for production use)
-   */
-  static getMockPrivateKey(): string {
-    return `-----BEGIN PRIVATE KEY-----
+    /**
+     * Mock private key for testing (not for production use)
+     */
+    static getMockPrivateKey(): string {
+        return `-----BEGIN PRIVATE KEY-----
 MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC0VZ7SdT4yyQNk
 1laHk5HWucRbVklXcr27i6H7y/U6NiVcVNiTRfdnJoSHBjlU6371asZhk1ZPi6kP
 5YNNzb2w3jEU9nT/eBL0mtjgreVh1UDUNDpZcO6T6bn3xH73kWThP2TsjnocMAqK
@@ -263,13 +263,13 @@ OC4pmyhjGCl/XqYX02SkGNyFANewPwBqmPGSl/sEjz102s4cfBJtq06v+dyFItkQ
 9frPcDRMX/jm3W9E9bPLUSMvolHSmvwQxeCZouIlcbktqmfwEvXrUoYzbuatpWQV
 uT1ZWPjNuRpiF5epqrO/TVDB
 -----END PRIVATE KEY-----`;
-  }
+    }
 
-  /**
-   * Mock public certificate for testing (not for production use)
-   */
-  static getMockPublicCert(): string {
-    return `-----BEGIN CERTIFICATE-----
+    /**
+     * Mock public certificate for testing (not for production use)
+     */
+    static getMockPublicCert(): string {
+        return `-----BEGIN CERTIFICATE-----
 MIIDNTCCAh2gAwIBAgIUNji+KMe16pCsZLDhYwFli38DUIkwDQYJKoZIhvcNAQEL
 BQAwKjEbMBkGA1UEAwwSZmlza2FsaXphY2lqYS10ZXN0MQswCQYDVQQGEwJIUjAe
 Fw0yNTA2MTYwOTA5MjZaFw0yNjA2MTYwOTA5MjZaMCoxGzAZBgNVBAMMEmZpc2th
@@ -289,5 +289,66 @@ lbra88ynkF05SHfE0YoYnv3CejkIYkT3cyhONhkOO8qJI+EvURTqB8XG22ESaB+e
 icpyrDCz5E66m+Ew99chGcPJUemh+zi1FOOYkvM+m93JOo86RPP7lO3R685tYdHV
 zEUhxvel9xJJ
 -----END CERTIFICATE-----`;
-  }
+    }
+
+    static getMockEvidentirajERacunZahtjev(): IEvidentirajERacunZahtjev {
+        return {
+            _id: XmlSigner.generateId("ID"),
+            Zaglavlje: {
+                datumVrijemeSlanja: new Date().toISOString(),
+                vrstaERacuna: "U"
+            },
+            ERacun: [{
+                brojDokumenta: "1234-P1-1",
+                datumIzdavanja: "2025-06-23",
+                vrstaDokumenta: "380",
+                valutaERacuna: "EUR",
+                datumDospijecaPlacanja: "2026-01-01",
+                vrstaPoslovnogProcesa: "P1",
+                Izdavatelj: {
+                    ime: "IZDAVATELJ",
+                    oibPorezniBroj: "00000000001"
+                },
+                Primatelj: {
+                    ime: "PRIMATELJ",
+                    oibPorezniBroj: "11111111119"
+                },
+                PrijenosSredstava: [{
+                    identifikatorRacunaZaPlacanje: "HRXXXXXXXXXXXXXXXX"
+                }],
+                DokumentUkupanIznos: {
+                    neto: 100,
+                    iznosBezPdv: 100,
+                    pdv: 25,
+                    iznosSPdv: 125,
+                    iznosKojiDospijevaZaPlacanje: 125
+                },
+                RaspodjelaPdv: [
+                    {
+                        kategorijaPdv: "S",
+                        oporeziviIznos: 100,
+                        iznosPoreza: 25,
+                        stopa: 25
+                    }
+                ],
+                StavkaERacuna: [{
+                    kolicina: 1,
+                    jedinicaMjere: "H87",
+                    artiklNetoCijena: 100,
+                    artiklOsnovnaKolicina: 1,
+                    artiklJedinicaMjereZaOsnovnuKolicinu: "H87",
+                    artiklKategorijaPdv: "S",
+                    artiklStopaPdv: 25,
+                    artiklNaziv: "Proizvod",
+                    ArtiklIdentifikatorKlasifikacija: [
+                        {
+                            identifikatorKlasifikacije: "62.90.90",
+                            identifikatorSheme: "CG"
+                        }
+                    ]
+                }],
+                indikatorKopije: false
+            }]
+        };
+    }
 }

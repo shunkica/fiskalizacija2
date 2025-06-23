@@ -1,4 +1,4 @@
-import {XmlElement} from "libxml2-wasm";
+import {XmlDocument, XmlElement} from "libxml2-wasm";
 import {ValidationError} from "../types";
 import {REGEX} from "../models/xml/regex";
 import {BUSINESS_TERMS} from "../models/xml/businessTerms";
@@ -141,6 +141,22 @@ export function getOptionalElementContent(
     return el.content;
 }
 
+export function getAttributeValue(
+    el: XmlElement,
+    name: string,
+    prefix: string,
+    regexKey?: keyof typeof REGEX
+): string {
+    const attr = el.attr(name, prefix);
+    if (!attr) {
+        throw new ValidationError(`Atribut '${name}' nije pronađen u elementu '${el.prefix}:${el.name}'`, undefined);
+    }
+    if (regexKey && !REGEX[regexKey].test(attr.value)) {
+        throw new ValidationError(`Atribut '${name}' ne zadovoljava regex ${REGEX[regexKey]}`, attr.value);
+    }
+    return attr.value;
+}
+
 
 export function xmlEscape(val: string): string {
     return val.replace(/&/g, "&amp;")
@@ -148,4 +164,16 @@ export function xmlEscape(val: string): string {
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&apos;");
+}
+
+
+export function using(doc: XmlDocument, fn: (r: XmlDocument) => void) {
+    if (!doc) {
+        throw new Error("Failed to parse XML document");
+    }
+    try {
+        fn(doc);
+    } finally {
+        doc.dispose();
+    }
 }

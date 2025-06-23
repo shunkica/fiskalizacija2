@@ -1,5 +1,5 @@
 import {IArtiklIdentifikatorKlasifikacija, IDokumentUkupanIznos, IIzdavatelj, IOdgovor, IPrijenosSredstava, IPrimatelj, IRaspodjelaPdv} from "./common";
-import {XmlSerializable} from "../util";
+import {XmlSerializable} from "./util";
 
 /**
  * Zaglavlje sadrži osnovne informacije o zahtjevu, uključujući datum i vrijeme slanja te vrstu eRačuna, koja može biti ulazna ili izlazna.

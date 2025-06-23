@@ -1,4 +1,4 @@
-import {XmlSerializable} from "../util";
+import {XmlSerializable} from "./util";
 
 /**
  * Greška prilikom obrade zahtjeva
@@ -39,7 +39,7 @@ export interface IOdgovor {
      * Indikator prihvaćanja zahtjeva
      * @regex boolean
      */
-    prihvacenZahtjev: string;
+    prihvacenZahtjev: boolean;
     /**
      * Detalji o grešci ako zahtjev nije prihvaćen
      */

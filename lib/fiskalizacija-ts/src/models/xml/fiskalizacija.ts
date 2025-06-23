@@ -1,17 +1,17 @@
 import {
     ArtiklIdentifikatorKlasifikacijaSerializable,
-    DokumentUkupanIznosSerializable, ERacunSerializable, EvidentirajERacunZahtjevSerializable, IArtiklIdentifikatorKlasifikacija,
+    DokumentUkupanIznosSerializable, ERacunSerializable, EvidentirajERacunOdgovorSerializable, EvidentirajERacunZahtjevSerializable, GreskaSerializable, IArtiklIdentifikatorKlasifikacija,
     IDokumentUkupanIznos,
-    IERacun,
-    IEvidentirajERacunZahtjev,
-    IIzdavatelj,
+    IERacun, IEvidentirajERacunOdgovor,
+    IEvidentirajERacunZahtjev, IGreska,
+    IIzdavatelj, IOdgovor,
     IPrethodniERacun,
     IPrijenosSredstava,
     IPrimatelj,
     IRaspodjelaPdv,
     IStavkaERacuna,
     IZaglavljeFiskalizacija,
-    IzdavateljSerializable,
+    IzdavateljSerializable, OdgovorSerializable,
     PrethodniERacunSerializable,
     PrijenosSredstavaSerializable,
     PrimateljSerializable,
@@ -20,7 +20,7 @@ import {
     ZaglavljeFiskalizacijaSerializable
 } from "../../types";
 import {FISK_NS, UBL_NS} from "./const";
-import {getElementContent, getOptionalElementContent, extractElement, xmlEscape, extractOptionalElements, extractElements, getElementContentNumber, getOptionalElementContentNumber, getBusinessGroupXpath, getBusinessTermXpath} from "../../util/xml";
+import {getElementContent, getOptionalElementContent, extractElement, xmlEscape, extractOptionalElements, extractElements, getElementContentNumber, getOptionalElementContentNumber, getBusinessGroupXpath, getBusinessTermXpath, getAttributeValue, extractOptionalElement} from "../../util/xml";
 import {XmlAttribute, XmlDocument, XmlElement} from "libxml2-wasm";
 
 export class EvidentirajERacunZahtjev implements EvidentirajERacunZahtjevSerializable {
@@ -660,4 +660,81 @@ export class ArtiklIdentifikatorKlasifikacija implements ArtiklIdentifikatorKlas
         });
 
     }
+}
+
+export class EvidentirajERacunOdgovor implements EvidentirajERacunOdgovorSerializable {
+    _id: string;
+    datumVrijemeSlanja: string;
+    Odgovor: FiskalizacijaOdgovor;
+
+    constructor(args: IEvidentirajERacunOdgovor) {
+        this._id = args._id;
+        this.datumVrijemeSlanja = args.datumVrijemeSlanja;
+        this.Odgovor = new FiskalizacijaOdgovor(args.Odgovor);
+    }
+
+    public static fromXmlElement(el: XmlElement): IEvidentirajERacunOdgovor {
+        return {
+            _id: getAttributeValue(el, "id", el.prefix),
+            datumVrijemeSlanja: getElementContent(el, "efis:datumVrijemeSlanja", FISK_NS, "datumVrijemeDeci"),
+            Odgovor: extractElement(el, "efis:Odgovor", FISK_NS, FiskalizacijaOdgovor.fromXmlElement),
+        }
+    }
+
+    toXmlString(): string {
+        throw new Error("Method not implemented.");
+    }
+
+}
+
+export class FiskalizacijaOdgovor implements OdgovorSerializable {
+    idZahtjeva: string;
+    prihvacenZahtjev: boolean;
+    greska?: IGreska;
+
+    constructor(args: IOdgovor) {
+        this.idZahtjeva = args.idZahtjeva;
+        this.prihvacenZahtjev = args.prihvacenZahtjev;
+        if (args.greska) {
+            this.greska = new FiskalizacijaGreska(args.greska)
+        }
+    }
+
+    public static fromXmlElement(el: XmlElement): IOdgovor {
+        return {
+            idZahtjeva: getElementContent(el, `efis:idZahtjeva`, FISK_NS, "uuid"),
+            prihvacenZahtjev: getElementContent(el, `efis:prihvacenZahtjev`, FISK_NS, "boolean") === "true",
+            greska: extractOptionalElement(el, `efis:greska`, FISK_NS, FiskalizacijaGreska.fromXmlElement)
+        }
+    }
+
+
+    toXmlString(): string {
+        throw new Error("Method not implemented.");
+    }
+}
+
+export class FiskalizacijaGreska implements GreskaSerializable {
+    sifra: string;
+    redniBrojZapisa: string;
+    opis: string;
+
+    constructor(args: IGreska) {
+        this.sifra = args.sifra;
+        this.redniBrojZapisa = args.redniBrojZapisa;
+        this.opis = args.opis;
+    }
+
+    static fromXmlElement(el: XmlElement): IGreska {
+        return {
+            sifra: getElementContent(el, "efis:sifra", FISK_NS, "greska"),
+            redniBrojZapisa: getElementContent(el, "efis:redniBrojZapisa", FISK_NS, "redniBroj"),
+            opis: getElementContent(el, "efis:opis", FISK_NS, "tekst1024")
+        }
+    }
+
+    toXmlString(): string {
+        throw new Error("Method not implemented.");
+    }
+
 }

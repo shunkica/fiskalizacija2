@@ -1,7 +1,8 @@
 export const FISK_NS = {
+    soapenv: "http://schemas.xmlsoap.org/soap/envelope/",
     ds: "http://www.w3.org/2000/09/xmldsig#",
-    efis: "http://www.porezna-uprava-it.hr/fin/2024/types/eFiskalizacija",
-    eizv: "http://www.porezna-uprava-it.hr/fin/2024/types/eIzvjestavanje",
+    efis: "http://www.porezna-uprava.gov.hr/fin/2024/types/eFiskalizacija",
+    eizv: "http://www.porezna-uprava.gov.hr/fin/2024/types/eIzvjestavanje",
 }
 
 export const UBL_NS = {

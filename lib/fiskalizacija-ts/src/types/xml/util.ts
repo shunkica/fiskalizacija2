@@ -18,6 +18,10 @@ export class ValidationError {
         this.message = message;
         this.value = value;
     }
+
+    toString(): string {
+        return `ValidationError: ${this.message}${this.value ? ` (value: ${this.value})` : ''}`;
+    }
 }
 
 export interface IBusinessTermXpath {
