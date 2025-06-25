@@ -1,4 +1,4 @@
-# Verzija 1.1 (2025-05-09)
+# Verzija 1.2 (2025-06-23)
 
 | ID     | Pojam                                                         | Min | Max | Invoice                                                                                     | CreditNote                                                                                  |
 |--------|---------------------------------------------------------------|-----|-----|---------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|
@@ -159,7 +159,7 @@
 | BT-155 | Prodavateljev identifikator artikla                           | 0   | 1   | /cac:InvoiceLine/cac:Item/cac:SellersItemIdentification/cbc:ID                              | /cac:CreditNoteLine/cac:Item/cac:SellersItemIdentification/cbc:ID                           |
 | BT-156 | Kupčev identifikator artikla                                  | 0   | 1   | /cac:InvoiceLine/cac:Item/cac:BuyersItemIdentification/cbc:ID                               | /cac:CreditNoteLine/cac:Item/cac:BuyersItemIdentification/cbc:ID                            |
 | BT-157 | Standardni identifikator artikla                              | 0   | 1   | /cac:InvoiceLine/cac:Item/cac:StandardItemIdentification/cbc:ID                             | /cac:CreditNoteLine/cac:Item/cac:StandardItemIdentification/cbc:ID                          |
-| BT-158 | Identifikator klasifikacije artikla                           | 1   | n   | /cac:InvoiceLine/cac:Item/cac:CommodityClassification/cbc:ItemClassificationCode            | /cac:CreditNoteLine/cac:Item/cac:CommodityClassification/cbc:ItemClassificationCode         |
+| BT-158 | Identifikator klasifikacije artikla                           | 0   | n   | /cac:InvoiceLine/cac:Item/cac:CommodityClassification/cbc:ItemClassificationCode            | /cac:CreditNoteLine/cac:Item/cac:CommodityClassification/cbc:ItemClassificationCode         |
 | BT-159 | Zemlja podrijetla artikla                                     | 0   | 1   | /cac:InvoiceLine/cac:Item/cac:OriginCountry/cbc:IdentificationCode                          | /cac:CreditNoteLine/cac:Item/cac:OriginCountry/cbc:IdentificationCode                       |
 | BT-160 | Ime atributa artikla                                          | 1   | 1   | /cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty/cbc:Name                               | /cac:CreditNoteLine/cac:Item/cac:AdditionalItemProperty/cbc:Name                            |
 | BT-161 | Vrijednost atributa artikla                                   | 1   | 1   | /cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty/cbc:Value                              | /cac:CreditNoteLine/cac:Item/cac:AdditionalItemProperty/cbc:Value                           |

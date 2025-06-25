@@ -22,7 +22,7 @@
             <schxslt.compile.typed-variables xmlns="https://doi.org/10.5281/zenodo.1495494#">true</schxslt.compile.typed-variables>
          </dct:Agent>
       </dct:creator>
-      <dct:created>2025-06-03T14:06:54.481282881+02:00</dct:created>
+      <dct:created>2025-06-25T17:38:41.999856931Z</dct:created>
    </rdf:Description>
    <xsl:output indent="yes"/>
    <xsl:param name="schxslt.validate.initial-document-uri" as="xs:string?"/>
@@ -65,14 +65,14 @@
                               <schxslt.compile.typed-variables xmlns="https://doi.org/10.5281/zenodo.1495494#">true</schxslt.compile.typed-variables>
                            </dct:Agent>
                         </dct:creator>
-                        <dct:created>2025-06-03T14:06:54.481282881+02:00</dct:created>
+                        <dct:created>2025-06-25T17:38:41.999856931Z</dct:created>
                      </rdf:Description>
                   </dct:source>
                </svrl:metadata>
             </xsl:variable>
             <xsl:variable name="report" as="element(schxslt:report)">
                <schxslt:report>
-                  <xsl:call-template name="d7e23"/>
+                  <xsl:call-template name="d7e24"/>
                </schxslt:report>
             </xsl:variable>
             <xsl:variable name="schxslt:report" as="node()*">
@@ -110,9 +110,9 @@
       <xsl:apply-templates mode="#current" select="@*"/>
       <xsl:apply-templates mode="#current" select="node()"/>
    </xsl:template>
-   <xsl:template name="d7e23">
+   <xsl:template name="d7e24">
       <schxslt:document>
-         <schxslt:pattern id="d7e23">
+         <schxslt:pattern id="d7e24">
             <xsl:if test="exists(base-uri(root()))">
                <xsl:attribute name="documents" select="base-uri(root())"/>
             </xsl:if>
@@ -124,14 +124,14 @@
                </svrl:active-pattern>
             </xsl:for-each>
          </schxslt:pattern>
-         <xsl:apply-templates mode="d7e23" select="root()"/>
+         <xsl:apply-templates mode="d7e24" select="root()"/>
       </schxslt:document>
    </xsl:template>
-   <xsl:template match="/ubl:Invoice | /cn:CreditNote" priority="1" mode="d7e23">
+   <xsl:template match="/ubl:Invoice | /cn:CreditNote" priority="1" mode="d7e24">
       <xsl:param name="schxslt:patterns-matched" as="xs:string*"/>
       <xsl:choose>
-         <xsl:when test="$schxslt:patterns-matched[. = 'd7e23']">
-            <schxslt:rule pattern="d7e23">
+         <xsl:when test="$schxslt:patterns-matched[. = 'd7e24']">
+            <schxslt:rule pattern="d7e24">
                <xsl:comment xmlns:svrl="http://purl.oclc.org/dsdl/svrl">WARNING: Rule for context "/ubl:Invoice | /cn:CreditNote" shadowed by preceding rule</xsl:comment>
                <svrl:suppressed-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl">
                   <xsl:attribute name="context">/ubl:Invoice | /cn:CreditNote</xsl:attribute>
@@ -148,7 +148,7 @@
             </xsl:next-match>
          </xsl:when>
          <xsl:otherwise>
-            <schxslt:rule pattern="d7e23">
+            <schxslt:rule pattern="d7e24">
                <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl">
                   <xsl:attribute name="context">/ubl:Invoice | /cn:CreditNote</xsl:attribute>
                   <xsl:variable name="documentUri" as="xs:anyURI?" select="document-uri()"/>
@@ -182,21 +182,10 @@
                   <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                       location="{schxslt:location(.)}"
                                       flag="fatal"
-                                      id="HR-BR-4(1)">
+                                      id="HR-BR-4">
                      <xsl:attribute name="test">not(cac:LegalMonetaryTotal/cbc:PayableAmount &gt; 0) or (cbc:DueDate and normalize-space(cbc:DueDate) != '')</xsl:attribute>
                      <svrl:text>
         [HR-BR-4] U slučaju pozitivnog iznosa koji dospijeva na plaćanje (BT-115), datum dospijeća plaćanja (BT-9) mora biti naveden.
-      </svrl:text>
-                  </svrl:failed-assert>
-               </xsl:if>
-               <xsl:if test="not(cbc:ProfileID and (matches(cbc:ProfileID, '^P([1-9]|1[0-2])$') or matches(cbc:ProfileID, '^P99:.+$')))">
-                  <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                      location="{schxslt:location(.)}"
-                                      flag="fatal"
-                                      id="HR-BR-4(2)">
-                     <xsl:attribute name="test">cbc:ProfileID and (matches(cbc:ProfileID, '^P([1-9]|1[0-2])$') or matches(cbc:ProfileID, '^P99:.+$'))</xsl:attribute>
-                     <svrl:text>
-        [HR-BR-4] Oznaka procesa (BT-23) MORA biti navedena. Koriste se vrijednosti P1-P12 ili P99:Oznaka kupca iz Tablice 4 Tipovi poslovnog procesa
       </svrl:text>
                   </svrl:failed-assert>
                </xsl:if>
@@ -255,12 +244,12 @@
       </svrl:text>
                   </svrl:failed-assert>
                </xsl:if>
-               <xsl:if test="not(every $charge in cac:AllowanceCharge[cbc:ChargeIndicator='true'] satisfies (                 not($charge/cac:TaxCategory/cbc:ID = ('E', 'O')) or                 ($charge/cac:TaxCategory/cbc:Name and normalize-space($charge/cac:TaxCategory/cbc:Name) != '' and                  $charge/cac:TaxCategory/cbc:Name = ('HR:Z', 'HR:K', 'HR:G', 'HR:AE', 'HR:E', 'HR:POVNAK', 'HR:PP', 'HR:PPMV', 'HR:O'))               ))">
+               <xsl:if test="not(every $charge in cac:AllowanceCharge[cbc:ChargeIndicator='true'] satisfies (                 not($charge/cac:TaxCategory/cbc:ID = ('E', 'O')) or                 ($charge/cac:TaxCategory/cbc:Name and normalize-space($charge/cac:TaxCategory/cbc:Name) != '' and                  $charge/cac:TaxCategory/cbc:Name = ('HR:Z', 'HR:K', 'HR:G', 'HR:AE', 'HR:E', 'HR:POVNAK', 'HR:PP', 'HR:PPMV', 'HR:O', 'HR:N'))               ))">
                   <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                       location="{schxslt:location(.)}"
                                       flag="fatal"
                                       id="HR-BR-11">
-                     <xsl:attribute name="test">every $charge in cac:AllowanceCharge[cbc:ChargeIndicator='true'] satisfies (                 not($charge/cac:TaxCategory/cbc:ID = ('E', 'O')) or                 ($charge/cac:TaxCategory/cbc:Name and normalize-space($charge/cac:TaxCategory/cbc:Name) != '' and                  $charge/cac:TaxCategory/cbc:Name = ('HR:Z', 'HR:K', 'HR:G', 'HR:AE', 'HR:E', 'HR:POVNAK', 'HR:PP', 'HR:PPMV', 'HR:O'))               )</xsl:attribute>
+                     <xsl:attribute name="test">every $charge in cac:AllowanceCharge[cbc:ChargeIndicator='true'] satisfies (                 not($charge/cac:TaxCategory/cbc:ID = ('E', 'O')) or                 ($charge/cac:TaxCategory/cbc:Name and normalize-space($charge/cac:TaxCategory/cbc:Name) != '' and                  $charge/cac:TaxCategory/cbc:Name = ('HR:Z', 'HR:K', 'HR:G', 'HR:AE', 'HR:E', 'HR:POVNAK', 'HR:PP', 'HR:PPMV', 'HR:O', 'HR:N'))               )</xsl:attribute>
                      <svrl:text>
         [HR-BR-11] Svaki troškak na razini dokumenta (BG-21) koji ne podliježe PDV-u ili je oslobođen PDV-a mora imati oznaku kategorije PDV-a troška na razini dokumenta (HR-BT-6) iz tablice HR-TB-2 HR oznaka kategorija PDV-a
       </svrl:text>
@@ -281,10 +270,10 @@
                   <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                       location="{schxslt:location(.)}"
                                       flag="fatal"
-                                      id="HR-BR-17(1)">
+                                      id="HR-BR-17">
                      <xsl:attribute name="test">not((cac:InvoiceLine | cac:CreditNoteLine)/cac:OrderLineReference/cac:OrderReference/cbc:ID) or not(cac:OrderReference/cbc:ID)</xsl:attribute>
                      <svrl:text>
-        [HR-BR-17(1)] Ako se koristi referenca narudžbenice na stavci računa (HR-BT-9), zabranjeno je koristiti BT-13 Referencu narudžbenice na razini računa
+        [HR-BR-17] Ako se koristi referenca narudžbenice na stavci računa (HR-BT-9), zabranjeno je koristiti BT-13 Referencu narudžbenice na razini računa
       </svrl:text>
                   </svrl:failed-assert>
                </xsl:if>
@@ -292,10 +281,10 @@
                   <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                       location="{schxslt:location(.)}"
                                       flag="fatal"
-                                      id="HR-BR-18(1)">
+                                      id="HR-BR-18">
                      <xsl:attribute name="test">not((cac:InvoiceLine | cac:CreditNoteLine)/cac:DespatchLineReference/cac:DocumentReference/cbc:ID) or not(cac:DespatchDocumentReference/cbc:ID)</xsl:attribute>
                      <svrl:text>
-        [HR-BR-18(1)] Ako se koristi referenca otpremnice na stavci računa (HR-BT-10), zabranjeno je koristiti BT-16 Referencu otpremnice na razini računa
+        [HR-BR-18] Ako se koristi referenca otpremnice na stavci računa (HR-BT-10), zabranjeno je koristiti BT-16 Referencu otpremnice na razini računa
       </svrl:text>
                   </svrl:failed-assert>
                </xsl:if>
@@ -303,10 +292,10 @@
                   <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                       location="{schxslt:location(.)}"
                                       flag="fatal"
-                                      id="HR-BR-19(1)">
+                                      id="HR-BR-19">
                      <xsl:attribute name="test">not((cac:InvoiceLine | cac:CreditNoteLine)/cac:ReceiptLineReference/cac:DocumentReference/cbc:ID) or not(cac:ReceiptDocumentReference/cbc:ID)</xsl:attribute>
                      <svrl:text>
-        [HR-BR-19(1)] Ako se koristi referenca primke na stavci računa (HR-BT-11), zabranjeno je koristiti BT-15 Referencu primke na razini računa
+        [HR-BR-19] Ako se koristi referenca primke na stavci računa (HR-BT-11), zabranjeno je koristiti BT-15 Referencu primke na razini računa
       </svrl:text>
                   </svrl:failed-assert>
                </xsl:if>
@@ -395,6 +384,28 @@
                      <xsl:attribute name="test">not(//*[not(*) and not(@*) and normalize-space() = '' and local-name() != 'SignatureInformation'])</xsl:attribute>
                      <svrl:text>
         [HR-BR-33] Račun ne smije sadržavati prazne xml elemente osim elementa s elektroničkim potpisom računa
+      </svrl:text>
+                  </svrl:failed-assert>
+               </xsl:if>
+               <xsl:if test="not(cbc:ProfileID and (matches(cbc:ProfileID, '^P([1-9]|1[0-2])$') or matches(cbc:ProfileID, '^P99:.+$')))">
+                  <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                      location="{schxslt:location(.)}"
+                                      flag="fatal"
+                                      id="HR-BR-34">
+                     <xsl:attribute name="test">cbc:ProfileID and (matches(cbc:ProfileID, '^P([1-9]|1[0-2])$') or matches(cbc:ProfileID, '^P99:.+$'))</xsl:attribute>
+                     <svrl:text>
+        [HR-BR-34] Oznaka procesa (BT-23) MORA biti navedena. Koriste se vrijednosti P1-P12 ili P99:Oznaka kupca iz Tablice 4 Tipovi poslovnog procesa
+      </svrl:text>
+                  </svrl:failed-assert>
+               </xsl:if>
+               <xsl:if test="not(cac:AccountingSupplierParty/cac:SellerContact/cbc:Name and normalize-space(cac:AccountingSupplierParty/cac:SellerContact/cbc:Name) != '')">
+                  <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                      location="{schxslt:location(.)}"
+                                      flag="fatal"
+                                      id="HR-BR-37">
+                     <xsl:attribute name="test">cac:AccountingSupplierParty/cac:SellerContact/cbc:Name and normalize-space(cac:AccountingSupplierParty/cac:SellerContact/cbc:Name) != ''</xsl:attribute>
+                     <svrl:text>
+        [HR-BR-37] Račun mora sadržavati oznaku operatera (HR-BT-4)
       </svrl:text>
                   </svrl:failed-assert>
                </xsl:if>
@@ -534,18 +545,18 @@
             <xsl:next-match>
                <xsl:with-param name="schxslt:patterns-matched"
                                as="xs:string*"
-                               select="($schxslt:patterns-matched, 'd7e23')"/>
+                               select="($schxslt:patterns-matched, 'd7e24')"/>
             </xsl:next-match>
          </xsl:otherwise>
       </xsl:choose>
    </xsl:template>
    <xsl:template match="/ubl:Invoice/cac:InvoiceLine | /cn:CreditNote/cac:CreditNoteLine"
                  priority="0"
-                 mode="d7e23">
+                 mode="d7e24">
       <xsl:param name="schxslt:patterns-matched" as="xs:string*"/>
       <xsl:choose>
-         <xsl:when test="$schxslt:patterns-matched[. = 'd7e23']">
-            <schxslt:rule pattern="d7e23">
+         <xsl:when test="$schxslt:patterns-matched[. = 'd7e24']">
+            <schxslt:rule pattern="d7e24">
                <xsl:comment xmlns:svrl="http://purl.oclc.org/dsdl/svrl">WARNING: Rule for context "/ubl:Invoice/cac:InvoiceLine | /cn:CreditNote/cac:CreditNoteLine" shadowed by preceding rule</xsl:comment>
                <svrl:suppressed-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl">
                   <xsl:attribute name="context">/ubl:Invoice/cac:InvoiceLine | /cn:CreditNote/cac:CreditNoteLine</xsl:attribute>
@@ -562,7 +573,7 @@
             </xsl:next-match>
          </xsl:when>
          <xsl:otherwise>
-            <schxslt:rule pattern="d7e23">
+            <schxslt:rule pattern="d7e24">
                <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl">
                   <xsl:attribute name="context">/ubl:Invoice/cac:InvoiceLine | /cn:CreditNote/cac:CreditNoteLine</xsl:attribute>
                   <xsl:variable name="documentUri" as="xs:anyURI?" select="document-uri()"/>
@@ -570,47 +581,14 @@
                      <xsl:attribute name="document" select="$documentUri"/>
                   </xsl:if>
                </svrl:fired-rule>
-               <xsl:if test="not(not(cac:Item/cac:ClassifiedTaxCategory/cbc:ID = ('E', 'O')) or                     (cac:Item/cac:ClassifiedTaxCategory/cbc:Name and normalize-space(cac:Item/cac:ClassifiedTaxCategory/cbc:Name) != '' and                      cac:Item/cac:ClassifiedTaxCategory/cbc:Name = ('HR:Z', 'HR:K', 'HR:G', 'HR:AE', 'HR:E', 'HR:POVNAK', 'HR:PP', 'HR:PPMV', 'HR:O')))">
+               <xsl:if test="not(not(cac:Item/cac:ClassifiedTaxCategory/cbc:ID = ('E', 'O')) or                     (cac:Item/cac:ClassifiedTaxCategory/cbc:Name and normalize-space(cac:Item/cac:ClassifiedTaxCategory/cbc:Name) != '' and                      cac:Item/cac:ClassifiedTaxCategory/cbc:Name = ('HR:Z', 'HR:K', 'HR:G', 'HR:AE', 'HR:E', 'HR:POVNAK', 'HR:PP', 'HR:PPMV', 'HR:O', 'HR:N')))">
                   <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                       location="{schxslt:location(.)}"
                                       flag="fatal"
                                       id="HR-BR-16">
-                     <xsl:attribute name="test">not(cac:Item/cac:ClassifiedTaxCategory/cbc:ID = ('E', 'O')) or                     (cac:Item/cac:ClassifiedTaxCategory/cbc:Name and normalize-space(cac:Item/cac:ClassifiedTaxCategory/cbc:Name) != '' and                      cac:Item/cac:ClassifiedTaxCategory/cbc:Name = ('HR:Z', 'HR:K', 'HR:G', 'HR:AE', 'HR:E', 'HR:POVNAK', 'HR:PP', 'HR:PPMV', 'HR:O'))</xsl:attribute>
+                     <xsl:attribute name="test">not(cac:Item/cac:ClassifiedTaxCategory/cbc:ID = ('E', 'O')) or                     (cac:Item/cac:ClassifiedTaxCategory/cbc:Name and normalize-space(cac:Item/cac:ClassifiedTaxCategory/cbc:Name) != '' and                      cac:Item/cac:ClassifiedTaxCategory/cbc:Name = ('HR:Z', 'HR:K', 'HR:G', 'HR:AE', 'HR:E', 'HR:POVNAK', 'HR:PP', 'HR:PPMV', 'HR:O', 'HR:N'))</xsl:attribute>
                      <svrl:text>
         [HR-BR-16] Svaka stavka računa (BG-25) koja ne podliježe PDV-u ili je oslobođena od PDV-a mora imati oznaku kategorije PDV-a obračunate stavke HR-BT-12 iz šifarnika oznaka kategorija PDV-a HR-TB-2
-      </svrl:text>
-                  </svrl:failed-assert>
-               </xsl:if>
-               <xsl:if test="not(not(cac:Item/cac:ClassifiedTaxCategory/cbc:ID = ('E', 'O')) or                     (cac:Item/cac:ClassifiedTaxCategory/cbc:ID = 'E' and cac:Item/cac:ClassifiedTaxCategory/cbc:Percent = 0))">
-                  <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                      location="{schxslt:location(.)}"
-                                      flag="fatal"
-                                      id="HR-BR-17(2)">
-                     <xsl:attribute name="test">not(cac:Item/cac:ClassifiedTaxCategory/cbc:ID = ('E', 'O')) or                     (cac:Item/cac:ClassifiedTaxCategory/cbc:ID = 'E' and cac:Item/cac:ClassifiedTaxCategory/cbc:Percent = 0)</xsl:attribute>
-                     <svrl:text>
-        [HR-BR-17(2)] Svaka stavka računa (BG-25) koja ne podliježe PDV-u ili je oslobođena od PDV-a mora imati kod kategorije PDV-a „E" (BT-151) i stopu PDV-a (BT-152) jednaku 0
-      </svrl:text>
-                  </svrl:failed-assert>
-               </xsl:if>
-               <xsl:if test="not(not(cac:Item/cac:ClassifiedTaxCategory/cbc:ID = ('E', 'O')) or                     (cac:Item/cac:ClassifiedTaxCategory/cbc:TaxExemptionReason and normalize-space(cac:Item/cac:ClassifiedTaxCategory/cbc:TaxExemptionReason) != '') or                     (cac:Item/cac:ClassifiedTaxCategory/cbc:TaxExemptionReasonCode and normalize-space(cac:Item/cac:ClassifiedTaxCategory/cbc:TaxExemptionReasonCode) != ''))">
-                  <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                      location="{schxslt:location(.)}"
-                                      flag="fatal"
-                                      id="HR-BR-18(2)">
-                     <xsl:attribute name="test">not(cac:Item/cac:ClassifiedTaxCategory/cbc:ID = ('E', 'O')) or                     (cac:Item/cac:ClassifiedTaxCategory/cbc:TaxExemptionReason and normalize-space(cac:Item/cac:ClassifiedTaxCategory/cbc:TaxExemptionReason) != '') or                     (cac:Item/cac:ClassifiedTaxCategory/cbc:TaxExemptionReasonCode and normalize-space(cac:Item/cac:ClassifiedTaxCategory/cbc:TaxExemptionReasonCode) != '')</xsl:attribute>
-                     <svrl:text>
-        [HR-BR-18(2)] Svaka stavka računa (BG-25) koja ne podliježe PDV-u ili je oslobođena od PDV-a mora imati razlog oslobođenja PDV-a (HR-BT-13) ili kod razloga oslobođenja PDV-a (HR-BT-14)
-      </svrl:text>
-                  </svrl:failed-assert>
-               </xsl:if>
-               <xsl:if test="not(not(cac:Item/cac:ClassifiedTaxCategory/cbc:ID = ('E', 'O')) or                     (cac:Item/cac:ClassifiedTaxCategory/cbc:TaxExemptionReason and normalize-space(cac:Item/cac:ClassifiedTaxCategory/cbc:TaxExemptionReason) != '') or                     (cac:Item/cac:ClassifiedTaxCategory/cbc:TaxExemptionReasonCode and normalize-space(cac:Item/cac:ClassifiedTaxCategory/cbc:TaxExemptionReasonCode) != ''))">
-                  <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                      location="{schxslt:location(.)}"
-                                      flag="fatal"
-                                      id="HR-BR-19(2)">
-                     <xsl:attribute name="test">not(cac:Item/cac:ClassifiedTaxCategory/cbc:ID = ('E', 'O')) or                     (cac:Item/cac:ClassifiedTaxCategory/cbc:TaxExemptionReason and normalize-space(cac:Item/cac:ClassifiedTaxCategory/cbc:TaxExemptionReason) != '') or                     (cac:Item/cac:ClassifiedTaxCategory/cbc:TaxExemptionReasonCode and normalize-space(cac:Item/cac:ClassifiedTaxCategory/cbc:TaxExemptionReasonCode) != '')</xsl:attribute>
-                     <svrl:text>
-        [HR-BR-19(2)] Svaka stavka računa (BG-25) koja ne podliježe PDV-u ili je oslobođena od PDV-a mora imati razlog oslobođenja PDV-a (HR-BT-13) ili kod razloga oslobođenja PDV-a (HR-BT-14)
       </svrl:text>
                   </svrl:failed-assert>
                </xsl:if>
@@ -636,11 +614,44 @@
       </svrl:text>
                   </svrl:failed-assert>
                </xsl:if>
+               <xsl:if test="not((ancestor::*[self::ubl:Invoice or self::cn:CreditNote]/cbc:InvoiceTypeCode = '458') or                     (cac:Item/cac:CommodityClassification/cbc:ItemClassificationCode and                      cac:Item/cac:CommodityClassification/cbc:ItemClassificationCode/@listID = 'CG'))">
+                  <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                      location="{schxslt:location(.)}"
+                                      flag="fatal"
+                                      id="HR-BR-25">
+                     <xsl:attribute name="test">(ancestor::*[self::ubl:Invoice or self::cn:CreditNote]/cbc:InvoiceTypeCode = '458') or                     (cac:Item/cac:CommodityClassification/cbc:ItemClassificationCode and                      cac:Item/cac:CommodityClassification/cbc:ItemClassificationCode/@listID = 'CG')</xsl:attribute>
+                     <svrl:text>
+        [HR-BR-25] Svaki artikl MORA imati identifikator klasifikacije artikla (BT-158) iz sheme Klasifikacija proizvoda po djelatnostima: KPD (CPA) – listID „CG", osim u slučaju računa za predujam.
+      </svrl:text>
+                  </svrl:failed-assert>
+               </xsl:if>
+               <xsl:if test="not(not(cac:Item/cac:ClassifiedTaxCategory/cbc:ID = ('E', 'O')) or                     (cac:Item/cac:ClassifiedTaxCategory/cbc:ID = 'E' and cac:Item/cac:ClassifiedTaxCategory/cbc:Percent = 0))">
+                  <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                      location="{schxslt:location(.)}"
+                                      flag="fatal"
+                                      id="HR-BR-35">
+                     <xsl:attribute name="test">not(cac:Item/cac:ClassifiedTaxCategory/cbc:ID = ('E', 'O')) or                     (cac:Item/cac:ClassifiedTaxCategory/cbc:ID = 'E' and cac:Item/cac:ClassifiedTaxCategory/cbc:Percent = 0)</xsl:attribute>
+                     <svrl:text>
+        [HR-BR-35] Svaka stavka računa (BG-25) koja ne podliježe PDV-u ili je oslobođena od PDV-a mora imati kod kategorije PDV-a „E" (BT-151) i stopu PDV-a (BT-152) jednaku 0
+      </svrl:text>
+                  </svrl:failed-assert>
+               </xsl:if>
+               <xsl:if test="not(not(cac:Item/cac:ClassifiedTaxCategory/cbc:ID = ('E', 'O')) or                     (cac:Item/cac:ClassifiedTaxCategory/cbc:TaxExemptionReason and normalize-space(cac:Item/cac:ClassifiedTaxCategory/cbc:TaxExemptionReason) != '') or                     (cac:Item/cac:ClassifiedTaxCategory/cbc:TaxExemptionReasonCode and normalize-space(cac:Item/cac:ClassifiedTaxCategory/cbc:TaxExemptionReasonCode) != ''))">
+                  <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                      location="{schxslt:location(.)}"
+                                      flag="fatal"
+                                      id="HR-BR-36">
+                     <xsl:attribute name="test">not(cac:Item/cac:ClassifiedTaxCategory/cbc:ID = ('E', 'O')) or                     (cac:Item/cac:ClassifiedTaxCategory/cbc:TaxExemptionReason and normalize-space(cac:Item/cac:ClassifiedTaxCategory/cbc:TaxExemptionReason) != '') or                     (cac:Item/cac:ClassifiedTaxCategory/cbc:TaxExemptionReasonCode and normalize-space(cac:Item/cac:ClassifiedTaxCategory/cbc:TaxExemptionReasonCode) != '')</xsl:attribute>
+                     <svrl:text>
+        [HR-BR-36] Svaka stavka računa (BG-25) koja ne podliježe PDV-u ili je oslobođena od PDV-a mora imati razlog oslobođenja PDV-a (HR-BT-13) ili kod razloga oslobođenja PDV-a (HR-BT-14)
+      </svrl:text>
+                  </svrl:failed-assert>
+               </xsl:if>
             </schxslt:rule>
             <xsl:next-match>
                <xsl:with-param name="schxslt:patterns-matched"
                                as="xs:string*"
-                               select="($schxslt:patterns-matched, 'd7e23')"/>
+                               select="($schxslt:patterns-matched, 'd7e24')"/>
             </xsl:next-match>
          </xsl:otherwise>
       </xsl:choose>

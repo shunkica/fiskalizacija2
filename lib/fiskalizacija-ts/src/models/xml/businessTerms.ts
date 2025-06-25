@@ -2815,7 +2815,7 @@ export const BUSINESS_TERMS: Record<string, IBusinessTermXpath> = {
             "cbc:Name"
         ],
         CreditNote: [
-            "cac:InvoiceLine",
+            "cac:CreditNoteLine",
             "cac:Item",
             "cac:ClassifiedTaxCategory",
             "cbc:Name"
@@ -2833,7 +2833,7 @@ export const BUSINESS_TERMS: Record<string, IBusinessTermXpath> = {
             "cbc:TaxExemptionReason"
         ],
         CreditNote: [
-            "cac:InvoiceLine",
+            "cac:CreditNoteLine",
             "cac:Item",
             "cac:ClassifiedTaxCategory",
             "cbc:TaxExemptionReason"
@@ -2851,7 +2851,7 @@ export const BUSINESS_TERMS: Record<string, IBusinessTermXpath> = {
             "cbc:TaxExemptionReasonCode"
         ],
         CreditNote: [
-            "cac:InvoiceLine",
+            "cac:CreditNoteLine",
             "cac:Item",
             "cac:ClassifiedTaxCategory",
             "cbc:TaxExemptionReasonCode"
@@ -2866,7 +2866,7 @@ export const BUSINESS_TERMS: Record<string, IBusinessTermXpath> = {
             "ext:Extensions",
             "ext:Extension",
             "ext:ExtensionContent",
-            "hrextac:HRFISK20data",
+            "hrextac:HRFISK20Data",
             "hrextac:HRObracunPDVPoNaplati"
         ],
         CreditNote: [
@@ -2886,7 +2886,7 @@ export const BUSINESS_TERMS: Record<string, IBusinessTermXpath> = {
             "ext:Extensions",
             "ext:Extension",
             "ext:ExtensionContent",
-            "hrextac:HRFISK20data",
+            "hrextac:HRFISK20Data",
             "hrextac:HRTaxTotal",
             "hrextac:HRTaxSubtotal",
             "cbc:TaxableAmount"

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Specifikacije osnovne upotrebe eRačuna s proširenjima v1.2 (2025-06-23) -->
 <schema xmlns="http://purl.oclc.org/dsdl/schematron"
         xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
         xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
@@ -35,14 +36,9 @@
         [HR-BR-2] Račun mora imati vrijeme izdavanja računa (HR-BT-2).
       </assert>
 
-      <assert id="HR-BR-4(1)" flag="fatal"
+      <assert id="HR-BR-4" flag="fatal"
               test="not(cac:LegalMonetaryTotal/cbc:PayableAmount > 0) or (cbc:DueDate and normalize-space(cbc:DueDate) != '')">
         [HR-BR-4] U slučaju pozitivnog iznosa koji dospijeva na plaćanje (BT-115), datum dospijeća plaćanja (BT-9) mora biti naveden.
-      </assert>
-
-      <assert id="HR-BR-4(2)" flag="fatal"
-              test="cbc:ProfileID and (matches(cbc:ProfileID, '^P([1-9]|1[0-2])$') or matches(cbc:ProfileID, '^P99:.+$'))">
-        [HR-BR-4] Oznaka procesa (BT-23) MORA biti navedena. Koriste se vrijednosti P1-P12 ili P99:Oznaka kupca iz Tablice 4 Tipovi poslovnog procesa
       </assert>
 
       <assert id="HR-BR-5" flag="fatal"
@@ -74,7 +70,7 @@
               test="every $charge in cac:AllowanceCharge[cbc:ChargeIndicator='true'] satisfies (
                 not($charge/cac:TaxCategory/cbc:ID = ('E', 'O')) or
                 ($charge/cac:TaxCategory/cbc:Name and normalize-space($charge/cac:TaxCategory/cbc:Name) != '' and
-                 $charge/cac:TaxCategory/cbc:Name = ('HR:Z', 'HR:K', 'HR:G', 'HR:AE', 'HR:E', 'HR:POVNAK', 'HR:PP', 'HR:PPMV', 'HR:O'))
+                 $charge/cac:TaxCategory/cbc:Name = ('HR:Z', 'HR:K', 'HR:G', 'HR:AE', 'HR:E', 'HR:POVNAK', 'HR:PP', 'HR:PPMV', 'HR:O', 'HR:N'))
               )">
         [HR-BR-11] Svaki troškak na razini dokumenta (BG-21) koji ne podliježe PDV-u ili je oslobođen PDV-a mora imati oznaku kategorije PDV-a troška na razini dokumenta (HR-BT-6) iz tablice HR-TB-2 HR oznaka kategorija PDV-a
       </assert>
@@ -88,19 +84,19 @@
         [HR-BR-13] Svaki troškak na razini dokumenta (BG-21) koji ne podliježe PDV-u ili je oslobođen mora imati razlog oslobođenja PDV-a troška na razini dokumenta (HR-BT-7) ili kod razloga oslobođenja PDV-a a troška na razini dokumenta (HR-BT-8)
       </assert>
 
-      <assert id="HR-BR-17(1)" flag="fatal"
+      <assert id="HR-BR-17" flag="fatal"
               test="not((cac:InvoiceLine | cac:CreditNoteLine)/cac:OrderLineReference/cac:OrderReference/cbc:ID) or not(cac:OrderReference/cbc:ID)">
-        [HR-BR-17(1)] Ako se koristi referenca narudžbenice na stavci računa (HR-BT-9), zabranjeno je koristiti BT-13 Referencu narudžbenice na razini računa
+        [HR-BR-17] Ako se koristi referenca narudžbenice na stavci računa (HR-BT-9), zabranjeno je koristiti BT-13 Referencu narudžbenice na razini računa
       </assert>
 
-      <assert id="HR-BR-18(1)" flag="fatal"
+      <assert id="HR-BR-18" flag="fatal"
               test="not((cac:InvoiceLine | cac:CreditNoteLine)/cac:DespatchLineReference/cac:DocumentReference/cbc:ID) or not(cac:DespatchDocumentReference/cbc:ID)">
-        [HR-BR-18(1)] Ako se koristi referenca otpremnice na stavci računa (HR-BT-10), zabranjeno je koristiti BT-16 Referencu otpremnice na razini računa
+        [HR-BR-18] Ako se koristi referenca otpremnice na stavci računa (HR-BT-10), zabranjeno je koristiti BT-16 Referencu otpremnice na razini računa
       </assert>
 
-      <assert id="HR-BR-19(1)" flag="fatal"
+      <assert id="HR-BR-19" flag="fatal"
               test="not((cac:InvoiceLine | cac:CreditNoteLine)/cac:ReceiptLineReference/cac:DocumentReference/cbc:ID) or not(cac:ReceiptDocumentReference/cbc:ID)">
-        [HR-BR-19(1)] Ako se koristi referenca primke na stavci računa (HR-BT-11), zabranjeno je koristiti BT-15 Referencu primke na razini računa
+        [HR-BR-19] Ako se koristi referenca primke na stavci računa (HR-BT-11), zabranjeno je koristiti BT-15 Referencu primke na razini računa
       </assert>
 
       <assert id="HR-BR-26" flag="fatal"
@@ -166,6 +162,16 @@
       <assert id="HR-BR-33" flag="fatal"
               test="not(//*[not(*) and not(@*) and normalize-space() = '' and local-name() != 'SignatureInformation'])">
         [HR-BR-33] Račun ne smije sadržavati prazne xml elemente osim elementa s elektroničkim potpisom računa
+      </assert>
+      
+      <assert id="HR-BR-34" flag="fatal"
+              test="cbc:ProfileID and (matches(cbc:ProfileID, '^P([1-9]|1[0-2])$') or matches(cbc:ProfileID, '^P99:.+$'))">
+        [HR-BR-34] Oznaka procesa (BT-23) MORA biti navedena. Koriste se vrijednosti P1-P12 ili P99:Oznaka kupca iz Tablice 4 Tipovi poslovnog procesa
+      </assert>
+
+      <assert id="HR-BR-37" flag="fatal"
+              test="cac:AccountingSupplierParty/cac:SellerContact/cbc:Name and normalize-space(cac:AccountingSupplierParty/cac:SellerContact/cbc:Name) != ''">
+        [HR-BR-37] Račun mora sadržavati oznaku operatera (HR-BT-4)
       </assert>
 
       <assert id="HR-BR-S-1" flag="fatal"
@@ -247,28 +253,8 @@
       <assert id="HR-BR-16" flag="fatal"
               test="not(cac:Item/cac:ClassifiedTaxCategory/cbc:ID = ('E', 'O')) or
                     (cac:Item/cac:ClassifiedTaxCategory/cbc:Name and normalize-space(cac:Item/cac:ClassifiedTaxCategory/cbc:Name) != '' and
-                     cac:Item/cac:ClassifiedTaxCategory/cbc:Name = ('HR:Z', 'HR:K', 'HR:G', 'HR:AE', 'HR:E', 'HR:POVNAK', 'HR:PP', 'HR:PPMV', 'HR:O'))">
+                     cac:Item/cac:ClassifiedTaxCategory/cbc:Name = ('HR:Z', 'HR:K', 'HR:G', 'HR:AE', 'HR:E', 'HR:POVNAK', 'HR:PP', 'HR:PPMV', 'HR:O', 'HR:N'))">
         [HR-BR-16] Svaka stavka računa (BG-25) koja ne podliježe PDV-u ili je oslobođena od PDV-a mora imati oznaku kategorije PDV-a obračunate stavke HR-BT-12 iz šifarnika oznaka kategorija PDV-a HR-TB-2
-      </assert>
-
-      <assert id="HR-BR-17(2)" flag="fatal"
-              test="not(cac:Item/cac:ClassifiedTaxCategory/cbc:ID = ('E', 'O')) or
-                    (cac:Item/cac:ClassifiedTaxCategory/cbc:ID = 'E' and cac:Item/cac:ClassifiedTaxCategory/cbc:Percent = 0)">
-        [HR-BR-17(2)] Svaka stavka računa (BG-25) koja ne podliježe PDV-u ili je oslobođena od PDV-a mora imati kod kategorije PDV-a „E" (BT-151) i stopu PDV-a (BT-152) jednaku 0
-      </assert>
-
-      <assert id="HR-BR-18(2)" flag="fatal"
-              test="not(cac:Item/cac:ClassifiedTaxCategory/cbc:ID = ('E', 'O')) or
-                    (cac:Item/cac:ClassifiedTaxCategory/cbc:TaxExemptionReason and normalize-space(cac:Item/cac:ClassifiedTaxCategory/cbc:TaxExemptionReason) != '') or
-                    (cac:Item/cac:ClassifiedTaxCategory/cbc:TaxExemptionReasonCode and normalize-space(cac:Item/cac:ClassifiedTaxCategory/cbc:TaxExemptionReasonCode) != '')">
-        [HR-BR-18(2)] Svaka stavka računa (BG-25) koja ne podliježe PDV-u ili je oslobođena od PDV-a mora imati razlog oslobođenja PDV-a (HR-BT-13) ili kod razloga oslobođenja PDV-a (HR-BT-14)
-      </assert>
-
-      <assert id="HR-BR-19(2)" flag="fatal"
-              test="not(cac:Item/cac:ClassifiedTaxCategory/cbc:ID = ('E', 'O')) or
-                    (cac:Item/cac:ClassifiedTaxCategory/cbc:TaxExemptionReason and normalize-space(cac:Item/cac:ClassifiedTaxCategory/cbc:TaxExemptionReason) != '') or
-                    (cac:Item/cac:ClassifiedTaxCategory/cbc:TaxExemptionReasonCode and normalize-space(cac:Item/cac:ClassifiedTaxCategory/cbc:TaxExemptionReasonCode) != '')">
-        [HR-BR-19(2)] Svaka stavka računa (BG-25) koja ne podliježe PDV-u ili je oslobođena od PDV-a mora imati razlog oslobođenja PDV-a (HR-BT-13) ili kod razloga oslobođenja PDV-a (HR-BT-14)
       </assert>
 
       <assert id="HR-BR-20" flag="fatal"
@@ -282,7 +268,27 @@
                     (cac:Price/cbc:BaseQuantity/@unitCode = (cbc:InvoicedQuantity | cbc:CreditedQuantity)/@unitCode)">
         [HR-BR-21] Jedinica mjere jedinične količine cijene artikla (BT-150), ako je iskazan, MORA biti jednaka jedinici mjere obračunate količine (BT-130)
       </assert>
+      
+      <assert id="HR-BR-25" flag="fatal"
+              test="(ancestor::*[self::ubl:Invoice or self::cn:CreditNote]/cbc:InvoiceTypeCode = '458') or
+                    (cac:Item/cac:CommodityClassification/cbc:ItemClassificationCode and
+                     cac:Item/cac:CommodityClassification/cbc:ItemClassificationCode/@listID = 'CG')">
+        [HR-BR-25] Svaki artikl MORA imati identifikator klasifikacije artikla (BT-158) iz sheme Klasifikacija proizvoda po djelatnostima: KPD (CPA) – listID „CG", osim u slučaju računa za predujam.
+      </assert>
+      
+      <assert id="HR-BR-35" flag="fatal"
+              test="not(cac:Item/cac:ClassifiedTaxCategory/cbc:ID = ('E', 'O')) or
+                    (cac:Item/cac:ClassifiedTaxCategory/cbc:ID = 'E' and cac:Item/cac:ClassifiedTaxCategory/cbc:Percent = 0)">
+        [HR-BR-35] Svaka stavka računa (BG-25) koja ne podliježe PDV-u ili je oslobođena od PDV-a mora imati kod kategorije PDV-a „E" (BT-151) i stopu PDV-a (BT-152) jednaku 0
+      </assert>
 
+      <assert id="HR-BR-36" flag="fatal"
+              test="not(cac:Item/cac:ClassifiedTaxCategory/cbc:ID = ('E', 'O')) or
+                    (cac:Item/cac:ClassifiedTaxCategory/cbc:TaxExemptionReason and normalize-space(cac:Item/cac:ClassifiedTaxCategory/cbc:TaxExemptionReason) != '') or
+                    (cac:Item/cac:ClassifiedTaxCategory/cbc:TaxExemptionReasonCode and normalize-space(cac:Item/cac:ClassifiedTaxCategory/cbc:TaxExemptionReasonCode) != '')">
+        [HR-BR-36] Svaka stavka računa (BG-25) koja ne podliježe PDV-u ili je oslobođena od PDV-a mora imati razlog oslobođenja PDV-a (HR-BT-13) ili kod razloga oslobođenja PDV-a (HR-BT-14)
+      </assert>
+      
     </rule>
 
   </pattern>

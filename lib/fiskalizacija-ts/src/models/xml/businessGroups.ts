@@ -451,7 +451,7 @@ export const BUSINESS_GROUPS: Record<string, IBusinessTermXpath> = {
             "ext:Extensions",
             "ext:Extension",
             "ext:ExtensionContent",
-            "hrextac:HRFISK20data",
+            "hrextac:HRFISK20Data",
             "hrextac:HRTaxTotal",
             "hrextac:HRTaxSubtotal"
         ],
@@ -473,7 +473,7 @@ export const BUSINESS_GROUPS: Record<string, IBusinessTermXpath> = {
             "ext:Extensions",
             "ext:Extension",
             "ext:ExtensionContent",
-            "hrextac:HRFISK20data",
+            "hrextac:HRFISK20Data",
             "hrextac:HRLegalMonetaryTotal"
         ],
         CreditNote: [

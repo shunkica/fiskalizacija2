@@ -1,4 +1,4 @@
-# Verzija 1.1 (2025-05-09)
+# Verzija 1.2 (2025-06-23)
 
 ## HR-TB-1 Tipovi poslovnog procesa (Tablica 55)
 
@@ -33,4 +33,5 @@
 | HR:POVNAK                  | E                        | O                                    | OTH                           | Povratna naknada                            | Povratna naknada za jednokratnu ambalažu (trošak POVNAK je prolazna stavka koja ne ulazi u poreznu osnovicu - čl. 33. st. 3)                         |
 | HR:PP                      | E                        | O                                    | LOC                           | Posebni porez na potrošnju u ugostiteljstvu | Artikl podliježe i pod posebni porez u ugostiteljstvu (u iznosu definiranom prema lokalnim propisima, trošaak PPUG je prolazna stavka čl. 33. st. 3) |
 | HR:PPMV                    | E                        | O                                    | CAR                           | Posebni porez na motorna vozila             | Na artikl se plaća PDV o Posebni porez na motorna vozila (Sam trošak PPMV je prolazna stavka čl. 33. st. 3)                                          |
-| HR:O                       | O                        | O                                    | VAT                           | Nije predmet oporezivanja PDVom             | Artikl ne podliježe PDV-u (jer cijeli račun ne podliježe PDV-u temeljem čl. 5 Zakona o PDVu)                                                         |
+| HR:O                       | O                        | O                                    | VAT                           | Nije predmet oporezivanja PDV-om            | Artikl ne podliježe PDV-u (jer cijeli račun ne podliježe PDV-u temeljem čl. 5 Zakona o PDVu)                                                         |
+| HR:N                       | E                        | O                                    | VAT                           | Nije predmet oporezivanja PDV-om            | Artikl ne podliježe PDV-u                                                                                                                            |
