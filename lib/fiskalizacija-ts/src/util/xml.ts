@@ -141,6 +141,22 @@ export function getOptionalElementContent(
     return el.content;
 }
 
+export function getOptionalAttributeValue(
+    el: XmlElement,
+    name: string,
+    prefix: string,
+    regexKey?: keyof typeof REGEX
+): string | undefined {
+    const attr = el.attr(name, prefix);
+    if (!attr) {
+        return undefined;
+    }
+    if (regexKey && !REGEX[regexKey].test(attr.value)) {
+        throw new ValidationError(`Atribut '${name}' ne zadovoljava regex ${REGEX[regexKey]}`, attr.value);
+    }
+    return attr.value;
+}
+
 export function getAttributeValue(
     el: XmlElement,
     name: string,
@@ -167,12 +183,12 @@ export function xmlEscape(val: string): string {
 }
 
 
-export function using(doc: XmlDocument, fn: (r: XmlDocument) => void) {
+export function usingXmlDocument<T>(doc: XmlDocument, fn: (r: XmlDocument) => T): T {
     if (!doc) {
         throw new Error("Failed to parse XML document");
     }
     try {
-        fn(doc);
+        return fn(doc);
     } finally {
         doc.dispose();
     }

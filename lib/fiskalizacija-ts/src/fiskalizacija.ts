@@ -3,7 +3,7 @@ import {EvidentirajERacunOdgovor, EvidentirajERacunZahtjev} from './models/xml/f
 import {FiskalizacijaOptions, FiskalizacijaResult, IEvidentirajERacunZahtjev, ValidationError} from './types';
 import {XmlDocument, XmlElement} from "libxml2-wasm";
 import {FISK_NS} from "./models/xml/const";
-import {using} from "./util/xml";
+import {usingXmlDocument} from "./util/xml";
 import {postRequest} from "./util/http";
 import {parseError} from "./util/error";
 
@@ -53,7 +53,7 @@ export class FiskalizacijaClient {
             result.httpStatusCode = statusCode;
             result.soapResRaw = data;
 
-            using(XmlDocument.fromString(data), (doc: XmlDocument) => {
+            usingXmlDocument(XmlDocument.fromString(data), (doc: XmlDocument) => {
                 const odgovorElement = doc.get('/soapenv:Envelope/soapenv:Body/efis:EvidentirajERacunOdgovor', FISK_NS) as XmlElement;
                 if (!odgovorElement) {
                     throw new ValidationError(`HTTP ${statusCode} | /soapenv:Envelope/soapenv:Body/efis:EvidentirajERacunOdgovor`, data);

@@ -2,7 +2,7 @@ import {describe, it, expect, vi, beforeEach} from 'vitest';
 import * as fs from "node:fs";
 import {FiskalizacijaClient, FiskalizacijaService, IEvidentirajERacunZahtjev} from "../../src";
 import {XmlTestProvider} from "../fixtures/xmlProvider";
-import {EvidentirajERacunZahtjev} from "../../src/models";
+import {EvidentirajERacunZahtjev} from "../../src";
 
 describe('FiscalizationClient Test Environment', () => {
     const privateKey = fs.readFileSync(process.env.PRIVATE_KEY_FILE || "tests/fixtures/key.pem", 'utf-8');

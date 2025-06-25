@@ -20,7 +20,7 @@ import {
     ZaglavljeFiskalizacijaSerializable
 } from "../../types";
 import {FISK_NS, UBL_NS} from "./const";
-import {getElementContent, getOptionalElementContent, extractElement, xmlEscape, extractOptionalElements, extractElements, getElementContentNumber, getOptionalElementContentNumber, getBusinessGroupXpath, getBusinessTermXpath, getAttributeValue, extractOptionalElement} from "../../util/xml";
+import {getElementContent, getOptionalElementContent, extractElement, xmlEscape, extractOptionalElements, extractElements, getElementContentNumber, getOptionalElementContentNumber, getBusinessGroupXpath, getBusinessTermXpath, getAttributeValue, extractOptionalElement, usingXmlDocument, getOptionalAttributeValue} from "../../util/xml";
 import {XmlAttribute, XmlDocument, XmlElement} from "libxml2-wasm";
 
 export class EvidentirajERacunZahtjev implements EvidentirajERacunZahtjevSerializable {
@@ -218,6 +218,16 @@ export class ERacun implements ERacunSerializable {
             StavkaERacuna: extractElements(el, "efis:StavkaERacuna", FISK_NS, StavkaERacuna.fromXmlElement),
             indikatorKopije: getElementContent(el, "efis:indikatorKopije", FISK_NS, "boolean") === "true"
         }
+    }
+
+    static fromUblString(xml: string, type: "Invoice" | "CreditNote"): IERacun {
+        return usingXmlDocument(XmlDocument.fromString(xml), (doc: XmlDocument) => {
+            const el = doc.get(`//${type.toLowerCase()}:${type}`, UBL_NS) as XmlElement | null;
+            if (!el) {
+                throw new ValidationError(`Nije pronađen element '${type}' u XML-u`, xml);
+            }
+            return ERacun.fromUbl(el, type);
+        });
     }
 
     static fromUbl(el: XmlElement, type: "Invoice" | "CreditNote"): IERacun {
@@ -608,7 +618,7 @@ export class StavkaERacuna implements StavkaERacunaSerializable {
                 artiklKategorijaPdv: getElementContent(groupEl, getBusinessTermXpath("BT-151", type, "BG-25"), UBL_NS, "kategorijaPdv"),
                 artiklStopaPdv: getElementContentNumber(groupEl, getBusinessTermXpath("BT-152", type, "BG-25"), UBL_NS, "decimal"),
                 artiklNaziv: getElementContent(groupEl, getBusinessTermXpath("BT-153", type, "BG-25"), UBL_NS, "tekst100"),
-                ArtiklIdentifikatorKlasifikacija: ArtiklIdentifikatorKlasifikacija.fromUbl(groupEl, type)
+                ArtiklIdentifikatorKlasifikacija: extractOptionalElements(groupEl, getBusinessTermXpath("BT-158", type, "BG-25"), UBL_NS, (el) => ArtiklIdentifikatorKlasifikacija.fromUbl(el, type))
             };
         });
     }
@@ -646,19 +656,12 @@ export class ArtiklIdentifikatorKlasifikacija implements ArtiklIdentifikatorKlas
         }
     }
 
-    static fromUbl(groupEl: XmlElement, type: "Invoice" | "CreditNote") {
-        const elements = groupEl.find(getBusinessTermXpath("BT-158", type, "BG-25"), UBL_NS) as XmlElement[];
-        if (elements.length === 0) {
-            return undefined;
-        }
-        return elements.map(el => {
-            return {
-                identifikatorKlasifikacije: getElementContent(el, ".", UBL_NS, "tekst10"),
-                identifikatorSheme: "CG",
-                verzijaSheme: undefined
-            };
-        });
-
+    static fromUbl(el: XmlElement, type: "Invoice" | "CreditNote") {
+        return {
+            identifikatorKlasifikacije: getElementContent(el, ".", UBL_NS, "tekst10"),
+            identifikatorSheme: getAttributeValue(el, "listID", ""),
+            verzijaSheme: getOptionalAttributeValue(el, "listVersionID", "") || undefined,
+        };
     }
 }
 

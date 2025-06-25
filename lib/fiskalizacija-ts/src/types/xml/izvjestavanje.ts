@@ -1,4 +1,5 @@
 import {IArtiklIdentifikatorKlasifikacija, IDokumentUkupanIznos, IIzdavatelj, IOdgovor, IPrijenosSredstava, IPrimatelj, IRaspodjelaPdv} from "./common";
+import {XmlSerializable} from "./util";
 
 /**
  * Zaglavlje sadrži osnovne informacije o zahtjevu, uključujući datum i vrijeme slanja.
@@ -10,6 +11,8 @@ export interface IZaglavljeIzvjestavanje {
      */
     datumVrijemeSlanja: string;
 }
+
+export type ZaglavljeIzvjestavanjeSerializable = XmlSerializable<IZaglavljeIzvjestavanje>;
 
 /**
  * Zaglavlje za zahtjeve evidencije isporuke za koju nije izdan eRačun
@@ -26,6 +29,8 @@ export interface IZaglavljeIsporuka {
      */
     vrstaRacuna: string;
 }
+
+export type ZaglavljeIsporukaSerializable = XmlSerializable<IZaglavljeIsporuka>;
 
 /**
  * Podaci o naplati eRačuna
@@ -76,6 +81,8 @@ export interface INaplata {
      */
     nacinPlacanja: string;
 }
+
+export type NaplataSerializable = XmlSerializable<INaplata>;
 
 /**
  * Podaci o odbijanju eRačuna
@@ -130,6 +137,8 @@ export interface IOdbijanje {
     razlogOdbijanja: string;
 }
 
+export type OdbijanjeSerializable = XmlSerializable<IOdbijanje>;
+
 /**
  * Informacije o jednom ili više prethodnih računa (BG-3 iz UBL 2.1)
  */
@@ -148,6 +157,8 @@ export interface IPrethodniRacun {
      */
     datumIzdavanja: string;
 }
+
+export type PrethodniRacunSerializable = XmlSerializable<IPrethodniRacun>;
 
 /**
  * Informacije o pojedinačnim stavkama računa
@@ -210,6 +221,8 @@ export interface IStavkaRacuna {
      */
     ArtiklIdentifikatorKlasifikacija?: IArtiklIdentifikatorKlasifikacija[];
 }
+
+export type StavkaRacunaSerializable = XmlSerializable<IStavkaRacuna>;
 
 /**
  * Podaci o računu
@@ -313,12 +326,14 @@ export interface IRacun {
     indikatorKopije: boolean;
 }
 
+export type RacunSerializable = XmlSerializable<IRacun>;
+
 // Request and Response interfaces
 
 /**
  * Zahtjev za evidenciju naplate eRačuna
  */
-export interface EvidentirajNaplatuZahtjev {
+export interface IEvidentirajNaplatuZahtjev {
     /**
      * Atribut korišten prilikom kreiranja i provjere digitalnog potpisa
      */
@@ -335,10 +350,12 @@ export interface EvidentirajNaplatuZahtjev {
     Naplata: INaplata[];
 }
 
+export type EvidentirajNaplatuZahtjevSerializable = XmlSerializable<IEvidentirajNaplatuZahtjev>;
+
 /**
  * Odgovor na zahtjev za evidenciju naplate
  */
-export interface EvidentirajNaplatuOdgovor {
+export interface IEvidentirajNaplatuOdgovor {
     /**
      * Atribut korišten prilikom kreiranja i provjere digitalnog potpisa
      */
@@ -350,10 +367,12 @@ export interface EvidentirajNaplatuOdgovor {
     Odgovor: IOdgovor;
 }
 
+export type EvidentirajNaplatuOdgovorSerializable = XmlSerializable<IEvidentirajNaplatuOdgovor>;
+
 /**
  * Zahtjev za evidenciju odbijanja eRačuna
  */
-export interface EvidentirajOdbijanjeZahtjev {
+export interface IEvidentirajOdbijanjeZahtjev {
     /**
      * Atribut korišten prilikom kreiranja i provjere digitalnog potpisa
      */
@@ -370,10 +389,12 @@ export interface EvidentirajOdbijanjeZahtjev {
     Odbijanje: IOdbijanje[];
 }
 
+export type EvidentirajOdbijanjeZahtjevSerializable = XmlSerializable<IEvidentirajOdbijanjeZahtjev>;
+
 /**
  * Odgovor na zahtjev za evidenciju odbijanja
  */
-export interface EvidentirajOdbijanjeOdgovor {
+export interface IEvidentirajOdbijanjeOdgovor {
     /**
      * Atribut korišten prilikom kreiranja i provjere digitalnog potpisa
      */
@@ -391,10 +412,12 @@ export interface EvidentirajOdbijanjeOdgovor {
     Odgovor: IOdgovor;
 }
 
+export type EvidentirajOdbijanjeOdgovorSerializable = XmlSerializable<IEvidentirajOdbijanjeOdgovor>;
+
 /**
  * Zahtjev za evidenciju računa za koji nije izdan eRačun
  */
-export interface EvidentirajIsporukuZaKojuNijeIzdanERacunZahtjev {
+export interface IEvidentirajIsporukuZaKojuNijeIzdanERacunZahtjev {
     /**
      * Atribut korišten prilikom kreiranja i provjere digitalnog potpisa
      */
@@ -411,10 +434,12 @@ export interface EvidentirajIsporukuZaKojuNijeIzdanERacunZahtjev {
     Racun: IRacun[];
 }
 
+export type EvidentirajIsporukuZaKojuNijeIzdanERacunZahtjevSerializable = XmlSerializable<IEvidentirajIsporukuZaKojuNijeIzdanERacunZahtjev>;
+
 /**
  * Odgovor na zahtjev za evidenciju eRačuna
  */
-export interface EvidentirajIsporukuZaKojuNijeIzdanERacunOdgovor {
+export interface IEvidentirajIsporukuZaKojuNijeIzdanERacunOdgovor {
     /**
      * Atribut korišten prilikom kreiranja i provjere digitalnog potpisa
      */
@@ -431,3 +456,5 @@ export interface EvidentirajIsporukuZaKojuNijeIzdanERacunOdgovor {
      */
     Odgovor: IOdgovor;
 }
+
+export type EvidentirajIsporukuZaKojuNijeIzdanERacunOdgovorSerializable = XmlSerializable<IEvidentirajIsporukuZaKojuNijeIzdanERacunOdgovor>;
