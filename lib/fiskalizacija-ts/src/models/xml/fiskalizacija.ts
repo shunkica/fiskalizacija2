@@ -94,12 +94,12 @@ export class EvidentirajERacunZahtjev implements EvidentirajERacunZahtjevSeriali
     }
 
     public toXmlString() {
-        const parts: string[] = [];
-        parts.push(`<efis:EvidentirajERacunZahtjev xmlns:ds="${FISK_NS["ds"]}" xmlns:efis="${FISK_NS["efis"]}" efis:id="${xmlEscape(this._id)}">`);
-        parts.push(this.Zaglavlje.toXmlString());
-        this.ERacun.forEach(eracun => parts.push(eracun.toXmlString()));
-        parts.push(`</efis:EvidentirajERacunZahtjev>`);
-        return parts.join("");
+        let res = '';
+        res += `<efis:EvidentirajERacunZahtjev xmlns:ds="${FISK_NS["ds"]}" xmlns:efis="${FISK_NS["efis"]}" efis:id="${xmlEscape(this._id)}">`;
+        res += this.Zaglavlje.toXmlString();
+        this.ERacun.forEach(eracun => res += eracun.toXmlString());
+        res += `</efis:EvidentirajERacunZahtjev>`;
+        return res;
     }
 }
 
@@ -113,12 +113,12 @@ export class ZaglavljeFiskalizacija implements ZaglavljeFiskalizacijaSerializabl
     }
 
     public toXmlString() {
-        const parts: string[] = [];
-        parts.push(`<efis:Zaglavlje>`);
-        parts.push(`<efis:datumVrijemeSlanja>${xmlEscape(this.datumVrijemeSlanja)}</efis:datumVrijemeSlanja>`);
-        parts.push(`<efis:vrstaERacuna>${xmlEscape(this.vrstaERacuna)}</efis:vrstaERacuna>`);
-        parts.push(`</efis:Zaglavlje>`);
-        return parts.join("");
+        let res = '';
+        res += `<efis:Zaglavlje>`;
+        res += `<efis:datumVrijemeSlanja>${xmlEscape(this.datumVrijemeSlanja)}</efis:datumVrijemeSlanja>`;
+        res += `<efis:vrstaERacuna>${xmlEscape(this.vrstaERacuna)}</efis:vrstaERacuna>`;
+        res += `</efis:Zaglavlje>`;
+        return res;
     }
 
     static fromXmlElement(el: XmlElement): IZaglavljeFiskalizacija {
@@ -167,36 +167,36 @@ export class ERacun implements ERacunSerializable {
     }
 
     toXmlString(): string {
-        const parts: string[] = [];
-        parts.push('<efis:ERacun>');
-        parts.push('<efis:brojDokumenta>' + xmlEscape(this.brojDokumenta) + '</efis:brojDokumenta>');
-        parts.push('<efis:datumIzdavanja>' + xmlEscape(this.datumIzdavanja) + '</efis:datumIzdavanja>');
-        parts.push('<efis:vrstaDokumenta>' + xmlEscape(this.vrstaDokumenta) + '</efis:vrstaDokumenta>');
-        parts.push('<efis:valutaERacuna>' + xmlEscape(this.valutaERacuna) + '</efis:valutaERacuna>');
+        let res = '';
+        res += '<efis:ERacun>';
+        res += '<efis:brojDokumenta>' + xmlEscape(this.brojDokumenta) + '</efis:brojDokumenta>';
+        res += '<efis:datumIzdavanja>' + xmlEscape(this.datumIzdavanja) + '</efis:datumIzdavanja>';
+        res += '<efis:vrstaDokumenta>' + xmlEscape(this.vrstaDokumenta) + '</efis:vrstaDokumenta>';
+        res += '<efis:valutaERacuna>' + xmlEscape(this.valutaERacuna) + '</efis:valutaERacuna>';
         if (this.datumDospijecaPlacanja) {
-            parts.push('<efis:datumDospijecaPlacanja>' + xmlEscape(this.datumDospijecaPlacanja) + '</efis:datumDospijecaPlacanja>');
+            res += '<efis:datumDospijecaPlacanja>' + xmlEscape(this.datumDospijecaPlacanja) + '</efis:datumDospijecaPlacanja>';
         }
         if (this.datumIsporuke) {
-            parts.push('<efis:datumIsporuke>' + xmlEscape(this.datumIsporuke) + '</efis:datumIsporuke>');
+            res += '<efis:datumIsporuke>' + xmlEscape(this.datumIsporuke) + '</efis:datumIsporuke>';
         }
-        parts.push('<efis:vrstaPoslovnogProcesa>' + xmlEscape(this.vrstaPoslovnogProcesa) + '</efis:vrstaPoslovnogProcesa>');
+        res += '<efis:vrstaPoslovnogProcesa>' + xmlEscape(this.vrstaPoslovnogProcesa) + '</efis:vrstaPoslovnogProcesa>';
         if (this.referencaNaUgovor) {
-            parts.push('<efis:referencaNaUgovor>' + xmlEscape(this.referencaNaUgovor) + '</efis:referencaNaUgovor>');
+            res += '<efis:referencaNaUgovor>' + xmlEscape(this.referencaNaUgovor) + '</efis:referencaNaUgovor>';
         }
         if (this.PrethodniERacun) {
-            this.PrethodniERacun.forEach(i => parts.push(i.toXmlString()));
+            this.PrethodniERacun.forEach(i => res += i.toXmlString());
         }
-        parts.push(this.Izdavatelj.toXmlString());
-        parts.push(this.Primatelj.toXmlString());
+        res += this.Izdavatelj.toXmlString();
+        res += this.Primatelj.toXmlString();
         if (this.PrijenosSredstava) {
-            this.PrijenosSredstava.forEach(i => parts.push(i.toXmlString()));
+            this.PrijenosSredstava.forEach(i => res += i.toXmlString());
         }
-        parts.push(this.DokumentUkupanIznos.toXmlString());
-        this.RaspodjelaPdv.forEach(i => parts.push(i.toXmlString()));
-        this.StavkaERacuna.forEach(i => parts.push(i.toXmlString()));
-        parts.push(`<efis:indikatorKopije>${xmlEscape(String(this.indikatorKopije))}</efis:indikatorKopije>`);
-        parts.push('</efis:ERacun>');
-        return parts.join("");
+        res += this.DokumentUkupanIznos.toXmlString();
+        this.RaspodjelaPdv.forEach(i => res += i.toXmlString());
+        this.StavkaERacuna.forEach(i => res += i.toXmlString());
+        res += `<efis:indikatorKopije>${xmlEscape(String(this.indikatorKopije))}</efis:indikatorKopije>`;
+        res += '</efis:ERacun>';
+        return res;
     }
 
     static fromXmlElement(el: XmlElement): IERacun {
@@ -263,12 +263,12 @@ export class PrethodniERacun implements PrethodniERacunSerializable {
     }
 
     toXmlString(): string {
-        const parts: string[] = [];
-        parts.push(`<efis:PrethodniERacun>`);
-        parts.push(`<efis:brojDokumenta>${xmlEscape(this.brojDokumenta)}</efis:brojDokumenta>`);
-        parts.push(`<efis:datumIzdavanja>${xmlEscape(this.datumIzdavanja)}</efis:datumIzdavanja>`);
-        parts.push(`</efis:PrethodniERacun>`);
-        return parts.join("");
+        let res = '';
+        res += `<efis:PrethodniERacun>`;
+        res += `<efis:brojDokumenta>${xmlEscape(this.brojDokumenta)}</efis:brojDokumenta>`;
+        res += `<efis:datumIzdavanja>${xmlEscape(this.datumIzdavanja)}</efis:datumIzdavanja>`;
+        res += `</efis:PrethodniERacun>`;
+        return res;
     }
 
     static fromXmlElement(el: XmlElement): IPrethodniERacun {
@@ -302,12 +302,12 @@ export class Izdavatelj implements IzdavateljSerializable {
     }
 
     toXmlString(): string {
-        const parts: string[] = [];
-        parts.push(`<efis:Izdavatelj>`);
-        parts.push(`<efis:ime>${xmlEscape(this.ime)}</efis:ime>`);
-        parts.push(`<efis:oibPorezniBroj>${xmlEscape(this.oibPorezniBroj)}</efis:oibPorezniBroj>`);
-        parts.push(`</efis:Izdavatelj>`);
-        return parts.join("");
+        let res = '';
+        res += `<efis:Izdavatelj>`;
+        res += `<efis:ime>${xmlEscape(this.ime)}</efis:ime>`;
+        res += `<efis:oibPorezniBroj>${xmlEscape(this.oibPorezniBroj)}</efis:oibPorezniBroj>`;
+        res += `</efis:Izdavatelj>`;
+        return res;
     }
 
     static fromXmlElement(el: XmlElement): IIzdavatelj {
@@ -339,12 +339,12 @@ export class Primatelj implements PrimateljSerializable {
     }
 
     toXmlString(): string {
-        const parts: string[] = [];
-        parts.push(`<efis:Primatelj>`);
-        parts.push(`<efis:ime>${xmlEscape(this.ime)}</efis:ime>`);
-        parts.push(`<efis:oibPorezniBroj>${xmlEscape(this.oibPorezniBroj)}</efis:oibPorezniBroj>`);
-        parts.push(`</efis:Primatelj>`);
-        return parts.join("");
+        let res = '';
+        res += `<efis:Primatelj>`;
+        res += `<efis:ime>${xmlEscape(this.ime)}</efis:ime>`;
+        res += `<efis:oibPorezniBroj>${xmlEscape(this.oibPorezniBroj)}</efis:oibPorezniBroj>`;
+        res += `</efis:Primatelj>`;
+        return res;
     }
 
     static fromXmlElement(el: XmlElement): IPrimatelj {
@@ -378,17 +378,17 @@ export class PrijenosSredstava implements PrijenosSredstavaSerializable {
     }
 
     toXmlString(): string {
-        const parts: string[] = [];
-        parts.push(`<efis:PrijenosSredstava>`);
-        parts.push(`<efis:identifikatorRacunaZaPlacanje>${xmlEscape(this.identifikatorRacunaZaPlacanje)}</efis:identifikatorRacunaZaPlacanje>`);
+        let res = '';
+        res += `<efis:PrijenosSredstava>`;
+        res += `<efis:identifikatorRacunaZaPlacanje>${xmlEscape(this.identifikatorRacunaZaPlacanje)}</efis:identifikatorRacunaZaPlacanje>`;
         if (this.nazivRacunaZaPlacanje) {
-            parts.push(`<efis:nazivRacunaZaPlacanje>${xmlEscape(this.nazivRacunaZaPlacanje)}</efis:nazivRacunaZaPlacanje>`);
+            res += `<efis:nazivRacunaZaPlacanje>${xmlEscape(this.nazivRacunaZaPlacanje)}</efis:nazivRacunaZaPlacanje>`;
         }
         if (this.identifikatorPruzateljaPlatnihUsluga) {
-            parts.push(`<efis:identifikatorPruzateljaPlatnihUsluga>${xmlEscape(this.identifikatorPruzateljaPlatnihUsluga)}</efis:identifikatorPruzateljaPlatnihUsluga>`);
+            res += `<efis:identifikatorPruzateljaPlatnihUsluga>${xmlEscape(this.identifikatorPruzateljaPlatnihUsluga)}</efis:identifikatorPruzateljaPlatnihUsluga>`;
         }
-        parts.push(`</efis:PrijenosSredstava>`);
-        return parts.join("");
+        res += `</efis:PrijenosSredstava>`;
+        return res;
     }
 
     static fromXmlElement(el: XmlElement): IPrijenosSredstava {
@@ -434,21 +434,21 @@ export class DokumentUkupanIznos implements DokumentUkupanIznosSerializable {
     }
 
     toXmlString(): string {
-        const parts: string[] = [];
-        parts.push(`<efis:DokumentUkupanIznos>`);
-        parts.push(`<efis:neto>${this.neto.toFixed(2)}</efis:neto>`);
+        let res = '';
+        res += `<efis:DokumentUkupanIznos>`;
+        res += `<efis:neto>${this.neto.toFixed(2)}</efis:neto>`;
         if (this.popust !== undefined) {
-            parts.push(`<efis:popust>${this.popust.toFixed(2)}</efis:popust>`);
+            res += `<efis:popust>${this.popust.toFixed(2)}</efis:popust>`;
         }
-        parts.push(`<efis:iznosBezPdv>${this.iznosBezPdv.toFixed(2)}</efis:iznosBezPdv>`);
-        parts.push(`<efis:pdv>${this.pdv.toFixed(2)}</efis:pdv>`);
-        parts.push(`<efis:iznosSPdv>${this.iznosSPdv.toFixed(2)}</efis:iznosSPdv>`);
+        res += `<efis:iznosBezPdv>${this.iznosBezPdv.toFixed(2)}</efis:iznosBezPdv>`;
+        res += `<efis:pdv>${this.pdv.toFixed(2)}</efis:pdv>`;
+        res += `<efis:iznosSPdv>${this.iznosSPdv.toFixed(2)}</efis:iznosSPdv>`;
         if (this.placeniIznos !== undefined) {
-            parts.push(`<efis:placeniIznos>${this.placeniIznos.toFixed(2)}</efis:placeniIznos>`);
+            res += `<efis:placeniIznos>${this.placeniIznos.toFixed(2)}</efis:placeniIznos>`;
         }
-        parts.push(`<efis:iznosKojiDospijevaZaPlacanje>${this.iznosKojiDospijevaZaPlacanje.toFixed(2)}</efis:iznosKojiDospijevaZaPlacanje>`);
-        parts.push(`</efis:DokumentUkupanIznos>`);
-        return parts.join("");
+        res += `<efis:iznosKojiDospijevaZaPlacanje>${this.iznosKojiDospijevaZaPlacanje.toFixed(2)}</efis:iznosKojiDospijevaZaPlacanje>`;
+        res += `</efis:DokumentUkupanIznos>`;
+        return res;
     }
 
     static fromXmlElement(el: XmlElement): IDokumentUkupanIznos {
@@ -495,22 +495,22 @@ export class RaspodjelaPdv implements RaspodjelaPdvSerializable {
     }
 
     toXmlString(): string {
-        const parts: string[] = [];
-        parts.push(`<efis:RaspodjelaPdv>`);
-        parts.push(`<efis:kategorijaPdv>${xmlEscape(this.kategorijaPdv)}</efis:kategorijaPdv>`);
-        parts.push(`<efis:oporeziviIznos>${this.oporeziviIznos.toFixed(2)}</efis:oporeziviIznos>`);
-        parts.push(`<efis:iznosPoreza>${this.iznosPoreza.toFixed(2)}</efis:iznosPoreza>`);
+        let res = '';
+        res += `<efis:RaspodjelaPdv>`;
+        res += `<efis:kategorijaPdv>${xmlEscape(this.kategorijaPdv)}</efis:kategorijaPdv>`;
+        res += `<efis:oporeziviIznos>${this.oporeziviIznos.toFixed(2)}</efis:oporeziviIznos>`;
+        res += `<efis:iznosPoreza>${this.iznosPoreza.toFixed(2)}</efis:iznosPoreza>`;
         if (this.stopa !== undefined) {
-            parts.push(`<efis:stopa>${this.stopa.toFixed(2)}</efis:stopa>`);
+            res += `<efis:stopa>${this.stopa.toFixed(2)}</efis:stopa>`;
         }
         if (this.razlogOslobodenja !== undefined) {
-            parts.push(`<efis:razlogOslobodenja>${xmlEscape(this.razlogOslobodenja)}</efis:razlogOslobodenja>`);
+            res += `<efis:razlogOslobodenja>${xmlEscape(this.razlogOslobodenja)}</efis:razlogOslobodenja>`;
         }
         if (this.tekstRazlogaOslobodenja !== undefined) {
-            parts.push(`<efis:tekstRazlogaOslobodenja>${xmlEscape(this.tekstRazlogaOslobodenja)}</efis:tekstRazlogaOslobodenja>`);
+            res += `<efis:tekstRazlogaOslobodenja>${xmlEscape(this.tekstRazlogaOslobodenja)}</efis:tekstRazlogaOslobodenja>`;
         }
-        parts.push(`</efis:RaspodjelaPdv>`);
-        return parts.join("");
+        res += `</efis:RaspodjelaPdv>`;
+        return res;
     }
 
     static fromXmlElement(el: XmlElement): IRaspodjelaPdv {
@@ -567,25 +567,25 @@ export class StavkaERacuna implements StavkaERacunaSerializable {
 
 
     toXmlString(): string {
-        const parts: string[] = [];
-        parts.push(`<efis:StavkaERacuna>`);
-        parts.push(`<efis:kolicina>${this.kolicina.toFixed(2)}</efis:kolicina>`);
-        parts.push(`<efis:jedinicaMjere>${xmlEscape(this.jedinicaMjere)}</efis:jedinicaMjere>`);
-        parts.push(`<efis:artiklNetoCijena>${this.artiklNetoCijena.toFixed(2)}</efis:artiklNetoCijena>`);
+        let res = '';
+        res += `<efis:StavkaERacuna>`;
+        res += `<efis:kolicina>${this.kolicina.toFixed(2)}</efis:kolicina>`;
+        res += `<efis:jedinicaMjere>${xmlEscape(this.jedinicaMjere)}</efis:jedinicaMjere>`;
+        res += `<efis:artiklNetoCijena>${this.artiklNetoCijena.toFixed(2)}</efis:artiklNetoCijena>`;
         if (this.artiklOsnovnaKolicina !== undefined) {
-            parts.push(`<efis:artiklOsnovnaKolicina>${this.artiklOsnovnaKolicina.toFixed(2)}</efis:artiklOsnovnaKolicina>`);
+            res += `<efis:artiklOsnovnaKolicina>${this.artiklOsnovnaKolicina.toFixed(2)}</efis:artiklOsnovnaKolicina>`;
         }
         if (this.artiklJedinicaMjereZaOsnovnuKolicinu !== undefined) {
-            parts.push(`<efis:artiklJedinicaMjereZaOsnovnuKolicinu>${xmlEscape(this.artiklJedinicaMjereZaOsnovnuKolicinu)}</efis:artiklJedinicaMjereZaOsnovnuKolicinu>`);
+            res += `<efis:artiklJedinicaMjereZaOsnovnuKolicinu>${xmlEscape(this.artiklJedinicaMjereZaOsnovnuKolicinu)}</efis:artiklJedinicaMjereZaOsnovnuKolicinu>`;
         }
-        parts.push(`<efis:artiklKategorijaPdv>${xmlEscape(this.artiklKategorijaPdv)}</efis:artiklKategorijaPdv>`);
-        parts.push(`<efis:artiklStopaPdv>${this.artiklStopaPdv.toFixed(2)}</efis:artiklStopaPdv>`);
-        parts.push(`<efis:artiklNaziv>${xmlEscape(this.artiklNaziv)}</efis:artiklNaziv>`);
+        res += `<efis:artiklKategorijaPdv>${xmlEscape(this.artiklKategorijaPdv)}</efis:artiklKategorijaPdv>`;
+        res += `<efis:artiklStopaPdv>${this.artiklStopaPdv.toFixed(2)}</efis:artiklStopaPdv>`;
+        res += `<efis:artiklNaziv>${xmlEscape(this.artiklNaziv)}</efis:artiklNaziv>`;
         if (this.ArtiklIdentifikatorKlasifikacija) {
-            this.ArtiklIdentifikatorKlasifikacija.forEach(a => parts.push(a.toXmlString()));
+            this.ArtiklIdentifikatorKlasifikacija.forEach(a => res += a.toXmlString());
         }
-        parts.push(`</efis:StavkaERacuna>`);
-        return parts.join("");
+        res += `</efis:StavkaERacuna>`;
+        return res;
     }
 
     static fromXmlElement(el: XmlElement): IStavkaERacuna {
@@ -637,15 +637,15 @@ export class ArtiklIdentifikatorKlasifikacija implements ArtiklIdentifikatorKlas
 
 
     toXmlString(): string {
-        const parts: string[] = [];
-        parts.push(`<efis:ArtiklIdentifikatorKlasifikacija>`);
-        parts.push(`<efis:identifikatorKlasifikacije>${xmlEscape(this.identifikatorKlasifikacije)}</efis:identifikatorKlasifikacije>`);
-        parts.push(`<efis:identifikatorSheme>${xmlEscape(this.identifikatorSheme)}</efis:identifikatorSheme>`);
+        let res = '';
+        res += `<efis:ArtiklIdentifikatorKlasifikacija>`;
+        res += `<efis:identifikatorKlasifikacije>${xmlEscape(this.identifikatorKlasifikacije)}</efis:identifikatorKlasifikacije>`;
+        res += `<efis:identifikatorSheme>${xmlEscape(this.identifikatorSheme)}</efis:identifikatorSheme>`;
         if (this.verzijaSheme !== undefined) {
-            parts.push(`<efis:verzijaSheme>${xmlEscape(this.verzijaSheme)}</efis:verzijaSheme>`);
+            res += `<efis:verzijaSheme>${xmlEscape(this.verzijaSheme)}</efis:verzijaSheme>`;
         }
-        parts.push(`</efis:ArtiklIdentifikatorKlasifikacija>`);
-        return parts.join("");
+        res += `</efis:ArtiklIdentifikatorKlasifikacija>`;
+        return res;
     }
 
     static fromXmlElement(el: XmlElement): IArtiklIdentifikatorKlasifikacija {

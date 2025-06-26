@@ -27,19 +27,19 @@ export class XmlSigner {
         }
         const publicCertDer = pemToDer(publicCertPem)
         const publicCertDigest = new Sha256().getHash(publicCertDer)
-        const parts: string[] = []
-        parts.push(`<xades:QualifyingProperties xmlns:xades="http://uri.etsi.org/01903/v1.3.2#" Target="#${signatureId}">`)
-        parts.push(`<xades:SignedProperties Id="${signedPropertiesId}">`)
-        parts.push(`<xades:SignedSignatureProperties>`)
-        parts.push(`<xades:SigningTime>${signingTime}</xades:SigningTime>`)
-        parts.push(`<xades:SigningCertificateV2><xades:Cert><xades:CertDigest>`)
-        parts.push(`<ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>`)
-        parts.push(`<ds:DigestValue>${publicCertDigest}</ds:DigestValue>`)
-        parts.push(`</xades:CertDigest></xades:Cert></xades:SigningCertificateV2>`)
-        parts.push(`</xades:SignedSignatureProperties>`)
-        parts.push(`</xades:SignedProperties>`)
-        parts.push(`</xades:QualifyingProperties>`)
-        return parts.join('');
+        let res = '';
+        res += `<xades:QualifyingProperties xmlns:xades="http://uri.etsi.org/01903/v1.3.2#" Target="#${signatureId}">`
+        res += `<xades:SignedProperties Id="${signedPropertiesId}">`
+        res += `<xades:SignedSignatureProperties>`
+        res += `<xades:SigningTime>${signingTime}</xades:SigningTime>`
+        res += `<xades:SigningCertificateV2><xades:Cert><xades:CertDigest>`
+        res += `<ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>`
+        res += `<ds:DigestValue>${publicCertDigest}</ds:DigestValue>`
+        res += `</xades:CertDigest></xades:Cert></xades:SigningCertificateV2>`
+        res += `</xades:SignedSignatureProperties>`
+        res += `</xades:SignedProperties>`
+        res += `</xades:QualifyingProperties>`
+        return res;
     }
 
     /**

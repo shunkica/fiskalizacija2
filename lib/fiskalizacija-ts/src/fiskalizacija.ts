@@ -69,16 +69,15 @@ export class FiskalizacijaClient {
     }
 
     private generateSoapEnvelope(body: string): string {
-        let parts: string[] = [];
-        parts.push('<?xml version="1.0" encoding="UTF-8"?>');
-        parts.push('<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">');
-        parts.push('<soap:Body>');
-        parts.push(body);
-        parts.push('</soap:Body>');
-        parts.push('</soap:Envelope>');
-        return parts.join('');
+        let res = '';
+        res += '<?xml version="1.0" encoding="UTF-8"?>';
+        res += '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">';
+        res += '<soap:Body>';
+        res += body;
+        res += '</soap:Body>';
+        res += '</soap:Envelope>';
+        return res;
     }
-
 
 
 }
