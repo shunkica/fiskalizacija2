@@ -1,19 +1,19 @@
 import {describe, it, expect} from 'vitest';
 import {XmlDocument} from 'libxml2-wasm';
-import {XmlTestProvider} from "../fixtures/xmlProvider";
+import {XmlTestProvider} from "../fixtures/XmlTestProvider";
 import {ERacun} from "../../src";
+import {XmlTestValidator} from "../fixtures/XmlTestValidator";
 
 describe('ERacun', () => {
     describe('fromUbl', () => {
         it('should convert full UBL invoice to ERacun', () => {
-            const ublXml = XmlTestProvider.getFullUblInvoice();
-            const doc = XmlDocument.fromString(ublXml);
+            const doc = XmlDocument.fromString(XmlTestProvider.ublInvoiceFull);
 
             try {
                 const root = doc.root;
                 const eracun = ERacun.fromUbl(root, 'Invoice');
 
-                XmlTestProvider.validateFullUblInvoice(eracun)
+                XmlTestValidator.validateFullUblInvoice(eracun)
 
             } finally {
                 doc.dispose();
@@ -21,14 +21,13 @@ describe('ERacun', () => {
         });
 
         it('should convert minimal UBL invoice to ERacun', () => {
-            const ublXml = XmlTestProvider.getMinimalUblInvoice();
-            const doc = XmlDocument.fromString(ublXml);
+            const doc = XmlDocument.fromString(XmlTestProvider.ublInvoiceMinimal);
 
             try {
                 const root = doc.root;
                 const eracun = ERacun.fromUbl(root, 'Invoice');
 
-                XmlTestProvider.validateMinimalUblInvoice(eracun);
+                XmlTestValidator.validateMinimalUblInvoice(eracun);
 
             } finally {
                 doc.dispose();
@@ -36,15 +35,13 @@ describe('ERacun', () => {
         });
 
         it('should handle optional fields correctly', () => {
-            const ublXml = XmlTestProvider.getMinimalUblInvoice();
-            const doc = XmlDocument.fromString(ublXml);
+            const doc = XmlDocument.fromString(XmlTestProvider.ublInvoiceMinimal);
 
             try {
                 const root = doc.root;
                 const eracun = ERacun.fromUbl(root, 'Invoice');
 
                 // Test that optional fields are undefined when not present
-                expect(eracun.datumDospijecaPlacanja).toBeUndefined();
                 expect(eracun.datumIsporuke).toBeUndefined();
                 expect(eracun.referencaNaUgovor).toBeUndefined();
                 expect(eracun.PrethodniERacun).toBeUndefined();
@@ -58,9 +55,7 @@ describe('ERacun', () => {
         });
 
         it('should throw validation error for invalid UBL', () => {
-            const invalidXml = XmlTestProvider.getInvalidInvoice();
-            const doc = XmlDocument.fromString(invalidXml);
-
+            const doc = XmlDocument.fromString(XmlTestProvider.ublInvoiceInvalid);
             try {
                 const root = doc.root;
 

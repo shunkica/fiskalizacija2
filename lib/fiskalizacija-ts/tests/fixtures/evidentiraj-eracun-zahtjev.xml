@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<efis:EvidentirajERacunZahtjev
+    xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+    xmlns:efis="http://www.porezna-uprava.gov.hr/fin/2024/types/eFiskalizacija"
+    efis:id="cfa9dd33-9d9a-4a2a-8ef0-dd65fe476d8b">
+  <efis:Zaglavlje>
+    <efis:datumVrijemeSlanja>2025-06-26T12:00:00.0000</efis:datumVrijemeSlanja>
+    <efis:vrstaERacuna>I</efis:vrstaERacuna>
+  </efis:Zaglavlje>
+  <efis:ERacun>
+    <efis:brojDokumenta>5-P1-1</efis:brojDokumenta>
+    <efis:datumIzdavanja>2025-05-01</efis:datumIzdavanja>
+    <efis:vrstaDokumenta>380</efis:vrstaDokumenta>
+    <efis:valutaERacuna>EUR</efis:valutaERacuna>
+    <efis:datumDospijecaPlacanja>2025-05-31</efis:datumDospijecaPlacanja>
+    <efis:vrstaPoslovnogProcesa>P1</efis:vrstaPoslovnogProcesa>
+    <efis:Izdavatelj>
+      <efis:ime>TVRTKA A d.o.o.</efis:ime>
+      <efis:oibPorezniBroj>12345678901</efis:oibPorezniBroj>
+    </efis:Izdavatelj>
+    <efis:Primatelj>
+      <efis:ime>Tvrtka B d.o.o.</efis:ime>
+      <efis:oibPorezniBroj>11111111119</efis:oibPorezniBroj>
+    </efis:Primatelj>
+    <efis:PrijenosSredstava>
+      <efis:identifikatorRacunaZaPlacanje>HRXXXXXXXXXXXXXXXX</efis:identifikatorRacunaZaPlacanje>
+    </efis:PrijenosSredstava>
+    <efis:DokumentUkupanIznos>
+      <efis:neto>100.00</efis:neto>
+      <efis:iznosBezPdv>100.00</efis:iznosBezPdv>
+      <efis:pdv>25.00</efis:pdv>
+      <efis:iznosSPdv>125.00</efis:iznosSPdv>
+      <efis:iznosKojiDospijevaZaPlacanje>125.00</efis:iznosKojiDospijevaZaPlacanje>
+    </efis:DokumentUkupanIznos>
+    <efis:RaspodjelaPdv>
+      <efis:kategorijaPdv>S</efis:kategorijaPdv>
+      <efis:oporeziviIznos>100.00</efis:oporeziviIznos>
+      <efis:iznosPoreza>25.00</efis:iznosPoreza>
+      <efis:stopa>25</efis:stopa>
+    </efis:RaspodjelaPdv>
+    <efis:StavkaERacuna>
+      <efis:kolicina>1.000</efis:kolicina>
+      <efis:jedinicaMjere>H87</efis:jedinicaMjere>
+      <efis:artiklNetoCijena>100.000000</efis:artiklNetoCijena>
+      <efis:artiklOsnovnaKolicina>1.000</efis:artiklOsnovnaKolicina>
+      <efis:artiklJedinicaMjereZaOsnovnuKolicinu>H87</efis:artiklJedinicaMjereZaOsnovnuKolicinu>
+      <efis:artiklKategorijaPdv>S</efis:artiklKategorijaPdv>
+      <efis:artiklStopaPdv>25</efis:artiklStopaPdv>
+      <efis:artiklNaziv>Proizvod</efis:artiklNaziv>
+      <efis:ArtiklIdentifikatorKlasifikacija>
+        <efis:identifikatorKlasifikacije>62.90.90</efis:identifikatorKlasifikacije>
+        <efis:identifikatorSheme>CG</efis:identifikatorSheme>
+      </efis:ArtiklIdentifikatorKlasifikacija>
+    </efis:StavkaERacuna>
+    <efis:indikatorKopije>false</efis:indikatorKopije>
+  </efis:ERacun>
+</efis:EvidentirajERacunZahtjev>

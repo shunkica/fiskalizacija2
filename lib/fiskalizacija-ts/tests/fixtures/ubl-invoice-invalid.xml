@@ -1,0 +1,5 @@
+<Invoice xmlns="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2"
+         xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+  <cbc:ID>INVALID-001</cbc:ID>
+  <cbc:IssueDate>2024-01-15</cbc:IssueDate>
+</Invoice>

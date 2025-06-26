@@ -101,10 +101,10 @@ export function extractOptionalElements<T>(
     tag: string,
     ns: Record<string, string>,
     fn: (el: XmlElement) => T
-): T[] {
+): T[] | undefined {
     const elements = parentEl.find(tag, ns);
     if (!elements || elements.length === 0) {
-        return [];
+        return undefined;
     }
     return elements.map(el => fn(el as XmlElement));
 }

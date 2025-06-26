@@ -1,6 +1,7 @@
 import {pemToDer, SignedXml} from 'xml-crypto';
 import {Sha256} from "xml-crypto/lib/hash-algorithms";
 import {SigningOptions} from "../types";
+import {randomUUID} from "node:crypto";
 
 export class XmlSigner {
     private options: SigningOptions;
@@ -15,9 +16,8 @@ export class XmlSigner {
         this.options = {...this.defaultOptions, ...options};
     }
 
-    static generateId(prefix: string): string {
-        const randomPart = Math.random().toString(36).substring(2, 15);
-        return `${prefix}-${randomPart}`;
+    static generateId(prefix?: string): string {
+        return prefix ? `${prefix}-${randomUUID()}` : randomUUID();
     }
 
     private getXAdESContent(signatureId: string, signedPropertiesId: string, signingTime: string): string {
@@ -50,7 +50,7 @@ export class XmlSigner {
     signFiscalizationRequest(xml: string): string {
         const signatureId = XmlSigner.generateId("Sig");
         const signedPropertiesId = XmlSigner.generateId("xades");
-        const signingTime = new Date().toISOString();
+        const signingTime = new Date().toISOString(); // TODO: provjeriti da li treba biti lokalno vrijeme ili može biti UTC
 
         // Create SignedXml instance
         const sig = new SignedXml({
