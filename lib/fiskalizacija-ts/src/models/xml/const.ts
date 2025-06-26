@@ -5,6 +5,21 @@ export const FISK_NS = {
     eizv: "http://www.porezna-uprava.gov.hr/fin/2024/types/eIzvjestavanje",
 }
 
+export const getFiskNsPrefix = (namespaceUri: string): string => {
+    switch (namespaceUri) {
+        case FISK_NS.soapenv:
+            return "soapenv";
+        case FISK_NS.ds:
+            return "ds";
+        case FISK_NS.efis:
+            return "efis";
+        case FISK_NS.eizv:
+            return "eizv";
+        default:
+            throw new Error(`FISK_NS.getPrefix: Unknown namespace URI: ${namespaceUri}`);
+    }
+}
+
 export const UBL_NS = {
     invoice: "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
     creditnote: "urn:oasis:names:specification:ubl:schema:xsd:CreditNote-2",

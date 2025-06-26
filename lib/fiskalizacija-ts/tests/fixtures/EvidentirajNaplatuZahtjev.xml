@@ -1,0 +1,16 @@
+<eizv:EvidentirajNaplatuZahtjev
+    xmlns:eizv="http://www.porezna-uprava.gov.hr/fin/2024/types/eIzvjestavanje"
+    eizv:id="122321">
+  <eizv:Zaglavlje>
+    <eizv:datumVrijemeSlanja>2024-02-27T15:28:00.0000</eizv:datumVrijemeSlanja>
+  </eizv:Zaglavlje>
+  <eizv:Naplata>
+    <eizv:brojDokumenta>1234-2024-06</eizv:brojDokumenta>
+    <eizv:datumIzdavanja>2024-02-27</eizv:datumIzdavanja>
+    <eizv:oibPorezniBrojIzdavatelja>02994650199</eizv:oibPorezniBrojIzdavatelja>
+    <eizv:oibPorezniBrojPrimatelja>00000000001</eizv:oibPorezniBrojPrimatelja>
+    <eizv:datumNaplate>2024-06-17</eizv:datumNaplate>
+    <eizv:naplaceniIznos>110.00</eizv:naplaceniIznos>
+    <eizv:nacinPlacanja>T</eizv:nacinPlacanja>
+  </eizv:Naplata>
+</eizv:EvidentirajNaplatuZahtjev>

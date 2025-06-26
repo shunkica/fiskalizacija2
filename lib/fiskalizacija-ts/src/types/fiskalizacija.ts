@@ -1,4 +1,5 @@
 import {IEvidentirajERacunOdgovor, IEvidentirajERacunZahtjev} from "./xml/fiskalizacija";
+import {IEvidentirajIsporukuZaKojuNijeIzdanERacunOdgovor, IEvidentirajIsporukuZaKojuNijeIzdanERacunZahtjev, IEvidentirajNaplatuOdgovor, IEvidentirajNaplatuZahtjev, IEvidentirajOdbijanjeOdgovor, IEvidentirajOdbijanjeZahtjev} from "./xml/izvjestavanje";
 
 export interface IErrorWithMessage {
     message: string;
@@ -20,12 +21,12 @@ export interface FiskalizacijaOptions extends SigningOptions {
     headers?: Record<string, string>;
 }
 
-export type FiskalizacijaResult = {
+export type FiskalizacijaResult<Z, O> = {
     success: boolean;
     error?: IErrorWithMessage;
     httpStatusCode?: number;
     soapReqRaw?: string;
-    reqObject?: IEvidentirajERacunZahtjev;
+    reqObject?: Z;
     soapResRaw?: string;
-    resObject?: IEvidentirajERacunOdgovor;
+    resObject?: O;
 }

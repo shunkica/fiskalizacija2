@@ -1,9 +1,7 @@
 {
-  "name": "fiskalizacija-primjeri",
-  "version": "1.0.0",
+  "name": "fiskalizacija",
+  "version": "0.1.0",
   "description": "Croatian e-invoicing and fiscalization library",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
   "type": "module",
   "scripts": {
     "build": "tsc",

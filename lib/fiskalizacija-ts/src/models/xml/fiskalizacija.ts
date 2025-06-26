@@ -1,27 +1,8 @@
-import {
-    ArtiklIdentifikatorKlasifikacijaSerializable,
-    DokumentUkupanIznosSerializable, ERacunSerializable, EvidentirajERacunOdgovorSerializable, EvidentirajERacunZahtjevSerializable, GreskaSerializable, IArtiklIdentifikatorKlasifikacija,
-    IDokumentUkupanIznos,
-    IERacun, IEvidentirajERacunOdgovor,
-    IEvidentirajERacunZahtjev, IGreska,
-    IIzdavatelj, IOdgovor,
-    IPrethodniERacun,
-    IPrijenosSredstava,
-    IPrimatelj,
-    IRaspodjelaPdv,
-    IStavkaERacuna,
-    IZaglavljeFiskalizacija,
-    IzdavateljSerializable, OdgovorSerializable,
-    PrethodniERacunSerializable,
-    PrijenosSredstavaSerializable,
-    PrimateljSerializable,
-    RaspodjelaPdvSerializable,
-    StavkaERacunaSerializable, ValidationError,
-    ZaglavljeFiskalizacijaSerializable
-} from "../../types";
+import {ERacunSerializable, EvidentirajERacunOdgovorSerializable, EvidentirajERacunZahtjevSerializable, IERacun, IEvidentirajERacunOdgovor, IEvidentirajERacunZahtjev, IEvidentirajNaplatuZahtjev, IGreska, IOdgovor, IPrethodniERacun, IStavkaERacuna, IZaglavljeFiskalizacija, OdgovorSerializable, PrethodniERacunSerializable, StavkaERacunaSerializable, ValidationError, ZaglavljeFiskalizacijaSerializable} from "../../types";
 import {FISK_NS, UBL_NS} from "./const";
-import {getElementContent, getOptionalElementContent, extractElement, xmlEscape, extractOptionalElements, extractElements, getElementContentNumber, getOptionalElementContentNumber, getBusinessGroupXpath, getBusinessTermXpath, getAttributeValue, extractOptionalElement, usingXmlDocument, getOptionalAttributeValue} from "../../util/xml";
+import {extractElement, extractElements, extractOptionalElements, getAttributeValue, getBusinessGroupXpath, getBusinessTermXpath, getElementContent, getElementContentNumber, getOptionalElementContent, getOptionalElementContentNumber, usingXmlDocument, xmlEscape} from "../../util/xml";
 import {XmlAttribute, XmlDocument, XmlElement} from "libxml2-wasm";
+import {ArtiklIdentifikatorKlasifikacija, DokumentUkupanIznos, Izdavatelj, PrijenosSredstava, Primatelj, RaspodjelaPdv, Odgovor} from "./common";
 
 export class EvidentirajERacunZahtjev implements EvidentirajERacunZahtjevSerializable {
     _id: string;
@@ -34,63 +15,39 @@ export class EvidentirajERacunZahtjev implements EvidentirajERacunZahtjevSeriali
         this.ERacun = args.ERacun.map((eracun) => new ERacun(eracun));
     }
 
-    public static fromXmlString(xml: string): IEvidentirajERacunZahtjev {
-        let doc = null;
-        try {
-            doc = XmlDocument.fromString(xml);
-        } catch (e) {
-            throw new ValidationError(`Greška pri parsiranju XML-a: ${(e as any).message}`, undefined);
-        }
-        return EvidentirajERacunZahtjev.fromXmlDocument(doc);
-    }
-
-    public static fromXmlBuffer(xmlBuffer: Uint8Array): IEvidentirajERacunZahtjev {
-        let doc = null;
-        try {
-            doc = XmlDocument.fromBuffer(xmlBuffer);
-        } catch (e) {
-            throw new ValidationError(`Greška pri parsiranju XML-a: ${(e as any).message}`, undefined);
-        }
-        return EvidentirajERacunZahtjev.fromXmlDocument(doc)
-    }
-
-    private static fromXmlDocument(doc: XmlDocument): IEvidentirajERacunZahtjev {
-        try {
-            const root = doc.root;
-            if (root.name !== "EvidentirajERacunZahtjev") {
-                throw new ValidationError(`Očekivan element 'EvidentirajERacunZahtjev', pronađen '${root.name}'`, root.name);
+    public static fromXml(xml: string | Uint8Array | XmlDocument | XmlElement): IEvidentirajERacunZahtjev {
+        if (typeof xml === 'string') {
+            return usingXmlDocument(XmlDocument.fromString(xml), doc => {
+                return EvidentirajERacunZahtjev.fromXml(doc);
+            });
+        } else if (Buffer.isBuffer(xml)) {
+            return usingXmlDocument(XmlDocument.fromBuffer(xml), doc => {
+                return EvidentirajERacunZahtjev.fromXml(doc);
+            });
+        } else if (xml instanceof XmlDocument) {
+            return EvidentirajERacunZahtjev.fromXml(xml.root)
+        } else {
+            let el = xml as XmlElement;
+            if (el.name === 'Envelope' && el.namespaceUri === FISK_NS.soapenv) {
+                let el2 = el.get('/soapenv:Envelope/soapenv:Body/efis:EvidentirajERacunZahtjev', FISK_NS) as XmlElement | null;
+                if (!el2) {
+                    throw new ValidationError(`Expected 'EvidentirajERacunZahtjev' element in SOAP body`, xml);
+                }
+                el = el2;
             }
-            if (root.namespaceUri !== FISK_NS["efis"]) {
-                throw new ValidationError(`Očekivan namespace '${FISK_NS["efis"]}', pronađen '${root.namespaceUri}'`, root.namespaceUri);
+            if (el.name !== 'EvidentirajERacunZahtjev' || el.namespaceUri != FISK_NS.efis) {
+                throw new ValidationError(`Expected 'EvidentirajERacunZahtjev' element with namespace '${FISK_NS.efis}'`, xml);
             }
-            return EvidentirajERacunZahtjev.fromXmlElement(root);
-        } finally {
-            doc.dispose();
+            return EvidentirajERacunZahtjev.fromXmlElement(el);
         }
     }
 
     static fromXmlElement(el: XmlElement): IEvidentirajERacunZahtjev {
-        const idAttr = el.get("@efis:id", FISK_NS) as XmlAttribute | null;
-        if (!idAttr) {
-            throw new ValidationError(`Atribut 'id' nije pronađen u elementu 'EvidentirajERacunZahtjev'`, el.name);
+        return {
+            _id: getAttributeValue(el, "id", el.prefix),
+            Zaglavlje: extractElement(el, "efis:Zaglavlje", FISK_NS, ZaglavljeFiskalizacija.fromXmlElement),
+            ERacun: extractElements(el, "efis:ERacun", FISK_NS, ERacun.fromXmlElement)
         }
-        const _id = idAttr.value;
-        const zaglavljeEl = el.get("efis:Zaglavlje", FISK_NS) as XmlElement | null;
-        if (!zaglavljeEl) {
-            throw new ValidationError(`Element 'Zaglavlje' nije pronađen u elementu 'EvidentirajERacunZahtjev'`, el.name);
-        }
-
-        const zaglavlje = ZaglavljeFiskalizacija.fromXmlElement(zaglavljeEl);
-        const eracunEls = el.find("efis:ERacun", FISK_NS) as XmlElement[];
-        if (eracunEls.length === 0) {
-            throw new ValidationError(`Nije pronađen niti jedan element 'ERacun' u elementu 'EvidentirajERacunZahtjev'`, el.name);
-        }
-        if (eracunEls.length > 100) {
-            throw new ValidationError(`Pronađeno je više od 100 elemenata 'ERacun' u elementu 'EvidentirajERacunZahtjev'`, el.name);
-        }
-        const eracuni = eracunEls.map(eracunEl => ERacun.fromXmlElement(eracunEl));
-
-        return {_id, Zaglavlje: zaglavlje, ERacun: eracuni};
     }
 
     public toXmlString() {
@@ -157,11 +114,11 @@ export class ERacun implements ERacunSerializable {
         this.vrstaPoslovnogProcesa = args.vrstaPoslovnogProcesa;
         this.referencaNaUgovor = args.referencaNaUgovor;
         this.PrethodniERacun = args.PrethodniERacun?.map(i => new PrethodniERacun(i))
-        this.Izdavatelj = new Izdavatelj(args.Izdavatelj);
-        this.Primatelj = new Primatelj(args.Primatelj);
-        this.PrijenosSredstava = args.PrijenosSredstava?.map(i => new PrijenosSredstava(i));
-        this.DokumentUkupanIznos = new DokumentUkupanIznos(args.DokumentUkupanIznos)
-        this.RaspodjelaPdv = args.RaspodjelaPdv.map(i => new RaspodjelaPdv(i));
+        this.Izdavatelj = new Izdavatelj(args.Izdavatelj, "efis");
+        this.Primatelj = new Primatelj(args.Primatelj, "efis");
+        this.PrijenosSredstava = args.PrijenosSredstava?.map(i => new PrijenosSredstava(i, "efis"));
+        this.DokumentUkupanIznos = new DokumentUkupanIznos(args.DokumentUkupanIznos, "efis")
+        this.RaspodjelaPdv = args.RaspodjelaPdv.map(i => new RaspodjelaPdv(i, "efis"));
         this.StavkaERacuna = args.StavkaERacuna.map(i => new StavkaERacuna(i));
         this.indikatorKopije = args.indikatorKopije;
     }
@@ -292,256 +249,6 @@ export class PrethodniERacun implements PrethodniERacunSerializable {
     }
 }
 
-export class Izdavatelj implements IzdavateljSerializable {
-    ime: string;
-    oibPorezniBroj: string;
-
-    constructor(args: IIzdavatelj) {
-        this.ime = args.ime;
-        this.oibPorezniBroj = args.oibPorezniBroj;
-    }
-
-    toXmlString(): string {
-        let res = '';
-        res += `<efis:Izdavatelj>`;
-        res += `<efis:ime>${xmlEscape(this.ime)}</efis:ime>`;
-        res += `<efis:oibPorezniBroj>${xmlEscape(this.oibPorezniBroj)}</efis:oibPorezniBroj>`;
-        res += `</efis:Izdavatelj>`;
-        return res;
-    }
-
-    static fromXmlElement(el: XmlElement): IIzdavatelj {
-        return {
-            ime: getElementContent(el, "efis:ime", FISK_NS, "tekst500"),
-            oibPorezniBroj: getElementContent(el, "efis:oibPorezniBroj", FISK_NS, "tekst20")
-        };
-    }
-
-    static fromUbl(el: XmlElement, type: "Invoice" | "CreditNote"): IIzdavatelj {
-        const groupEl = el.get(getBusinessGroupXpath("BG-4", type), UBL_NS) as XmlElement | null;
-        if (!groupEl) {
-            throw new ValidationError(`Grupa 'BG-4' nije pronađena u dokumentu '${type}'`, undefined);
-        }
-        return {
-            ime: getElementContent(groupEl, getBusinessTermXpath("BT-27", type, "BG-4"), UBL_NS, "tekst500"),
-            oibPorezniBroj: getElementContent(groupEl, getBusinessTermXpath("BT-31", type, "BG-4"), UBL_NS, "tekst20")
-        };
-    }
-}
-
-export class Primatelj implements PrimateljSerializable {
-    ime: string;
-    oibPorezniBroj: string;
-
-    constructor(args: IPrimatelj) {
-        this.ime = args.ime;
-        this.oibPorezniBroj = args.oibPorezniBroj;
-    }
-
-    toXmlString(): string {
-        let res = '';
-        res += `<efis:Primatelj>`;
-        res += `<efis:ime>${xmlEscape(this.ime)}</efis:ime>`;
-        res += `<efis:oibPorezniBroj>${xmlEscape(this.oibPorezniBroj)}</efis:oibPorezniBroj>`;
-        res += `</efis:Primatelj>`;
-        return res;
-    }
-
-    static fromXmlElement(el: XmlElement): IPrimatelj {
-        return {
-            ime: getElementContent(el, "efis:ime", FISK_NS, "tekst500"),
-            oibPorezniBroj: getElementContent(el, "efis:oibPorezniBroj", FISK_NS, "tekst20")
-        }
-    }
-
-    static fromUbl(el: XmlElement, type: "Invoice" | "CreditNote"): IPrimatelj {
-        const groupEl = el.get(getBusinessGroupXpath("BG-7", type), UBL_NS) as XmlElement | null;
-        if (!groupEl) {
-            throw new ValidationError(`Grupa 'BG-7' nije pronađena u dokumentu '${type}'`, undefined);
-        }
-        return {
-            ime: getElementContent(groupEl, getBusinessTermXpath("BT-44", type, "BG-7"), UBL_NS, "tekst500"),
-            oibPorezniBroj: getElementContent(groupEl, getBusinessTermXpath("BT-48", type, "BG-7"), UBL_NS, "tekst20")
-        };
-    }
-}
-
-export class PrijenosSredstava implements PrijenosSredstavaSerializable {
-    identifikatorRacunaZaPlacanje: string;
-    nazivRacunaZaPlacanje?: string | undefined;
-    identifikatorPruzateljaPlatnihUsluga?: string | undefined;
-
-    constructor(args: IPrijenosSredstava) {
-        this.identifikatorRacunaZaPlacanje = args.identifikatorRacunaZaPlacanje;
-        this.nazivRacunaZaPlacanje = args.nazivRacunaZaPlacanje;
-        this.identifikatorPruzateljaPlatnihUsluga = args.identifikatorPruzateljaPlatnihUsluga;
-    }
-
-    toXmlString(): string {
-        let res = '';
-        res += `<efis:PrijenosSredstava>`;
-        res += `<efis:identifikatorRacunaZaPlacanje>${xmlEscape(this.identifikatorRacunaZaPlacanje)}</efis:identifikatorRacunaZaPlacanje>`;
-        if (this.nazivRacunaZaPlacanje) {
-            res += `<efis:nazivRacunaZaPlacanje>${xmlEscape(this.nazivRacunaZaPlacanje)}</efis:nazivRacunaZaPlacanje>`;
-        }
-        if (this.identifikatorPruzateljaPlatnihUsluga) {
-            res += `<efis:identifikatorPruzateljaPlatnihUsluga>${xmlEscape(this.identifikatorPruzateljaPlatnihUsluga)}</efis:identifikatorPruzateljaPlatnihUsluga>`;
-        }
-        res += `</efis:PrijenosSredstava>`;
-        return res;
-    }
-
-    static fromXmlElement(el: XmlElement): IPrijenosSredstava {
-        return {
-            identifikatorRacunaZaPlacanje: getElementContent(el, "efis:identifikatorRacunaZaPlacanje", FISK_NS, "tekst34"),
-            nazivRacunaZaPlacanje: getOptionalElementContent(el, "efis:nazivRacunaZaPlacanje", FISK_NS, "tekst35"),
-            identifikatorPruzateljaPlatnihUsluga: getOptionalElementContent(el, "efis:identifikatorPruzateljaPlatnihUsluga", FISK_NS, "tekst25")
-        }
-    }
-
-    static fromUbl(el: XmlElement, type: "Invoice" | "CreditNote"): IPrijenosSredstava[] | undefined {
-        const groups = el.find(getBusinessGroupXpath("BG-17", type), UBL_NS) as XmlElement[];
-        if (groups.length === 0) {
-            return undefined;
-        }
-        return groups.map(groupEl => {
-            return {
-                identifikatorRacunaZaPlacanje: getElementContent(groupEl, getBusinessTermXpath("BT-84", type, "BG-17"), UBL_NS, "tekst34"),
-                nazivRacunaZaPlacanje: getOptionalElementContent(groupEl, getBusinessTermXpath("BT-85", type, "BG-17"), UBL_NS, "tekst35"),
-                identifikatorPruzateljaPlatnihUsluga: getOptionalElementContent(groupEl, getBusinessTermXpath("BT-86", type, "BG-17"), UBL_NS, "tekst25")
-            };
-        });
-    }
-}
-
-export class DokumentUkupanIznos implements DokumentUkupanIznosSerializable {
-    neto: number;
-    popust?: number | undefined;
-    iznosBezPdv: number;
-    pdv: number;
-    iznosSPdv: number;
-    placeniIznos?: number | undefined;
-    iznosKojiDospijevaZaPlacanje: number;
-
-    constructor(args: IDokumentUkupanIznos) {
-        this.neto = args.neto;
-        this.popust = args.popust;
-        this.iznosBezPdv = args.iznosBezPdv;
-        this.pdv = args.pdv;
-        this.iznosSPdv = args.iznosSPdv;
-        this.placeniIznos = args.placeniIznos;
-        this.iznosKojiDospijevaZaPlacanje = args.iznosKojiDospijevaZaPlacanje;
-    }
-
-    toXmlString(): string {
-        let res = '';
-        res += `<efis:DokumentUkupanIznos>`;
-        res += `<efis:neto>${this.neto.toFixed(2)}</efis:neto>`;
-        if (this.popust !== undefined) {
-            res += `<efis:popust>${this.popust.toFixed(2)}</efis:popust>`;
-        }
-        res += `<efis:iznosBezPdv>${this.iznosBezPdv.toFixed(2)}</efis:iznosBezPdv>`;
-        res += `<efis:pdv>${this.pdv.toFixed(2)}</efis:pdv>`;
-        res += `<efis:iznosSPdv>${this.iznosSPdv.toFixed(2)}</efis:iznosSPdv>`;
-        if (this.placeniIznos !== undefined) {
-            res += `<efis:placeniIznos>${this.placeniIznos.toFixed(2)}</efis:placeniIznos>`;
-        }
-        res += `<efis:iznosKojiDospijevaZaPlacanje>${this.iznosKojiDospijevaZaPlacanje.toFixed(2)}</efis:iznosKojiDospijevaZaPlacanje>`;
-        res += `</efis:DokumentUkupanIznos>`;
-        return res;
-    }
-
-    static fromXmlElement(el: XmlElement): IDokumentUkupanIznos {
-        return {
-            neto: getElementContentNumber(el, "efis:neto", FISK_NS, "decimal2"),
-            popust: getOptionalElementContentNumber(el, "efis:popust", FISK_NS, "decimal2"),
-            iznosBezPdv: getElementContentNumber(el, "efis:iznosBezPdv", FISK_NS, "decimal2"),
-            pdv: getElementContentNumber(el, "efis:pdv", FISK_NS, "decimal2"),
-            iznosSPdv: getElementContentNumber(el, "efis:iznosSPdv", FISK_NS, "decimal2"),
-            placeniIznos: getOptionalElementContentNumber(el, "efis:placeniIznos", FISK_NS, "decimal2"),
-            iznosKojiDospijevaZaPlacanje: getElementContentNumber(el, "efis:iznosKojiDospijevaZaPlacanje", FISK_NS, "decimal2")
-        }
-    }
-
-    static fromUbl(el: XmlElement, type: "Invoice" | "CreditNote"): IDokumentUkupanIznos {
-        return {
-            neto: getElementContentNumber(el, getBusinessTermXpath("BT-106", type), UBL_NS, "decimal2"),
-            popust: getOptionalElementContentNumber(el, getBusinessTermXpath("BT-107", type), UBL_NS, "decimal2"),
-            iznosBezPdv: getElementContentNumber(el, getBusinessTermXpath("BT-109", type), UBL_NS, "decimal2"),
-            /** BT-110 nije obvezan u specifikaciji eRacuna, ali je pdv obvezan u specifikaciji fiskalizacije */
-            pdv: getOptionalElementContentNumber(el, getBusinessTermXpath("BT-110", type), UBL_NS, "decimal2") || 0,
-            iznosSPdv: getElementContentNumber(el, getBusinessTermXpath("BT-112", type), UBL_NS, "decimal2"),
-            placeniIznos: getOptionalElementContentNumber(el, getBusinessTermXpath("BT-113", type), UBL_NS, "decimal2"),
-            iznosKojiDospijevaZaPlacanje: getElementContentNumber(el, getBusinessTermXpath("BT-115", type), UBL_NS, "decimal2")
-        }
-    }
-}
-
-export class RaspodjelaPdv implements RaspodjelaPdvSerializable {
-    kategorijaPdv: string;
-    oporeziviIznos: number;
-    iznosPoreza: number;
-    stopa?: number | undefined;
-    razlogOslobodenja?: string | undefined;
-    tekstRazlogaOslobodenja?: string | undefined;
-
-    constructor(args: IRaspodjelaPdv) {
-        this.kategorijaPdv = args.kategorijaPdv;
-        this.oporeziviIznos = args.oporeziviIznos;
-        this.iznosPoreza = args.iznosPoreza;
-        this.stopa = args.stopa;
-        this.razlogOslobodenja = args.razlogOslobodenja;
-        this.tekstRazlogaOslobodenja = args.tekstRazlogaOslobodenja;
-    }
-
-    toXmlString(): string {
-        let res = '';
-        res += `<efis:RaspodjelaPdv>`;
-        res += `<efis:kategorijaPdv>${xmlEscape(this.kategorijaPdv)}</efis:kategorijaPdv>`;
-        res += `<efis:oporeziviIznos>${this.oporeziviIznos.toFixed(2)}</efis:oporeziviIznos>`;
-        res += `<efis:iznosPoreza>${this.iznosPoreza.toFixed(2)}</efis:iznosPoreza>`;
-        if (this.stopa !== undefined) {
-            res += `<efis:stopa>${this.stopa.toFixed(2)}</efis:stopa>`;
-        }
-        if (this.razlogOslobodenja !== undefined) {
-            res += `<efis:razlogOslobodenja>${xmlEscape(this.razlogOslobodenja)}</efis:razlogOslobodenja>`;
-        }
-        if (this.tekstRazlogaOslobodenja !== undefined) {
-            res += `<efis:tekstRazlogaOslobodenja>${xmlEscape(this.tekstRazlogaOslobodenja)}</efis:tekstRazlogaOslobodenja>`;
-        }
-        res += `</efis:RaspodjelaPdv>`;
-        return res;
-    }
-
-    static fromXmlElement(el: XmlElement): IRaspodjelaPdv {
-        return {
-            kategorijaPdv: getElementContent(el, "efis:kategorijaPdv", FISK_NS, "kategorijaPdv"),
-            oporeziviIznos: getElementContentNumber(el, "efis:oporeziviIznos", FISK_NS, "decimal2"),
-            iznosPoreza: getElementContentNumber(el, "efis:iznosPoreza", FISK_NS, "decimal2"),
-            stopa: getOptionalElementContentNumber(el, "efis:stopa", FISK_NS, "decimal"),
-            razlogOslobodenja: getOptionalElementContent(el, "efis:razlogOslobodenja", FISK_NS, "izuzecePdv"),
-            tekstRazlogaOslobodenja: getOptionalElementContent(el, "efis:tekstRazlogaOslobodenja", FISK_NS, "tekst1024")
-        }
-    }
-
-    static fromUbl(el: XmlElement, type: "Invoice" | "CreditNote"): IRaspodjelaPdv[] {
-        const groups = el.find(getBusinessGroupXpath("BG-23", type), UBL_NS) as XmlElement[];
-        if (groups.length === 0) {
-            throw new ValidationError(`Nije pronađena ni jedna grupa 'BG-23' u dokumentu '${type}'`, undefined);
-        }
-        return groups.map(groupEl => {
-            return {
-                kategorijaPdv: getElementContent(groupEl, getBusinessTermXpath("BT-118", type, "BG-23"), UBL_NS, "kategorijaPdv"),
-                oporeziviIznos: getElementContentNumber(groupEl, getBusinessTermXpath("BT-116", type, "BG-23"), UBL_NS, "decimal2"),
-                iznosPoreza: getElementContentNumber(groupEl, getBusinessTermXpath("BT-117", type, "BG-23"), UBL_NS, "decimal2"),
-                stopa: getOptionalElementContentNumber(groupEl, getBusinessTermXpath("BT-119", type, "BG-23"), UBL_NS, "decimal"),
-                razlogOslobodenja: getOptionalElementContent(groupEl, getBusinessTermXpath("BT-121", type, "BG-23"), UBL_NS, "izuzecePdv"),
-                tekstRazlogaOslobodenja: getOptionalElementContent(groupEl, getBusinessTermXpath("BT-120", type, "BG-23"), UBL_NS, "tekst1024")
-            };
-        });
-    }
-}
-
 export class StavkaERacuna implements StavkaERacunaSerializable {
     kolicina: number;
     jedinicaMjere: string;
@@ -562,7 +269,7 @@ export class StavkaERacuna implements StavkaERacunaSerializable {
         this.artiklKategorijaPdv = args.artiklKategorijaPdv;
         this.artiklStopaPdv = args.artiklStopaPdv;
         this.artiklNaziv = args.artiklNaziv;
-        this.ArtiklIdentifikatorKlasifikacija = args.ArtiklIdentifikatorKlasifikacija?.map(i => new ArtiklIdentifikatorKlasifikacija(i));
+        this.ArtiklIdentifikatorKlasifikacija = args.ArtiklIdentifikatorKlasifikacija?.map(i => new ArtiklIdentifikatorKlasifikacija(i, "efis"));
     }
 
 
@@ -624,115 +331,22 @@ export class StavkaERacuna implements StavkaERacunaSerializable {
     }
 }
 
-export class ArtiklIdentifikatorKlasifikacija implements ArtiklIdentifikatorKlasifikacijaSerializable {
-    identifikatorKlasifikacije: string;
-    identifikatorSheme: string;
-    verzijaSheme?: string | undefined;
-
-    constructor(args: IArtiklIdentifikatorKlasifikacija) {
-        this.identifikatorKlasifikacije = args.identifikatorKlasifikacije;
-        this.identifikatorSheme = args.identifikatorSheme;
-        this.verzijaSheme = args.verzijaSheme;
-    }
-
-
-    toXmlString(): string {
-        let res = '';
-        res += `<efis:ArtiklIdentifikatorKlasifikacija>`;
-        res += `<efis:identifikatorKlasifikacije>${xmlEscape(this.identifikatorKlasifikacije)}</efis:identifikatorKlasifikacije>`;
-        res += `<efis:identifikatorSheme>${xmlEscape(this.identifikatorSheme)}</efis:identifikatorSheme>`;
-        if (this.verzijaSheme !== undefined) {
-            res += `<efis:verzijaSheme>${xmlEscape(this.verzijaSheme)}</efis:verzijaSheme>`;
-        }
-        res += `</efis:ArtiklIdentifikatorKlasifikacija>`;
-        return res;
-    }
-
-    static fromXmlElement(el: XmlElement): IArtiklIdentifikatorKlasifikacija {
-        return {
-            identifikatorKlasifikacije: getElementContent(el, "efis:identifikatorKlasifikacije", FISK_NS, "tekst10"),
-            identifikatorSheme: getElementContent(el, "efis:identifikatorSheme", FISK_NS, "klasifikacijaArtikla"),
-            verzijaSheme: getOptionalElementContent(el, "efis:verzijaSheme", FISK_NS, "tekst10")
-        }
-    }
-
-    static fromUbl(el: XmlElement, type: "Invoice" | "CreditNote") {
-        return {
-            identifikatorKlasifikacije: getElementContent(el, ".", UBL_NS, "tekst10"),
-            identifikatorSheme: getAttributeValue(el, "listID", ""),
-            verzijaSheme: getOptionalAttributeValue(el, "listVersionID", "") || undefined,
-        };
-    }
-}
-
 export class EvidentirajERacunOdgovor implements EvidentirajERacunOdgovorSerializable {
     _id: string;
     datumVrijemeSlanja: string;
-    Odgovor: FiskalizacijaOdgovor;
+    Odgovor: Odgovor;
 
     constructor(args: IEvidentirajERacunOdgovor) {
         this._id = args._id;
         this.datumVrijemeSlanja = args.datumVrijemeSlanja;
-        this.Odgovor = new FiskalizacijaOdgovor(args.Odgovor);
+        this.Odgovor = new Odgovor(args.Odgovor, "efis");
     }
 
     public static fromXmlElement(el: XmlElement): IEvidentirajERacunOdgovor {
         return {
             _id: getAttributeValue(el, "id", el.prefix),
             datumVrijemeSlanja: getElementContent(el, "efis:datumVrijemeSlanja", FISK_NS, "datumVrijemeDeci"),
-            Odgovor: extractElement(el, "efis:Odgovor", FISK_NS, FiskalizacijaOdgovor.fromXmlElement),
-        }
-    }
-
-    toXmlString(): string {
-        throw new Error("Method not implemented.");
-    }
-
-}
-
-export class FiskalizacijaOdgovor implements OdgovorSerializable {
-    idZahtjeva: string;
-    prihvacenZahtjev: boolean;
-    greska?: IGreska;
-
-    constructor(args: IOdgovor) {
-        this.idZahtjeva = args.idZahtjeva;
-        this.prihvacenZahtjev = args.prihvacenZahtjev;
-        if (args.greska) {
-            this.greska = new FiskalizacijaGreska(args.greska)
-        }
-    }
-
-    public static fromXmlElement(el: XmlElement): IOdgovor {
-        return {
-            idZahtjeva: getElementContent(el, `efis:idZahtjeva`, FISK_NS, "uuid"),
-            prihvacenZahtjev: getElementContent(el, `efis:prihvacenZahtjev`, FISK_NS, "boolean") === "true",
-            greska: extractOptionalElement(el, `efis:greska`, FISK_NS, FiskalizacijaGreska.fromXmlElement)
-        }
-    }
-
-
-    toXmlString(): string {
-        throw new Error("Method not implemented.");
-    }
-}
-
-export class FiskalizacijaGreska implements GreskaSerializable {
-    sifra: string;
-    redniBrojZapisa: string;
-    opis: string;
-
-    constructor(args: IGreska) {
-        this.sifra = args.sifra;
-        this.redniBrojZapisa = args.redniBrojZapisa;
-        this.opis = args.opis;
-    }
-
-    static fromXmlElement(el: XmlElement): IGreska {
-        return {
-            sifra: getElementContent(el, "efis:sifra", FISK_NS, "greska"),
-            redniBrojZapisa: getElementContent(el, "efis:redniBrojZapisa", FISK_NS, "redniBroj"),
-            opis: getElementContent(el, "efis:opis", FISK_NS, "tekst1024")
+            Odgovor: extractElement(el, "efis:Odgovor", FISK_NS, Odgovor.fromXmlElement),
         }
     }
 

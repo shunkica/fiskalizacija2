@@ -337,7 +337,7 @@ export interface IEvidentirajNaplatuZahtjev {
     /**
      * Atribut korišten prilikom kreiranja i provjere digitalnog potpisa
      */
-    id: string;
+    _id: string;
 
     /**
      * Zaglavlje zahtjeva
@@ -359,7 +359,7 @@ export interface IEvidentirajNaplatuOdgovor {
     /**
      * Atribut korišten prilikom kreiranja i provjere digitalnog potpisa
      */
-    id: string;
+    _id: string;
 
     /**
      * Odgovor na zahtjev
@@ -376,7 +376,7 @@ export interface IEvidentirajOdbijanjeZahtjev {
     /**
      * Atribut korišten prilikom kreiranja i provjere digitalnog potpisa
      */
-    id: string;
+    _id: string;
 
     /**
      * Zaglavlje zahtjeva
@@ -398,7 +398,7 @@ export interface IEvidentirajOdbijanjeOdgovor {
     /**
      * Atribut korišten prilikom kreiranja i provjere digitalnog potpisa
      */
-    id: string;
+    _id: string;
 
     /**
      * Datum i vrijeme slanja zahtjeva
@@ -421,7 +421,7 @@ export interface IEvidentirajIsporukuZaKojuNijeIzdanERacunZahtjev {
     /**
      * Atribut korišten prilikom kreiranja i provjere digitalnog potpisa
      */
-    id: string;
+    _id: string;
 
     /**
      * Zaglavlje zahtjeva
@@ -443,7 +443,7 @@ export interface IEvidentirajIsporukuZaKojuNijeIzdanERacunOdgovor {
     /**
      * Atribut korišten prilikom kreiranja i provjere digitalnog potpisa
      */
-    id: string;
+    _id: string;
 
     /**
      * Datum i vrijeme slanja odgovora

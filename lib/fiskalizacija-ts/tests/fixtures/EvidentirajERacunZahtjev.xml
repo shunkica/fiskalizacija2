@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <efis:EvidentirajERacunZahtjev
-    xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
     xmlns:efis="http://www.porezna-uprava.gov.hr/fin/2024/types/eFiskalizacija"
     efis:id="cfa9dd33-9d9a-4a2a-8ef0-dd65fe476d8b">
   <efis:Zaglavlje>

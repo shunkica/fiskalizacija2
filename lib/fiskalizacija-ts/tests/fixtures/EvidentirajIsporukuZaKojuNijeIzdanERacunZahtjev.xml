@@ -1,0 +1,49 @@
+<eizv:EvidentirajIsporukuZaKojuNijeIzdanERacunZahtjev
+    xmlns:eizv="http://www.porezna-uprava.gov.hr/fin/2024/types/eIzvjestavanje"
+    eizv:id="unique-request-id-12345">
+  <eizv:Zaglavlje>
+    <eizv:datumVrijemeSlanja>2024-11-06T10:15:00.0000</eizv:datumVrijemeSlanja>
+    <eizv:vrstaRacuna>IR</eizv:vrstaRacuna>
+  </eizv:Zaglavlje>
+  <eizv:Racun>
+    <eizv:brojDokumenta>1234/2024/01</eizv:brojDokumenta>
+    <eizv:datumIzdavanja>2024-09-02</eizv:datumIzdavanja>
+    <eizv:vrstaDokumenta>380</eizv:vrstaDokumenta>
+    <eizv:valutaRacuna>EUR</eizv:valutaRacuna>
+    <eizv:vrstaPoslovnogProcesa>P1</eizv:vrstaPoslovnogProcesa>
+    <eizv:Izdavatelj>
+      <eizv:ime>Tvrtka A d.o.o.</eizv:ime>
+      <eizv:oibPorezniBroj>02994650199</eizv:oibPorezniBroj>
+    </eizv:Izdavatelj>
+    <eizv:Primatelj>
+      <eizv:ime>Tvrtka B d.o.o.</eizv:ime>
+      <eizv:oibPorezniBroj>00000000001</eizv:oibPorezniBroj>
+    </eizv:Primatelj>
+    <eizv:DokumentUkupanIznos>
+      <eizv:neto>1000.00</eizv:neto>
+      <eizv:iznosBezPdv>1000.00</eizv:iznosBezPdv>
+      <eizv:pdv>250.00</eizv:pdv>
+      <eizv:iznosSPdv>1250.00</eizv:iznosSPdv>
+      <eizv:iznosKojiDospijevaZaPlacanje>1250.00</eizv:iznosKojiDospijevaZaPlacanje>
+    </eizv:DokumentUkupanIznos>
+    <eizv:RaspodjelaPdv>
+      <eizv:kategorijaPdv>S</eizv:kategorijaPdv>
+      <eizv:oporeziviIznos>1000.00</eizv:oporeziviIznos>
+      <eizv:iznosPoreza>250.00</eizv:iznosPoreza>
+      <eizv:stopa>25</eizv:stopa>
+    </eizv:RaspodjelaPdv>
+    <eizv:StavkaRacuna>
+      <eizv:kolicina>2</eizv:kolicina>
+      <eizv:jedinicaMjere>H87</eizv:jedinicaMjere>
+      <eizv:artiklNetoCijena>500.00</eizv:artiklNetoCijena>
+      <eizv:artiklKategorijaPdv>S</eizv:artiklKategorijaPdv>
+      <eizv:artiklStopaPdv>25</eizv:artiklStopaPdv>
+      <eizv:artiklNaziv>naziv artikla</eizv:artiklNaziv>
+      <eizv:ArtiklIdentifikatorKlasifikacija>
+        <eizv:identifikatorKlasifikacije>11.07.01</eizv:identifikatorKlasifikacije>
+        <eizv:identifikatorSheme>CG</eizv:identifikatorSheme>
+      </eizv:ArtiklIdentifikatorKlasifikacija>
+    </eizv:StavkaRacuna>
+    <eizv:indikatorKopije>false</eizv:indikatorKopije>
+  </eizv:Racun>
+</eizv:EvidentirajIsporukuZaKojuNijeIzdanERacunZahtjev>

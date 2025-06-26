@@ -12,15 +12,21 @@ export type XmlSerializable<T> = T & IXmlSerializable;
 
 export class ValidationError {
     message: string;
-    value: string | undefined;
+    value: any;
 
-    constructor(message: string, value: string | undefined) {
+    constructor(message: string, value: any) {
         this.message = message;
         this.value = value;
     }
 
     toString(): string {
-        return `ValidationError: ${this.message}${this.value ? ` (value: ${this.value})` : ''}`;
+        if (this.value === undefined || this.value === null) {
+            return `ValidationError: ${this.message}`;
+        } else if (typeof this.value === 'string') {
+            return `ValidationError: ${this.message} (value: "${this.value}")`;
+        } else {
+            return `ValidationError: ${this.message} (value: ${JSON.stringify(this.value)})`;
+        }
     }
 }
 

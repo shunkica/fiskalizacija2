@@ -69,7 +69,7 @@ describe('XmlSigner', () => {
         });
 
         it('should sign a fiscalization request XML', () => {
-            const signedXml = signer.signFiscalizationRequest(XmlTestProvider.evidentirajERacunZahtjev);
+            const signedXml = signer.signFiscalizationRequest(XmlTestProvider.EvidentirajERacunZahtjev);
 
             expect(signedXml).toBeDefined();
             expect(signedXml).toContain('<ds:Signature');
@@ -77,7 +77,7 @@ describe('XmlSigner', () => {
         });
 
         it('should include XAdES elements in signature', () => {
-            const signedXml = signer.signFiscalizationRequest(XmlTestProvider.evidentirajERacunZahtjev);
+            const signedXml = signer.signFiscalizationRequest(XmlTestProvider.EvidentirajERacunZahtjev);
 
             // Check for XAdES namespace and elements
             expect(signedXml).toContain('xmlns:xades="http://uri.etsi.org/01903/v1.3.2#"');
@@ -88,7 +88,7 @@ describe('XmlSigner', () => {
         });
 
         it('should include proper signature references', () => {
-            const signedXml = signer.signFiscalizationRequest(XmlTestProvider.evidentirajERacunZahtjev);
+            const signedXml = signer.signFiscalizationRequest(XmlTestProvider.EvidentirajERacunZahtjev);
 
             // Check for document reference
             expect(signedXml).toContain('<ds:Reference URI="">');
@@ -98,7 +98,7 @@ describe('XmlSigner', () => {
         });
 
         it('should include proper transforms', () => {
-            const signedXml = signer.signFiscalizationRequest(XmlTestProvider.evidentirajERacunZahtjev);
+            const signedXml = signer.signFiscalizationRequest(XmlTestProvider.EvidentirajERacunZahtjev);
 
             // Check for enveloped signature transform
             expect(signedXml).toContain('http://www.w3.org/2000/09/xmldsig#enveloped-signature');
@@ -108,7 +108,7 @@ describe('XmlSigner', () => {
         });
 
         it('should produce valid XML structure', () => {
-            const signedXml = signer.signFiscalizationRequest(XmlTestProvider.evidentirajERacunZahtjev);
+            const signedXml = signer.signFiscalizationRequest(XmlTestProvider.EvidentirajERacunZahtjev);
 
             // Parse the signed XML to ensure it's valid
             const doc = XmlDocument.fromString(signedXml);
@@ -125,7 +125,7 @@ describe('XmlSigner', () => {
         });
 
         it('should include certificate digest in XAdES', () => {
-            const signedXml = signer.signFiscalizationRequest(XmlTestProvider.evidentirajERacunZahtjev);
+            const signedXml = signer.signFiscalizationRequest(XmlTestProvider.EvidentirajERacunZahtjev);
 
             // Check for certificate digest elements
             expect(signedXml).toContain('<xades:CertDigest>');
@@ -134,7 +134,7 @@ describe('XmlSigner', () => {
         });
 
         it('should include signing time in ISO format', () => {
-            const signedXml = signer.signFiscalizationRequest(XmlTestProvider.evidentirajERacunZahtjev);
+            const signedXml = signer.signFiscalizationRequest(XmlTestProvider.EvidentirajERacunZahtjev);
 
             // Extract signing time and verify format
             const signingTimeMatch = signedXml.match(/<xades:SigningTime>([^<]+)<\/xades:SigningTime>/);
@@ -154,7 +154,7 @@ describe('XmlSigner', () => {
                 signatureAlgorithm: 'http://www.w3.org/2001/04/xmldsig-more#rsa-sha512'
             });
 
-            const signedXml = customSigner.signFiscalizationRequest(XmlTestProvider.evidentirajERacunZahtjev);
+            const signedXml = customSigner.signFiscalizationRequest(XmlTestProvider.EvidentirajERacunZahtjev);
 
             expect(signedXml).toContain('http://www.w3.org/2001/04/xmldsig-more#rsa-sha512');
         });
@@ -166,12 +166,12 @@ describe('XmlSigner', () => {
             });
 
             expect(() => {
-                invalidSigner.signFiscalizationRequest(XmlTestProvider.evidentirajERacunZahtjev);
+                invalidSigner.signFiscalizationRequest(XmlTestProvider.EvidentirajERacunZahtjev);
             }).toThrow('Invalid PEM format.');
         });
 
         it('should preserve original XML content', () => {
-            const signedXml = signer.signFiscalizationRequest(XmlTestProvider.evidentirajERacunZahtjev);
+            const signedXml = signer.signFiscalizationRequest(XmlTestProvider.EvidentirajERacunZahtjev);
 
             // Original content should still be present
             expect(signedXml).toContain('EvidentirajERacunZahtjev');
@@ -181,8 +181,8 @@ describe('XmlSigner', () => {
         });
 
         it('should generate unique signature IDs for multiple signings', () => {
-            const signedXml1 = signer.signFiscalizationRequest(XmlTestProvider.evidentirajERacunZahtjev);
-            const signedXml2 = signer.signFiscalizationRequest(XmlTestProvider.evidentirajERacunZahtjev);
+            const signedXml1 = signer.signFiscalizationRequest(XmlTestProvider.EvidentirajERacunZahtjev);
+            const signedXml2 = signer.signFiscalizationRequest(XmlTestProvider.EvidentirajERacunZahtjev);
 
             // Extract signature IDs
             const sigId1Match = signedXml1.match(/Id="(Sig-[^"]+)"/);

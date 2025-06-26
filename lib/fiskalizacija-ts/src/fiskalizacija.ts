@@ -1,16 +1,17 @@
 import {XmlSigner} from './util/signing';
 import {EvidentirajERacunOdgovor, EvidentirajERacunZahtjev} from './models/xml/fiskalizacija';
-import {FiskalizacijaOptions, FiskalizacijaResult, IEvidentirajERacunZahtjev, ValidationError} from './types';
+import {FiskalizacijaOptions, FiskalizacijaResult, IEvidentirajERacunOdgovor, IEvidentirajERacunZahtjev, IEvidentirajIsporukuZaKojuNijeIzdanERacunZahtjev, IEvidentirajNaplatuOdgovor, IEvidentirajNaplatuZahtjev, IEvidentirajOdbijanjeZahtjev, ValidationError} from './types';
 import {XmlDocument, XmlElement} from "libxml2-wasm";
 import {FISK_NS} from "./models/xml/const";
 import {usingXmlDocument} from "./util/xml";
 import {postRequest} from "./util/http";
 import {parseError} from "./util/error";
+import {EvidentirajIsporukuZaKojuNijeIzdanERacunOdgovor, EvidentirajIsporukuZaKojuNijeIzdanERacunZahtjev, EvidentirajNaplatuOdgovor, EvidentirajNaplatuZahtjev, EvidentirajOdbijanjeOdgovor, EvidentirajOdbijanjeZahtjev} from "./models/xml/izvjestavanje";
 
 
 export class FiskalizacijaClient {
-    private signer: XmlSigner;
-    private options: FiskalizacijaOptions;
+    private readonly signer: XmlSigner;
+    private readonly options: FiskalizacijaOptions;
 
     constructor(options: FiskalizacijaOptions) {
         this.options = {
@@ -25,25 +26,22 @@ export class FiskalizacijaClient {
         this.signer = new XmlSigner(options);
     }
 
-    /**
-     * Submit an ERacun fiscalization request
-     * @param zahtjev - The fiscalization request data
-     * @returns Promise resolving to the fiscalization response
-     */
-    async evidentirajERacun(zahtjev: IEvidentirajERacunZahtjev): Promise<FiskalizacijaResult>;
-    async evidentirajERacun(zahtjev: EvidentirajERacunZahtjev): Promise<FiskalizacijaResult>;
-    async evidentirajERacun(zahtjev: IEvidentirajERacunZahtjev | EvidentirajERacunZahtjev): Promise<FiskalizacijaResult> {
-        const result: FiskalizacijaResult = {success: false};
+    private async execute<TReq, TReqClass extends { new(arg: TReq): TReqInstance }, TReqInstance extends TReq, TRes>(
+        zahtjev: TReq | TReqInstance,
+        ReqClass: TReqClass,
+        OdgovorClass: { fromXmlElement(elem: XmlElement): TRes },
+        responseXpath: string
+    ): Promise<FiskalizacijaResult<TReq, TRes>> {
+        const result: FiskalizacijaResult<TReq, TRes> = {success: false};
 
         try {
+            if (!(zahtjev instanceof ReqClass)) {
+                zahtjev = new ReqClass(zahtjev) as TReqInstance;
+            }
 
-            const zahtjevModel = zahtjev instanceof EvidentirajERacunZahtjev
-                ? zahtjev
-                : new EvidentirajERacunZahtjev(zahtjev);
+            result.reqObject = zahtjev;
 
-            result.reqObject = zahtjevModel;
-
-            const signedXml = this.signer.signFiscalizationRequest(zahtjevModel.toXmlString());
+            const signedXml = this.signer.signFiscalizationRequest((zahtjev as any).toXmlString());
             const soap = this.generateSoapEnvelope(signedXml);
 
             result.soapReqRaw = soap;
@@ -54,18 +52,55 @@ export class FiskalizacijaClient {
             result.soapResRaw = data;
 
             usingXmlDocument(XmlDocument.fromString(data), (doc: XmlDocument) => {
-                const odgovorElement = doc.get('/soapenv:Envelope/soapenv:Body/efis:EvidentirajERacunOdgovor', FISK_NS) as XmlElement;
+                const odgovorElement = doc.get(responseXpath, FISK_NS) as XmlElement;
                 if (!odgovorElement) {
-                    throw new ValidationError(`HTTP ${statusCode} | /soapenv:Envelope/soapenv:Body/efis:EvidentirajERacunOdgovor`, data);
+                    throw new ValidationError(`HTTP ${statusCode} | ${responseXpath}`, data);
                 }
-                result.resObject = EvidentirajERacunOdgovor.fromXmlElement(odgovorElement);
-                result.success = result.resObject.Odgovor.prihvacenZahtjev && !result.resObject.Odgovor.greska;
+                result.resObject = OdgovorClass.fromXmlElement(odgovorElement);
+                result.success = (result.resObject as any).Odgovor.prihvacenZahtjev && !(result.resObject as any).Odgovor.greska;
             });
         } catch (error) {
             result.error = parseError(error);
         }
 
         return result;
+    }
+
+
+    async evidentirajERacun(zahtjev: IEvidentirajERacunZahtjev | EvidentirajERacunZahtjev) {
+        return this.execute(
+            zahtjev,
+            EvidentirajERacunZahtjev,
+            EvidentirajERacunOdgovor,
+            '/soapenv:Envelope/soapenv:Body/efis:EvidentirajERacunOdgovor'
+        );
+    }
+
+    async evidentirajNaplatu(zahtjev: IEvidentirajNaplatuZahtjev | EvidentirajNaplatuZahtjev) {
+        return this.execute(
+            zahtjev,
+            EvidentirajNaplatuZahtjev,
+            EvidentirajNaplatuOdgovor,
+            '/soapenv:Envelope/soapenv:Body/eizv:EvidentirajNaplatuOdgovor'
+        );
+    }
+
+    async evidentirajOdbijanje(zahtjev: IEvidentirajOdbijanjeZahtjev | EvidentirajOdbijanjeZahtjev) {
+        return this.execute(
+            zahtjev,
+            EvidentirajOdbijanjeZahtjev,
+            EvidentirajOdbijanjeOdgovor,
+            '/soapenv:Envelope/soapenv:Body/eizv:EvidentirajOdbijanjeOdgovor'
+        );
+    }
+
+    async evidentirajIsporukuZaKojuNijeIzdanERacun(zahtjev: IEvidentirajIsporukuZaKojuNijeIzdanERacunZahtjev | EvidentirajIsporukuZaKojuNijeIzdanERacunZahtjev) {
+        return this.execute(
+            zahtjev,
+            EvidentirajIsporukuZaKojuNijeIzdanERacunZahtjev,
+            EvidentirajIsporukuZaKojuNijeIzdanERacunOdgovor,
+            '/soapenv:Envelope/soapenv:Body/eizv:EvidentirajIsporukuZaKojuNijeIzdanERacunOdgovor'
+        );
     }
 
     private generateSoapEnvelope(body: string): string {

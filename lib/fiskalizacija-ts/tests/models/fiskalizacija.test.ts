@@ -1,8 +1,9 @@
-import {describe, it, expect} from 'vitest';
+import {describe, it, expect, beforeEach} from 'vitest';
 import {XmlDocument} from 'libxml2-wasm';
 import {XmlTestProvider} from "../fixtures/XmlTestProvider";
-import {ERacun} from "../../src";
+import {ERacun, EvidentirajERacunZahtjev, FiskalizacijaClient, FiskalizacijaService, IEvidentirajERacunZahtjev, IEvidentirajIsporukuZaKojuNijeIzdanERacunZahtjev} from "../../src";
 import {XmlTestValidator} from "../fixtures/XmlTestValidator";
+import {EvidentirajIsporukuZaKojuNijeIzdanERacunZahtjev, EvidentirajNaplatuZahtjev, EvidentirajOdbijanjeZahtjev} from "../../src/models/xml/izvjestavanje";
 
 describe('ERacun', () => {
     describe('fromUbl', () => {
@@ -67,5 +68,83 @@ describe('ERacun', () => {
                 doc.dispose();
             }
         });
+    });
+});
+
+describe('Model serialization and deserialization', () => {
+
+    describe('EvidentirajERacun', () => {
+        const xml = XmlTestProvider.EvidentirajERacunZahtjev;
+        const data = XmlTestProvider.mockEvidentirajERacunZahtjev;
+        const zahtjev = new EvidentirajERacunZahtjev(data);
+
+        it('should deserialize XML without throwing', () => {
+            expect(() => {
+                EvidentirajERacunZahtjev.fromXml(xml);
+            }).not.toThrow();
+        });
+
+        it('should serialize and deserialize without throwing', () => {
+            expect(() => {
+                EvidentirajERacunZahtjev.fromXml(zahtjev.toXmlString());
+            }).not.toThrow();
+        });
+    });
+
+    describe('EvidentirajIsporukuZaKojuNijeIzdanERacun', () => {
+        const xml = XmlTestProvider.EvidentirajIsporukuZaKojuNijeIzdanERacunZahtjev;
+        const data: IEvidentirajIsporukuZaKojuNijeIzdanERacunZahtjev = XmlTestProvider.mockEvidentirajIsporukuZaKojuNijeIzdanERacunZahtjev;
+        const zahtjev = new EvidentirajIsporukuZaKojuNijeIzdanERacunZahtjev(data);
+
+        it('should deserialize XML without throwing', () => {
+            expect(() => {
+                EvidentirajIsporukuZaKojuNijeIzdanERacunZahtjev.fromXml(xml);
+            }).not.toThrow();
+        });
+
+        it('should serialize mock object and deserialize without throwing', () => {
+            expect(() => {
+                EvidentirajIsporukuZaKojuNijeIzdanERacunZahtjev.fromXml(zahtjev.toXmlString());
+            }).not.toThrow();
+        });
+
+    });
+
+    describe('EvidentirajNaplatuZahtjev', () => {
+        const xml = XmlTestProvider.EvidentirajNaplatuZahtjev;
+        const data = XmlTestProvider.mockEvidentirajNaplatuZahtjev;
+        const zahtjev = new EvidentirajNaplatuZahtjev(data);
+
+        it('should deserialize XML without throwing', () => {
+            expect(() => {
+                EvidentirajNaplatuZahtjev.fromXml(xml);
+            }).not.toThrow();
+        });
+
+        it('should serialize mock object and deserialize without throwing', () => {
+            expect(() => {
+                EvidentirajNaplatuZahtjev.fromXml(zahtjev.toXmlString());
+            }).not.toThrow();
+        });
+
+    });
+
+    describe('EvidentirajOdbijanjeZahtjev', () => {
+        const xml = XmlTestProvider.EvidentirajOdbijanjeZahtjev;
+        const data = XmlTestProvider.mockEvidentirajOdbijanjeZahtjev;
+        const zahtjev = new EvidentirajOdbijanjeZahtjev(data);
+
+        it('should deserialize XML without throwing', () => {
+            expect(() => {
+                EvidentirajOdbijanjeZahtjev.fromXml(xml);
+            }).not.toThrow();
+        });
+
+        it('should serialize mock object and deserialize without throwing', () => {
+            expect(() => {
+                EvidentirajOdbijanjeZahtjev.fromXml(zahtjev.toXmlString());
+            }).not.toThrow();
+        });
+
     });
 });
