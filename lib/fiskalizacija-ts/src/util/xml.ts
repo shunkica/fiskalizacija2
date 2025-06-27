@@ -173,7 +173,6 @@ export function getAttributeValue(
     return attr.value;
 }
 
-
 export function xmlEscape(val: string): string {
     return val.replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
@@ -182,10 +181,14 @@ export function xmlEscape(val: string): string {
         .replace(/'/g, "&apos;");
 }
 
-
-export function usingXmlDocument<T>(doc: XmlDocument, fn: (r: XmlDocument) => T): T {
+export function usingXmlDocument<T>(doc: string | Uint8Array | XmlDocument, fn: (r: XmlDocument) => T): T {
     if (!doc) {
-        throw new Error("Failed to parse XML document");
+        throw new Error("XML document is required for processing");
+    }
+    if (typeof doc === 'string') {
+        doc = XmlDocument.fromString(doc);
+    } else if (doc instanceof Uint8Array) {
+        doc = XmlDocument.fromBuffer(doc);
     }
     try {
         return fn(doc);

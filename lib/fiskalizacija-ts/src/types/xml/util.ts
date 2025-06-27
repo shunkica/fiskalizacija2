@@ -4,10 +4,6 @@ export interface IXmlSerializable {
     toXmlString(): string;
 }
 
-export interface IXmlSerializableConstructor<T> {
-    fromXmlElement(el: XmlElement): T;
-}
-
 export type XmlSerializable<T> = T & IXmlSerializable;
 
 export class ValidationError {

@@ -1,5 +1,5 @@
 import {ERacunSerializable, EvidentirajERacunOdgovorSerializable, EvidentirajERacunZahtjevSerializable, IERacun, IEvidentirajERacunOdgovor, IEvidentirajERacunZahtjev, IEvidentirajNaplatuZahtjev, IGreska, IOdgovor, IPrethodniERacun, IStavkaERacuna, IZaglavljeFiskalizacija, OdgovorSerializable, PrethodniERacunSerializable, StavkaERacunaSerializable, ValidationError, ZaglavljeFiskalizacijaSerializable} from "../../types";
-import {FISK_NS, UBL_NS} from "./const";
+import {FISK_NS, getUblNsPrefix, UBL_NS} from "./const";
 import {extractElement, extractElements, extractOptionalElements, getAttributeValue, getBusinessGroupXpath, getBusinessTermXpath, getElementContent, getElementContentNumber, getOptionalElementContent, getOptionalElementContentNumber, usingXmlDocument, xmlEscape} from "../../util/xml";
 import {XmlAttribute, XmlDocument, XmlElement} from "libxml2-wasm";
 import {ArtiklIdentifikatorKlasifikacija, DokumentUkupanIznos, Izdavatelj, PrijenosSredstava, Primatelj, RaspodjelaPdv, Odgovor} from "./common";
@@ -177,17 +177,7 @@ export class ERacun implements ERacunSerializable {
         }
     }
 
-    static fromUblString(xml: string, type: "Invoice" | "CreditNote"): IERacun {
-        return usingXmlDocument(XmlDocument.fromString(xml), (doc: XmlDocument) => {
-            const el = doc.get(`//${type.toLowerCase()}:${type}`, UBL_NS) as XmlElement | null;
-            if (!el) {
-                throw new ValidationError(`Nije pronađen element '${type}' u XML-u`, xml);
-            }
-            return ERacun.fromUbl(el, type);
-        });
-    }
-
-    static fromUbl(el: XmlElement, type: "Invoice" | "CreditNote"): IERacun {
+    static fromUblElement(el: XmlElement, type: "Invoice" | "CreditNote"): IERacun {
         return {
             brojDokumenta: getElementContent(el, getBusinessTermXpath("BT-1", type), UBL_NS, "tekst100"),
             datumIzdavanja: getElementContent(el, getBusinessTermXpath("BT-2", type), UBL_NS, "datum"),
@@ -197,15 +187,14 @@ export class ERacun implements ERacunSerializable {
             datumIsporuke: getOptionalElementContent(el, getBusinessTermXpath("BT-72", type), UBL_NS, "datum"),
             vrstaPoslovnogProcesa: getElementContent(el, getBusinessTermXpath("BT-23", type), UBL_NS, "tekst100"),
             referencaNaUgovor: getOptionalElementContent(el, getBusinessTermXpath("BT-12", type), UBL_NS, "tekst100"),
-            PrethodniERacun: PrethodniERacun.fromUbl(el, type),
-            Izdavatelj: Izdavatelj.fromUbl(el, type),
-            Primatelj: Primatelj.fromUbl(el, type),
-            PrijenosSredstava: PrijenosSredstava.fromUbl(el, type),
-            DokumentUkupanIznos: DokumentUkupanIznos.fromUbl(el, type),
-            RaspodjelaPdv: RaspodjelaPdv.fromUbl(el, type),
-            StavkaERacuna: StavkaERacuna.fromUbl(el, type),
+            PrethodniERacun: PrethodniERacun.fromUblElement(el, type),
+            Izdavatelj: Izdavatelj.fromUblElement(el, type),
+            Primatelj: Primatelj.fromUblElement(el, type),
+            PrijenosSredstava: PrijenosSredstava.fromUblElement(el, type),
+            DokumentUkupanIznos: DokumentUkupanIznos.fromUblElement(el, type),
+            RaspodjelaPdv: RaspodjelaPdv.fromUblElement(el, type),
+            StavkaERacuna: StavkaERacuna.fromUblElement(el, type),
             indikatorKopije: getOptionalElementContent(el, getBusinessTermXpath("HR-BT-1", type), UBL_NS, "boolean") === "true"
-
         }
     }
 }
@@ -235,7 +224,7 @@ export class PrethodniERacun implements PrethodniERacunSerializable {
         };
     }
 
-    static fromUbl(el: XmlElement, type: "Invoice" | "CreditNote"): IPrethodniERacun[] | undefined {
+    static fromUblElement(el: XmlElement, type: "Invoice" | "CreditNote"): IPrethodniERacun[] | undefined {
         const groups = el.find(getBusinessGroupXpath("BG-3", type), UBL_NS) as XmlElement[];
         if (groups.length === 0) {
             return undefined;
@@ -310,7 +299,7 @@ export class StavkaERacuna implements StavkaERacunaSerializable {
 
     }
 
-    static fromUbl(el: XmlElement, type: "Invoice" | "CreditNote") {
+    static fromUblElement(el: XmlElement, type: "Invoice" | "CreditNote") {
         const groups = el.find(getBusinessGroupXpath("BG-25", type), UBL_NS) as XmlElement[];
         if (groups.length === 0) {
             throw new ValidationError(`Nije pronađena ni jedna grupa 'BG-25' u dokumentu '${type}'`, undefined);
@@ -325,7 +314,7 @@ export class StavkaERacuna implements StavkaERacunaSerializable {
                 artiklKategorijaPdv: getElementContent(groupEl, getBusinessTermXpath("BT-151", type, "BG-25"), UBL_NS, "kategorijaPdv"),
                 artiklStopaPdv: getElementContentNumber(groupEl, getBusinessTermXpath("BT-152", type, "BG-25"), UBL_NS, "decimal"),
                 artiklNaziv: getElementContent(groupEl, getBusinessTermXpath("BT-153", type, "BG-25"), UBL_NS, "tekst100"),
-                ArtiklIdentifikatorKlasifikacija: extractOptionalElements(groupEl, getBusinessTermXpath("BT-158", type, "BG-25"), UBL_NS, (el) => ArtiklIdentifikatorKlasifikacija.fromUbl(el, type))
+                ArtiklIdentifikatorKlasifikacija: extractOptionalElements(groupEl, getBusinessTermXpath("BT-158", type, "BG-25"), UBL_NS, (el) => ArtiklIdentifikatorKlasifikacija.fromUblElement(el, type))
             };
         });
     }

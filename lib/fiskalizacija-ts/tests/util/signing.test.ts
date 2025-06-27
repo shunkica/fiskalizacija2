@@ -209,4 +209,42 @@ describe('XmlSigner', () => {
             }).toThrow();
         });
     });
+
+    describe('valid signature generation', () => {
+        const signer = new XmlSigner({
+            privateKey: mockPrivateKey,
+            publicCert: mockPublicCert
+        });
+        const signedXml = signer.signFiscalizationRequest(XmlTestProvider.EvidentirajERacunZahtjev);
+
+        it('should validate the signature using the X509Certificate element', () => {
+            expect(XmlSigner.isValidSignature(signedXml)).toBe(true);
+        });
+
+        it('should validate signature with provided public certificate', () => {
+            expect(XmlSigner.isValidSignature(signedXml, mockPublicCert)).toBe(true);
+        });
+
+        it('should fail validation with an invalid public certificate', () => {
+            const invalidCert = Buffer.from("invalid-certificate").toString('base64');
+            const invalidCertPem = `-----BEGIN CERTIFICATE-----\n${invalidCert}\n-----END CERTIFICATE-----`;
+            expect(() => {
+                XmlSigner.isValidSignature(signedXml, invalidCertPem);
+            }).toThrow(/^error/);
+        });
+
+        it('should fail validation with wrong public certificate', () => {
+           expect(() => {
+               XmlSigner.isValidSignature(signedXml, XmlTestProvider.mockPublicCert2);
+           }).toThrow(/^invalid signature/);
+        });
+
+        it('should fail validation with an invalid signature', () => {
+            const invalidSignatureValue = Buffer.from('invalid-signature').toString('base64');
+            const invalidSignedXml = signedXml.replace(/<ds:SignatureValue>.*?<\/ds:SignatureValue>/, `<ds:SignatureValue>${invalidSignatureValue}</ds:SignatureValue>`);
+            expect(() => {
+                XmlSigner.isValidSignature(invalidSignedXml, mockPublicCert);
+            }).toThrow(/^invalid signature/);
+        });
+    });
 });

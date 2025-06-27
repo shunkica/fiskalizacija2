@@ -9,6 +9,10 @@ export class XmlTestProvider {
 
     static mockPublicCert = fs.readFileSync(path.join(__dirname, 'cert.pem'), 'utf8')
 
+    static mockPrivateKey2 = fs.readFileSync(path.join(__dirname, 'key2.pem'), 'utf8')
+
+    static mockPublicCert2 = fs.readFileSync(path.join(__dirname, 'cert2.pem'), 'utf8')
+
     static ublInvoiceFull = fs.readFileSync(path.join(__dirname, 'ubl-invoice-full.xml'), 'utf8')
 
     static ublInvoiceMinimal = fs.readFileSync(path.join(__dirname, 'ubl-invoice-minimal.xml'), 'utf8');

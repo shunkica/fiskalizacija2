@@ -51,6 +51,14 @@ export class FiskalizacijaClient {
             result.httpStatusCode = statusCode;
             result.soapResRaw = data;
 
+            // Neka korisnik odluči što se događa ako potpis odgovora nije valjan
+            try {
+                result.soapResSignatureValid = XmlSigner.isValidSignature(result.soapResRaw);
+            } catch (error) {
+                result.soapResSignatureValid = false;
+                result.error = parseError(error);
+            }
+
             usingXmlDocument(XmlDocument.fromString(data), (doc: XmlDocument) => {
                 const odgovorElement = doc.get(responseXpath, FISK_NS) as XmlElement;
                 if (!odgovorElement) {
@@ -65,7 +73,6 @@ export class FiskalizacijaClient {
 
         return result;
     }
-
 
     async evidentirajERacun(zahtjev: IEvidentirajERacunZahtjev | EvidentirajERacunZahtjev) {
         return this.execute(

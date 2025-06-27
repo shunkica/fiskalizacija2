@@ -1,6 +1,3 @@
-import {IEvidentirajERacunOdgovor, IEvidentirajERacunZahtjev} from "./xml/fiskalizacija";
-import {IEvidentirajIsporukuZaKojuNijeIzdanERacunOdgovor, IEvidentirajIsporukuZaKojuNijeIzdanERacunZahtjev, IEvidentirajNaplatuOdgovor, IEvidentirajNaplatuZahtjev, IEvidentirajOdbijanjeOdgovor, IEvidentirajOdbijanjeZahtjev} from "./xml/izvjestavanje";
-
 export interface IErrorWithMessage {
     message: string;
     thrown?: unknown;
@@ -28,5 +25,6 @@ export type FiskalizacijaResult<Z, O> = {
     soapReqRaw?: string;
     reqObject?: Z;
     soapResRaw?: string;
+    soapResSignatureValid?: boolean;
     resObject?: O;
 }

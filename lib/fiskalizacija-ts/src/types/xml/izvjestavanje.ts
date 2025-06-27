@@ -328,8 +328,6 @@ export interface IRacun {
 
 export type RacunSerializable = XmlSerializable<IRacun>;
 
-// Request and Response interfaces
-
 /**
  * Zahtjev za evidenciju naplate eRačuna
  */

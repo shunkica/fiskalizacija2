@@ -27,3 +27,20 @@ export const UBL_NS = {
     cbc: "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
     ext: "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
 }
+
+export const getUblNsPrefix = (namespaceUri: string): string => {
+    switch (namespaceUri) {
+        case UBL_NS.invoice:
+            return "invoice";
+        case UBL_NS.creditnote:
+            return "creditnote";
+        case UBL_NS.cac:
+            return "cac";
+        case UBL_NS.cbc:
+            return "cbc";
+        case UBL_NS.ext:
+            return "ext";
+        default:
+            throw new Error(`UBL_NS.getPrefix: Unknown namespace URI: ${namespaceUri}`);
+    }
+}

@@ -31,7 +31,7 @@ export class Izdavatelj implements IzdavateljSerializable {
         };
     }
 
-    static fromUbl(el: XmlElement, type: "Invoice" | "CreditNote"): IIzdavatelj {
+    static fromUblElement(el: XmlElement, type: "Invoice" | "CreditNote"): IIzdavatelj {
         const groupEl = el.get(getBusinessGroupXpath("BG-4", type), UBL_NS) as XmlElement | null;
         if (!groupEl) {
             throw new ValidationError(`Grupa 'BG-4' nije pronađena u dokumentu '${type}'`, undefined);
@@ -71,7 +71,7 @@ export class Primatelj implements PrimateljSerializable {
         }
     }
 
-    static fromUbl(el: XmlElement, type: "Invoice" | "CreditNote"): IPrimatelj {
+    static fromUblElement(el: XmlElement, type: "Invoice" | "CreditNote"): IPrimatelj {
         const groupEl = el.get(getBusinessGroupXpath("BG-7", type), UBL_NS) as XmlElement | null;
         if (!groupEl) {
             throw new ValidationError(`Grupa 'BG-7' nije pronađena u dokumentu '${type}'`, undefined);
@@ -119,7 +119,7 @@ export class PrijenosSredstava implements PrijenosSredstavaSerializable {
         }
     }
 
-    static fromUbl(el: XmlElement, type: "Invoice" | "CreditNote"): IPrijenosSredstava[] | undefined {
+    static fromUblElement(el: XmlElement, type: "Invoice" | "CreditNote"): IPrijenosSredstava[] | undefined {
         const groups = el.find(getBusinessGroupXpath("BG-17", type), UBL_NS) as XmlElement[];
         if (groups.length === 0) {
             return undefined;
@@ -186,7 +186,7 @@ export class DokumentUkupanIznos implements DokumentUkupanIznosSerializable {
         }
     }
 
-    static fromUbl(el: XmlElement, type: "Invoice" | "CreditNote"): IDokumentUkupanIznos {
+    static fromUblElement(el: XmlElement, type: "Invoice" | "CreditNote"): IDokumentUkupanIznos {
         return {
             neto: getElementContentNumber(el, getBusinessTermXpath("BT-106", type), UBL_NS, "decimal2"),
             popust: getOptionalElementContentNumber(el, getBusinessTermXpath("BT-107", type), UBL_NS, "decimal2"),
@@ -250,7 +250,7 @@ export class RaspodjelaPdv implements RaspodjelaPdvSerializable {
         }
     }
 
-    static fromUbl(el: XmlElement, type: "Invoice" | "CreditNote"): IRaspodjelaPdv[] {
+    static fromUblElement(el: XmlElement, type: "Invoice" | "CreditNote"): IRaspodjelaPdv[] {
         const groups = el.find(getBusinessGroupXpath("BG-23", type), UBL_NS) as XmlElement[];
         if (groups.length === 0) {
             throw new ValidationError(`Nije pronađena ni jedna grupa 'BG-23' u dokumentu '${type}'`, undefined);
@@ -303,7 +303,7 @@ export class ArtiklIdentifikatorKlasifikacija implements ArtiklIdentifikatorKlas
         }
     }
 
-    static fromUbl(el: XmlElement, type: "Invoice" | "CreditNote") {
+    static fromUblElement(el: XmlElement, type: "Invoice" | "CreditNote") {
         return {
             identifikatorKlasifikacije: getElementContent(el, ".", UBL_NS, "tekst10"),
             identifikatorSheme: getAttributeValue(el, "listID", ""),

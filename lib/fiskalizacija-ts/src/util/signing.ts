@@ -2,6 +2,9 @@ import {pemToDer, SignedXml} from 'xml-crypto';
 import {Sha256} from "xml-crypto/lib/hash-algorithms";
 import {SigningOptions} from "../types";
 import {randomUUID} from "node:crypto";
+import {usingXmlDocument} from "./xml";
+import {XmlElement} from "libxml2-wasm";
+import {FISK_NS} from "../models/xml/const";
 
 export class XmlSigner {
     private options: SigningOptions;
@@ -96,5 +99,40 @@ export class XmlSigner {
         });
 
         return sig.getSignedXml();
+    }
+
+    static isValidSignature(signedXml: string | Buffer): boolean;
+    static isValidSignature(signedXml: string | Buffer, publicCert: string | Buffer): boolean;
+    static isValidSignature(signedXml: string | Buffer, publicCert: string | Buffer, signature: XmlElement): boolean
+    static isValidSignature(signedXml: string | Buffer, publicCert?: string | Buffer, signature?: XmlElement): boolean {
+        if (!signedXml) {
+            throw new Error("Signed XML is required for signature validation");
+        }
+        if (signature == undefined) {
+            return usingXmlDocument(signedXml, (doc) => {
+                const signature = doc.get("//ds:Signature", FISK_NS) as XmlElement | null;
+                if (!signature) {
+                    throw new Error("No signature found in the signed XML");
+                }
+                if (publicCert == undefined) {
+                    const certElement = signature.get("ds:KeyInfo/ds:X509Data/ds:X509Certificate", FISK_NS);
+                    if (!certElement) {
+                        throw new Error("No public certificate found in the signature");
+                    }
+                    publicCert = certElement.content.trim();
+                    const pemCert = `-----BEGIN CERTIFICATE-----\n${publicCert}\n-----END CERTIFICATE-----`;
+                    return this.isValidSignature(signedXml, pemCert, signature);
+                }
+                return this.isValidSignature(signedXml, publicCert, signature);
+            });
+        }
+        if (Buffer.isBuffer(signedXml)) {
+            signedXml = signedXml.toString('utf8');
+        }
+        const sig = new SignedXml({
+            publicCert: publicCert,
+        });
+        sig.loadSignature(signature.toString({format: false, noDeclaration: true}));
+        return sig.checkSignature(signedXml);
     }
 }
