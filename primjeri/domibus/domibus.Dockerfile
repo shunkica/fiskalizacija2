@@ -15,6 +15,7 @@ ENV JAVA_OPTS "${JAVA_OPTS} -Ddomibus.config.location=/opt/domibus/conf/domibus 
 COPY template/bus/entrypoint.sh /opt/domibus/bin/
 COPY template/bus/logback.xml /opt/domibus/conf/domibus/
 COPY template/bus/domibus.properties /opt/domibus/conf/domibus/
+COPY template/bus/ws-plugin.properties /opt/domibus/conf/domibus/plugins/config/
 COPY template/bus/signOnly.xml /opt/domibus/conf/domibus/policies/
 COPY template/bus/doNothingPolicy.xml /opt/domibus/conf/domibus/policies/
 COPY template/bus/security/keystore.p12 /opt/domibus/conf/domibus/keystores/
