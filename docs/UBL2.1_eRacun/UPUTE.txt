@@ -1,0 +1,2 @@
+Dodati shemu HRExtensionAggregateComponents-1.xsd u common direktorij ubl shema
+- ‎zamijeniti shemu UBL-CommonExtensionComponents-2.1.xsd s ovom iz zip-a u common direktoriju ubl shema
