@@ -1,4 +1,4 @@
-# Verzija 1.2 (2025-06-23)
+# Verzija 1.3 (2025-07-03)
 
 ## HR-TB-1 Tipovi poslovnog procesa (Tablica 55)
 
