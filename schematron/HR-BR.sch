@@ -4,7 +4,7 @@
         xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
         xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
         xmlns:cn="urn:oasis:names:specification:ubl:schema:xsd:CreditNote-2"
-        xmlns:ubl="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2"
+        xmlns:inv="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2"
         xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
         xmlns:hrextac="urn:mfin.gov.hr:schemas:UBL-2:1"
         queryBinding="xslt2">
@@ -14,7 +14,7 @@
   <ns prefix="cbc" uri="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"/>
   <ns prefix="cac" uri="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"/>
   <ns prefix="cn" uri="urn:oasis:names:specification:ubl:schema:xsd:CreditNote-2"/>
-  <ns prefix="ubl" uri="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2"/>
+  <ns prefix="inv" uri="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2"/>
   <ns prefix="ext" uri="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"/>
   <ns prefix="hrextac" uri="urn:mfin.gov.hr:schemas:UBL-2:1"/>
 
@@ -24,7 +24,7 @@
 
   <pattern id="HR-Model">
 
-    <rule context="/ubl:Invoice | /cn:CreditNote">
+    <rule context="/inv:Invoice | /cn:CreditNote">
 
       <assert id="HR-BR-1" flag="fatal"
               test="not(matches(cbc:ID, '\s'))">
@@ -163,7 +163,7 @@
               test="not(//*[not(*) and not(@*) and normalize-space() = '' and local-name() != 'SignatureInformation'])">
         [HR-BR-33] Račun ne smije sadržavati prazne xml elemente osim elementa s elektroničkim potpisom računa
       </assert>
-      
+
       <assert id="HR-BR-34" flag="fatal"
               test="cbc:ProfileID and (matches(cbc:ProfileID, '^P([1-9]|1[0-2])$') or matches(cbc:ProfileID, '^P99:.+$'))">
         [HR-BR-34] Oznaka procesa (BT-23) MORA biti navedena. Koriste se vrijednosti P1-P12 ili P99:Oznaka kupca iz Tablice 4 Tipovi poslovnog procesa
@@ -248,7 +248,7 @@
 
     </rule>
 
-    <rule context="/ubl:Invoice/cac:InvoiceLine | /cn:CreditNote/cac:CreditNoteLine">
+    <rule context="/inv:Invoice/cac:InvoiceLine | /cn:CreditNote/cac:CreditNoteLine">
 
       <assert id="HR-BR-16" flag="fatal"
               test="not(cac:Item/cac:ClassifiedTaxCategory/cbc:ID = ('E', 'O')) or
@@ -268,14 +268,17 @@
                     (cac:Price/cbc:BaseQuantity/@unitCode = (cbc:InvoicedQuantity | cbc:CreditedQuantity)/@unitCode)">
         [HR-BR-21] Jedinica mjere jedinične količine cijene artikla (BT-150), ako je iskazan, MORA biti jednaka jedinici mjere obračunate količine (BT-130)
       </assert>
-      
+
       <assert id="HR-BR-25" flag="fatal"
-              test="(ancestor::*[self::ubl:Invoice or self::cn:CreditNote]/cbc:InvoiceTypeCode = '458') or
-                    (cac:Item/cac:CommodityClassification/cbc:ItemClassificationCode and
-                     cac:Item/cac:CommodityClassification/cbc:ItemClassificationCode/@listID = 'CG')">
+              test="(ancestor::*[self::inv:Invoice or self::cn:CreditNote]/cbc:ProfileID = 'P4' or
+               ancestor::*[self::inv:Invoice or self::cn:CreditNote]/cbc:InvoiceTypeCode = '386')
+              or
+              (cac:Item/cac:CommodityClassification/cbc:ItemClassificationCode and
+               cac:Item/cac:CommodityClassification/cbc:ItemClassificationCode/@listID = 'CG')">
         [HR-BR-25] Svaki artikl MORA imati identifikator klasifikacije artikla (BT-158) iz sheme Klasifikacija proizvoda po djelatnostima: KPD (CPA) – listID „CG", osim u slučaju računa za predujam.
       </assert>
-      
+
+
       <assert id="HR-BR-35" flag="fatal"
               test="not(cac:Item/cac:ClassifiedTaxCategory/cbc:ID = ('E', 'O')) or
                     (cac:Item/cac:ClassifiedTaxCategory/cbc:ID = 'E' and cac:Item/cac:ClassifiedTaxCategory/cbc:Percent = 0)">
@@ -288,7 +291,7 @@
                     (cac:Item/cac:ClassifiedTaxCategory/cbc:TaxExemptionReasonCode and normalize-space(cac:Item/cac:ClassifiedTaxCategory/cbc:TaxExemptionReasonCode) != '')">
         [HR-BR-36] Svaka stavka računa (BG-25) koja ne podliježe PDV-u ili je oslobođena od PDV-a mora imati razlog oslobođenja PDV-a (HR-BT-13) ili kod razloga oslobođenja PDV-a (HR-BT-14)
       </assert>
-      
+
     </rule>
 
   </pattern>

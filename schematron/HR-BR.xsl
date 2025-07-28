@@ -5,11 +5,11 @@
                xmlns:error="https://doi.org/10.5281/zenodo.1495494#error"
                xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
                xmlns:hrextac="urn:mfin.gov.hr:schemas:UBL-2:1"
+               xmlns:inv="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2"
                xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
                xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                xmlns:schxslt="https://doi.org/10.5281/zenodo.1495494"
                xmlns:schxslt-api="https://doi.org/10.5281/zenodo.1495494#api"
-               xmlns:ubl="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2"
                xmlns:xs="http://www.w3.org/2001/XMLSchema"
                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                version="2.0">
@@ -22,7 +22,7 @@
             <schxslt.compile.typed-variables xmlns="https://doi.org/10.5281/zenodo.1495494#">true</schxslt.compile.typed-variables>
          </dct:Agent>
       </dct:creator>
-      <dct:created>2025-06-25T17:38:41.999856931Z</dct:created>
+      <dct:created>2025-07-28T16:46:11.787855388Z</dct:created>
    </rdf:Description>
    <xsl:output indent="yes"/>
    <xsl:param name="schxslt.validate.initial-document-uri" as="xs:string?"/>
@@ -65,7 +65,7 @@
                               <schxslt.compile.typed-variables xmlns="https://doi.org/10.5281/zenodo.1495494#">true</schxslt.compile.typed-variables>
                            </dct:Agent>
                         </dct:creator>
-                        <dct:created>2025-06-25T17:38:41.999856931Z</dct:created>
+                        <dct:created>2025-07-28T16:46:11.787855388Z</dct:created>
                      </rdf:Description>
                   </dct:source>
                </svrl:metadata>
@@ -92,7 +92,7 @@
                                                    uri="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"/>
                <svrl:ns-prefix-in-attribute-values prefix="cn"
                                                    uri="urn:oasis:names:specification:ubl:schema:xsd:CreditNote-2"/>
-               <svrl:ns-prefix-in-attribute-values prefix="ubl"
+               <svrl:ns-prefix-in-attribute-values prefix="inv"
                                                    uri="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2"/>
                <svrl:ns-prefix-in-attribute-values prefix="ext"
                                                    uri="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"/>
@@ -127,14 +127,14 @@
          <xsl:apply-templates mode="d7e24" select="root()"/>
       </schxslt:document>
    </xsl:template>
-   <xsl:template match="/ubl:Invoice | /cn:CreditNote" priority="1" mode="d7e24">
+   <xsl:template match="/inv:Invoice | /cn:CreditNote" priority="1" mode="d7e24">
       <xsl:param name="schxslt:patterns-matched" as="xs:string*"/>
       <xsl:choose>
          <xsl:when test="$schxslt:patterns-matched[. = 'd7e24']">
             <schxslt:rule pattern="d7e24">
-               <xsl:comment xmlns:svrl="http://purl.oclc.org/dsdl/svrl">WARNING: Rule for context "/ubl:Invoice | /cn:CreditNote" shadowed by preceding rule</xsl:comment>
+               <xsl:comment xmlns:svrl="http://purl.oclc.org/dsdl/svrl">WARNING: Rule for context "/inv:Invoice | /cn:CreditNote" shadowed by preceding rule</xsl:comment>
                <svrl:suppressed-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl">
-                  <xsl:attribute name="context">/ubl:Invoice | /cn:CreditNote</xsl:attribute>
+                  <xsl:attribute name="context">/inv:Invoice | /cn:CreditNote</xsl:attribute>
                   <xsl:variable name="documentUri" as="xs:anyURI?" select="document-uri()"/>
                   <xsl:if test="exists($documentUri)">
                      <xsl:attribute name="document" select="$documentUri"/>
@@ -150,7 +150,7 @@
          <xsl:otherwise>
             <schxslt:rule pattern="d7e24">
                <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl">
-                  <xsl:attribute name="context">/ubl:Invoice | /cn:CreditNote</xsl:attribute>
+                  <xsl:attribute name="context">/inv:Invoice | /cn:CreditNote</xsl:attribute>
                   <xsl:variable name="documentUri" as="xs:anyURI?" select="document-uri()"/>
                   <xsl:if test="exists($documentUri)">
                      <xsl:attribute name="document" select="$documentUri"/>
@@ -550,16 +550,16 @@
          </xsl:otherwise>
       </xsl:choose>
    </xsl:template>
-   <xsl:template match="/ubl:Invoice/cac:InvoiceLine | /cn:CreditNote/cac:CreditNoteLine"
+   <xsl:template match="/inv:Invoice/cac:InvoiceLine | /cn:CreditNote/cac:CreditNoteLine"
                  priority="0"
                  mode="d7e24">
       <xsl:param name="schxslt:patterns-matched" as="xs:string*"/>
       <xsl:choose>
          <xsl:when test="$schxslt:patterns-matched[. = 'd7e24']">
             <schxslt:rule pattern="d7e24">
-               <xsl:comment xmlns:svrl="http://purl.oclc.org/dsdl/svrl">WARNING: Rule for context "/ubl:Invoice/cac:InvoiceLine | /cn:CreditNote/cac:CreditNoteLine" shadowed by preceding rule</xsl:comment>
+               <xsl:comment xmlns:svrl="http://purl.oclc.org/dsdl/svrl">WARNING: Rule for context "/inv:Invoice/cac:InvoiceLine | /cn:CreditNote/cac:CreditNoteLine" shadowed by preceding rule</xsl:comment>
                <svrl:suppressed-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl">
-                  <xsl:attribute name="context">/ubl:Invoice/cac:InvoiceLine | /cn:CreditNote/cac:CreditNoteLine</xsl:attribute>
+                  <xsl:attribute name="context">/inv:Invoice/cac:InvoiceLine | /cn:CreditNote/cac:CreditNoteLine</xsl:attribute>
                   <xsl:variable name="documentUri" as="xs:anyURI?" select="document-uri()"/>
                   <xsl:if test="exists($documentUri)">
                      <xsl:attribute name="document" select="$documentUri"/>
@@ -575,7 +575,7 @@
          <xsl:otherwise>
             <schxslt:rule pattern="d7e24">
                <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl">
-                  <xsl:attribute name="context">/ubl:Invoice/cac:InvoiceLine | /cn:CreditNote/cac:CreditNoteLine</xsl:attribute>
+                  <xsl:attribute name="context">/inv:Invoice/cac:InvoiceLine | /cn:CreditNote/cac:CreditNoteLine</xsl:attribute>
                   <xsl:variable name="documentUri" as="xs:anyURI?" select="document-uri()"/>
                   <xsl:if test="exists($documentUri)">
                      <xsl:attribute name="document" select="$documentUri"/>
@@ -614,12 +614,12 @@
       </svrl:text>
                   </svrl:failed-assert>
                </xsl:if>
-               <xsl:if test="not((ancestor::*[self::ubl:Invoice or self::cn:CreditNote]/cbc:InvoiceTypeCode = '458') or                     (cac:Item/cac:CommodityClassification/cbc:ItemClassificationCode and                      cac:Item/cac:CommodityClassification/cbc:ItemClassificationCode/@listID = 'CG'))">
+               <xsl:if test="not((ancestor::*[self::inv:Invoice or self::cn:CreditNote]/cbc:ProfileID = 'P4' or                ancestor::*[self::inv:Invoice or self::cn:CreditNote]/cbc:InvoiceTypeCode = '386')               or               (cac:Item/cac:CommodityClassification/cbc:ItemClassificationCode and                cac:Item/cac:CommodityClassification/cbc:ItemClassificationCode/@listID = 'CG'))">
                   <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                       location="{schxslt:location(.)}"
                                       flag="fatal"
                                       id="HR-BR-25">
-                     <xsl:attribute name="test">(ancestor::*[self::ubl:Invoice or self::cn:CreditNote]/cbc:InvoiceTypeCode = '458') or                     (cac:Item/cac:CommodityClassification/cbc:ItemClassificationCode and                      cac:Item/cac:CommodityClassification/cbc:ItemClassificationCode/@listID = 'CG')</xsl:attribute>
+                     <xsl:attribute name="test">(ancestor::*[self::inv:Invoice or self::cn:CreditNote]/cbc:ProfileID = 'P4' or                ancestor::*[self::inv:Invoice or self::cn:CreditNote]/cbc:InvoiceTypeCode = '386')               or               (cac:Item/cac:CommodityClassification/cbc:ItemClassificationCode and                cac:Item/cac:CommodityClassification/cbc:ItemClassificationCode/@listID = 'CG')</xsl:attribute>
                      <svrl:text>
         [HR-BR-25] Svaki artikl MORA imati identifikator klasifikacije artikla (BT-158) iz sheme Klasifikacija proizvoda po djelatnostima: KPD (CPA) – listID „CG", osim u slučaju računa za predujam.
       </svrl:text>
