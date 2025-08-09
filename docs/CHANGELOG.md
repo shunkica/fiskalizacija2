@@ -1,5 +1,10 @@
 # Evidencija zapažanja promjena u službenoj dokumentaciji
 
+## 2025-07-29
+
+- Tehnicka_specifikacija_eRacun_AMS.pdf
+  - Ažuriranje poglavlja 5.3. dodani primjeri formiranja DNS upita
+
 ## 2025-07-28
 
  - Tehnicka_specifikacija_eRacun_MPS.pdf

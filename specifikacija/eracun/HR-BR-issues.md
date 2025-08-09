@@ -14,6 +14,19 @@
 
 ### Opisi pravila
 
+#### Nerazumljiv opis pravila
+
+- HR-BR-27 - `U HR raspodjeli PDV-a (HR-BG-2) HR oporezivi iznos (HR-BT-16) mora biti jednak zbroju neto iznosa stavki računa (BT-131) umanjen za zbroj iznosa popusta na razini dokumenta (BT-92) uvećan za zbroj iznosa troškova na razini dokumenta (BT-99) i umanjen za HR neoporezivi iznos (HR-BT-24).`
+    - HR-BT-16 je element koji se ponavlja za svaku vrstu poreza, a ne ukupni oporezivi iznos. Prema tome pretpostavljam da bi tu trebalo pisati "...suma HR oporezivih iznosa (HR-BT-16)..." ??
+
+- HR-BR-28 - `Za cac:TaxScheme = „VAT“ i kod porezne kategorije „E“ ili „O“ HR iznos porezne kategorije mora biti 0`
+  - Nije definirano kako jednoznačno povezati TaxSubtotal sa pripadajućim HRTaxSubtotal elementom, jer element `hrextac:HRTaxCategory/cbc:Name` nije obvezan
+  - druga opcija je da se ovdje misli na `hrextac:HRTaxScheme/cbc:ID` ??
+
+- HR-BR-29 - `Stavke računa, troškovi ili popusti koji ne ulaze u poreznu osnovicu HR kod kategorije PDV-a (HR-BT-18) mora biti „O", a HR iznos kategorije poreza (HR-BT-17) mora biti 0`
+  - Zašto se ovdje spominju stavke, troškovi i popusti ako se pravilo odnosi na HRTaxSubtotal?
+  - Što se tiče validacijske sheme, ovo pravilo vjerojatno samo znači da HR-BT-17 mora biti `0` ako je HR-BT-18 `O` (Out of scope), te da HR-BT-18 mora odgovarati vrijednosti iz HR-TB-2
+
 #### BT nije naveden eksplicitno u opisu pravila
 
 - HR-BR-1 - nije naveden BT: BT-1
@@ -28,7 +41,7 @@
 
 - HR-BR-10 - pogrešan BT: umjesto BT-49 napisano je BT-37
 - HR-BR-13 - pogrešan BT: umjesto HR-BT-7 napisano je HR-BT-6, umjesto HR-BT-8 napisano je HR-BT-7
-- HR-BR-27 - pogrešan BT: umjesto HR-BT-16 napisano je HR-BT-17, umjesto HR-BT-24 napisano je HR-BT-20
+- HR-BR-27 - pogrešan BT: umjesto HR-BT-23 napisano je HR-BT-17, umjesto HR-BT-24 napisano je HR-BT-20
 - HR-BR-31 - pogrešan BT: umjesto HR-BT-23 napisano je HR-BT-19
 - HR-BR-32 - pogrešan BT: umjesto HR-BT-24 napisano je HR-BT-20
 
@@ -54,7 +67,7 @@
 | HR-BR-21   | Jedinica mjere jedinične količine cijene artikla (BT-150), ako je iskazan, MORA biti jednaka jedinici mjere obračunate količine (BT-130)                                                                                                                                                                                                   |
 | HR-BR-25   | Svaki artikl MORA imati identifikator klasifikacije artikla (BT-158) iz sheme Klasifikacija proizvoda po djelatnostima: KPD (CPA) – listID „CG“, osim u slučaju računa za predujam.                                                                                                                                                        |
 | HR-BR-26   | Račun koji sadržava stavku računa (BG-25), popust na razini dokumenta (BG-20) ili trošak na razini dokumenta (BG-21), gdje je kod kategorije PDV-a (BT-151, BT-95 ili BT-102) „oslobođeno od PDV-a“ mora u za svaki razlog oslobođenja od PDV-a ili kod razloga oslobođenja od PDV-a sadržavati HR raspodjelu oslobođenja od PDV (HR-BG-2) |
-| HR-BR-27   | U HR raspodjeli PDV-a (HR-BG-2) HR oporezivi iznos (HR-BT-16) mora biti jednak zbroju neto iznosa stavki računa (BT-131) umanjen za zbroj iznosa popusta na razini dokumenta (BT-92) uvećan za zbroj iznosa troškova na razini dokumenta (BT-99) i umanjen za HR neoporezivi iznos (HR-BT-24).                                             |
+| HR-BR-27   | U HR raspodjeli PDV-a (HR-BG-2) HR oporezivi iznos (HR-BT-23) mora biti jednak zbroju neto iznosa stavki računa (BT-131) umanjen za zbroj iznosa popusta na razini dokumenta (BT-92) uvećan za zbroj iznosa troškova na razini dokumenta (BT-99) i umanjen za HR neoporezivi iznos (HR-BT-24).                                             |
 | HR-BR-28   | Za cac:TaxScheme = „VAT“ i kod porezne kategorije (HR-BT-18) „E“ ili „O“ HR iznos porezne kategorije (HR-BT-17) mora biti 0                                                                                                                                                                                                                |
 | HR-BR-29   | Stavke računa, troškovi ili popusti koji ne ulaze u poreznu osnovicu HR kod kategorije PDV-a (HR-BT-18) mora biti „O“, a HR iznos kategorije poreza (HR-BT-17) mora biti 0                                                                                                                                                                 |
 | HR-BR-30   | HR Ukupni iznosi računa (HR-BG-3) se navodi na računu ako račun sadrži stavke računa (BG-25) ili troškove na razini dokumenta (BG-21) koji ne ulaze u poreznu osnovicu računa.                                                                                                                                                             |
