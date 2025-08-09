@@ -12,3 +12,8 @@ RUN dnf install -y unzip java  && \
 COPY HR-BR.sch /opt/
 
 RUN java -jar /opt/saxon-he-12.7.jar -s:/opt/HR-BR.sch -xsl:/opt/schxslt-1.10.1/2.0/compile-for-svrl.xsl -o:/opt/HR-BR.xsl
+
+# Create reports directory
+RUN mkdir -p /opt/reports
+
+WORKDIR /opt
