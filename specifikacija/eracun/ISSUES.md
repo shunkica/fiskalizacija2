@@ -1,4 +1,4 @@
-# Verzija 1.3 (2025-07-03)
+# Specifikacija upotrebe eRačuna s proširenjima - verzija 1.3 (2025-07-03)
 
 ## Greške u specifikaciji
 
@@ -90,3 +90,32 @@
 | HR-BR-AE-1 | Račun koji sadrži stavku računa (BG-25) u kojoj je kod kategorije PDV-a obračunate stavke (BT-151) "Reverse charge" mora sadržavati PDV identifikacijski broj Kupca (BT-48).                                                                                                                                                               |
 | HR-BR-AE-2 | Račun koji sadrži popuste na razini dokumenta (BG-20) gdje je kod kategorije PDV-a popusta na razini dokumenta (BT-95) "Reverse charge" mora sadržavati PDV identifikacijski broj Kupca (BT-48).                                                                                                                                           |
 | HR-BR-AE-3 | Račun koji sadrži troškove na razini dokumenta (BG-21) gdje je kod kategorije PDV-a troška na razini dokumenta (BT-102) "Reverse charge" mora sadržavati PDV identifikacijski broj Kupca (BT-48).                                                                                                                                          |
+
+
+# Primjeri eRačuna 
+
+## Odobrenje.xml
+
+- Ne zadovoljava pravilo [HR-BR-4] U slučaju pozitivnog iznosa koji dospijeva na plaćanje (BT-115), datum dospijeća plaćanja (BT-9) mora biti naveden.
+  - ima pozitivan iznos koji dospijeva na plaćanje (BT-115)
+  - nema BT-9 (Datum dospijeća plaćanja) (/cac:PaymentMeans/cbc:PaymentDueDate)
+
+## eRacun_PDV_NEOP_POVRATNA_NAKNADA_stavka.xml
+
+- Ne zadovoljava pravilo [HR-BR-36] - Svaka stavka računa (BG-25) koja ne podliježe PDV-u ili je oslobođena od PDV-a mora imati razlog oslobođenja PDV-a (HR-BT-13) ili kod razloga oslobođenja PDV-a (HR-BT-14)
+  - ima stavku PDV-a koja ne podliježe PDV-u ili je oslobođena od PDV-a ("Povratna naknada")
+  - nema HR-BT-13 (Razlog oslobođenja PDV-a /cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cbc:TaxExemptionReason)
+  - nema HR-BT-14 (Kod razloga oslobođenja PDV-a) (/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cbc:TaxExemptionReasonCode)
+
+## eRacun_PDV_NEOP_PP_trosak.xml
+
+- Ne zadovoljava pravilo [HR-BR-11] Svaki trošak na razini dokumenta (BG-21) koji ne podliježe PDV-u ili je oslobođen PDV-a mora imati oznaku kategorije PDV-a troška na razini dokumenta (HR-BT-6) iz tablice HR-TB-2 HR oznaka kategorija PDV-a
+    - ima trošak na razini dokumenta koji ne podliježe PDV-u ili je oslobođen PDV-a ("#HR:PP#")
+    - nema HR-BT-6 (Oznaka kategorije PDV-a troška na razini dokumenta) (/cac:AllowanceCharge/cac:TaxCategory/cbc:Name)
+- Ne zadovoljava pravilo [HR-BR-13] Svaki trošak na razini dokumenta (BG-21) koji ne podliježe PDV-u ili je oslobođen mora imati razlog oslobođenja PDV-a troška na razini dokumenta (HR-BT-7) ili kod razloga oslobođenja PDV-a a troška na razini dokumenta (HR-BT-8)
+  - ima trošak na razini dokumenta koji ne podliježe PDV-u ili je oslobođen PDV-a ("#HR:PP#")
+  - nema HR-BT-7 (Razlog oslobođenja PDV-a troška na razini dokumenta) (/cac:AllowanceCharge/cac:TaxCategory/cbc:TaxExemptionReason)
+
+## Ostalo
+
+- U primjerima PP i POVNAK u `cac:TaxCategory/cac:TaxScheme/cbc:ID` odnosno `cac:ClassifiedTaxCategory/cac:TaxScheme/cbc:ID` navedeno je `VAT` što se ne podudara sa vrijednostima iz tablice 2. (greška ili namjera?)
