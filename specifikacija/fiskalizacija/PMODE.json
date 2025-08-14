@@ -1,0 +1,148 @@
+{
+  "name": "PMODE",
+  "version": "1.0",
+  "date": "2025-05-15",
+  "description": "P-Mode parametri",
+  "data": [
+    {
+      "Parametar": "PMode.ID",
+      "Vrijednost": "`eRacun`"
+    },
+    {
+      "Parametar": "PMode.Agreement",
+      "Vrijednost": "`urn:fdc:eracun.hr:2023:agreements:ap_provider`"
+    },
+    {
+      "Parametar": "PMode.MEP",
+      "Vrijednost": "`http://docs.oasis-open.org/ebxmlmsg/ebms/v3.0/ns/core/200704/oneWay`"
+    },
+    {
+      "Parametar": "PMode.MEPBinding",
+      "Vrijednost": "`http://docs.oasis-open.org/ebxml-msg/ebms/v3.0/ns/core/200704/push`"
+    },
+    {
+      "Parametar": "PMode.Initiator.Party",
+      "Vrijednost": "Unosi se u Pmode za pošiljatelja:<br/> Jedan PartyId sa vrijednosti Subject CNAME iz certifikata pristupne točke, npr. HR11111111111_1000000100 (u formatu HR<OIB>)<br/>Fiksna vrijednost za partyIdType `urn:fdc:eRacun.hr:2023:identifiers:ap`"
+    },
+    {
+      "Parametar": "PMode.Initiator.Role",
+      "Vrijednost": "`http://docs.oasis-open.org/ebxmlmsg/ebms/v3.0/ns/core/200704/initiator`"
+    },
+    {
+      "Parametar": "PMode.Responder.Party",
+      "Vrijednost": "Unosi se u Pmode za primatelja:<br/> Jedan PartyId sa vrijednosti Subject CNAME iz certifikata pristupne točke, npr. HR11111111111_1000000100 (u formatu HR<OIB>)<br/>Fiksna vrijednost za partyIdType `urn:fdc:eRacun.hr:2023:identifiers:ap`"
+    },
+    {
+      "Parametar": "PMode.Responder.Role",
+      "Vrijednost": "`http://docs.oasis-open.org/ebxmlmsg/ebms/v3.0/ns/core/200704/responder`"
+    },
+    {
+      "Parametar": "PMode[].Protocol.Address",
+      "Vrijednost": "Obavezno, https URL primatelja"
+    },
+    {
+      "Parametar": "PMode[].Protocol.SOAPVersion",
+      "Vrijednost": "`1.2`"
+    },
+    {
+      "Parametar": "PMode[].BusinessInfo.Service",
+      "Vrijednost": "Predefinirana vrijednost identifikatora procesa za slanje eRačuna - `hrBillingService`<br/>Vrijednost: `urn:fdc:eracun.hr:2023:processId`"
+    },
+    {
+      "Parametar": "PMode[].BusinessInfo.Service.type",
+      "Vrijednost": "Ne unosi se"
+    },
+    {
+      "Parametar": "PMode[].BusinessInfo.Action",
+      "Vrijednost": "Predefinirana vrijednost identifikatora tipa dokumenta za eRačun formatirana po slijedećem: «scheme id»::«document type id value»<br/>Definirana su dva tipa:<br/>`hrBillingInvoiceAction` - `busdox-docid-qns::urn:oasis:names:specification:ubl:schema:xsd:Invoice2::Invoice##urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:billing:3.0::2.1`<br/>`hrBillingCreditNoteAction` – `busdox-docid-qns::urn:oasis:names:specification:ubl:schema:xsd:CreditNote2::CreditNote##urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:billing:3.0::2.1`"
+    },
+    {
+      "Parametar": "PMode[].BusinessInfo.MPC",
+      "Vrijednost": "`http://docs.oasisopen.org/ebxml-msg/ebms/v3.0/ns/core/200704/defaultMPC`"
+    },
+    {
+      "Parametar": "PMode[].Errorhandling.Report.AsResponse",
+      "Vrijednost": "`True`"
+    },
+    {
+      "Parametar": "PMode[].Errorhandling.Report.ProcessErrorNotifyConsumer",
+      "Vrijednost": "`True`"
+    },
+    {
+      "Parametar": "PMode[].Errorhandling.Report.ProcessErrorNotifyProducer",
+      "Vrijednost": "`True`"
+    },
+    {
+      "Parametar": "PMode[].Errorhandling.DeliveryFailuresNotifyProducer",
+      "Vrijednost": "`True`"
+    },
+    {
+      "Parametar": "PMode[].ErrorHandling.Report.MissingReceiptNotifyProducer",
+      "Vrijednost": "`True`"
+    },
+    {
+      "Parametar": "PMode[].Security.WSSversion",
+      "Vrijednost": "`1.1.1`"
+    },
+    {
+      "Parametar": "PMode[].Security.X509.Sign",
+      "Vrijednost": "`True`"
+    },
+    {
+      "Parametar": "PMode[].Security.X509.Signature.Certificate",
+      "Vrijednost": "Certifikat pristupne točke pošiljatelja"
+    },
+    {
+      "Parametar": "PMode[].Security.X509.Signature.HashFunction",
+      "Vrijednost": "`https://www.w3.org/TR/xmlenc-core1/`"
+    },
+    {
+      "Parametar": "PMode[].Security.X509.Signature.Algorithm",
+      "Vrijednost": "`https://www.ietf.org/internet-drafts/draft-eastlake-additional-xmlsec-uris-00.txt`"
+    },
+    {
+      "Parametar": "PMode[].Security.X509.Encryption.Encrypt",
+      "Vrijednost": "`False`"
+    },
+    {
+      "Parametar": "PMode[].Security.PModeAuthorize",
+      "Vrijednost": "`False`"
+    },
+    {
+      "Parametar": "PMode[].Security.SendReceipt",
+      "Vrijednost": "`True`"
+    },
+    {
+      "Parametar": "PMode[].Security.SendReceipt.NonRepudiation",
+      "Vrijednost": "`True`"
+    },
+    {
+      "Parametar": "PMode[].Security.SendReceipt.ReplyPattern",
+      "Vrijednost": "`Response`"
+    },
+    {
+      "Parametar": "PMode[].PayloadService.CompressionType",
+      "Vrijednost": "`application/gzip`"
+    },
+    {
+      "Parametar": "PMode[].ReceptionAwareness",
+      "Vrijednost": "`True`"
+    },
+    {
+      "Parametar": "PMode[].ReceptionAwareness.Retry",
+      "Vrijednost": "`True`"
+    },
+    {
+      "Parametar": "PMode[].ReceptionAwareness.Retry.Parameters",
+      "Vrijednost": "`maxretries=10, period=3000`"
+    },
+    {
+      "Parametar": "PMode[].ReceptionAwareness.DuplicateDetection",
+      "Vrijednost": "`True`"
+    },
+    {
+      "Parametar": "PMode[].ReceptionAwareness.DuplicateDetection",
+      "Vrijednost": "`maxsize=10Mb, checkwindow=7D`"
+    }
+  ]
+}

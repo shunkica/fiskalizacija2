@@ -1,0 +1,263 @@
+{
+  "name": "BG",
+  "version": "1.3",
+  "date": "2025-07-03",
+  "data": [
+    {
+      "ID": "BG-1",
+      "Pojam": "Napomena za račun",
+      "Min": "0",
+      "Max": "n",
+      "Invoice": "",
+      "CreditNote": ""
+    },
+    {
+      "ID": "BG-2",
+      "Pojam": "Procesna kontrola",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "",
+      "CreditNote": ""
+    },
+    {
+      "ID": "BG-3",
+      "Pojam": "Referenca prethodnog računa",
+      "Min": "0",
+      "Max": "n",
+      "Invoice": "/cac:BillingReference",
+      "CreditNote": "/cac:BillingReference"
+    },
+    {
+      "ID": "BG-4",
+      "Pojam": "Prodavatelj",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cac:AccountingSupplierParty",
+      "CreditNote": "/cac:AccountingSupplierParty"
+    },
+    {
+      "ID": "BG-5",
+      "Pojam": "Poštanska adresa prodavatelja",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress",
+      "CreditNote": "/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress"
+    },
+    {
+      "ID": "BG-6",
+      "Pojam": "Kontakt prodavatelja",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:AccountingSupplierParty/cac:Party/cac:Contact",
+      "CreditNote": "/cac:AccountingSupplierParty/cac:Party/cac:Contact"
+    },
+    {
+      "ID": "BG-7",
+      "Pojam": "Kupac",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cac:AccountingCustomerParty",
+      "CreditNote": "/cac:AccountingCustomerParty"
+    },
+    {
+      "ID": "BG-8",
+      "Pojam": "Poštanska adresa kupca",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress",
+      "CreditNote": "/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress"
+    },
+    {
+      "ID": "BG-9",
+      "Pojam": "Kontaktni podaci kupca",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:AccountingCustomerParty/cac:Party/cac:Contact",
+      "CreditNote": "/cac:AccountingCustomerParty/cac:Party/cac:Contact"
+    },
+    {
+      "ID": "BG-10",
+      "Pojam": "Primatelj plaćanja",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:PayeeParty",
+      "CreditNote": "/cac:PayeeParty"
+    },
+    {
+      "ID": "BG-11",
+      "Pojam": "Porezni zastupnik prodavatelja",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:TaxRepresentativeParty",
+      "CreditNote": "/cac:TaxRepresentativeParty"
+    },
+    {
+      "ID": "BG-12",
+      "Pojam": "Poštanska adresa poreznog zastupnika prodavatelja",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cac:TaxRepresentativeParty/cac:PostalAddress",
+      "CreditNote": "/cac:TaxRepresentativeParty/cac:PostalAddress"
+    },
+    {
+      "ID": "BG-13",
+      "Pojam": "Podaci o isporuci",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:Delivery",
+      "CreditNote": "/cac:Delivery"
+    },
+    {
+      "ID": "BG-14",
+      "Pojam": "Obračunsko razdoblje",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:InvoicePeriod",
+      "CreditNote": "/cac:InvoicePeriod"
+    },
+    {
+      "ID": "BG-15",
+      "Pojam": "Adresa isporuke",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:Delivery/cac:DeliveryLocation/cac:Address",
+      "CreditNote": "/cac:Delivery/cac:DeliveryLocation/cac:Address"
+    },
+    {
+      "ID": "BG-16",
+      "Pojam": "Upute za plaćanje",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:PaymentMeans",
+      "CreditNote": "/cac:PaymentMeans"
+    },
+    {
+      "ID": "BG-17",
+      "Pojam": "Kreditni transfer",
+      "Min": "0",
+      "Max": "n",
+      "Invoice": "/cac:PaymentMeans/cac:PayeeFinancialAccount",
+      "CreditNote": "/cac:PaymentMeans/cac:PayeeFinancialAccount"
+    },
+    {
+      "ID": "BG-18",
+      "Pojam": "Podaci o platnoj kartici",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:PaymentMeans/cac:CardAccount",
+      "CreditNote": "/cac:PaymentMeans/cac:CardAccount"
+    },
+    {
+      "ID": "BG-19",
+      "Pojam": "Izravno terećenje",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:PaymentMeans/cac:PaymentMandate",
+      "CreditNote": "/cac:PaymentMeans/cac:PaymentMandate"
+    },
+    {
+      "ID": "BG-20",
+      "Pojam": "Popusti na razini dokumenta",
+      "Min": "0",
+      "Max": "n",
+      "Invoice": "/cac:AllowanceCharge",
+      "CreditNote": "/cac:AllowanceCharge"
+    },
+    {
+      "ID": "BG-21",
+      "Pojam": "Troškovi na razini dokumenta",
+      "Min": "0",
+      "Max": "n",
+      "Invoice": "/cac:AllowanceCharge",
+      "CreditNote": "/cac:AllowanceCharge"
+    },
+    {
+      "ID": "BG-22",
+      "Pojam": "Ukupni iznosi na razini dokumenta",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cac:LegalMonetaryTotal",
+      "CreditNote": "/cac:LegalMonetaryTotal"
+    },
+    {
+      "ID": "BG-23",
+      "Pojam": "Raspodjela PDV-a",
+      "Min": "1",
+      "Max": "n",
+      "Invoice": "/cac:TaxTotal/cac:TaxSubtotal",
+      "CreditNote": "/cac:TaxTotal/cac:TaxSubtotal"
+    },
+    {
+      "ID": "BG-24",
+      "Pojam": "Dodatni popratni dokumenti",
+      "Min": "0",
+      "Max": "n",
+      "Invoice": "/cac:AdditionalDocumentReference",
+      "CreditNote": "/cac:AdditionalDocumentReference"
+    },
+    {
+      "ID": "BG-25",
+      "Pojam": "Stavka računa",
+      "Min": "1",
+      "Max": "n",
+      "Invoice": "/cac:InvoiceLine",
+      "CreditNote": "/cac:CreditNoteLine"
+    },
+    {
+      "ID": "BG-26",
+      "Pojam": "Obračunsko razdoblje stavke računa",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:InvoiceLine/cac:InvoicePeriod",
+      "CreditNote": "/cac:CreditNoteLine/cac:InvoicePeriod"
+    },
+    {
+      "ID": "BG-27",
+      "Pojam": "Popusti na stavci računa",
+      "Min": "0",
+      "Max": "n",
+      "Invoice": "/cac:InvoiceLine/cac:AllowanceCharge",
+      "CreditNote": "/cac:CreditNoteLine/cac:AllowanceCharge"
+    },
+    {
+      "ID": "BG-28",
+      "Pojam": "Troškovi na stavci računa",
+      "Min": "0",
+      "Max": "n",
+      "Invoice": "/cac:InvoiceLine/cac:AllowanceCharge",
+      "CreditNote": "/cac:CreditNoteLine/cac:AllowanceCharge"
+    },
+    {
+      "ID": "BG-29",
+      "Pojam": "Pojedinosti cijene",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cac:InvoiceLine/cac:Price",
+      "CreditNote": "/cac:CreditNoteLine/cac:Price"
+    },
+    {
+      "ID": "BG-30",
+      "Pojam": "Podaci o PDV-u stavke računa",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory",
+      "CreditNote": "/cac:CreditNoteLine/cac:Item/cac:ClassifiedTaxCategory"
+    },
+    {
+      "ID": "BG-31",
+      "Pojam": "Podaci o artiklu",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cac:InvoiceLine/cac:Item",
+      "CreditNote": "/cac:CreditNoteLine/cac:Item"
+    },
+    {
+      "ID": "BG-32",
+      "Pojam": "Atributi artikla",
+      "Min": "0",
+      "Max": "n",
+      "Invoice": "/cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty",
+      "CreditNote": "/cac:CreditNoteLine/cac:Item/cac:AdditionalItemProperty"
+    }
+  ]
+}

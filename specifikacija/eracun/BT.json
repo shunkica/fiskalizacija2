@@ -1,0 +1,1327 @@
+{
+  "name": "BT",
+  "version": "1.3",
+  "date": "2025-07-03",
+  "data": [
+    {
+      "ID": "BT-1",
+      "Pojam": "Broj računa",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cbc:ID",
+      "CreditNote": "/cbc:ID"
+    },
+    {
+      "ID": "BT-2",
+      "Pojam": "Datum izdavanja računa",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cbc:IssueDate",
+      "CreditNote": "/cbc:IssueDate"
+    },
+    {
+      "ID": "BT-3",
+      "Pojam": "Kod tipa računa",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cbc:InvoiceTypeCode",
+      "CreditNote": "/cbc:CreditNoteTypeCode"
+    },
+    {
+      "ID": "BT-5",
+      "Pojam": "Kod valute računa",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cbc:DocumentCurrencyCode",
+      "CreditNote": "/cbc:DocumentCurrencyCode"
+    },
+    {
+      "ID": "BT-6",
+      "Pojam": "Kod računovodstvene valute za PDV",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cbc:TaxCurrencyCode",
+      "CreditNote": "/cbc:TaxCurrencyCode"
+    },
+    {
+      "ID": "BT-7",
+      "Pojam": "Datum nastanka obveze poreza na dodanu vrijednost",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cbc:TaxPointDate",
+      "CreditNote": "/cbc:TaxPointDate"
+    },
+    {
+      "ID": "BT-8",
+      "Pojam": "Kod datuma nastanka obveze poreza na dodanu vrijednost",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:InvoicePeriod/cbc:DescriptionCode",
+      "CreditNote": "/cac:InvoicePeriod/cbc:DescriptionCode"
+    },
+    {
+      "ID": "BT-9",
+      "Pojam": "Datum dospijeća plaćanja",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cbc:DueDate",
+      "CreditNote": "/cac:PaymentMeans/cbc:PaymentDueDate"
+    },
+    {
+      "ID": "BT-10",
+      "Pojam": "Interni identifikator kupca",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cbc:BuyerReference",
+      "CreditNote": "/cbc:BuyerReference"
+    },
+    {
+      "ID": "BT-11",
+      "Pojam": "Referenca projekta",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:ProjectReference/cbc:ID",
+      "CreditNote": "/cac:AdditionalDocumentReference/cbc:ID"
+    },
+    {
+      "ID": "BT-12",
+      "Pojam": "Referenca ugovora",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:ContractDocumentReference/cbc:ID",
+      "CreditNote": "/cac:ContractDocumentReference/cbc:ID"
+    },
+    {
+      "ID": "BT-13",
+      "Pojam": "Referenca narudžbenice",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:OrderReference/cbc:ID",
+      "CreditNote": "/cac:OrderReference/cbc:ID"
+    },
+    {
+      "ID": "BT-14",
+      "Pojam": "Referenca naloga za isporuku (eng. Sales order)",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:OrderReference/cbc:SalesOrderID",
+      "CreditNote": "/cac:OrderReference/cbc:SalesOrderID"
+    },
+    {
+      "ID": "BT-15",
+      "Pojam": "Referenca primke",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:ReceiptDocumentReference/cbc:ID",
+      "CreditNote": "/cac:ReceiptDocumentReference/cbc:ID"
+    },
+    {
+      "ID": "BT-16",
+      "Pojam": "Referenca otpremnice",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:DespatchDocumentReference/cbc:ID",
+      "CreditNote": "/cac:DespatchDocumentReference/cbc:ID"
+    },
+    {
+      "ID": "BT-17",
+      "Pojam": "Referenca javnog nadmetanja ili grupe/lota",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:OriginatorDocumentReference/cbc:ID",
+      "CreditNote": "/cac:OriginatorDocumentReference/cbc:ID"
+    },
+    {
+      "ID": "BT-18",
+      "Pojam": "Identifikator fakturiranog objekta",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:AdditionalDocumentReference/cbc:ID",
+      "CreditNote": "/cac:AdditionalDocumentReference/cbc:ID"
+    },
+    {
+      "ID": "BT-19",
+      "Pojam": "Računovodstvena oznaka kupca",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cbc:AccountingCost",
+      "CreditNote": "/cbc:AccountingCost"
+    },
+    {
+      "ID": "BT-20",
+      "Pojam": "Uvjeti plaćanja",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:PaymentTerms/cbc:Note",
+      "CreditNote": "/cac:PaymentTerms/cbc:Note"
+    },
+    {
+      "ID": "BT-21",
+      "Pojam": "Kod predmeta napomene za račun",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cbc:Note",
+      "CreditNote": "/cbc:Note"
+    },
+    {
+      "ID": "BT-22",
+      "Pojam": "Napomena za račun",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cbc:Note",
+      "CreditNote": "/cbc:Note"
+    },
+    {
+      "ID": "BT-23",
+      "Pojam": "Tip poslovnoga procesa",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cbc:ProfileID",
+      "CreditNote": "/cbc:ProfileID"
+    },
+    {
+      "ID": "BT-24",
+      "Pojam": "Identifikator specifikacije",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cbc:CustomizationID",
+      "CreditNote": "/cbc:CustomizationID"
+    },
+    {
+      "ID": "BT-25",
+      "Pojam": "Referenca prethodnog računa",
+      "Min": "0",
+      "Max": "n",
+      "Invoice": "/cac:BillingReference/cac:InvoiceDocumentReference/cbc:ID",
+      "CreditNote": "/cac:BillingReference/cac:InvoiceDocumentReference/cbc:ID"
+    },
+    {
+      "ID": "BT-26",
+      "Pojam": "Datum izdavanja prethodnog računa",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cac:BillingReference/cac:InvoiceDocumentReference/cbc:IssueDate",
+      "CreditNote": "/cac:BillingReference/cac:InvoiceDocumentReference/cbc:IssueDate"
+    },
+    {
+      "ID": "BT-27",
+      "Pojam": "Ime prodavatelja",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationName",
+      "CreditNote": "/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationName"
+    },
+    {
+      "ID": "BT-28",
+      "Pojam": "Trgovački naziv prodavatelja",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:AccountingSupplierParty/cac:Party/cac:PartyName/cbc:Name",
+      "CreditNote": "/cac:AccountingSupplierParty/cac:Party/cac:PartyName/cbc:Name"
+    },
+    {
+      "ID": "BT-29",
+      "Pojam": "Identifikator prodavatelja",
+      "Min": "0",
+      "Max": "n",
+      "Invoice": "/cac:AccountingSupplierParty/cac:Party/cac:PartyIdentification/cbc:ID",
+      "CreditNote": "/cac:AccountingSupplierParty/cac:Party/cac:PartyIdentification/cbc:ID"
+    },
+    {
+      "ID": "BT-30",
+      "Pojam": "Identifikator pravne registracije prodavatelja",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyID",
+      "CreditNote": "/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyID"
+    },
+    {
+      "ID": "BT-31",
+      "Pojam": "Identifikator prodavatelja za PDV",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme/cbc:CompanyID",
+      "CreditNote": "/cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme/cbc:CompanyID"
+    },
+    {
+      "ID": "BT-32",
+      "Pojam": "Identifikator porezne registracije prodavatelja",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme/cbc:CompanyID",
+      "CreditNote": "/cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme/cbc:CompanyID"
+    },
+    {
+      "ID": "BT-33",
+      "Pojam": "Dodatni pravni podaci prodavatelja",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyLegalForm",
+      "CreditNote": "/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyLegalForm"
+    },
+    {
+      "ID": "BT-34",
+      "Pojam": "Elektronička adresa prodavatelja",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cac:AccountingSupplierParty/cac:Party/cbc:EndpointID",
+      "CreditNote": "/cac:AccountingSupplierParty/cac:Party/cbc:EndpointID"
+    },
+    {
+      "ID": "BT-35",
+      "Pojam": "1. redak adrese prodavatelja",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:StreetName",
+      "CreditNote": "/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:StreetName"
+    },
+    {
+      "ID": "BT-36",
+      "Pojam": "2. redak adrese prodavatelja",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:AdditionalStreetName",
+      "CreditNote": "/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:AdditionalStreetName"
+    },
+    {
+      "ID": "BT-37",
+      "Pojam": "Grad prodavatelja",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:CityName",
+      "CreditNote": "/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:CityName"
+    },
+    {
+      "ID": "BT-38",
+      "Pojam": "Poštanski broj prodavatelja",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:PostalZone",
+      "CreditNote": "/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:PostalZone"
+    },
+    {
+      "ID": "BT-39",
+      "Pojam": "Oznaka pokrajine države prodavatelja",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:CountrySubentity",
+      "CreditNote": "/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:CountrySubentity"
+    },
+    {
+      "ID": "BT-40",
+      "Pojam": "Kod države prodavatelja",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode",
+      "CreditNote": "/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode"
+    },
+    {
+      "ID": "BT-41",
+      "Pojam": "Kontaktna točka prodavatelja",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:AccountingSupplierParty/cac:Party/cac:Contact/cbc:Name",
+      "CreditNote": "/cac:AccountingSupplierParty/cac:Party/cac:Contact/cbc:Name"
+    },
+    {
+      "ID": "BT-42",
+      "Pojam": "Broj telefona za kontakt prodavatelja",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:AccountingSupplierParty/cac:Party/cac:Contact/cbc:Telephone",
+      "CreditNote": "/cac:AccountingSupplierParty/cac:Party/cac:Contact/cbc:Telephone"
+    },
+    {
+      "ID": "BT-43",
+      "Pojam": "Adresa e-pošte za kontakt prodavatelja",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:AccountingSupplierParty/cac:Party/cac:Contact/cbc:ElectronicMail",
+      "CreditNote": "/cac:AccountingSupplierParty/cac:Party/cac:Contact/cbc:ElectronicMail"
+    },
+    {
+      "ID": "BT-44",
+      "Pojam": "Ime kupca",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationName",
+      "CreditNote": "/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationName"
+    },
+    {
+      "ID": "BT-45",
+      "Pojam": "Trgovački naziv kupca",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:AccountingCustomerParty/cac:Party/cac:PartyName/cbc:Name",
+      "CreditNote": "/cac:AccountingCustomerParty/cac:Party/cac:PartyName/cbc:Name"
+    },
+    {
+      "ID": "BT-46",
+      "Pojam": "Identifikator kupca",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:AccountingCustomerParty/cac:Party/cac:PartyIdentification/cbc:ID",
+      "CreditNote": "/cac:AccountingCustomerParty/cac:Party/cac:PartyIdentification/cbc:ID"
+    },
+    {
+      "ID": "BT-47",
+      "Pojam": "Identifikator pravne registracije kupca",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyID",
+      "CreditNote": "/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyID"
+    },
+    {
+      "ID": "BT-48",
+      "Pojam": "Identifikator kupca za PDV",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme/cbc:CompanyID",
+      "CreditNote": "/cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme/cbc:CompanyID"
+    },
+    {
+      "ID": "BT-49",
+      "Pojam": "Elektronička adresa kupca",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cac:AccountingCustomerParty/cac:Party/cbc:EndpointID",
+      "CreditNote": "/cac:AccountingCustomerParty/cac:Party/cbc:EndpointID"
+    },
+    {
+      "ID": "BT-50",
+      "Pojam": "Redak adrese kupca 1",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:StreetName",
+      "CreditNote": "/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:StreetName"
+    },
+    {
+      "ID": "BT-51",
+      "Pojam": "Redak adrese kupca 2",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:AdditionalStreetName",
+      "CreditNote": "/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:AdditionalStreetName"
+    },
+    {
+      "ID": "BT-52",
+      "Pojam": "Grad kupca",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:CityName",
+      "CreditNote": "/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:CityName"
+    },
+    {
+      "ID": "BT-53",
+      "Pojam": "Poštanski broj kupca",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:PostalZone",
+      "CreditNote": "/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:PostalZone"
+    },
+    {
+      "ID": "BT-54",
+      "Pojam": "Županija kupca",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:CountrySubentity",
+      "CreditNote": "/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:CountrySubentity"
+    },
+    {
+      "ID": "BT-55",
+      "Pojam": "Šifra države kupca",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode",
+      "CreditNote": "/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode"
+    },
+    {
+      "ID": "BT-56",
+      "Pojam": "Broj telefona za kontakt kupca",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:AccountingCustomerParty/cac:Party/cac:Contact/cbc:Name",
+      "CreditNote": "/cac:AccountingCustomerParty/cac:Party/cac:Contact/cbc:Name"
+    },
+    {
+      "ID": "BT-57",
+      "Pojam": "Telefonski broj kontakta kupca",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:AccountingCustomerParty/cac:Party/cac:Contact/cbc:Telephone",
+      "CreditNote": "/cac:AccountingCustomerParty/cac:Party/cac:Contact/cbc:Telephone"
+    },
+    {
+      "ID": "BT-58",
+      "Pojam": "Adresa e-pošte za kontakt kupca",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:AccountingCustomerParty/cac:Party/cac:Contact/cbc:ElectronicMail",
+      "CreditNote": "/cac:AccountingCustomerParty/cac:Party/cac:Contact/cbc:ElectronicMail"
+    },
+    {
+      "ID": "BT-59",
+      "Pojam": "Ime primatelja plaćanja",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cac:PayeeParty/cac:PartyName/cbc:Name",
+      "CreditNote": "/cac:PayeeParty/cac:PartyName/cbc:Name"
+    },
+    {
+      "ID": "BT-60",
+      "Pojam": "Identifikator primatelja plaćanja",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:PayeeParty/cac:PartyIdentification/cbc:ID",
+      "CreditNote": "/cac:PayeeParty/cac:PartyIdentification/cbc:ID"
+    },
+    {
+      "ID": "BT-61",
+      "Pojam": "Identifikator pravne registracije primatelja plaćanja",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:PayeeParty/cac:PartyLegalEntity/cbc:CompanyID",
+      "CreditNote": "/cac:PayeeParty/cac:PartyLegalEntity/cbc:CompanyID"
+    },
+    {
+      "ID": "BT-62",
+      "Pojam": "Ime poreznog zastupnika prodavatelja",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cac:TaxRepresentativeParty/cac:PartyName/cbc:Name",
+      "CreditNote": "/cac:TaxRepresentativeParty/cac:PartyName/cbc:Name"
+    },
+    {
+      "ID": "BT-63",
+      "Pojam": "Identifikator za PDV poreznog zastupnika prodavatelja",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cac:TaxRepresentativeParty/cac:PartyTaxScheme/cbc:CompanyID",
+      "CreditNote": "/cac:TaxRepresentativeParty/cac:PartyTaxScheme/cbc:CompanyID"
+    },
+    {
+      "ID": "BT-64",
+      "Pojam": "1. redak adrese poreznoga zastupnika",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:TaxRepresentativeParty/cac:PostalAddress/cbc:StreetName",
+      "CreditNote": "/cac:TaxRepresentativeParty/cac:PostalAddress/cbc:StreetName"
+    },
+    {
+      "ID": "BT-65",
+      "Pojam": "2. redak adrese poreznoga zastupnika",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:TaxRepresentativeParty/cac:PostalAddress/cbc:AdditionalStreetName",
+      "CreditNote": "/cac:TaxRepresentativeParty/cac:PostalAddress/cbc:AdditionalStreetName"
+    },
+    {
+      "ID": "BT-66",
+      "Pojam": "Grad poreznog zastupnika",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:TaxRepresentativeParty/cac:PostalAddress/cbc:CityName",
+      "CreditNote": "/cac:TaxRepresentativeParty/cac:PostalAddress/cbc:CityName"
+    },
+    {
+      "ID": "BT-67",
+      "Pojam": "Poštanski broj poreznoga zastupnika",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:TaxRepresentativeParty/cac:PostalAddress/cbc:PostalZone",
+      "CreditNote": "/cac:TaxRepresentativeParty/cac:PostalAddress/cbc:PostalZone"
+    },
+    {
+      "ID": "BT-68",
+      "Pojam": "Pokrajina poreznoga zastupnika",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:TaxRepresentativeParty/cac:PostalAddress/cbc:CountrySubentity",
+      "CreditNote": "/cac:TaxRepresentativeParty/cac:PostalAddress/cbc:CountrySubentity"
+    },
+    {
+      "ID": "BT-69",
+      "Pojam": "Kod države poreznoga zastupnika",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cac:TaxRepresentativeParty/cac:PostalAddress/cac:Country/cbc:IdentificationCode",
+      "CreditNote": "/cac:TaxRepresentativeParty/cac:PostalAddress/cac:Country/cbc:IdentificationCode"
+    },
+    {
+      "ID": "BT-70",
+      "Pojam": "Ime strane primatelja isporuke",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:Delivery/cac:DeliveryParty/cac:PartyName/cbc:Name",
+      "CreditNote": "/cac:Delivery/cac:DeliveryParty/cac:PartyName/cbc:Name"
+    },
+    {
+      "ID": "BT-71",
+      "Pojam": "Identifikator lokacije isporuke",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:Delivery/cac:DeliveryLocation/cbc:ID",
+      "CreditNote": "/cac:Delivery/cac:DeliveryLocation/cbc:ID"
+    },
+    {
+      "ID": "BT-72",
+      "Pojam": "Stvarni datum isporuke",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:Delivery/cbc:ActualDeliveryDate",
+      "CreditNote": "/cac:Delivery/cbc:ActualDeliveryDate"
+    },
+    {
+      "ID": "BT-73",
+      "Pojam": "Početni datum obračunskog razdoblja",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:InvoicePeriod/cbc:StartDate",
+      "CreditNote": "/cac:InvoicePeriod/cbc:StartDate"
+    },
+    {
+      "ID": "BT-74",
+      "Pojam": "Završni datum obračunskog razdoblja",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:InvoicePeriod/cbc:EndDate",
+      "CreditNote": "/cac:InvoicePeriod/cbc:EndDate"
+    },
+    {
+      "ID": "BT-75",
+      "Pojam": "1. redak adrese isporuke",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:StreetName",
+      "CreditNote": "/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:StreetName"
+    },
+    {
+      "ID": "BT-76",
+      "Pojam": "2. redak adrese isporuke",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:AdditionalStreetName",
+      "CreditNote": "/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:AdditionalStreetName"
+    },
+    {
+      "ID": "BT-77",
+      "Pojam": "Grad isporuke",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:CityName",
+      "CreditNote": "/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:CityName"
+    },
+    {
+      "ID": "BT-78",
+      "Pojam": "Poštanski broj isporuke",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:PostalZone",
+      "CreditNote": "/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:PostalZone"
+    },
+    {
+      "ID": "BT-79",
+      "Pojam": "Pokrajina države isporuke",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:CountrySubentity",
+      "CreditNote": "/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:CountrySubentity"
+    },
+    {
+      "ID": "BT-80",
+      "Pojam": "Kod države isporuke",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cac:Delivery/cac:DeliveryLocation/cac:Address/cac:Country/cbc:IdentificationCode",
+      "CreditNote": "/cac:Delivery/cac:DeliveryLocation/cac:Address/cac:Country/cbc:IdentificationCode"
+    },
+    {
+      "ID": "BT-81",
+      "Pojam": "Kod načina plaćanja",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cac:PaymentMeans/cbc:PaymentMeansCode",
+      "CreditNote": "/cac:PaymentMeans/cbc:PaymentMeansCode"
+    },
+    {
+      "ID": "BT-82",
+      "Pojam": "Tekst načina plaćanja",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:PaymentMeans/cbc:InstructionNote",
+      "CreditNote": "/cac:PaymentMeans/cbc:InstructionNote"
+    },
+    {
+      "ID": "BT-83",
+      "Pojam": "Podaci o doznaci",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:PaymentMeans/cbc:PaymentID",
+      "CreditNote": "/cac:PaymentMeans/cbc:PaymentID"
+    },
+    {
+      "ID": "BT-84",
+      "Pojam": "Identifikator računa za plaćanje",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cac:PaymentMeans/cac:PayeeFinancialAccount/cbc:ID",
+      "CreditNote": "/cac:PaymentMeans/cac:PayeeFinancialAccount/cbc:ID"
+    },
+    {
+      "ID": "BT-85",
+      "Pojam": "Naziv računa za plaćanje",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:PaymentMeans/cac:PayeeFinancialAccount/cbc:Name",
+      "CreditNote": "/cac:PaymentMeans/cac:PayeeFinancialAccount/cbc:Name"
+    },
+    {
+      "ID": "BT-86",
+      "Pojam": "Identifikator pružanja platnih usluga",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:PaymentMeans/cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cbc:ID",
+      "CreditNote": "/cac:PaymentMeans/cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cbc:ID"
+    },
+    {
+      "ID": "BT-87",
+      "Pojam": "Primarni broj računa platne kartice",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cac:PaymentMeans/cac:CardAccount/cbc:PrimaryAccountNumberID",
+      "CreditNote": "/cac:PaymentMeans/cac:CardAccount/cbc:PrimaryAccountNumberID"
+    },
+    {
+      "ID": "BT-88",
+      "Pojam": "Ime imatelja platne kartice",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:PaymentMeans/cac:CardAccount/cbc:HolderName",
+      "CreditNote": "/cac:PaymentMeans/cac:CardAccount/cbc:HolderName"
+    },
+    {
+      "ID": "BT-89",
+      "Pojam": "Identifikator reference ovlaštenja",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:PaymentMeans/cac:PaymentMandate/cbc:ID",
+      "CreditNote": "/cac:PaymentMeans/cac:PaymentMandate/cbc:ID"
+    },
+    {
+      "ID": "BT-90",
+      "Pojam": "Bankovni identifikator vjerovnika",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:AccountingSupplierParty/cac:Party/cac:PartyIdentification/cbc:ID",
+      "CreditNote": "/cac:AccountingSupplierParty/cac:Party/cac:PartyIdentification/cbc:ID"
+    },
+    {
+      "ID": "BT-90",
+      "Pojam": "Bankovni identifikator vjerovnika",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:PayeeParty/cac:PartyIdentification/cbc:ID",
+      "CreditNote": "/cac:PayeeParty/cac:PartyIdentification/cbc:ID"
+    },
+    {
+      "ID": "BT-91",
+      "Pojam": "Identifikator računa za terećenje",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:PaymentMeans/cac:PaymentMandate/cac:PayerFinancialAccount/cbc:ID",
+      "CreditNote": "/cac:PaymentMeans/cac:PaymentMandate/cac:PayerFinancialAccount/cbc:ID"
+    },
+    {
+      "ID": "BT-92",
+      "Pojam": "Iznos popusta na razini dokumenta",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cac:AllowanceCharge/cbc:Amount",
+      "CreditNote": "/cac:AllowanceCharge/cbc:Amount"
+    },
+    {
+      "ID": "BT-93",
+      "Pojam": "Osnovica popusta na razini dokumenta",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:AllowanceCharge/cbc:BaseAmount",
+      "CreditNote": "/cac:AllowanceCharge/cbc:BaseAmount"
+    },
+    {
+      "ID": "BT-94",
+      "Pojam": "Postotak popusta na razini dokumenta",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:AllowanceCharge/cbc:MultiplierFactorNumeric",
+      "CreditNote": "/cac:AllowanceCharge/cbc:MultiplierFactorNumeric"
+    },
+    {
+      "ID": "BT-95",
+      "Pojam": "Kod kategorije PDV-a za popust na razini dokumenta",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cac:AllowanceCharge/cac:TaxCategory/cbc:ID",
+      "CreditNote": "/cac:AllowanceCharge/cac:TaxCategory/cbc:ID"
+    },
+    {
+      "ID": "BT-96",
+      "Pojam": "Stopa PDV-a popusta na razini dokumenta",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:AllowanceCharge/cac:TaxCategory/cbc:Percent",
+      "CreditNote": "/cac:AllowanceCharge/cac:TaxCategory/cbc:Percent"
+    },
+    {
+      "ID": "BT-97",
+      "Pojam": "Razlog popusta na razini dokumenta",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:AllowanceCharge/cbc:AllowanceChargeReason",
+      "CreditNote": "/cac:AllowanceCharge/cbc:AllowanceChargeReason"
+    },
+    {
+      "ID": "BT-98",
+      "Pojam": "Kod razloga popusta na razini dokumenta",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:AllowanceCharge/cbc:AllowanceChargeReasonCode",
+      "CreditNote": "/cac:AllowanceCharge/cbc:AllowanceChargeReasonCode"
+    },
+    {
+      "ID": "BT-99",
+      "Pojam": "Iznos troška na razini dokumenta",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cac:AllowanceCharge/cbc:Amount",
+      "CreditNote": "/cac:AllowanceCharge/cbc:Amount"
+    },
+    {
+      "ID": "BT-100",
+      "Pojam": "Osnovica troška na razini dokumenta",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:AllowanceCharge/cbc:BaseAmount",
+      "CreditNote": "/cac:AllowanceCharge/cbc:BaseAmount"
+    },
+    {
+      "ID": "BT-101",
+      "Pojam": "Postotak troška na razini dokumenta",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:AllowanceCharge/cbc:MultiplierFactorNumeric",
+      "CreditNote": "/cac:AllowanceCharge/cbc:MultiplierFactorNumeric"
+    },
+    {
+      "ID": "BT-102",
+      "Pojam": "Kod kategorije PDV-a troška na razini dokumenta",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cac:AllowanceCharge/cac:TaxCategory/cbc:ID",
+      "CreditNote": "/cac:AllowanceCharge/cac:TaxCategory/cbc:ID"
+    },
+    {
+      "ID": "BT-103",
+      "Pojam": "Stopa PDV-a troška na razini dokumenta",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:AllowanceCharge/cac:TaxCategory/cbc:Percent",
+      "CreditNote": "/cac:AllowanceCharge/cac:TaxCategory/cbc:Percent"
+    },
+    {
+      "ID": "BT-104",
+      "Pojam": "Razlog troška na razini dokumenta",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:AllowanceCharge/cbc:AllowanceChargeReason",
+      "CreditNote": "/cac:AllowanceCharge/cbc:AllowanceChargeReason"
+    },
+    {
+      "ID": "BT-105",
+      "Pojam": "Kod razloga troška na razini dokumenta",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:AllowanceCharge/cbc:AllowanceChargeReasonCode",
+      "CreditNote": "/cac:AllowanceCharge/cbc:AllowanceChargeReasonCode"
+    },
+    {
+      "ID": "BT-106",
+      "Pojam": "Zbroj neto iznosa stavki računa",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cac:LegalMonetaryTotal/cbc:LineExtensionAmount",
+      "CreditNote": "/cac:LegalMonetaryTotal/cbc:LineExtensionAmount"
+    },
+    {
+      "ID": "BT-107",
+      "Pojam": "Zbroj popusta na razini dokumenta",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:LegalMonetaryTotal/cbc:AllowanceTotalAmount",
+      "CreditNote": "/cac:LegalMonetaryTotal/cbc:AllowanceTotalAmount"
+    },
+    {
+      "ID": "BT-108",
+      "Pojam": "Zbroj troškova na razini dokumenta",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:LegalMonetaryTotal/cbc:ChargeTotalAmount",
+      "CreditNote": "/cac:LegalMonetaryTotal/cbc:ChargeTotalAmount"
+    },
+    {
+      "ID": "BT-109",
+      "Pojam": "Ukupni iznos računa bez PDV-a",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cac:LegalMonetaryTotal/cbc:TaxExclusiveAmount",
+      "CreditNote": "/cac:LegalMonetaryTotal/cbc:TaxExclusiveAmount"
+    },
+    {
+      "ID": "BT-110",
+      "Pojam": "Ukupni iznos PDV-a za račun",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:TaxTotal/cbc:TaxAmount",
+      "CreditNote": "/cac:TaxTotal/cbc:TaxAmount"
+    },
+    {
+      "ID": "BT-111",
+      "Pojam": "Ukupni iznos PDV-a za račun u računovodstvenoj valuti",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:TaxTotal/cbc:TaxAmount",
+      "CreditNote": "/cac:TaxTotal/cbc:TaxAmount"
+    },
+    {
+      "ID": "BT-112",
+      "Pojam": "Ukupni iznos računa s PDV-om",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cac:LegalMonetaryTotal/cbc:TaxInclusiveAmount",
+      "CreditNote": "/cac:LegalMonetaryTotal/cbc:TaxInclusiveAmount"
+    },
+    {
+      "ID": "BT-113",
+      "Pojam": "Plaćen iznos",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:LegalMonetaryTotal/cbc:PrepaidAmount",
+      "CreditNote": "/cac:LegalMonetaryTotal/cbc:PrepaidAmount"
+    },
+    {
+      "ID": "BT-114",
+      "Pojam": "Iznos zaokruživanja",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:LegalMonetaryTotal/cbc:PayableRoundingAmount",
+      "CreditNote": "/cac:LegalMonetaryTotal/cbc:PayableRoundingAmount"
+    },
+    {
+      "ID": "BT-115",
+      "Pojam": "Iznos koji dospijeva na plaćanje",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cac:LegalMonetaryTotal/cbc:PayableAmount",
+      "CreditNote": "/cac:LegalMonetaryTotal/cbc:PayableAmount"
+    },
+    {
+      "ID": "BT-116",
+      "Pojam": "Oporezivi iznos kategorije PDV-a",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cac:TaxTotal/cac:TaxSubtotal/cbc:TaxableAmount",
+      "CreditNote": "/cac:TaxTotal/cac:TaxSubtotal/cbc:TaxableAmount"
+    },
+    {
+      "ID": "BT-117",
+      "Pojam": "Iznos poreza kategorije PDV-a",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cac:TaxTotal/cac:TaxSubtotal/cbc:TaxAmount",
+      "CreditNote": "/cac:TaxTotal/cac:TaxSubtotal/cbc:TaxAmount"
+    },
+    {
+      "ID": "BT-118",
+      "Pojam": "Kod kategorije PDV-a",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:ID",
+      "CreditNote": "/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:ID"
+    },
+    {
+      "ID": "BT-119",
+      "Pojam": "Stopa kategorije PDV-a",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:Percent",
+      "CreditNote": "/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:Percent"
+    },
+    {
+      "ID": "BT-120",
+      "Pojam": "Tekst razloga za oslobođenje od PDV-a",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:TaxExemptionReason",
+      "CreditNote": "/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:TaxExemptionReason"
+    },
+    {
+      "ID": "BT-121",
+      "Pojam": "Kod razloga za oslobođenje od PDV-a",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:TaxExemptionReasonCode",
+      "CreditNote": "/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:TaxExemptionReasonCode"
+    },
+    {
+      "ID": "BT-122",
+      "Pojam": "Referenca popratnog dokumenta",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cac:AdditionalDocumentReference/cbc:ID",
+      "CreditNote": "/cac:AdditionalDocumentReference/cbc:ID"
+    },
+    {
+      "ID": "BT-123",
+      "Pojam": "Opis popratnog dokumenta",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:AdditionalDocumentReference/cbc:DocumentDescription",
+      "CreditNote": "/cac:AdditionalDocumentReference/cbc:DocumentDescription"
+    },
+    {
+      "ID": "BT-124",
+      "Pojam": "Lokacija vanjskog dokumenta",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:AdditionalDocumentReference/cac:Attachment/cac:ExternalReference/cbc:URI",
+      "CreditNote": "/cac:AdditionalDocumentReference/cac:Attachment/cac:ExternalReference/cbc:URI"
+    },
+    {
+      "ID": "BT-125",
+      "Pojam": "Priloženi dokument",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:AdditionalDocumentReference/cac:Attachment/cbc:EmbeddedDocumentBinaryObject",
+      "CreditNote": "/cac:AdditionalDocumentReference/cac:Attachment/cbc:EmbeddedDocumentBinaryObject"
+    },
+    {
+      "ID": "BT-126",
+      "Pojam": "Identifikator stavke računa",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cac:InvoiceLine/cbc:ID",
+      "CreditNote": "/cac:CreditNoteLine/cbc:ID"
+    },
+    {
+      "ID": "BT-127",
+      "Pojam": "Napomena stavke računa",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:InvoiceLine/cbc:Note",
+      "CreditNote": "/cac:CreditNoteLine/cbc:Note"
+    },
+    {
+      "ID": "BT-128",
+      "Pojam": "Identifikator objekta stavke računa",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:InvoiceLine/cac:DocumentReference/cbc:DocumentTypeCode",
+      "CreditNote": "/cac:CreditNoteLine/cac:DocumentReference/cbc:DocumentTypeCode"
+    },
+    {
+      "ID": "BT-129",
+      "Pojam": "Obračunata količina",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cac:InvoiceLine/cbc:InvoicedQuantity",
+      "CreditNote": "/cac:CreditNoteLine/cbc:CreditedQuantity"
+    },
+    {
+      "ID": "BT-130",
+      "Pojam": "Kod jedinice mjere obračunate količine",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cac:InvoiceLine/cbc:InvoicedQuantity/@unitCode",
+      "CreditNote": "/cac:CreditNoteLine/cbc:CreditedQuantity/@unitCode"
+    },
+    {
+      "ID": "BT-131",
+      "Pojam": "Neto iznos stavke računa",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cac:InvoiceLine/cbc:LineExtensionAmount",
+      "CreditNote": "/cac:CreditNoteLine/cbc:LineExtensionAmount"
+    },
+    {
+      "ID": "BT-132",
+      "Pojam": "Referencirana referenca stavke narudžbenice",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:InvoiceLine/cac:OrderLineReference/cbc:LineID",
+      "CreditNote": "/cac:CreditNoteLine/cac:OrderLineReference/cbc:LineID"
+    },
+    {
+      "ID": "BT-133",
+      "Pojam": "Računovodstvena oznaka kupca na stavci računa (mjesto troška)",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:InvoiceLine/cbc:AccountingCost",
+      "CreditNote": "/cac:CreditNoteLine/cbc:AccountingCost"
+    },
+    {
+      "ID": "BT-134",
+      "Pojam": "Početni datum obračunskog razdoblja stavke računa",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:InvoiceLine/cac:InvoicePeriod/cbc:StartDate",
+      "CreditNote": "/cac:CreditNoteLine/cac:InvoicePeriod/cbc:StartDate"
+    },
+    {
+      "ID": "BT-135",
+      "Pojam": "Završni datum obračunskog razdoblja stavke računa",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:InvoiceLine/cac:InvoicePeriod/cbc:EndDate",
+      "CreditNote": "/cac:CreditNoteLine/cac:InvoicePeriod/cbc:EndDate"
+    },
+    {
+      "ID": "BT-136",
+      "Pojam": "Iznos popusta na stavci računa",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cac:InvoiceLine/cac:AllowanceCharge/cbc:Amount",
+      "CreditNote": "/cac:CreditNoteLine/cac:AllowanceCharge/cbc:Amount"
+    },
+    {
+      "ID": "BT-137",
+      "Pojam": "Osnovica iznosa popusta na stavci računa",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:InvoiceLine/cac:AllowanceCharge/cbc:BaseAmount",
+      "CreditNote": "/cac:CreditNoteLine/cac:AllowanceCharge/cbc:BaseAmount"
+    },
+    {
+      "ID": "BT-138",
+      "Pojam": "Postotak popusta na stavci računa",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:InvoiceLine/cac:AllowanceCharge/cbc:MultiplierFactorNumeric",
+      "CreditNote": "/cac:CreditNoteLine/cac:AllowanceCharge/cbc:MultiplierFactorNumeric"
+    },
+    {
+      "ID": "BT-139",
+      "Pojam": "Razlog popusta na stavci računa",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:InvoiceLine/cac:AllowanceCharge/cbc:AllowanceChargeReason",
+      "CreditNote": "/cac:CreditNoteLine/cac:AllowanceCharge/cbc:AllowanceChargeReason"
+    },
+    {
+      "ID": "BT-140",
+      "Pojam": "Kod razloga popusta na stavci računa",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:InvoiceLine/cac:AllowanceCharge/cbc:AllowanceChargeReasonCode",
+      "CreditNote": "/cac:CreditNoteLine/cac:AllowanceCharge/cbc:AllowanceChargeReasonCode"
+    },
+    {
+      "ID": "BT-141",
+      "Pojam": "Iznos troška na stavci računa",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cac:InvoiceLine/cac:AllowanceCharge/cbc:Amount",
+      "CreditNote": "/cac:CreditNoteLine/cac:AllowanceCharge/cbc:Amount"
+    },
+    {
+      "ID": "BT-142",
+      "Pojam": "Osnovica iznosa troška na stavci računa",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:InvoiceLine/cac:AllowanceCharge/cbc:BaseAmount",
+      "CreditNote": "/cac:CreditNoteLine/cac:AllowanceCharge/cbc:BaseAmount"
+    },
+    {
+      "ID": "BT-143",
+      "Pojam": "Postotak troška na stavci računa",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:InvoiceLine/cac:AllowanceCharge/cbc:MultiplierFactorNumeric",
+      "CreditNote": "/cac:CreditNoteLine/cac:AllowanceCharge/cbc:MultiplierFactorNumeric"
+    },
+    {
+      "ID": "BT-144",
+      "Pojam": "Razlog troška na stavci računa",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:InvoiceLine/cac:AllowanceCharge/cbc:AllowanceChargeReason",
+      "CreditNote": "/cac:CreditNoteLine/cac:AllowanceCharge/cbc:AllowanceChargeReason"
+    },
+    {
+      "ID": "BT-145",
+      "Pojam": "Kod razloga za trošak na stavci računa",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:InvoiceLine/cac:AllowanceCharge/cbc:AllowanceChargeReasonCode",
+      "CreditNote": "/cac:CreditNoteLine/cac:AllowanceCharge/cbc:AllowanceChargeReasonCode"
+    },
+    {
+      "ID": "BT-146",
+      "Pojam": "Neto cijena artikla",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cac:InvoiceLine/cac:Price/cbc:PriceAmount",
+      "CreditNote": "/cac:CreditNoteLine/cac:Price/cbc:PriceAmount"
+    },
+    {
+      "ID": "BT-147",
+      "Pojam": "Popust na cijenu artikla",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:InvoiceLine/cac:Price/cac:AllowanceCharge/cbc:Amount",
+      "CreditNote": "/cac:CreditNoteLine/cac:Price/cac:AllowanceCharge/cbc:Amount"
+    },
+    {
+      "ID": "BT-148",
+      "Pojam": "Bruto cijena artikla",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:InvoiceLine/cac:Price/cac:AllowanceCharge/cbc:BaseAmount",
+      "CreditNote": "/cac:CreditNoteLine/cac:Price/cac:AllowanceCharge/cbc:BaseAmount"
+    },
+    {
+      "ID": "BT-149",
+      "Pojam": "Jedinična količina za cijenu artikla",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:InvoiceLine/cac:Price/cbc:BaseQuantity",
+      "CreditNote": "/cac:CreditNoteLine/cac:Price/cbc:BaseQuantity"
+    },
+    {
+      "ID": "BT-150",
+      "Pojam": "Kod jedinice mjere za jediničnu količinu za cijenu artikla",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:InvoiceLine/cac:Price/cbc:BaseQuantity/@unitCode",
+      "CreditNote": "/cac:CreditNoteLine/cac:Price/cbc:BaseQuantity/@unitCode"
+    },
+    {
+      "ID": "BT-151",
+      "Pojam": "Kod kategorije PDV-a stavke računa",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cbc:ID",
+      "CreditNote": "/cac:CreditNoteLine/cac:Item/cac:ClassifiedTaxCategory/cbc:ID"
+    },
+    {
+      "ID": "BT-152",
+      "Pojam": "Stopa PDV-a stavke računa",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cbc:Percent",
+      "CreditNote": "/cac:CreditNoteLine/cac:Item/cac:ClassifiedTaxCategory/cbc:Percent"
+    },
+    {
+      "ID": "BT-153",
+      "Pojam": "Naziv artikla",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cac:InvoiceLine/cac:Item/cbc:Name",
+      "CreditNote": "/cac:CreditNoteLine/cac:Item/cbc:Name"
+    },
+    {
+      "ID": "BT-154",
+      "Pojam": "Opis artikla",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:InvoiceLine/cac:Item/cbc:Description",
+      "CreditNote": "/cac:CreditNoteLine/cac:Item/cbc:Description"
+    },
+    {
+      "ID": "BT-155",
+      "Pojam": "Prodavateljev identifikator artikla",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:InvoiceLine/cac:Item/cac:SellersItemIdentification/cbc:ID",
+      "CreditNote": "/cac:CreditNoteLine/cac:Item/cac:SellersItemIdentification/cbc:ID"
+    },
+    {
+      "ID": "BT-156",
+      "Pojam": "Kupčev identifikator artikla",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:InvoiceLine/cac:Item/cac:BuyersItemIdentification/cbc:ID",
+      "CreditNote": "/cac:CreditNoteLine/cac:Item/cac:BuyersItemIdentification/cbc:ID"
+    },
+    {
+      "ID": "BT-157",
+      "Pojam": "Standardni identifikator artikla",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:InvoiceLine/cac:Item/cac:StandardItemIdentification/cbc:ID",
+      "CreditNote": "/cac:CreditNoteLine/cac:Item/cac:StandardItemIdentification/cbc:ID"
+    },
+    {
+      "ID": "BT-158",
+      "Pojam": "Identifikator klasifikacije artikla",
+      "Min": "0",
+      "Max": "n",
+      "Invoice": "/cac:InvoiceLine/cac:Item/cac:CommodityClassification/cbc:ItemClassificationCode",
+      "CreditNote": "/cac:CreditNoteLine/cac:Item/cac:CommodityClassification/cbc:ItemClassificationCode"
+    },
+    {
+      "ID": "BT-159",
+      "Pojam": "Zemlja podrijetla artikla",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:InvoiceLine/cac:Item/cac:OriginCountry/cbc:IdentificationCode",
+      "CreditNote": "/cac:CreditNoteLine/cac:Item/cac:OriginCountry/cbc:IdentificationCode"
+    },
+    {
+      "ID": "BT-160",
+      "Pojam": "Ime atributa artikla",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty/cbc:Name",
+      "CreditNote": "/cac:CreditNoteLine/cac:Item/cac:AdditionalItemProperty/cbc:Name"
+    },
+    {
+      "ID": "BT-161",
+      "Pojam": "Vrijednost atributa artikla",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty/cbc:Value",
+      "CreditNote": "/cac:CreditNoteLine/cac:Item/cac:AdditionalItemProperty/cbc:Value"
+    },
+    {
+      "ID": "BT-162",
+      "Pojam": "3. redak adrese prodavatelja",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cac:AddressLine/cbc:Line",
+      "CreditNote": "/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cac:AddressLine/cbc:Line"
+    },
+    {
+      "ID": "BT-163",
+      "Pojam": "Redak adrese kupca 3",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cac:AddressLine/cbc:Line",
+      "CreditNote": "/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cac:AddressLine/cbc:Line"
+    },
+    {
+      "ID": "BT-164",
+      "Pojam": "3. redak adrese poreznoga zastupnika",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:TaxRepresentativeParty/cac:PostalAddress/cac:AddressLine/cbc:Line",
+      "CreditNote": "/cac:TaxRepresentativeParty/cac:PostalAddress/cac:AddressLine/cbc:Line"
+    },
+    {
+      "ID": "BT-165",
+      "Pojam": "3. redak adrese isporuke",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:Delivery/cac:DeliveryLocation/cac:Address/cac:AddressLine/cbc:Line",
+      "CreditNote": "/cac:Delivery/cac:DeliveryLocation/cac:Address/cac:AddressLine/cbc:Line"
+    }
+  ]
+}

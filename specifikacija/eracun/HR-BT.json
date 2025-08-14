@@ -1,0 +1,207 @@
+{
+  "name": "HR-BT",
+  "version": "1.3",
+  "date": "2025-07-03",
+  "data": [
+    {
+      "ID": "HR-BT-1",
+      "Pojam": "Indikator kopije računa",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cbc:CopyIndicator",
+      "CreditNote": "/cbc:CopyIndicator"
+    },
+    {
+      "ID": "HR-BT-2",
+      "Pojam": "Vrijeme izdavanja računa",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cbc:IssueTime",
+      "CreditNote": "/cbc:IssueTime"
+    },
+    {
+      "ID": "HR-BT-3",
+      "Pojam": "Opis prethodnog računa",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:BillingReference/cac:InvoiceDocumentReference/cbc:DocumentDescription",
+      "CreditNote": "/cac:BillingReference/cac:InvoiceDocumentReference/cbc:DocumentDescription"
+    },
+    {
+      "ID": "HR-BT-4",
+      "Pojam": "Oznaka operatera",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cac:AccountingSupplierParty/cac:SellerContact/cbc:Name",
+      "CreditNote": "/cac:AccountingSupplierParty/cac:SellerContact/cbc:Name"
+    },
+    {
+      "ID": "HR-BT-5",
+      "Pojam": "OIB operatera",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/cac:AccountingSupplierParty/cac:SellerContact/cbc:ID",
+      "CreditNote": "/cac:AccountingSupplierParty/cac:SellerContact/cbc:ID"
+    },
+    {
+      "ID": "HR-BT-6",
+      "Pojam": "HR Oznaka porezne kategorije",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:AllowanceCharge/cac:TaxCategory/cbc:Name",
+      "CreditNote": "/cac:AllowanceCharge/cac:TaxCategory/cbc:Name"
+    },
+    {
+      "ID": "HR-BT-7",
+      "Pojam": "Razlog oslobođenja PDV-a",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:AllowanceCharge/cac:TaxCategory/cbc:TaxExemptionReason",
+      "CreditNote": "/cac:AllowanceCharge/cac:TaxCategory/cbc:TaxExemptionReason"
+    },
+    {
+      "ID": "HR-BT-8",
+      "Pojam": "Kod oslobođenja od PDV-a",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:AllowanceCharge/cac:TaxCategory/cbc:TaxExemptionReasonCode",
+      "CreditNote": "/cac:AllowanceCharge/cac:TaxCategory/cbc:TaxExemptionReasonCode"
+    },
+    {
+      "ID": "HR-BT-9",
+      "Pojam": "Referenca narudžbenice na stavci računa",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:InvoiceLine/cac:OrderLineReference/cac:OrderReference/cbc:ID",
+      "CreditNote": "/cac:CreditNoteLine/cac:OrderLineReference/cac:OrderReference/cbc:ID"
+    },
+    {
+      "ID": "HR-BT-10",
+      "Pojam": "Referenca otpremnice na stavci računa",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:InvoiceLine/cac:DespatchLineReference/cac:DocumentReference/cbc:ID",
+      "CreditNote": "/cac:CreditNoteLine/cac:DespatchLineReference/cac:DocumentReference/cbc:ID"
+    },
+    {
+      "ID": "HR-BT-11",
+      "Pojam": "Referenca primke na stavci računa",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:InvoiceLine/cac:ReceiptLineReference/cac:DocumentReference/cbc:ID",
+      "CreditNote": "/cac:CreditNoteLine/cac:ReceiptLineReference/cac:DocumentReference/cbc:ID"
+    },
+    {
+      "ID": "HR-BT-12",
+      "Pojam": "Oznaka porezne kategorije artikla",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cbc:Name",
+      "CreditNote": "/cac:CreditNoteLine/cac:Item/cac:ClassifiedTaxCategory/cbc:Name"
+    },
+    {
+      "ID": "HR-BT-13",
+      "Pojam": "Razlog oslobođenja od PDV-a stavke računa",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cbc:TaxExemptionReason",
+      "CreditNote": "/cac:CreditNoteLine/cac:Item/cac:ClassifiedTaxCategory/cbc:TaxExemptionReason"
+    },
+    {
+      "ID": "HR-BT-14",
+      "Pojam": "Kod razloga oslobođenja od PDV-a stavke računa",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cbc:TaxExemptionReasonCode",
+      "CreditNote": "/cac:CreditNoteLine/cac:Item/cac:ClassifiedTaxCategory/cbc:TaxExemptionReasonCode"
+    },
+    {
+      "ID": "HR-BT-15",
+      "Pojam": "Obračun PDV-a po naplaćenoj naknadi",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/ext:Extensions/ext:Extension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRObracunPDVPoNaplati",
+      "CreditNote": "/ext:Extensions/ext:Extension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRObracunPDVPoNaplati"
+    },
+    {
+      "ID": "HR-BT-16",
+      "Pojam": "HR iznos osnovice kategorije PDV",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/ext:Extensions/ext:Extension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal/cbc:TaxableAmount",
+      "CreditNote": "/ext:Extensions/ext:Extension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal/cbc:TaxableAmount"
+    },
+    {
+      "ID": "HR-BT-17",
+      "Pojam": "HR iznos kategorije PDV",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/ext:Extensions/ext:Extension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal/cbc:TaxAmount",
+      "CreditNote": "/ext:Extensions/ext:Extension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxSubtotal/cbc:TaxAmount"
+    },
+    {
+      "ID": "HR-BT-18",
+      "Pojam": "HR kod kategorije PDV",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/ext:Extensions/ext:Extension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal/hrextac:HRTaxCategory/cbc:ID",
+      "CreditNote": "/ext:Extensions/ext:Extension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal/hrextac:HRTaxCategory/cbc:ID"
+    },
+    {
+      "ID": "HR-BT-19",
+      "Pojam": "HR stopa kategorije PDV",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/ext:Extensions/ext:Extension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal/hrextac:HRTaxCategory/cbc:Percent",
+      "CreditNote": "/ext:Extensions/ext:Extension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal/hrextac:HRTaxCategory/cbc:Percent"
+    },
+    {
+      "ID": "HR-BT-20",
+      "Pojam": "HR tekst razloga oslobođenja kategorije PDV",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/ext:Extensions/ext:Extension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal/hrextac:HRTaxCategory/cbc:TaxExemptionReason",
+      "CreditNote": "/ext:Extensions/ext:Extension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal/hrextac:HRTaxCategory/cbc:TaxExemptionReason"
+    },
+    {
+      "ID": "HR-BT-21",
+      "Pojam": "HR kod razloga oslobođenja kategorije PDV",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/ext:Extensions/ext:Extension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal/hrextac:HRTaxCategory/cbc:TaxExemptionReasonCode",
+      "CreditNote": "/ext:Extensions/ext:Extension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal/hrextac:HRTaxCategory/cbc:TaxExemptionReasonCode"
+    },
+    {
+      "ID": "HR-BT-22",
+      "Pojam": "HR Oznaka kategorije PDV",
+      "Min": "0",
+      "Max": "1",
+      "Invoice": "/ext:Extensions/ext:Extension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal/hrextac:HRTaxCategory/cbc:Name",
+      "CreditNote": "/ext:Extensions/ext:Extension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal/hrextac:HRTaxCategory/cbc:Name"
+    },
+    {
+      "ID": "HR-BT-23",
+      "Pojam": "HR iznos osnovice za PDV",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/ext:Extensions/ext:Extension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRLegalMonetaryTotal/hrextac:HRTaxExclusiveAmount",
+      "CreditNote": "/ext:Extensions/ext:Extension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRLegalMonetaryTotal/hrextac:HRTaxExclusiveAmount"
+    },
+    {
+      "ID": "HR-BT-24",
+      "Pojam": "HR Neoporezivi iznos",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/ext:Extensions/ext:Extension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRLegalMonetaryTotal/cbc:OutOfScopeOfVATAmount",
+      "CreditNote": "/ext:Extensions/ext:Extension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRLegalMonetaryTotal/cbc:OutOfScopeOfVATAmount"
+    },
+    {
+      "ID": "HR-BT-25",
+      "Pojam": "HR ukupni iznos PDV",
+      "Min": "1",
+      "Max": "1",
+      "Invoice": "/ext:Extensions/ext:Extension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/cbc:TaxAmount",
+      "CreditNote": "/ext:Extensions/ext:Extension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/cbc:TaxAmount"
+    }
+  ]
+}

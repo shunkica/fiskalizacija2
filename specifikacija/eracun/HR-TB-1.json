@@ -1,0 +1,60 @@
+{
+  "name": "HR-TB-1",
+  "version": "1.3",
+  "date": "2025-07-03",
+  "description": "HR-TB-1 Tipovi poslovnog procesa (Tablica 55)",
+  "data": [
+    {
+      "Oznaka procesa": "P1",
+      "Naziv poslovnog procesa": "Izdavanje računa za isporuke robe i usluga prema narudžbenicama, na temelju ugovora"
+    },
+    {
+      "Oznaka procesa": "P2",
+      "Naziv poslovnog procesa": "Periodično izdavanje računa za isporuke robe i usluga na temelju ugovora"
+    },
+    {
+      "Oznaka procesa": "P3",
+      "Naziv poslovnog procesa": "Izdavanje računa za isporuku prema samostalnoj narudžbenici"
+    },
+    {
+      "Oznaka procesa": "P4",
+      "Naziv poslovnog procesa": "Plaćanje unaprijed (avansno plaćanje)"
+    },
+    {
+      "Oznaka procesa": "P5",
+      "Naziv poslovnog procesa": "Plaćanje na licu mjesta (engl. Sport payment)"
+    },
+    {
+      "Oznaka procesa": "P6",
+      "Naziv poslovnog procesa": "Plaćanje prije isporuke, na temelju narudžbenice"
+    },
+    {
+      "Oznaka procesa": "P7",
+      "Naziv poslovnog procesa": "Izdavanje računa s referencama na otpremnicu"
+    },
+    {
+      "Oznaka procesa": "P8",
+      "Naziv poslovnog procesa": "Izdavanje računa s referencama na otpremnicu i primku"
+    },
+    {
+      "Oznaka procesa": "P9",
+      "Naziv poslovnog procesa": "Odobrenja ili računi s negativnim iznosima, izdani zbog raznih razloga, uključujući i povrat prazne ambalaže"
+    },
+    {
+      "Oznaka procesa": "P10",
+      "Naziv poslovnog procesa": "Izdavanje korektivnog računa (storniranje/ispravak računa)"
+    },
+    {
+      "Oznaka procesa": "P11",
+      "Naziv poslovnog procesa": "Izdavanje djelomičnoga i konačnog računa"
+    },
+    {
+      "Oznaka procesa": "P12",
+      "Naziv poslovnog procesa": "Samoizdavanje računa"
+    },
+    {
+      "Oznaka procesa": "P99:Oznaka kupca",
+      "Naziv poslovnog procesa": "Proces definiran od strane kupca"
+    }
+  ]
+}

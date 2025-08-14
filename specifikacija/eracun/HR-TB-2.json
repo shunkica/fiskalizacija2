@@ -1,0 +1,112 @@
+{
+  "name": "HR-TB-2",
+  "version": "1.3",
+  "date": "2025-07-03",
+  "description": "HR-TB-2 HR oznaka kategorije PDV (Tablica 56)",
+  "data": [
+    {
+      "HR Oznaka kategorije PDV-a": "HR:PDV25",
+      "Kod UNTDID 5305 (BT-118)": "S",
+      "HR kod porezne kategorije (HR-BT-18)": "S",
+      "Kod porezne sheme UNTDID 5153": "VAT",
+      "Naziv HR oznake kategorije PDV-a": "Standardna stopa PDV-a 25%",
+      "Opis HR oznake kategorije PDV-a": "Standardna ili reducirana stopa PDV-a"
+    },
+    {
+      "HR Oznaka kategorije PDV-a": "HR:PDV13",
+      "Kod UNTDID 5305 (BT-118)": "S",
+      "HR kod porezne kategorije (HR-BT-18)": "S",
+      "Kod porezne sheme UNTDID 5153": "VAT",
+      "Naziv HR oznake kategorije PDV-a": "Reducirana stopa PDV-a 13%",
+      "Opis HR oznake kategorije PDV-a": "Standardna ili reducirana stopa PDV-a"
+    },
+    {
+      "HR Oznaka kategorije PDV-a": "HR:PDV5",
+      "Kod UNTDID 5305 (BT-118)": "S",
+      "HR kod porezne kategorije (HR-BT-18)": "S",
+      "Kod porezne sheme UNTDID 5153": "VAT",
+      "Naziv HR oznake kategorije PDV-a": "Reducirana stopa PDV-a 5%",
+      "Opis HR oznake kategorije PDV-a": "Standardna ili reducirana stopa PDV-a"
+    },
+    {
+      "HR Oznaka kategorije PDV-a": "HR:Z",
+      "Kod UNTDID 5305 (BT-118)": "Z",
+      "HR kod porezne kategorije (HR-BT-18)": "Z",
+      "Kod porezne sheme UNTDID 5153": "VAT",
+      "Naziv HR oznake kategorije PDV-a": "Nulta stopa PDV-a",
+      "Opis HR oznake kategorije PDV-a": "Nulta stopa PDVa"
+    },
+    {
+      "HR Oznaka kategorije PDV-a": "HR:K",
+      "Kod UNTDID 5305 (BT-118)": "K",
+      "HR kod porezne kategorije (HR-BT-18)": "K",
+      "Kod porezne sheme UNTDID 5153": "VAT",
+      "Naziv HR oznake kategorije PDV-a": "Isporuka unutar EU",
+      "Opis HR oznake kategorije PDV-a": "Oslobođeno PDV-a uslijed isporuke unutar EU"
+    },
+    {
+      "HR Oznaka kategorije PDV-a": "HR:G",
+      "Kod UNTDID 5305 (BT-118)": "G",
+      "HR kod porezne kategorije (HR-BT-18)": "G",
+      "Kod porezne sheme UNTDID 5153": "VAT",
+      "Naziv HR oznake kategorije PDV-a": "Izvoz",
+      "Opis HR oznake kategorije PDV-a": "Oslobođeno PDV-a uslijed izvoza"
+    },
+    {
+      "HR Oznaka kategorije PDV-a": "HR:AE",
+      "Kod UNTDID 5305 (BT-118)": "AE",
+      "HR kod porezne kategorije (HR-BT-18)": "AE",
+      "Kod porezne sheme UNTDID 5153": "VAT",
+      "Naziv HR oznake kategorije PDV-a": "Prijenos porezne obveze",
+      "Opis HR oznake kategorije PDV-a": "Prijenos porezne obveze – porez plaća primatelj računa"
+    },
+    {
+      "HR Oznaka kategorije PDV-a": "HR:E",
+      "Kod UNTDID 5305 (BT-118)": "E",
+      "HR kod porezne kategorije (HR-BT-18)": "E",
+      "Kod porezne sheme UNTDID 5153": "VAT",
+      "Naziv HR oznake kategorije PDV-a": "Osobođen PDV-a",
+      "Opis HR oznake kategorije PDV-a": "Artikl je oslobođen PDV-a prema odgovarajučem članku navedenom u TaxExemptionReason"
+    },
+    {
+      "HR Oznaka kategorije PDV-a": "HR:POVNAK",
+      "Kod UNTDID 5305 (BT-118)": "E",
+      "HR kod porezne kategorije (HR-BT-18)": "O",
+      "Kod porezne sheme UNTDID 5153": "OTH",
+      "Naziv HR oznake kategorije PDV-a": "Povratna naknada",
+      "Opis HR oznake kategorije PDV-a": "Povratna naknada za jednokratnu ambalažu (trošak POVNAK je prolazna stavka koja ne ulazi u poreznu osnovicu - čl. 33. st. 3)"
+    },
+    {
+      "HR Oznaka kategorije PDV-a": "HR:PP",
+      "Kod UNTDID 5305 (BT-118)": "E",
+      "HR kod porezne kategorije (HR-BT-18)": "O",
+      "Kod porezne sheme UNTDID 5153": "LOC",
+      "Naziv HR oznake kategorije PDV-a": "Posebni porez na potrošnju u ugostiteljstvu",
+      "Opis HR oznake kategorije PDV-a": "Artikl podliježe i pod posebni porez u ugostiteljstvu (u iznosu definiranom prema lokalnim propisima, trošaak PPUG je prolazna stavka čl. 33. st. 3)"
+    },
+    {
+      "HR Oznaka kategorije PDV-a": "HR:PPMV",
+      "Kod UNTDID 5305 (BT-118)": "E",
+      "HR kod porezne kategorije (HR-BT-18)": "O",
+      "Kod porezne sheme UNTDID 5153": "CAR",
+      "Naziv HR oznake kategorije PDV-a": "Posebni porez na motorna vozila",
+      "Opis HR oznake kategorije PDV-a": "Na artikl se plaća PDV o Posebni porez na motorna vozila (Sam trošak PPMV je prolazna stavka čl. 33. st. 3)"
+    },
+    {
+      "HR Oznaka kategorije PDV-a": "HR:O",
+      "Kod UNTDID 5305 (BT-118)": "O",
+      "HR kod porezne kategorije (HR-BT-18)": "O",
+      "Kod porezne sheme UNTDID 5153": "VAT",
+      "Naziv HR oznake kategorije PDV-a": "Nije predmet oporezivanja PDV-om",
+      "Opis HR oznake kategorije PDV-a": "Artikl ne podliježe PDV-u (jer cijeli račun ne podliježe PDV-u temeljem čl. 5 Zakona o PDVu)"
+    },
+    {
+      "HR Oznaka kategorije PDV-a": "HR:N",
+      "Kod UNTDID 5305 (BT-118)": "E",
+      "HR kod porezne kategorije (HR-BT-18)": "O",
+      "Kod porezne sheme UNTDID 5153": "VAT",
+      "Naziv HR oznake kategorije PDV-a": "Nije predmet oporezivanja PDV-om",
+      "Opis HR oznake kategorije PDV-a": "Artikl ne podliježe PDV-u"
+    }
+  ]
+}
