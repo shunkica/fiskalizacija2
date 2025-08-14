@@ -1,0 +1,64 @@
+services:
+#  domibus-db:
+#    build:
+#      context: .
+#      dockerfile: domibus-db.Dockerfile
+#    container_name: domibus-db
+#    ports:
+#        - "127.0.0.1:${DOMIBUS_DB_PORT:-8301}:3306"
+#    healthcheck:
+#      test: [ "CMD", "mysqladmin", "ping", "-h", "127.0.0.1" ]
+#      interval: 5s
+#      timeout: 5s
+#      retries: 30
+#    networks:
+#      domibus-network:
+#        ipv4_address: ${NET_PREFIX:-172.20.0}.10
+
+  domismp-db:
+    build:
+      context: .
+      dockerfile: domismp-db.Dockerfile
+    container_name: domismp-db-demo
+    ports:
+        - "127.0.0.1:${DOMISMP_DB_PORT:-8303}:3306"
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "127.0.0.1" ]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+#  domibus:
+#    build:
+#      context: .
+#      dockerfile: domibus.Dockerfile
+#    container_name: domibus
+#    environment:
+#      - DOMIBUS_DB_HOST=domibus-db
+#      - DOMIBUS_KEY_ALIAS=blue_gw
+#      - DOMIBUS_SMLZONE=demo.ams.porezna-uprava.hr
+#    ports:
+#      - "127.0.0.1:${DOMIBUS_PORT:-8081}:8080"
+#    volumes:
+#      - "./logs/domibus:/opt/domibus/logs"
+#    depends_on:
+#      domibus-db:
+#        condition: service_healthy
+#    dns:
+#      - ${NET_PREFIX:-172.20.0}.2
+#    networks:
+#      domibus-network:
+#        ipv4_address: ${NET_PREFIX:-172.20.0}.20
+
+  domismp:
+    build:
+      context: .
+      dockerfile: domismp.Dockerfile
+    container_name: domismp-demo
+    ports:
+      - "127.0.0.1:${DOMISMP_PORT:-8083}:8080"
+    volumes:
+      - "./logs/smp:/opt/smp/logs"
+    depends_on:
+      domismp-db:
+        condition: service_healthy
