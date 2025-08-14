@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+	<SOAP-ENV:Header/>
+	<S:Body>
+		<fis:EvidentirajERacunZahtjev xmlns:fis="http://www.porezna-uprava.gov.hr/fin/2024/types/eFiskalizacija" fis:id="unique-request-id-12345">
+			<fis:Zaglavlje>
+				<fis:datumVrijemeSlanja>2025-08-13T12:00:36.1424</fis:datumVrijemeSlanja>
+				<fis:vrstaERacuna>U</fis:vrstaERacuna>
+			</fis:Zaglavlje>
+			<fis:ERacun>
+				<fis:brojDokumenta>3-P1-1</fis:brojDokumenta>
+				<fis:datumIzdavanja>2025-05-15</fis:datumIzdavanja>
+				<fis:vrstaDokumenta>384</fis:vrstaDokumenta>
+				<fis:valutaERacuna>EUR</fis:valutaERacuna>
+				<fis:vrstaPoslovnogProcesa>P10</fis:vrstaPoslovnogProcesa>
+				<fis:PrethodniERacun>
+					<fis:brojDokumenta>1-P1-1</fis:brojDokumenta>
+					<fis:datumIzdavanja>2025-05-01</fis:datumIzdavanja>
+				</fis:PrethodniERacun>
+				<fis:Izdavatelj>
+					<fis:ime>Tvrtka A d.o.o.</fis:ime>
+					<fis:oibPorezniBroj>12345678901</fis:oibPorezniBroj>
+					<fis:oibOperatera>18683136487</fis:oibOperatera>
+				</fis:Izdavatelj>
+				<fis:Primatelj>
+					<fis:ime>Tvrtka B d.o.o.</fis:ime>
+					<fis:oibPorezniBroj>11111111119</fis:oibPorezniBroj>
+				</fis:Primatelj>
+				<fis:DokumentUkupanIznos>
+					<fis:neto>-100.00</fis:neto>
+					<fis:iznosBezPdv>-100.00</fis:iznosBezPdv>
+					<fis:pdv>-25.00</fis:pdv>
+					<fis:iznosSPdv>-125.00</fis:iznosSPdv>
+					<fis:iznosKojiDospijevaZaPlacanje>-125.00</fis:iznosKojiDospijevaZaPlacanje>
+				</fis:DokumentUkupanIznos>
+				<fis:RaspodjelaPdv>
+					<fis:kategorijaPdv>S</fis:kategorijaPdv>
+					<fis:oporeziviIznos>-100.00</fis:oporeziviIznos>
+					<fis:iznosPoreza>-25.00</fis:iznosPoreza>
+					<fis:stopa>25</fis:stopa>
+				</fis:RaspodjelaPdv>
+				<fis:StavkaERacuna>
+					<fis:kolicina>-1.000</fis:kolicina>
+					<fis:jedinicaMjere>H87</fis:jedinicaMjere>
+					<fis:artiklNetoCijena>100.000000</fis:artiklNetoCijena>
+					<fis:artiklOsnovnaKolicina>1.000</fis:artiklOsnovnaKolicina>
+					<fis:artiklJedinicaMjereZaOsnovnuKolicinu>H87</fis:artiklJedinicaMjereZaOsnovnuKolicinu>
+					<fis:artiklKategorijaPdv>S</fis:artiklKategorijaPdv>
+					<fis:artiklStopaPdv>25</fis:artiklStopaPdv>
+					<fis:artiklNaziv>Proizvod</fis:artiklNaziv>
+					<fis:ArtiklIdentifikatorKlasifikacija>
+						<fis:identifikatorKlasifikacije>62.90.90</fis:identifikatorKlasifikacije>
+						<fis:identifikatorSheme>CG</fis:identifikatorSheme>
+						<fis:verzijaSheme>1</fis:verzijaSheme>
+					</fis:ArtiklIdentifikatorKlasifikacija>
+				</fis:StavkaERacuna>
+				<fis:indikatorKopije>false</fis:indikatorKopije>
+			</fis:ERacun>
+			<ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#" Id="id-8fb4d7feab3b97bba723f5280070fd48">
+				<ds:SignedInfo>
+					<ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+					<ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
+					<ds:Reference Id="r-id-8fb4d7feab3b97bba723f5280070fd48-1" URI="">
+						<ds:Transforms>
+							<ds:Transform Algorithm="http://www.w3.org/2002/06/xmldsig-filter2">
+								<dsig-filter2:XPath xmlns:dsig-filter2="http://www.w3.org/2002/06/xmldsig-filter2" Filter="subtract">/descendant::ds:Signature</dsig-filter2:XPath>
+							</ds:Transform>
+							<ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+						</ds:Transforms>
+						<ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+						<ds:DigestValue> ... </ds:DigestValue>
+					</ds:Reference>
+					<ds:Reference Type="http://uri.etsi.org/01903#SignedProperties" URI="#xades-id-...">
+						<ds:Transforms>
+							<ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+						</ds:Transforms>
+						<ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+						<ds:DigestValue> ... </ds:DigestValue>
+					</ds:Reference>
+				</ds:SignedInfo>
+				<ds:SignatureValue Id="value-id- ... "> ...  </ds:SignatureValue>
+				<ds:KeyInfo>
+					<ds:X509Data>
+						<ds:X509Certificate> ... </ds:X509Certificate>
+					</ds:X509Data>
+				</ds:KeyInfo>
+			</ds:Signature>
+		</fis:EvidentirajERacunZahtjev>
+	</S:Body>
+</S:Envelope>	 

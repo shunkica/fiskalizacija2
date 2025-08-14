@@ -1,35 +1,48 @@
-      <eiz:EvidentirajOdbijanjeZahtjev  xmlns:eiz="http://www.porezna-uprava.gov.hr/fin/2024/types/eIzvjestavanje" xmlns:xd="http://www.w3.org/2000/09/xmldsig#" eiz:id="122321">
-         <eiz:Zaglavlje>
-            <eiz:datumVrijemeSlanja>2024-02-27T15:28:00.0000</eiz:datumVrijemeSlanja>
-         </eiz:Zaglavlje>
-         <eiz:Odbijanje>
-            <eiz:brojDokumenta>1234/2024/06</eiz:brojDokumenta>
-            <eiz:datumIzdavanja>2024-02-27</eiz:datumIzdavanja>
-            <eiz:oibPorezniBrojIzdavatelja>00000000001</eiz:oibPorezniBrojIzdavatelja>
-            <eiz:oibPorezniBrojPrimatelja>02994650199</eiz:oibPorezniBrojPrimatelja>
-            <eiz:datumOdbijanja>2024-02-28</eiz:datumOdbijanja>
-            <eiz:vrstaRazlogaOdbijanja>N</eiz:vrstaRazlogaOdbijanja>
-            <eiz:razlogOdbijanja>Greška u dostavljenom računu - neispravna stavka prema narudzbenici</eiz:razlogOdbijanja>
-         </eiz:Odbijanje>
-	<xd:Signature>
-		<xd:SignedInfo>
-			<xd:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
-			<xd:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
-			<xd:Reference URI="#unique-request-id-12345">
-				<xd:Transforms>
-					<xd:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
-					<xd:Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
-				</xd:Transforms>
-				<xd:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
-				<xd:DigestValue>4n6MLp...</xd:DigestValue>
-			</xd:Reference>
-		</xd:SignedInfo>
-		<xd:SignatureValue>vK9QFpDUkKv...</xd:SignatureValue>
-		<xd:KeyInfo>
-			<xd:X509Data>
-				<xd:X509Certificate>[BASE64 certifikat]
-				</xd:X509Certificate>
-			</xd:X509Data>
-		</xd:KeyInfo>
-	</xd:Signature>	
-     </eiz:EvidentirajOdbijanjeZahtjev>
+<soapenv:Envelope xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:eiz="http://www.porezna-uprava.gov.hr/fin/2024/types/eIzvjestavanje">
+	<soapenv:Header/>
+	<soapenv:Body>
+		<eiz:EvidentirajOdbijanjeZahtjev eiz:id="54321">
+			<eiz:Zaglavlje>
+				<eiz:datumVrijemeSlanja>2025-08-08T10:15:00.0000</eiz:datumVrijemeSlanja>
+			</eiz:Zaglavlje>
+			<eiz:Odbijanje>
+				<eiz:brojDokumenta>TEST</eiz:brojDokumenta>
+				<eiz:datumIzdavanja>2025-08-08</eiz:datumIzdavanja>
+				<eiz:oibPorezniBrojIzdavatelja>12345678901</eiz:oibPorezniBrojIzdavatelja>
+				<eiz:oibPorezniBrojPrimatelja>11111111119</eiz:oibPorezniBrojPrimatelja>
+				<eiz:datumOdbijanja>2024-08-10</eiz:datumOdbijanja>
+				<eiz:vrstaRazlogaOdbijanja>N</eiz:vrstaRazlogaOdbijanja>
+				<eiz:razlogOdbijanja>Neispravan iznos na računu</eiz:razlogOdbijanja>
+			</eiz:Odbijanje>
+			<ds:Signature Id="id">
+				<ds:SignedInfo>
+					<ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+					<ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
+					<ds:Reference Id="r-id-" URI="">
+						<ds:Transforms>
+							<ds:Transform Algorithm="http://www.w3.org/2002/06/xmldsig-filter2">
+								<dsig-filter2:XPath xmlns:dsig-filter2="http://www.w3.org/2002/06/xmldsig-filter2" Filter="subtract">/descendant::ds:Signature</dsig-filter2:XPath>
+							</ds:Transform>
+							<ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+						</ds:Transforms>
+						<ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+						<ds:DigestValue>Z5b...</ds:DigestValue>
+					</ds:Reference>
+					<ds:Reference Type="http://uri.etsi.org/01903#SignedProperties" URI="#xades-id-">
+						<ds:Transforms>
+							<ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+						</ds:Transforms>
+						<ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+						<ds:DigestValue>Ym2...</ds:DigestValue>
+					</ds:Reference>
+				</ds:SignedInfo>
+				<ds:SignatureValue Id="value-id-">qf8..</ds:SignatureValue>
+				<ds:KeyInfo>
+					<ds:X509Data>
+						<ds:X509Certificate>MII...</ds:X509Certificate>
+					</ds:X509Data>
+				</ds:KeyInfo>
+			</ds:Signature>
+		</eiz:EvidentirajOdbijanjeZahtjev>
+	</soapenv:Body>
+</soapenv:Envelope>
