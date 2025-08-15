@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:efis="http://www.porezna-uprava.gov.hr/fin/2024/types/eFiskalizacija"
+    xmlns:eizv="http://www.porezna-uprava.gov.hr/fin/2024/types/eIzvjestavanje"
+    targetNamespace="http://schemas.xmlsoap.org/soap/envelope/"
+    elementFormDefault="qualified">
+
+  <xs:import namespace="http://www.porezna-uprava.gov.hr/fin/2024/types/eFiskalizacija"
+             schemaLocation="eFiskalizacijaSchema.xsd"/>
+  <xs:import namespace="http://www.porezna-uprava.gov.hr/fin/2024/types/eIzvjestavanje"
+             schemaLocation="eIzvjestavanjeSchema.xsd"/>
+
+  <xs:redefine schemaLocation="soap-envelope.xsd">
+    <xs:complexType name="Body">
+      <xs:complexContent>
+        <xs:restriction base="soap:Body">
+          <xs:choice>
+            <xs:element ref="efis:EvidentirajERacunZahtjev"/>
+            <xs:element ref="efis:EvidentirajERacunOdgovor"/>
+            <xs:element ref="eizv:EvidentirajOdbijanjeZahtjev"/>
+            <xs:element ref="eizv:EvidentirajOdbijanjeOdgovor"/>
+            <xs:element ref="eizv:EvidentirajNaplatuZahtjev"/>
+            <xs:element ref="eizv:EvidentirajNaplatuOdgovor"/>
+            <xs:element ref="eizv:EvidentirajIsporukuZaKojuNijeIzdanERacunZahtjev"/>
+            <xs:element ref="eizv:EvidentirajIsporukuZaKojuNijeIzdanERacunOdgovor"/>
+          </xs:choice>
+          <xs:anyAttribute namespace="##any" processContents="lax"/>
+        </xs:restriction>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:redefine>
+
+</xs:schema>
