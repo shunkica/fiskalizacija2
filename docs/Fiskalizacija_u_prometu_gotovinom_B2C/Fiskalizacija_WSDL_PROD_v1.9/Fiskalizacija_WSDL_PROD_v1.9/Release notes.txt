@@ -1,0 +1,12 @@
+﻿Datum verzije: 24.06.2025.
+verzija: 1.9
+
+Promjene:
+	
+	- nova metoda promijeniPodatkeRacuna
+	- nove metode za radno vrijeme:
+		- prijaviRadnoVrijeme
+		- obrisiRadnoVrijeme
+		- dohvatiRadnoVrijeme
+
+----------------------------------------------------------------------------------------------------
