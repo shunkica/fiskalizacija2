@@ -17,4 +17,6 @@ RUN echo "export CLASSPATH=/opt/sml/config" >> ${CATALINA_HOME}/bin/setenv.sh
 
 VOLUME /opt/sml/
 
-#COPY artefacts/bdmsl-webapp-5.0.1-SNAPSHOT.war ${CATALINA_HOME}/webapps/edelivery-sml.war
+COPY template/sml/entrypoint.sh /opt/sml/entrypoint.sh
+RUN chmod +x /opt/sml/entrypoint.sh
+CMD ["/opt/sml/entrypoint.sh"]

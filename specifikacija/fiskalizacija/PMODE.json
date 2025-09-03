@@ -54,7 +54,7 @@
     },
     {
       "Parametar": "PMode[].BusinessInfo.Action",
-      "Vrijednost": "Predefinirana vrijednost identifikatora tipa dokumenta za eRačun formatirana po slijedećem: «scheme id»::«document type id value»<br/>Definirana su dva tipa:<br/>`hrBillingInvoiceAction` - `busdox-docid-qns::urn:oasis:names:specification:ubl:schema:xsd:Invoice2::Invoice##urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:billing:3.0::2.1`<br/>`hrBillingCreditNoteAction` – `busdox-docid-qns::urn:oasis:names:specification:ubl:schema:xsd:CreditNote2::CreditNote##urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:billing:3.0::2.1`"
+      "Vrijednost": "Predefinirana vrijednost identifikatora tipa dokumenta za eRačun formatirana po slijedećem: «scheme id»::«document type id value»<br/>Definirana su dva tipa:<br/>`hrBillingInvoiceAction` - `busdox-docid-qns::urn:oasis:names:specification:ubl:schema:xsd:Invoice-2::Invoice##urn:cen.eu:en16931:2017#compliant#urn:mfin.gov.hr:cius-2025:1.0#conformant#urn:mfin.gov.hr:ext-2025:1.0::2.1`<br/>`hrBillingCreditNoteAction` – `busdox-docid-qns::urn:oasis:names:specification:ubl:schema:xsd:CreditNote2::CreditNote##urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:billing:3.0::2.1`"
     },
     {
       "Parametar": "PMode[].BusinessInfo.MPC",

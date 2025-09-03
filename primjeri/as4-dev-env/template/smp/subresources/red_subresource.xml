@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ServiceMetadata xmlns="http://docs.oasis-open.org/bdxr/ns/SMP/2016/05" xmlns:ns2="http://www.w3.org/2000/09/xmldsig#">
+  <ServiceInformation>
+    <ParticipantIdentifier scheme="${resource.identifier.scheme}">${resource.identifier.value}</ParticipantIdentifier>
+    <DocumentIdentifier scheme="${subresource.identifier.scheme}">${subresource.identifier.value}</DocumentIdentifier>
+    <ProcessList>
+      <Process>
+        <ProcessIdentifier scheme="cenbii-procid-ubl">urn:fdc:eracun.hr:poacc:en16931:any</ProcessIdentifier>
+        <ServiceEndpointList>
+          <Endpoint transportProfile="eracun-transport-as4-v1_0">
+            <EndpointURI>http://domibus-red:8080/domibus/services/msh</EndpointURI>
+            <Certificate>MIIDXTCCAkWgAwIBAgIILTugXsXk78gwDQYJKoZIhvcNAQELBQAwXTELMAkGA1UE
+              BhMCSFIxDjAMBgNVBAgTBVN0YXRlMQ0wCwYDVQQHEwRDaXR5MRAwDgYDVQQKEwdD
+              b21wYW55MQwwCgYDVQQLEwNEZXYxDzANBgNVBAMMBnJlZF9jbjAeFw0yNTA5MDMx
+              MDEwMTJaFw0zNTA5MDExMDEwMTJaMF0xCzAJBgNVBAYTAkhSMQ4wDAYDVQQIEwVT
+              dGF0ZTENMAsGA1UEBxMEQ2l0eTEQMA4GA1UEChMHQ29tcGFueTEMMAoGA1UECxMD
+              RGV2MQ8wDQYDVQQDDAZyZWRfY24wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEK
+              AoIBAQC0t5ynrdAKrQxJSoAeDsp/UG7jXrzEVud/VYPlrFIHjDcsc7AhYvofkj1H
+              trF2obLwJN43/HzsXBM1AZm4QbgaGv2Au5LoGEWgiFBiJ9KhA62bpt5w1CHpXA+U
+              ozHRiJ/0PZQB9RszPWQxnRTS/UlMUvxj4rG+TDYnSoKCnbsm/n4hLa/FKeL/ohwV
+              X+tIKgkSS1nedhmA8h+/ywr1qinjSrSJENL30P7hKHbBXRBwONX+gs/7Stasbcb8
+              zRVUea+pG8b8VmqUIDyTSuHsJKYLwonsuKiDZ25ZVLew/brXexHHOwSK3/JpmZ8y
+              SK9UJ2xy6udTVe+cT1GWB9IbyV/rAgMBAAGjITAfMB0GA1UdDgQWBBQ+yukYSne3
+              L0t7iu5Z9/coKubTsDANBgkqhkiG9w0BAQsFAAOCAQEAstejMqzrxueCYujpkdGo
+              pjHtRsdTEwqYP/0P0JOMruQPcW6gz2QYVktbROLI9UyYlWRc/fnsEBkjG0XL+jOU
+              VAKN4E5A6XaEGRNpZHnFrkDERj43VAR8KXRr1OPvEumyQQnOIF8k5fZIK8wlA4zN
+              b4mI1I6l/DXcV2dzwCXGYZnv4CkScCo/EDR2G88CmCSVp1wvv90GDZL4yT0R0yU0
+              Sp2eJsHG1BbE7V5kBSFIl4ILRFC3X+nymgiGP7xXdu03l7o1T551Vj4HwhQseexz
+              iaUxtP+t3k+iP13X21tFgTBbIVU1lrMkCxjAN9/hdeZCHI7TkvLlcJJAN16yfqwT
+              6Q==</Certificate>
+            <ServiceDescription>Red Party Domibus</ServiceDescription>
+            <TechnicalContactUrl>http://localhost:8082/domibus</TechnicalContactUrl>
+          </Endpoint>
+        </ServiceEndpointList>
+      </Process>
+    </ProcessList>
+    <Extension>
+      <ExtensionID>eRacunParticipantData</ExtensionID>
+      <ex:HRMPS xmlns:ex="http://porezna-uprava.hr/mps/extension">
+        <ex:ParticipantOIB>00000000000</ex:ParticipantOIB>
+        <ex:AccessPointOIB>00000000000</ex:AccessPointOIB>
+      </ex:HRMPS >
+    </Extension>
+  </ServiceInformation>
+</ServiceMetadata>

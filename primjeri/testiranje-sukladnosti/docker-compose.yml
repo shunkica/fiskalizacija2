@@ -35,7 +35,7 @@ services:
 #    container_name: domibus
 #    environment:
 #      - DOMIBUS_DB_HOST=domibus-db
-#      - DOMIBUS_KEY_ALIAS=blue_gw
+#      - DOMIBUS_KEY_ALIAS=blue_party
 #      - DOMIBUS_SMLZONE=demo.ams.porezna-uprava.hr
 #    ports:
 #      - "127.0.0.1:${DOMIBUS_PORT:-8081}:8080"

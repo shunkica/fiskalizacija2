@@ -3,72 +3,96 @@ networks:
     driver: bridge
     ipam:
       config:
-        - subnet: ${NET_PREFIX:-172.20.0}.0/24
+        - subnet: ${NET_PREFIX:-172.20.44}.0/24
 
 services:
   domibus-blue-db:
-    build:
-      context: .
-      dockerfile: domibus-db.Dockerfile
+    image: mysql:8
     container_name: domibus-blue-db
     ports:
-        - "127.0.0.1:${DOMIBUS_BLUE_DB_PORT:-8301}:3306"
+      - "127.0.0.1:${DOMIBUS_BLUE_DB_PORT:-8301}:3306"
     healthcheck:
       test: [ "CMD", "mysqladmin", "ping", "-h", "127.0.0.1" ]
       interval: 5s
       timeout: 5s
       retries: 30
+    environment:
+      - MYSQL_ROOT_PASSWORD=domibus
+      - MYSQL_DATABASE=domibus
+      - MYSQL_USER=edelivery
+      - MYSQL_PASSWORD=edelivery
+    volumes:
+      - "domibus-blue-db-dev:/var/lib/mysql"
+      - "./template/bus/initdb-blue:/docker-entrypoint-initdb.d:ro"
     networks:
       domibus-network:
-        ipv4_address: ${NET_PREFIX:-172.20.0}.10
+        ipv4_address: ${NET_PREFIX:-172.20.44}.10
 
   domibus-red-db:
-    build:
-      context: .
-      dockerfile: domibus-db.Dockerfile
+    image: mysql:8
     container_name: domibus-red-db
     ports:
-        - "127.0.0.1:${DOMIBUS_RED_DB_PORT:-8302}:3306"
+      - "127.0.0.1:${DOMIBUS_RED_DB_PORT:-8302}:3306"
     healthcheck:
       test: [ "CMD", "mysqladmin", "ping", "-h", "127.0.0.1" ]
       interval: 5s
       timeout: 5s
       retries: 30
+    environment:
+      - MYSQL_ROOT_PASSWORD=domibus
+      - MYSQL_DATABASE=domibus
+      - MYSQL_USER=edelivery
+      - MYSQL_PASSWORD=edelivery
+    volumes:
+      - "domibus-red-db-dev:/var/lib/mysql"
+      - "./template/bus/initdb-red:/docker-entrypoint-initdb.d:ro"
     networks:
       domibus-network:
-        ipv4_address: ${NET_PREFIX:-172.20.0}.11
+        ipv4_address: ${NET_PREFIX:-172.20.44}.11
 
   domismp-db:
-    build:
-      context: .
-      dockerfile: domismp-db.Dockerfile
+    image: mysql:8
     container_name: domismp-db
     ports:
-        - "127.0.0.1:${DOMISMP_DB_PORT:-8303}:3306"
+      - "127.0.0.1:${DOMISMP_DB_PORT:-8303}:3306"
     healthcheck:
       test: [ "CMD", "mysqladmin", "ping", "-h", "127.0.0.1" ]
       interval: 5s
       timeout: 5s
       retries: 30
+    environment:
+      - MYSQL_ROOT_PASSWORD=domismp
+      - MYSQL_DATABASE=domismp
+      - MYSQL_USER=domismp
+      - MYSQL_PASSWORD=domismp
+    volumes:
+      - "domismp-db-dev:/var/lib/mysql"
+      - "./template/smp/initdb:/docker-entrypoint-initdb.d:ro"
     networks:
       domibus-network:
-        ipv4_address: ${NET_PREFIX:-172.20.0}.12
+        ipv4_address: ${NET_PREFIX:-172.20.44}.12
 
   domisml-db:
-    build:
-      context: .
-      dockerfile: domisml-db.Dockerfile
+    image: mysql:8
     container_name: domisml-db
     ports:
-        - "127.0.0.1:${DOMISML_DB_PORT:-8304}:3306"
+      - "127.0.0.1:${DOMISML_DB_PORT:-8304}:3306"
     healthcheck:
       test: [ "CMD", "mysqladmin", "ping", "-h", "127.0.0.1" ]
       interval: 5s
       timeout: 5s
       retries: 30
+    environment:
+      - MYSQL_ROOT_PASSWORD=domisml
+      - MYSQL_DATABASE=domisml
+      - MYSQL_USER=domisml
+      - MYSQL_PASSWORD=domisml
+    volumes:
+      - "domisml-db-dev:/var/lib/mysql"
+      - "./template/sml/initdb:/docker-entrypoint-initdb.d:ro"
     networks:
       domibus-network:
-        ipv4_address: ${NET_PREFIX:-172.20.0}.13
+        ipv4_address: ${NET_PREFIX:-172.20.44}.13
 
   domibus-blue:
     build:
@@ -76,21 +100,24 @@ services:
       dockerfile: domibus.Dockerfile
     container_name: domibus-blue
     environment:
+      - PUID=1000
+      - PGID=1000
       - DOMIBUS_DB_HOST=domibus-blue-db
-      - DOMIBUS_KEY_ALIAS=blue_gw
+      - DOMIBUS_KEY_ALIAS=blue_party
       - DOMIBUS_SMLZONE=hr.test.eracun.local
     ports:
       - "127.0.0.1:${DOMIBUS_BLUE_PORT:-8081}:8080"
     volumes:
+      - "domibus-blue:/opt/domibus"
       - "./logs/blue:/opt/domibus/logs"
     depends_on:
       domibus-blue-db:
         condition: service_healthy
     dns:
-      - ${NET_PREFIX:-172.20.0}.2
+      - ${NET_PREFIX:-172.20.44}.2
     networks:
       domibus-network:
-        ipv4_address: ${NET_PREFIX:-172.20.0}.20
+        ipv4_address: ${NET_PREFIX:-172.20.44}.20
 
   domibus-red:
     build:
@@ -98,48 +125,59 @@ services:
       dockerfile: domibus.Dockerfile
     container_name: domibus-red
     environment:
+      - PUID=1000
+      - PGID=1000
       - DOMIBUS_DB_HOST=domibus-red-db
-      - DOMIBUS_KEY_ALIAS=red_gw
+      - DOMIBUS_KEY_ALIAS=red_party
       - DOMIBUS_SMLZONE=hr.test.eracun.local
     ports:
       - "127.0.0.1:${DOMIBUS_RED_PORT:-8082}:8080"
     volumes:
+      - "domibus-red:/opt/domibus"
       - "./logs/red:/opt/domibus/logs"
     depends_on:
       domibus-red-db:
         condition: service_healthy
     dns:
-      - ${NET_PREFIX:-172.20.0}.2
+      - ${NET_PREFIX:-172.20.44}.2
     networks:
       domibus-network:
-        ipv4_address: ${NET_PREFIX:-172.20.0}.21
+        ipv4_address: ${NET_PREFIX:-172.20.44}.21
 
   domismp:
     build:
       context: .
       dockerfile: domismp.Dockerfile
     container_name: domismp
+    environment:
+      - PUID=1000
+      - PGID=1000
     ports:
       - "127.0.0.1:${DOMISMP_PORT:-8083}:8080"
     volumes:
+      - 'domismp-dev:/opt/smp'
       - "./logs/smp:/opt/smp/logs"
     depends_on:
       domismp-db:
         condition: service_healthy
     dns:
-      - ${NET_PREFIX:-172.20.0}.2
+      - ${NET_PREFIX:-172.20.44}.2
     networks:
       domibus-network:
-        ipv4_address: ${NET_PREFIX:-172.20.0}.30
+        ipv4_address: ${NET_PREFIX:-172.20.44}.30
 
   domisml:
     build:
       context: .
       dockerfile: domisml.Dockerfile
     container_name: domisml
+    environment:
+      - PUID=1000
+      - PGID=1000
     ports:
       - "127.0.0.1:${DOMISML_PORT:-8084}:8080"
     volumes:
+      - 'domisml-dev:/opt/sml'
       - "./logs/sml:/opt/sml/logs"
     depends_on:
       domisml-db:
@@ -147,10 +185,10 @@ services:
       bind9:
         condition: service_started
     dns:
-      - ${NET_PREFIX:-172.20.0}.2
+      - ${NET_PREFIX:-172.20.44}.2
     networks:
       domibus-network:
-        ipv4_address: ${NET_PREFIX:-172.20.0}.31
+        ipv4_address: ${NET_PREFIX:-172.20.44}.31
 
   bind9:
     build:
@@ -159,18 +197,18 @@ services:
     container_name: bind9
     networks:
       domibus-network:
-        ipv4_address: ${NET_PREFIX:-172.20.0}.2
-        
+        ipv4_address: ${NET_PREFIX:-172.20.44}.2
+
   client:
     build:
       context: .
       dockerfile: client.Dockerfile
     container_name: client
     dns:
-      - ${NET_PREFIX:-172.20.0}.2
+      - ${NET_PREFIX:-172.20.44}.2
     networks:
       domibus-network:
-        ipv4_address: ${NET_PREFIX:-172.20.0}.100
+        ipv4_address: ${NET_PREFIX:-172.20.44}.100
     ports:
       - "127.0.0.1:${CLIENT_PORT:-3000}:3000"
 
@@ -180,11 +218,21 @@ services:
       dockerfile: backend.Dockerfile
     container_name: backend
     dns:
-      - ${NET_PREFIX:-172.20.0}.2
+      - ${NET_PREFIX:-172.20.44}.2
     networks:
       domibus-network:
-        ipv4_address: ${NET_PREFIX:-172.20.0}.101
+        ipv4_address: ${NET_PREFIX:-172.20.44}.101
     ports:
       - "127.0.0.1:${BACKEND_PORT:-3001}:3000"
     volumes:
       - "./backend/received_messages:/app/received_messages"
+
+volumes:
+  domibus-blue-db-dev:
+  domibus-red-db-dev:
+  domismp-db-dev:
+  domisml-db-dev:
+  domibus-blue:
+  domibus-red:
+  domismp-dev:
+  domisml-dev:

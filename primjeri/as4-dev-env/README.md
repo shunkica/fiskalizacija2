@@ -8,7 +8,7 @@ docker compose up
 Nakon prvog pokretanja potrebno je postaviti PMode fileove za obje domibus instance. (PMode -> Current -> Upload)
 
 - instanca 1 (http://localhost:8081/domibus): `template/bus/pmode_blue.xml`
-- instanca 2 (http://localhost:8082/domibus): `template/bus/pmode_green.xml`
+- instanca 2 (http://localhost:8082/domibus): `template/bus/pmode_red.xml`
 
 # Defaultni Portovi
 
@@ -24,7 +24,7 @@ Nakon prvog pokretanja potrebno je postaviti PMode fileove za obje domibus insta
 - `http://localhost:8082/domibus` - domibus instanca 2
 - `http://localhost:8083/smp/ui` - domismp
 - `http://localhost:8084/bdmsl` - domisml
-- `http://localhost:3000/client` - client
+- `http://localhost:3000/` - client
 
 # Korisnički računi
 

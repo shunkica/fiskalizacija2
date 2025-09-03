@@ -1,6 +1,47 @@
 #!/bin/sh
 
-CONF_FILE="/opt/domibus/conf/domibus/domibus.properties"
+PUID=${PUID:-1000}
+PGID=${PGID:-1000}
+APP_USER=puser
+APP_HOME=/opt/domibus
+
+# Delete any conflicting group
+if getent group "$PGID" > /dev/null 2>&1; then
+    EXISTING_GROUP=$(getent group "$PGID" | cut -d: -f1)
+    if [ "$EXISTING_GROUP" != "$APP_USER" ]; then
+        delgroup "$EXISTING_GROUP"
+        if getent group "$APP_USER" > /dev/null 2>&1; then
+            delgroup "$APP_USER"
+        fi
+    fi
+elif getent group "$APP_USER" > /dev/null 2>&1; then
+        delgroup "$APP_USER"
+fi
+
+# If no group with PGID exists, create it with name APP_USER
+if ! getent group "$PGID" > /dev/null 2>&1; then
+    addgroup -g "$PGID" "$APP_USER"
+fi
+
+# Delete any conflicting user
+if id -u "$PUID" >/dev/null 2>&1; then
+    EXISTING_USER=$(getent passwd "$PUID" | cut -d: -f1)
+    if [ "$EXISTING_USER" != "$APP_USER" ]; then
+        deluser "$EXISTING_USER"
+        if id -u "$APP_USER" >/dev/null 2>&1; then
+            deluser "$APP_USER"
+        fi
+    fi
+elif id -u "$APP_USER" >/dev/null 2>&1; then
+        deluser "$APP_USER"
+fi
+
+# If no user with PUID exists, create it with name APP_USER
+if ! id -u "$PUID" >/dev/null 2>&1; then
+    adduser -u "$PUID" -G "$APP_USER" -D "$APP_USER"
+fi
+
+CONF_FILE="$APP_HOME/conf/domibus/domibus.properties"
 
 if [ -z "$DOMIBUS_DB_HOST" ]; then
   echo "Error: DOMIBUS_DB_HOST is not set. Please set it to the database host."
@@ -25,4 +66,8 @@ sed -i "s|^domibus.datasource.url=.*|domibus.datasource.url=jdbc:mysql://${DOMIB
 [ -n "$DOMIBUS_KEY_PASSWORD" ] && sed -i "s/^domibus.security.key.private.password=.*/domibus.security.key.private.password=${DOMIBUS_KEY_PASSWORD}/" "$CONF_FILE"
 [ -n "$DOMIBUS_TRUSTSTORE_PASSWORD" ] && sed -i "s/^domibus.security.truststore.password=.*/domibus.security.truststore.password=${DOMIBUS_TRUSTSTORE_PASSWORD}/" "$CONF_FILE"
 
-exec bin/catalina.sh run
+# Fix ownership
+chown -R "$PUID:$PGID" "$APP_HOME"
+
+# Run as APP_USER
+exec su "$APP_USER" -c "bin/catalina.sh run"

@@ -4,7 +4,11 @@ ADD https://ec.europa.eu/digital-building-blocks/artifact/repository/eDelivery/e
 
 ADD https://ec.europa.eu/digital-building-blocks/artifact/repository/eDelivery/eu/domibus/domibus-msh-distribution/5.1.8/domibus-msh-distribution-5.1.8-sample-configuration-and-testing.zip /tmp/domibus-sample.zip
 
-RUN apk --no-cache add unzip && unzip /tmp/domibus.zip -d /opt/ && unzip /tmp/domibus-sample.zip -d /opt/domibus/ && rm /tmp/domibus.zip /tmp/domibus-sample.zip && apk del unzip
+RUN apk --no-cache add unzip && \
+    unzip /tmp/domibus.zip -d /opt/ && \
+    unzip /tmp/domibus-sample.zip -d /opt/domibus/ && \
+    rm /tmp/domibus.zip /tmp/domibus-sample.zip && \
+    apk del unzip
 
 ADD https://repo1.maven.org/maven2/com/mysql/mysql-connector-j/8.4.0/mysql-connector-j-8.4.0.jar /opt/domibus/lib/mysql-connector-j.jar
 
@@ -20,9 +24,10 @@ COPY template/bus/signOnly.xml /opt/domibus/conf/domibus/policies/
 COPY template/bus/doNothingPolicy.xml /opt/domibus/conf/domibus/policies/
 COPY template/bus/security/keystore.p12 /opt/domibus/conf/domibus/keystores/
 COPY template/bus/security/truststore.p12 /opt/domibus/conf/domibus/keystores/
+RUN chmod u+w /opt/domibus/conf/domibus/keystores/
 
-RUN chmod +x bin/entrypoint.sh bin/catalina.sh
+# Make scripts executable and create necessary directories
+RUN chmod +x bin/entrypoint.sh bin/catalina.sh && \
+    mkdir -p logs temp work webapps conf/Catalina/localhost data
 
 CMD bin/entrypoint.sh
-
-#COPY artefacts/domibus-MSH-tomcat-distribution-5.1.8.war /opt/domibus/webapps/domibus.war

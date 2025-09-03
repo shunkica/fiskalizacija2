@@ -1,213 +1,100 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<db:configuration xmlns:db="http://domibus.eu/configuration"
-                  party="blue_gw">
-  <mpcs>
-    <mpc name="defaultMpc"
-         qualifiedName="http://docs.oasis-open.org/ebxml-msg/ebms/v3.0/ns/core/200704/defaultMPC"
-         enabled="true"
-         default="true"
-         retention_downloaded="0"
-         retention_undownloaded="600"
-    />
-  </mpcs>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:configuration xmlns:ns2="http://domibus.eu/configuration" party="blue_party">
   <businessProcesses>
     <roles>
-      <role name="defaultInitiatorRole"
-            value="http://docs.oasis-open.org/ebxml-msg/ebms/v3.0/ns/core/200704/initiator"
-      />
-      <role name="defaultResponderRole"
-            value="http://docs.oasis-open.org/ebxml-msg/ebms/v3.0/ns/core/200704/responder"
-      />
+      <role name="defaultInitiatorRole" value="http://docs.oasis-open.org/ebxml-msg/ebms/v3.0/ns/core/200704/initiator"/>
+      <role name="defaultResponderRole" value="http://docs.oasis-open.org/ebxml-msg/ebms/v3.0/ns/core/200704/responder"/>
     </roles>
     <parties>
       <partyIdTypes>
-        <partyIdType name="partyTypeUrn"
-                     value="urn:fdc:eracun.hr:2023:identifiers:ap"/>
+        <partyIdType name="partyTypeUrn" value="urn:fdc:eracun.hr:2023:identifiers:ap"/>
       </partyIdTypes>
-      <party name="blue_gw"
-             endpoint="http://domibus:8080/domibus/services/msh"
-             allowChunking="true"
-      >
-        <identifier partyId="blue_gw"
-                    partyIdType="partyTypeUrn"
-        />
+      <party name="blue_party" endpoint="http://domibus-blue:8080/domibus/services/msh">
+        <identifier partyId="blue_cn" partyIdType="partyTypeUrn"/>
       </party>
     </parties>
     <meps>
-      <mep name="oneway" value="http://docs.oasis-open.org/ebxml-msg/ebms/v3.0/ns/core/200704/oneWay"/>
+      <mep name="oneway" value="http://docs.oasis-open.org/ebxml-msg/ebms/v3.0/ns/core/200704/oneWay" legs="0"/>
       <binding name="push" value="http://docs.oasis-open.org/ebxml-msg/ebms/v3.0/ns/core/200704/push"/>
     </meps>
     <properties>
-      <property name="originalSenderProperty"
-                key="originalSender"
-                datatype="string"
-                required="true"
-      />
-      <property name="finalRecipientProperty"
-                key="finalRecipient"
-                datatype="string"
-                required="true"
-      />
+      <property name="originalSenderProperty" key="originalSender" datatype="string" required="true"/>
+      <property name="finalRecipientProperty" key="finalRecipient" datatype="string" required="true"/>
       <propertySet name="ecodexPropertySet">
         <propertyRef property="finalRecipientProperty"/>
         <propertyRef property="originalSenderProperty"/>
       </propertySet>
     </properties>
     <payloadProfiles>
-      <payload name="businessContentPayload"
-               cid="cid:message"
-               required="true"
-               mimeType="text/xml"
-      />
-      <payload name="businessContentAttachment"
-               cid="cid:attachment"
-               required="false"
-               mimeType="application/octet-stream"
-      />
+      <payload name="businessContentPayload" cid="cid:message" mimeType="text/xml" maxSize="0" required="true" inBody="false"/>
+      <payload name="businessContentAttachment" cid="cid:attachment" mimeType="application/octet-stream" maxSize="0" required="false" inBody="false"/>
       <payloadProfile name="MessageProfile" maxSize="40894464">
         <attachment name="businessContentPayload"/>
         <attachment name="businessContentAttachment"/>
       </payloadProfile>
     </payloadProfiles>
     <securities>
-      <security name="eDeliveryAS4Policy"
-                policy="eDeliveryAS4Policy.xml"
-                signatureMethod="RSA_SHA256"
-      />
-      <security name="noSigNoEnc"
-                policy="doNothingPolicy.xml"
-                signatureMethod="RSA_SHA256"
-      />
-      <security name="signOnly"
-                policy="signOnly.xml"
-                signatureMethod="RSA_SHA256"
-      />
+      <security name="eDeliveryAS4Policy" policy="eDeliveryAS4Policy.xml" signatureMethod="RSA_SHA256"/>
+      <security name="noSigNoEnc" policy="doNothingPolicy.xml" signatureMethod="RSA_SHA256"/>
+      <security name="signOnly" policy="signOnly.xml" signatureMethod="RSA_SHA256"/>
     </securities>
     <errorHandlings>
-      <errorHandling name="demoErrorHandling"
-                     errorAsResponse="true"
-                     businessErrorNotifyProducer="false"
-                     businessErrorNotifyConsumer="false"
-                     deliveryFailureNotifyProducer="false"
-      />
-      <errorHandling name="notifyErrorHandling"
-                     errorAsResponse="true"
-                     businessErrorNotifyProducer="true"
-                     businessErrorNotifyConsumer="true"
-                     deliveryFailureNotifyProducer="true"
-      />
+      <errorHandling name="demoErrorHandling" errorAsResponse="true" businessErrorNotifyProducer="false" businessErrorNotifyConsumer="false" deliveryFailureNotifyProducer="false"/>
+      <errorHandling name="notifyErrorHandling" errorAsResponse="true" businessErrorNotifyProducer="true" businessErrorNotifyConsumer="true" deliveryFailureNotifyProducer="true"/>
     </errorHandlings>
     <agreements>
-      <agreement name="hrAgreement"
-                 value="urn:fdc:eracun.hr:2023:agreements:ap_provider"
-                 type=""
-      />
+      <agreement name="hrAgreement" value="urn:fdc:eracun.hr:2023:agreements:ap_provider" type=""/>
     </agreements>
     <services>
-      <service name="hrBillingService"
-               value="urn:fdc:eracun.hr:poacc:en16931:any"
-               type="cenbii-procidubl"
-      />
+      <service name="hrBillingService" value="urn:fdc:eracun.hr:poacc:en16931:any" type="cenbii-procid-ubl"/>
     </services>
     <actions>
-      <action
-          name="hrBillingInvoiceAction"
-          value="busdox-docid-qns::urn:oasis:names:specification:ubl:schema:xsd:Invoice-2::Invoice##urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:billing:3.0::2.1"
-      />
-      <action
-          name="hrBillingCreditNoteAction"
-          value="busdox-docid-qns::urn:oasis:names:specification:ubl:schema:xsd:CreditNote-2::CreditNote##urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:billing:3.0::2.1"
-      />
+      <action name="hrBillingInvoiceAction" value="busdox-docid-qns::urn:oasis:names:specification:ubl:schema:xsd:Invoice-2::Invoice##urn:cen.eu:en16931:2017#compliant#urn:mfin.gov.hr:cius-2025:1.0#conformant#urn:mfin.gov.hr:ext-2025:1.0::2.1"/>
+      <action name="hrBillingCreditNoteAction" value="busdox-docid-qns::urn:oasis:names:specification:ubl:schema:xsd:CreditNote-2::CreditNote##urn:cen.eu:en16931:2017#compliant#urn:mfin.gov.hr:cius-2025:1.0#conformant#urn:mfin.gov.hr:ext-2025:1.0::2.1"/>
     </actions>
     <as4>
-      <receptionAwareness name="receptionAwareness"
-                          retry="12;4;CONSTANT"
-                          duplicateDetection="true"
-      />
-      <reliability name="AS4Reliability"
-                   nonRepudiation="true"
-                   replyPattern="response"
-      />
-      <reliability name="noReliability"
-                   nonRepudiation="false"
-                   replyPattern="response"
-      />
+      <receptionAwareness name="receptionAwareness" retry="12;4;CONSTANT" duplicateDetection="true"/>
+      <reliability name="AS4Reliability" replyPattern="response" nonRepudiation="true"/>
+      <reliability name="noReliability" replyPattern="response" nonRepudiation="false"/>
     </as4>
     <legConfigurations>
-      <legConfiguration name="hrBillingInvoiceLeg"
-                        service="hrBillingService"
-                        action="hrBillingInvoiceAction"
-                        defaultMpc="defaultMpc"
-                        reliability="AS4Reliability"
-                        security="signOnly"
-                        receptionAwareness="receptionAwareness"
-                        propertySet="ecodexPropertySet"
-                        payloadProfile="MessageProfile"
-                        errorHandling="demoErrorHandling"
-                        compressPayloads="true"/>
-      <legConfiguration name="hrBillingCreditNoteLeg"
-                        service="hrBillingService"
-                        action="hrBillingCreditNoteAction"
-                        defaultMpc="defaultMpc"
-                        reliability="AS4Reliability"
-                        security="signOnly"
-                        receptionAwareness="receptionAwareness"
-                        propertySet="ecodexPropertySet"
-                        payloadProfile="MessageProfile"
-                        errorHandling="demoErrorHandling"
-                        compressPayloads="true"/>
+      <legConfiguration name="hrBillingInvoiceLeg" reliability="AS4Reliability" security="signOnly" receptionAwareness="receptionAwareness" service="hrBillingService" action="hrBillingInvoiceAction" defaultMpc="defaultMpc" propertySet="ecodexPropertySet" payloadProfile="MessageProfile" errorHandling="demoErrorHandling" compressPayloads="true"/>
+      <legConfiguration name="hrBillingCreditNoteLeg" reliability="AS4Reliability" security="signOnly" receptionAwareness="receptionAwareness" service="hrBillingService" action="hrBillingCreditNoteAction" defaultMpc="defaultMpc" propertySet="ecodexPropertySet" payloadProfile="MessageProfile" errorHandling="demoErrorHandling" compressPayloads="true"/>
     </legConfigurations>
-    <process name="hrInvoiceSendProcess"
-             agreement="hrAgreement"
-             mep="oneway"
-             binding="push"
-             initiatorRole="defaultInitiatorRole"
-             responderRole="defaultResponderRole">
+    <process name="hrInvoiceSendProcess" initiatorRole="defaultInitiatorRole" responderRole="defaultResponderRole" agreement="hrAgreement" mep="oneway" binding="push">
       <initiatorParties>
-        <initiatorParty name="blue_gw"/>
+        <initiatorParty name="blue_party"/>
       </initiatorParties>
       <legs>
         <leg name="hrBillingInvoiceLeg"/>
       </legs>
     </process>
-    <process name="hrBillingNoteSendProcess"
-             agreement="hrAgreement"
-             mep="oneway"
-             binding="push"
-             initiatorRole="defaultInitiatorRole"
-             responderRole="defaultResponderRole">
+    <process name="hrBillingNoteSendProcess" initiatorRole="defaultInitiatorRole" responderRole="defaultResponderRole" agreement="hrAgreement" mep="oneway" binding="push">
       <initiatorParties>
-        <initiatorParty name="blue_gw"/>
+        <initiatorParty name="blue_party"/>
       </initiatorParties>
       <legs>
         <leg name="hrBillingCreditNoteLeg"/>
       </legs>
     </process>
-    <process name="hrInvoiceReceiveProcess"
-             agreement="hrAgreement"
-             mep="oneway"
-             binding="push"
-             initiatorRole="defaultInitiatorRole"
-             responderRole="defaultResponderRole">
+    <process name="hrInvoiceReceiveProcess" initiatorRole="defaultInitiatorRole" responderRole="defaultResponderRole" agreement="hrAgreement" mep="oneway" binding="push">
       <responderParties>
-        <responderParty name="blue_gw"/>
+        <responderParty name="blue_party"/>
       </responderParties>
       <legs>
         <leg name="hrBillingInvoiceLeg"/>
       </legs>
     </process>
-    <process name="hrBillingNoteReceiveProcess"
-             agreement="hrAgreement"
-             mep="oneway"
-             binding="push"
-             initiatorRole="defaultInitiatorRole"
-             responderRole="defaultResponderRole">
+    <process name="hrBillingNoteReceiveProcess" initiatorRole="defaultInitiatorRole" responderRole="defaultResponderRole" agreement="hrAgreement" mep="oneway" binding="push">
       <responderParties>
-        <responderParty name="blue_gw"/>
+        <responderParty name="blue_party"/>
       </responderParties>
       <legs>
         <leg name="hrBillingCreditNoteLeg"/>
       </legs>
     </process>
   </businessProcesses>
-</db:configuration>
+  <mpcs>
+    <mpc name="defaultMpc" retention_downloaded="0" retention_undownloaded="600" retention_sent="-1" retention_metadata_offset="0" delete_message_metadata="false" max_batch_delete="-1" default="true" enabled="true" qualifiedName="http://docs.oasis-open.org/ebxml-msg/ebms/v3.0/ns/core/200704/defaultMPC"/>
+  </mpcs>
+</ns2:configuration>

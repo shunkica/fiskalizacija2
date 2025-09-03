@@ -16,5 +16,8 @@ COPY template/smp/security/encryptionPrivateKey.private /opt/smp/security/
 COPY template/smp/security/keystore.p12 /opt/smp/security/
 COPY template/smp/security/truststore.p12 /opt/smp/security/
 
+VOLUME /opt/smp/
 
-VOLUME /opt/smp/config
+COPY template/smp/entrypoint.sh /opt/smp/entrypoint.sh
+RUN chmod +x /opt/smp/entrypoint.sh
+CMD ["/opt/smp/entrypoint.sh"]

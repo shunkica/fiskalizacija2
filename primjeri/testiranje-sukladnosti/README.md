@@ -35,10 +35,10 @@
 5. Kreiranje podresursa (vrsta dokumenata) - `Edit Resources` > `Subresources` > `Create`
   - Za __SVAKI__ resource (primatelj računa) potrebno je dodati Invoice i CreditNote dokumente
   - Invoice:
-    - `Subresource identifier`: `urn:oasis:names:specification:ubl:schema:xsd:Invoice-2::Invoice##urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:billing:3.0::2.1`
+    - `Subresource identifier`: `urn:oasis:names:specification:ubl:schema:xsd:Invoice-2::Invoice##urn:cen.eu:en16931:2017#compliant#urn:mfin.gov.hr:cius-2025:1.0#conformant#urn:mfin.gov.hr:ext-2025:1.0::2.1`
     - `Subresource scheme`: `busdox-docid-qns`
   - CreditNote:
-    - `Subresource identifier`: `urn:oasis:names:specification:ubl:schema:xsd:CreditNote-2::CreditNote##urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:billing:3.0::2.1`
+    - `Subresource identifier`: `urn:oasis:names:specification:ubl:schema:xsd:CreditNote-2::CreditNote##urn:cen.eu:en16931:2017#compliant#urn:mfin.gov.hr:cius-2025:1.0#conformant#urn:mfin.gov.hr:ext-2025:1.0::2.1`
     - `Subresource scheme`: `busdox-docid-qns`
 6. Postavljanje subresource dokumenata
   - Svaki kreirani subresource dokument potrebno je urediti klikom na `Edit` te `New version`
@@ -50,7 +50,7 @@
         <DocumentIdentifier scheme="${subresource.identifier.scheme}">${subresource.identifier.value}</DocumentIdentifier>
         <ProcessList>
             <Process>
-                <ProcessIdentifier scheme="cenbii-procidubl">urn:fdc:eracun.hr:poacc:en16931:any</ProcessIdentifier>
+                <ProcessIdentifier scheme="cenbii-procid-ubl">urn:fdc:eracun.hr:poacc:en16931:any</ProcessIdentifier>
                 <ServiceEndpointList>
                     <Endpoint transportProfile="eracun-transport-as4-v1_0">
                         <EndpointURI>[OVDJE STAVITI URL DO SVOJE PRISTUPNE TOČKE (domibus)]/services/msh</EndpointURI>

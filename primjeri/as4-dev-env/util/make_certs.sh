@@ -169,10 +169,10 @@ setup_domibus() {
 
     # 1. Keystore
     echo "Creating Domibus Keystore: $keystore"
-    generate_keystore_entry "blue_gw" "blue_gw" "$keystore"
-    generate_keystore_entry "red_gw" "red_gw" "$keystore"
+    generate_keystore_entry "blue_party" "blue_cn" "$keystore"
+    generate_keystore_entry "red_party" "red_cn" "$keystore"
 
-    # 2. Truststore (trusts Domismp, blue_gw, and red_gw)
+    # 2. Truststore (trusts Domismp, blue_party, and red_party)
     echo "Creating Domibus Truststore: $truststore"
     create_empty_truststore "$truststore"
 
@@ -185,19 +185,25 @@ setup_domibus() {
     export_cert "smp-test" "$smp_keystore_path" "$smp_test_cert_for_domibus_tmp"
 
     # Export Domibus gateway certificates from the *same* keystore (current domibus keystore)
-    local blue_gw_cert_tmp="$OUTPUT_BASE_DIR/tmp_blue_gw.cer"
-    local red_gw_cert_tmp="$OUTPUT_BASE_DIR/tmp_red_gw.cer"
-    export_cert "blue_gw" "$keystore" "$blue_gw_cert_tmp"
-    export_cert "red_gw" "$keystore" "$red_gw_cert_tmp"
+    local blue_party_cert_tmp="$OUTPUT_BASE_DIR/tmp_blue_party.cer"
+    local red_party_cert_tmp="$OUTPUT_BASE_DIR/tmp_red_party.cer"
+    export_cert "blue_party" "$keystore" "$blue_party_cert_tmp"
+    export_cert "red_party" "$keystore" "$red_party_cert_tmp"
+
+    # Export permanent .pem files for blue and red party certificates
+    local blue_party_pem="$bus_output_dir/blue_party.pem"
+    local red_party_pem="$bus_output_dir/red_party.pem"
+    export_cert "blue_party" "$keystore" "$blue_party_pem"
+    export_cert "red_party" "$keystore" "$red_party_pem"
 
     # Import all necessary certificates into Domibus truststore
     import_cert_to_truststore "ca-smp-test" "$ca_smp_test_cert_for_domibus_tmp" "$truststore"
     import_cert_to_truststore "smp-test" "$smp_test_cert_for_domibus_tmp" "$truststore"
-    import_cert_to_truststore "blue_gw" "$blue_gw_cert_tmp" "$truststore"
-    import_cert_to_truststore "red_gw" "$red_gw_cert_tmp" "$truststore"
+    import_cert_to_truststore "blue_party" "$blue_party_cert_tmp" "$truststore"
+    import_cert_to_truststore "red_party" "$red_party_cert_tmp" "$truststore"
 
     # Clean up temporary certs
-    rm -f "$ca_smp_test_cert_for_domibus_tmp" "$smp_test_cert_for_domibus_tmp" "$blue_gw_cert_tmp" "$red_gw_cert_tmp"
+    rm -f "$ca_smp_test_cert_for_domibus_tmp" "$smp_test_cert_for_domibus_tmp" "$blue_party_cert_tmp" "$red_party_cert_tmp"
     echo "Domibus setup complete."
     echo ""
 }

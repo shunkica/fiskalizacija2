@@ -1,7 +1,7 @@
 {
   "name": "domibus-backend",
   "scripts": {
-    "start": "node main.js"
+    "start": "node index.js"
   },
   "dependencies": {
     "express": "^5.1.0"
