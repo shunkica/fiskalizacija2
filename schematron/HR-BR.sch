@@ -54,7 +54,9 @@
       </assert>
 
       <assert id="HR-BR-4" flag="fatal"
-              test="not(cac:LegalMonetaryTotal/cbc:PayableAmount > 0) or cbc:DueDate">
+              test="not(cac:LegalMonetaryTotal/cbc:PayableAmount > 0) or 
+                    (local-name() = 'Invoice' and cbc:DueDate) or 
+                    (local-name() = 'CreditNote' and cac:PaymentMeans/cbc:PaymentDueDate)">
         [HR-BR-4] U slučaju pozitivnog iznosa koji dospijeva na plaćanje (BT-115), datum dospijeća plaćanja (BT-9) mora biti naveden.
       </assert>
 

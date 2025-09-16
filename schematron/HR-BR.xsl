@@ -22,7 +22,7 @@
             <schxslt.compile.typed-variables xmlns="https://doi.org/10.5281/zenodo.1495494#">true</schxslt.compile.typed-variables>
          </dct:Agent>
       </dct:creator>
-      <dct:created>2025-08-09T12:29:35.355908703Z</dct:created>
+      <dct:created>2025-09-16T14:49:35.354017423Z</dct:created>
    </rdf:Description>
    <xsl:output indent="yes"/>
    <xsl:param name="schxslt.validate.initial-document-uri" as="xs:string?"/>
@@ -65,7 +65,7 @@
                               <schxslt.compile.typed-variables xmlns="https://doi.org/10.5281/zenodo.1495494#">true</schxslt.compile.typed-variables>
                            </dct:Agent>
                         </dct:creator>
-                        <dct:created>2025-08-09T12:29:35.355908703Z</dct:created>
+                        <dct:created>2025-09-16T14:49:35.354017423Z</dct:created>
                      </rdf:Description>
                   </dct:source>
                </svrl:metadata>
@@ -244,12 +244,12 @@
       </svrl:text>
                   </svrl:failed-assert>
                </xsl:if>
-               <xsl:if test="not(not(cac:LegalMonetaryTotal/cbc:PayableAmount &gt; 0) or cbc:DueDate)">
+               <xsl:if test="not(not(cac:LegalMonetaryTotal/cbc:PayableAmount &gt; 0) or                      (local-name() = 'Invoice' and cbc:DueDate) or                      (local-name() = 'CreditNote' and cac:PaymentMeans/cbc:PaymentDueDate))">
                   <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                       location="{schxslt:location(.)}"
                                       flag="fatal"
                                       id="HR-BR-4">
-                     <xsl:attribute name="test">not(cac:LegalMonetaryTotal/cbc:PayableAmount &gt; 0) or cbc:DueDate</xsl:attribute>
+                     <xsl:attribute name="test">not(cac:LegalMonetaryTotal/cbc:PayableAmount &gt; 0) or                      (local-name() = 'Invoice' and cbc:DueDate) or                      (local-name() = 'CreditNote' and cac:PaymentMeans/cbc:PaymentDueDate)</xsl:attribute>
                      <svrl:text>
         [HR-BR-4] U slučaju pozitivnog iznosa koji dospijeva na plaćanje (BT-115), datum dospijeća plaćanja (BT-9) mora biti naveden.
       </svrl:text>
