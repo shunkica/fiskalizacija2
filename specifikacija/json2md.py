@@ -44,7 +44,7 @@ def json_to_md(json_file):
 
 def process_dirs():
     base_dir = Path(__file__).parent
-    for subdir in ["eracun", "fiskalizacija"]:
+    for subdir in ["eracun", "as4"]:
         dir_path = base_dir / subdir
         if dir_path.exists() and dir_path.is_dir():
             for json_file in dir_path.glob("*.json"):

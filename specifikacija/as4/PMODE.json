@@ -13,6 +13,10 @@
       "Vrijednost": "`urn:fdc:eracun.hr:2023:agreements:ap_provider`"
     },
     {
+      "Parametar": "PMode.Agreement.Type",
+      "Vrijednost": "Iako u speficikaciji nije eksplicitno definirano, u jednom primjeru naveden je type `T1`"
+    },
+    {
       "Parametar": "PMode.MEP",
       "Vrijednost": "`http://docs.oasis-open.org/ebxmlmsg/ebms/v3.0/ns/core/200704/oneWay`"
     },
@@ -22,7 +26,7 @@
     },
     {
       "Parametar": "PMode.Initiator.Party",
-      "Vrijednost": "Unosi se u Pmode za pošiljatelja:<br/> Jedan PartyId sa vrijednosti Subject CNAME iz certifikata pristupne točke, npr. HR11111111111_1000000100 (u formatu HR<OIB>)<br/>Fiksna vrijednost za partyIdType `urn:fdc:eRacun.hr:2023:identifiers:ap`"
+      "Vrijednost": "Unosi se u Pmode za pošiljatelja:<br/> Jedan PartyId sa vrijednosti Subject CNAME iz certifikata pristupne točke<br/>Fiksna vrijednost za partyIdType `urn:oasis:names:tc:ebcore:partyid-type:unregistered`"
     },
     {
       "Parametar": "PMode.Initiator.Role",
@@ -30,7 +34,7 @@
     },
     {
       "Parametar": "PMode.Responder.Party",
-      "Vrijednost": "Unosi se u Pmode za primatelja:<br/> Jedan PartyId sa vrijednosti Subject CNAME iz certifikata pristupne točke, npr. HR11111111111_1000000100 (u formatu HR<OIB>)<br/>Fiksna vrijednost za partyIdType `urn:fdc:eRacun.hr:2023:identifiers:ap`"
+      "Vrijednost": "Unosi se u Pmode za primatelja:<br/> Jedan PartyId sa vrijednosti Subject CNAME iz certifikata pristupne točke<br/>Fiksna vrijednost za partyIdType `urn:oasis:names:tc:ebcore:partyid-type:unregistered`"
     },
     {
       "Parametar": "PMode.Responder.Role",
@@ -46,7 +50,7 @@
     },
     {
       "Parametar": "PMode[].BusinessInfo.Service",
-      "Vrijednost": "Predefinirana vrijednost identifikatora procesa za slanje eRačuna - `hrBillingService`<br/>Vrijednost: `urn:fdc:eracun.hr:2023:processId`"
+      "Vrijednost": "Predefinirana vrijednost identifikatora procesa za slanje eRačuna - `hrBillingService`<br/>Vrijednost: `urn:fdc:eracun.hr:poacc:en16931:any`"
     },
     {
       "Parametar": "PMode[].BusinessInfo.Service.type",
@@ -54,7 +58,7 @@
     },
     {
       "Parametar": "PMode[].BusinessInfo.Action",
-      "Vrijednost": "Predefinirana vrijednost identifikatora tipa dokumenta za eRačun formatirana po slijedećem: «scheme id»::«document type id value»<br/>Definirana su dva tipa:<br/>`hrBillingInvoiceAction` - `busdox-docid-qns::urn:oasis:names:specification:ubl:schema:xsd:Invoice-2::Invoice##urn:cen.eu:en16931:2017#compliant#urn:mfin.gov.hr:cius-2025:1.0#conformant#urn:mfin.gov.hr:ext-2025:1.0::2.1`<br/>`hrBillingCreditNoteAction` – `busdox-docid-qns::urn:oasis:names:specification:ubl:schema:xsd:CreditNote2::CreditNote##urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:billing:3.0::2.1`"
+      "Vrijednost": "Predefinirana vrijednost identifikatora tipa dokumenta za eRačun formatirana po slijedećem: «scheme id»::«document type id value»<br/>Definirana su dva tipa:<br/>`en16931UblInvoiceAction` - `busdox-docid-qns::urn:oasis:names:specification:ubl:schema:xsd:Invoice-2::Invoice##urn:cen.eu:en16931:2017#compliant#urn:mfin.gov.hr:cius-2025:1.0#conformant#urn:mfin.gov.hr:ext-2025:1.0::2.1`<br/>`en16931UblCreditNoteAction` – `busdox-docid-qns::urn:oasis:names:specification:ubl:schema:xsd:CreditNote2::CreditNote##urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:billing:3.0::2.1`<br/>`en16931CiiInvoiceAction` - `busdox-docid-qns::urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100::CrossIndustryInvoice##urn:cen.eu:en16931:2017#compliant#urn:mfin.gov.hr:cius-2025:1.0#conformant#urn:mfin.gov.hr:ext-2025:1.0::2.1::D16B`"
     },
     {
       "Parametar": "PMode[].BusinessInfo.MPC",
