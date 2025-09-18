@@ -1,5 +1,20 @@
 # Evidencija zapažanja promjena u službenoj dokumentaciji
 
+## 2025-09-18
+- __Tehnicka_specifikacija_eRacun_PT_AS4.pdf__
+  - verzija 1.2 (16.9.2025.)
+  - promjena party.type u `urn:oasis:names:tc:ebcore:partyid-type:unregistered`
+  - promjena tipova dokumenata, dodan cii tip:
+    - `en16931UblInvoiceAction` -> `busdox-docid-qns::urn:oasis:names:specification:ubl:schema:xsd:Invoice-2::Invoice##urn:cen.eu:en16931:2017#compliant#urn:mfin.gov.hr:cius-2025:1.0#conformant#urn:mfin.gov.hr:ext-2025:1.0::2.1`
+    - `en16931UblCreditNoteAction` -> `busdox-docid-qns::urn:oasis:names:specification:ubl:schema:xsd:CreditNote-2::CreditNote##urn:cen.eu:en16931:2017#compliant#urn:mfin.gov.hr:cius-2025:1.0#conformant#urn:mfin.gov.hr:ext-2025:1.0::2.1`
+    - `en16931CiiInvoiceAction` -> `busdox-docid-qns::urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100::CrossIndustryInvoice##urn:cen.eu:en16931:2017#compliant#urn:mfin.gov.hr:cius-2025:1.0#conformant#urn:mfin.gov.hr:ext-2025:1.0::2.1::D16B`
+  - promjena process id u `urn:fdc:eracun.hr:poacc:en16931:any`
+  - promjena agreement type u `T1`
+- __Tehnicka_specifikacija_Fiskalizacija_eRacuna_i_eIzvjestavanje.pdf__
+  - verzija 1.5 (4.9.2025.)
+  - Ažurirano poglavlje 10. Elektronički potpis poruke zahtjeva; dodan primjer potpisa korištenjem DSS knjižnice u Javi
+  - specificiran baseline `XAdES Baseline B, ETSI EN 319 132-1`
+
 ## 2025-08-13
 - __eFiskalizacijaSchema.xsd__
   - dodan element `oibOperatera` u element `Izdavatelj`
