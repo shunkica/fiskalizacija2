@@ -59,39 +59,56 @@
       <reliability name="noReliability" replyPattern="response" nonRepudiation="false"/>
     </as4>
     <legConfigurations>
-      <legConfiguration name="hrBillingInvoiceLeg" reliability="AS4Reliability" security="signOnly" receptionAwareness="receptionAwareness" service="hrBillingService" action="en16931UblInvoiceAction" defaultMpc="defaultMpc" propertySet="ecodexPropertySet" payloadProfile="MessageProfile" errorHandling="demoErrorHandling" compressPayloads="true"/>
-      <legConfiguration name="hrBillingCreditNoteLeg" reliability="AS4Reliability" security="signOnly" receptionAwareness="receptionAwareness" service="hrBillingService" action="en16931UblCreditNoteAction" defaultMpc="defaultMpc" propertySet="ecodexPropertySet" payloadProfile="MessageProfile" errorHandling="demoErrorHandling" compressPayloads="true"/>
+      <legConfiguration name="en16931UblInvoiceLeg" reliability="AS4Reliability" security="signOnly" receptionAwareness="receptionAwareness" service="hrBillingService" action="en16931UblInvoiceAction" defaultMpc="defaultMpc" propertySet="ecodexPropertySet" payloadProfile="MessageProfile" errorHandling="demoErrorHandling" compressPayloads="true"/>
+      <legConfiguration name="en16931UblCreditNoteLeg" reliability="AS4Reliability" security="signOnly" receptionAwareness="receptionAwareness" service="hrBillingService" action="en16931UblCreditNoteAction" defaultMpc="defaultMpc" propertySet="ecodexPropertySet" payloadProfile="MessageProfile" errorHandling="demoErrorHandling" compressPayloads="true"/>
+      <legConfiguration name="en16931CiiInvoiceLeg" reliability="AS4Reliability" security="signOnly" receptionAwareness="receptionAwareness" service="hrBillingService" action="en16931CiiInvoiceAction" defaultMpc="defaultMpc" propertySet="ecodexPropertySet" payloadProfile="MessageProfile" errorHandling="demoErrorHandling" compressPayloads="true"/>
     </legConfigurations>
-    <process name="hrInvoiceSendProcess" initiatorRole="defaultInitiatorRole" responderRole="defaultResponderRole" agreement="hrAgreement" mep="oneway" binding="push">
+    <process name="en16931UblInvoiceSendProcess" initiatorRole="defaultInitiatorRole" responderRole="defaultResponderRole" agreement="hrAgreement" mep="oneway" binding="push">
       <initiatorParties>
         <initiatorParty name="blue_party"/>
       </initiatorParties>
       <legs>
-        <leg name="hrBillingInvoiceLeg"/>
+        <leg name="en16931UblInvoiceLeg"/>
       </legs>
     </process>
-    <process name="hrBillingNoteSendProcess" initiatorRole="defaultInitiatorRole" responderRole="defaultResponderRole" agreement="hrAgreement" mep="oneway" binding="push">
+    <process name="en16931UblCreditNoteSendProcess" initiatorRole="defaultInitiatorRole" responderRole="defaultResponderRole" agreement="hrAgreement" mep="oneway" binding="push">
       <initiatorParties>
         <initiatorParty name="blue_party"/>
       </initiatorParties>
       <legs>
-        <leg name="hrBillingCreditNoteLeg"/>
+        <leg name="en16931UblCreditNoteLeg"/>
       </legs>
     </process>
-    <process name="hrInvoiceReceiveProcess" initiatorRole="defaultInitiatorRole" responderRole="defaultResponderRole" agreement="hrAgreement" mep="oneway" binding="push">
+    <process name="en16931CiiInvoiceSendProcess" initiatorRole="defaultInitiatorRole" responderRole="defaultResponderRole" agreement="hrAgreement" mep="oneway" binding="push">
+      <initiatorParties>
+        <initiatorParty name="blue_party"/>
+      </initiatorParties>
+      <legs>
+        <leg name="en16931CiiInvoiceLeg"/>
+      </legs>
+    </process>
+    <process name="en16931UblInvoiceReceiveProcess" initiatorRole="defaultInitiatorRole" responderRole="defaultResponderRole" agreement="hrAgreement" mep="oneway" binding="push">
       <responderParties>
         <responderParty name="blue_party"/>
       </responderParties>
       <legs>
-        <leg name="hrBillingInvoiceLeg"/>
+        <leg name="en16931UblInvoiceLeg"/>
       </legs>
     </process>
-    <process name="hrBillingNoteReceiveProcess" initiatorRole="defaultInitiatorRole" responderRole="defaultResponderRole" agreement="hrAgreement" mep="oneway" binding="push">
+    <process name="en16931UblCreditNoteReceiveProcess" initiatorRole="defaultInitiatorRole" responderRole="defaultResponderRole" agreement="hrAgreement" mep="oneway" binding="push">
       <responderParties>
         <responderParty name="blue_party"/>
       </responderParties>
       <legs>
-        <leg name="hrBillingCreditNoteLeg"/>
+        <leg name="en16931UblCreditNoteLeg"/>
+      </legs>
+    </process>
+    <process name="en16931CiiInvoiceReceiveProcess" initiatorRole="defaultInitiatorRole" responderRole="defaultResponderRole" agreement="hrAgreement" mep="oneway" binding="push">
+      <responderParties>
+        <responderParty name="blue_party"/>
+      </responderParties>
+      <legs>
+        <leg name="en16931CiiInvoiceLeg"/>
       </legs>
     </process>
   </businessProcesses>
