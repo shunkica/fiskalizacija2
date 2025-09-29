@@ -4,7 +4,7 @@
                xmlns:cn="urn:oasis:names:specification:ubl:schema:xsd:CreditNote-2"
                xmlns:error="https://doi.org/10.5281/zenodo.1495494#error"
                xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
-               xmlns:hrextac="urn:hzn.hr:schema:xsd:HRExtensionAggregateComponents-1"
+               xmlns:hrextac="urn:mfin.gov.hr:schema:xsd:HRExtensionAggregateComponents-1"
                xmlns:inv="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2"
                xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
                xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -97,7 +97,7 @@
                <svrl:ns-prefix-in-attribute-values prefix="ext"
                                                    uri="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"/>
                <svrl:ns-prefix-in-attribute-values prefix="hrextac"
-                                                   uri="urn:hzn.hr:schema:xsd:HRExtensionAggregateComponents-1"/>
+                                                   uri="urn:mfin.gov.hr:schema:xsd:HRExtensionAggregateComponents-1"/>
                <xsl:sequence select="$schxslt:report"/>
             </svrl:schematron-output>
          </xsl:otherwise>

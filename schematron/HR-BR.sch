@@ -6,7 +6,7 @@
         xmlns:cn="urn:oasis:names:specification:ubl:schema:xsd:CreditNote-2"
         xmlns:inv="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2"
         xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
-        xmlns:hrextac="urn:hzn.hr:schema:xsd:HRExtensionAggregateComponents-1"
+        xmlns:hrextac="urn:mfin.gov.hr:schema:xsd:HRExtensionAggregateComponents-1"
         queryBinding="xslt2">
 
   <title>Fiskalizacija 2.0 - Hrvatska poslovna pravila za UBL</title>
@@ -16,7 +16,7 @@
   <ns prefix="cn" uri="urn:oasis:names:specification:ubl:schema:xsd:CreditNote-2"/>
   <ns prefix="inv" uri="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2"/>
   <ns prefix="ext" uri="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"/>
-  <ns prefix="hrextac" uri="urn:hzn.hr:schema:xsd:HRExtensionAggregateComponents-1"/>
+  <ns prefix="hrextac" uri="urn:mfin.gov.hr:schema:xsd:HRExtensionAggregateComponents-1"/>
 
   <phase id="HR-BR_phase">
     <active pattern="HR-Model"/>
@@ -54,8 +54,8 @@
       </assert>
 
       <assert id="HR-BR-4" flag="fatal"
-              test="not(cac:LegalMonetaryTotal/cbc:PayableAmount > 0) or 
-                    (local-name() = 'Invoice' and cbc:DueDate) or 
+              test="not(cac:LegalMonetaryTotal/cbc:PayableAmount > 0) or
+                    (local-name() = 'Invoice' and cbc:DueDate) or
                     (local-name() = 'CreditNote' and cac:PaymentMeans/cbc:PaymentDueDate)">
         [HR-BR-4] U slučaju pozitivnog iznosa koji dospijeva na plaćanje (BT-115), datum dospijeća plaćanja (BT-9) mora biti naveden.
       </assert>
