@@ -1,5 +1,14 @@
 # Evidencija zapažanja promjena u službenoj dokumentaciji
 
+## 2025-09-29
+- __Tehnicka_specifikacija_Fiskalizacija_eRacuna_i_eIzvjestavanje.pdf__
+  - verzija 1.6 (26.9.2025.)
+  - Ažurirana metoda `EvidentirajEracun`: dodani elementi `DokumentUkupanIznos`, `DokumentPopust`, `DokumentTrosak` nadopunjena `RaspodjelaPdv` i `StavkaERacuna`; ažurirani primjeri
+- __Tehnicka_specifikacija_eRacun_PT_AS4.pdf__
+  - verzija 1.3 (24.9.2025.)
+  - Ažuriran prilog P-mode parametri (PMode[].Security.X509.Signature.Certificate) i primjer P-modea
+  - Promijenjen je security u `eDeliveryAS4PolicyBST`
+
 ## 2025-09-18
 - __Tehnicka_specifikacija_eRacun_PT_AS4.pdf__
   - verzija 1.2 (16.9.2025.)
