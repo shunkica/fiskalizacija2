@@ -34,9 +34,7 @@
       </payloadProfile>
     </payloadProfiles>
     <securities>
-      <security name="eDeliveryAS4Policy" policy="eDeliveryAS4Policy.xml" signatureMethod="RSA_SHA256"/>
-      <security name="noSigNoEnc" policy="doNothingPolicy.xml" signatureMethod="RSA_SHA256"/>
-      <security name="signOnly" policy="signOnly.xml" signatureMethod="RSA_SHA256"/>
+      <security name="eDeliveryAS4PolicyBST" policy="eDeliveryAS4PolicyBST.xml" signatureMethod="RSA_SHA256"/>
     </securities>
     <errorHandlings>
       <errorHandling name="demoErrorHandling" errorAsResponse="true" businessErrorNotifyProducer="false" businessErrorNotifyConsumer="false" deliveryFailureNotifyProducer="false"/>
@@ -59,9 +57,9 @@
       <reliability name="noReliability" replyPattern="response" nonRepudiation="false"/>
     </as4>
     <legConfigurations>
-      <legConfiguration name="en16931UblInvoiceLeg" reliability="AS4Reliability" security="signOnly" receptionAwareness="receptionAwareness" service="hrBillingService" action="en16931UblInvoiceAction" defaultMpc="defaultMpc" propertySet="ecodexPropertySet" payloadProfile="MessageProfile" errorHandling="demoErrorHandling" compressPayloads="true"/>
-      <legConfiguration name="en16931UblCreditNoteLeg" reliability="AS4Reliability" security="signOnly" receptionAwareness="receptionAwareness" service="hrBillingService" action="en16931UblCreditNoteAction" defaultMpc="defaultMpc" propertySet="ecodexPropertySet" payloadProfile="MessageProfile" errorHandling="demoErrorHandling" compressPayloads="true"/>
-      <legConfiguration name="en16931CiiInvoiceLeg" reliability="AS4Reliability" security="signOnly" receptionAwareness="receptionAwareness" service="hrBillingService" action="en16931CiiInvoiceAction" defaultMpc="defaultMpc" propertySet="ecodexPropertySet" payloadProfile="MessageProfile" errorHandling="demoErrorHandling" compressPayloads="true"/>
+      <legConfiguration name="en16931UblInvoiceLeg" reliability="AS4Reliability" security="eDeliveryAS4PolicyBST" receptionAwareness="receptionAwareness" service="hrBillingService" action="en16931UblInvoiceAction" defaultMpc="defaultMpc" propertySet="ecodexPropertySet" payloadProfile="MessageProfile" errorHandling="demoErrorHandling" compressPayloads="true"/>
+      <legConfiguration name="en16931UblCreditNoteLeg" reliability="AS4Reliability" security="eDeliveryAS4PolicyBST" receptionAwareness="receptionAwareness" service="hrBillingService" action="en16931UblCreditNoteAction" defaultMpc="defaultMpc" propertySet="ecodexPropertySet" payloadProfile="MessageProfile" errorHandling="demoErrorHandling" compressPayloads="true"/>
+      <legConfiguration name="en16931CiiInvoiceLeg" reliability="AS4Reliability" security="eDeliveryAS4PolicyBST" receptionAwareness="receptionAwareness" service="hrBillingService" action="en16931CiiInvoiceAction" defaultMpc="defaultMpc" propertySet="ecodexPropertySet" payloadProfile="MessageProfile" errorHandling="demoErrorHandling" compressPayloads="true"/>
     </legConfigurations>
     <process name="en16931UblInvoiceSendProcess" initiatorRole="defaultInitiatorRole" responderRole="defaultResponderRole" agreement="hrAgreement" mep="oneway" binding="push">
       <initiatorParties>
