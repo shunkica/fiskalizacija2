@@ -7,10 +7,10 @@
             elementFormDefault="qualified"
             version="1.0">
 
-    <xsd:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig.xsd"/>
-
+    <xsd:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema.xsd"/>    
+    
 <!--
-    Evidentiranje eRačuna
+    Evidentiranje eRačuna 
 -->
 
     <xsd:element name="EvidentirajERacunZahtjev">
@@ -131,7 +131,7 @@
                 <xsd:annotation>
                     <xsd:documentation>Informacije o izdavatelju (BG-4 iz UBL 2.1).</xsd:documentation>
                 </xsd:annotation>
-            </xsd:element>
+            </xsd:element>            
             <xsd:element name="Primatelj" type="tns:Primatelj">
                 <xsd:annotation>
                     <xsd:documentation>Informacije o primatelju (BG-7 iz UBL 2.1).</xsd:documentation>
@@ -139,17 +139,27 @@
             </xsd:element>
             <xsd:element name="PrijenosSredstava" type="tns:PrijenosSredstava" minOccurs="0" maxOccurs="unbounded">
                 <xsd:annotation>
-                    <xsd:documentation>Informacije o virmanskim plaćanjima.</xsd:documentation>
+                    <xsd:documentation>Informacije o virmanskim plaćanjima (BG-13 iz UBL 2.1).</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="DokumentUkupanIznos" type="tns:DokumentUkupanIznos">
                 <xsd:annotation>
-                    <xsd:documentation>Informacije o ukupnim novčanim iznosima za eRačun.</xsd:documentation>
+                    <xsd:documentation>Informacije o ukupnim novčanim iznosima za eRačun (BG-22 iz UBL 2.1).</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="RaspodjelaPdv" type="tns:RaspodjelaPdv" maxOccurs="unbounded">
                 <xsd:annotation>
-                    <xsd:documentation>Informacije o rekapitulaciji PDV-a po različitim kategorijama, stopama i razlozima izuzeća.</xsd:documentation>
+                    <xsd:documentation>Informacije o rekapitulaciji PDV-a po različitim kategorijama, stopama i razlozima izuzeća (BG-23 iz UBL 2.1).</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="DokumentPopust" type="tns:DokumentPopust" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation>Skupina poslovnih pojmova koji nude informacije o popustima (BG-20 iz UBL 2.1).</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="DokumentTrosak" type="tns:DokumentTrosak" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation>Skupina poslovnih pojmova koji pružaju informacije o troškovima i porezima osim PDV-a, primjenjivo na račun u cjelini (BG-21 iz UBL 2.1).</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="StavkaERacuna" type="tns:StavkaERacuna" maxOccurs="unbounded">
@@ -248,6 +258,11 @@
                     <xsd:documentation>Zbroj svih popusta na razini dokumenta na računu (BT-107 iz UBL 2.1).</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
+            <xsd:element name="trosak" type="tns:decimal2" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Zbroj svih troškova na razini dokumenta na računu (BT-108 iz UBL 2.1).</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
             <xsd:element name="iznosBezPdv" type="tns:decimal2">
                 <xsd:annotation>
                     <xsd:documentation>Ukupan iznos na računu bez PDV-a (BT-109 iz UBL 2.1).</xsd:documentation>
@@ -308,6 +323,76 @@
                     <xsd:documentation>Tekst razloga za izuzeće od PDV-a, članak 226, stavke 11 do 15 Direktive 2006/112/EZ, obavezno ako je kategorijaPdv jednaka AE ili razlogOslobodenja postoji (BT-120 iz UBL 2.1).</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
+            <xsd:element name="hrOznakaKategorijaPdv" type="tns:hrKategorijaPdv" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Šifra Hrvatske kategorije PDV-a (HR-BT-22 iz EU norme).</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="DokumentPopust">
+        <xsd:sequence>
+            <xsd:element name="iznosPopust" type="tns:decimal2">
+                <xsd:annotation>
+                    <xsd:documentation>Iznos popusta, bez PDV-a (BT-92 iz UBL 2.1).</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="kategorijaPdv" type="tns:kategorijaPdv">
+                <xsd:annotation>
+                    <xsd:documentation>Kodirana identifikacija kategorije PDV-a koja se primjenjuje na popust na razini dokumenta (BT-95 iz UBL 2.1).</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="stopaPdv" type="xsd:decimal" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Stopa PDV-a prikazana kao postotak koji se primjenjuje na popust na razini dokumenta (BT-96 iz UBL 2.1).</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="tekstRazlogaPopusta" type="tns:tekst1024" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Razlog za popust na razini dokumenta izražen u obliku teksta (BT-97 iz UBL 2.1).</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="razlogPopusta" type="tns:razlogPopusta" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Razlog za popust na razini dokumenta, izražen u obliku koda (BT-98 iz UBL 2.1).</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="DokumentTrosak">
+        <xsd:sequence>
+            <xsd:element name="iznosTrosak" type="tns:decimal2">
+                <xsd:annotation>
+                    <xsd:documentation>Iznos troška, bez PDV-a (BT-99 iz UBL 2.1).</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="kategorijaPdv" type="tns:kategorijaPdv">
+                <xsd:annotation>
+                    <xsd:documentation>Kodirana identifikacija kategorije PDV-a koja se primjenjuje na trošak na razini dokumenta (BT-102 iz UBL 2.1).</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="hrOznakaPorezneKategorije" type="tns:hrKategorijaPdv" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Podrška za stavke koje ne podliježu PDV-u (HR-BT-6 iz EU norme).</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="stopaPdv" type="xsd:decimal" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Stopa PDV-a prikazana kao postotak na koji se primjenjuje trošak na razini dokumenta (BT-103 iz UBL 2.1).</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="tekstRazlogaOslobodenjaPdv" type="tns:tekst1024" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Razlog oslobođenja od PDV-a izražen kao tekst (HR-BT-7 iz EU norme).</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="razlogOslobodenjaPdv" type="tns:izuzecePdv" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Razlog oslobođenja od PDV-a izražen kao kod (HR-BT-8 iz EU norme).</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
         </xsd:sequence>
     </xsd:complexType>
 
@@ -323,9 +408,19 @@
                     <xsd:documentation>Jedinica mjere koja se primjenjuje na količinu fakturiranu na računu (BT-130 iz UBL 2.1).</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
+            <xsd:element name="neto" type="tns:decimal2">
+                <xsd:annotation>
+                    <xsd:documentation>Ukupan iznos stavke računa, uključujući popuste i troškove na razini stavke kao i druge relevantne poreze (BT-131 iz UBL 2.1).</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
             <xsd:element name="artiklNetoCijena" type="xsd:decimal">
                 <xsd:annotation>
                     <xsd:documentation>Cijena artikla bez PDV-a, nakon oduzimanja popusta na cijenu artikla (BT-146 iz UBL 2.1).</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="artiklBrutoCijena" type="tns:decimal2" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Jedinična cijena bez PDV-a prije oduzimanja popusta na cijenu artikla (BT-148 iz UBL 2.1).</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="artiklOsnovnaKolicina" type="xsd:decimal" minOccurs="0">
@@ -351,6 +446,16 @@
             <xsd:element name="artiklNaziv" type="tns:tekst100">
                 <xsd:annotation>
                     <xsd:documentation>Naziv artikla (BT-153 iz UBL 2.1).</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="artiklOpis" type="tns:tekst1024" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Opis artikla (BT-154 iz UBL 2.1).</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="artiklHrOznakaKategorijaPdv" type="tns:hrKategorijaPdv" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Podrška za stavke koje su oslobođene PDV-a ili ne podliježu PDV-u (oznaka porezne kategorije artikla) (HR-BT-12 iz EU norme).</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="ArtiklIdentifikatorKlasifikacija" type="tns:ArtiklIdentifikatorKlasifikacija" minOccurs="0" maxOccurs="unbounded">
@@ -559,6 +664,25 @@
         </xsd:restriction>
     </xsd:simpleType>
 
+    <xsd:simpleType name="hrKategorijaPdv">
+        <xsd:annotation>
+            <xsd:documentation>Oznaka Hrvatske kategorije PDV-a.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="([Hh][Rr]):(([Pp][Dd][Vv][0-9]{1,2})|([A-Za-z]{1,10}))"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="razlogPopusta">
+        <xsd:annotation>
+            <xsd:documentation>Razlog za popust po UNTIDID5305.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="([0-9]{4}|[A-Za-z]{2})"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+
     <xsd:simpleType name="tekst3">
         <xsd:annotation>
             <xsd:documentation>Tekst od 1 do 3 znaka.</xsd:documentation>
@@ -671,7 +795,7 @@
 
     <xsd:simpleType name="tekst1024">
         <xsd:annotation>
-            <xsd:documentation>Tekst od 1 do 1000 znakova.</xsd:documentation>
+            <xsd:documentation>Tekst od 1 do 1024 znakova.</xsd:documentation>
         </xsd:annotation>
         <xsd:restriction base="xsd:string">
             <xsd:minLength value="1"/>
