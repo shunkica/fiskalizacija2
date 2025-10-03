@@ -1,5 +1,21 @@
 # Evidencija zapažanja promjena u službenoj dokumentaciji
 
+## 2025-10-03
+- __Tehnicka_specifikacija_Fiskalizacija_eRacuna_i_eIzvjestavanje.pdf__
+  - verzija 1.7 (30.09.2025.)
+  - Ažurirano mapiranje na EU normu i pojavnost podataka: datum isporuke, prijenos sredstava, dokument popust, dokument trošak, indikator kopije
+    - DokumentPopust\stopaPdv - [0,N] -> [0,1]
+    - DokumentPopust\tekstRazlogaPopusta - [0,N] -> [0,1]
+    - DokumentPopust\razlogPopusta - [0,N] -> [0,1]
+    - DokumentTrosak\hrOznakaPorezneKategorije - [0,N] -> [0,1]
+    - DokumentTrosak\stopaPdv - [0,N] -> [0,1]
+    - DokumentTrosak\tekstRazlogaOslobodenjaPdv - [0,N] -> [0,1]
+    - DokumentTrosak\razlogOslobodenjaPdv - [0,N] -> [0,1]
+    - RaspodjelaPdv\iznosOs
+  - verzija 1.8 (1.10.2025.)
+  - Ažuriran preporučeni otvoreni TCP port prema sustavu
+    - 8449 -> 8509
+
 ## 2025-09-29
 - __Tehnicka_specifikacija_Fiskalizacija_eRacuna_i_eIzvjestavanje.pdf__
   - verzija 1.6 (26.9.2025.)

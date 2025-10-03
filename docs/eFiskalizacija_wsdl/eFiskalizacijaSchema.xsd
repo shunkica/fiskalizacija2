@@ -139,7 +139,7 @@
             </xsd:element>
             <xsd:element name="PrijenosSredstava" type="tns:PrijenosSredstava" minOccurs="0" maxOccurs="unbounded">
                 <xsd:annotation>
-                    <xsd:documentation>Informacije o virmanskim plaćanjima (BG-13 iz UBL 2.1).</xsd:documentation>
+                    <xsd:documentation>Informacije o virmanskim plaćanjima (BG-17 iz UBL 2.1).</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="DokumentUkupanIznos" type="tns:DokumentUkupanIznos">
