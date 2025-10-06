@@ -1,0 +1,246 @@
+name: as4-dev
+
+networks:
+  domibus-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: ${NET_PREFIX:-172.20.44}.0/24
+
+services:
+
+  domibus-blue-db:
+    image: mysql:8
+    ports:
+      - "127.0.0.1:${DOMIBUS_BLUE_DB_PORT:-8301}:3306"
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "127.0.0.1" ]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+    env_file:
+      - "assets/dev/env/.domibus.env"
+    volumes:
+      - "domibus-blue-db:/var/lib/mysql"
+      - "./assets/dev/db/bus-blue:/docker-entrypoint-initdb.d:ro"
+    networks:
+      domibus-network:
+        ipv4_address: ${NET_PREFIX:-172.20.44}.10
+
+  domibus-red-db:
+    image: mysql:8
+    ports:
+      - "127.0.0.1:${DOMIBUS_RED_DB_PORT:-8302}:3306"
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "127.0.0.1" ]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+    env_file:
+      - "assets/dev/env/.domibus.env"
+    volumes:
+      - "domibus-red-db:/var/lib/mysql"
+      - "./assets/dev/db/bus-red:/docker-entrypoint-initdb.d:ro"
+    networks:
+      domibus-network:
+        ipv4_address: ${NET_PREFIX:-172.20.44}.11
+
+  domismp-db:
+    image: mysql:8
+    ports:
+      - "127.0.0.1:${DOMISMP_DB_PORT:-8303}:3306"
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "127.0.0.1" ]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+    env_file:
+      - "assets/dev/env/.domismp.env"
+    volumes:
+      - "domismp-db:/var/lib/mysql"
+      - "./assets/dev/db/smp:/docker-entrypoint-initdb.d:ro"
+    networks:
+      domibus-network:
+        ipv4_address: ${NET_PREFIX:-172.20.44}.12
+
+  domisml-db:
+    image: mysql:8
+    ports:
+      - "127.0.0.1:${DOMISML_DB_PORT:-8304}:3306"
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "127.0.0.1" ]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+    env_file:
+      - "assets/dev/env/.domisml.env"
+    volumes:
+      - "domisml-db:/var/lib/mysql"
+      - "./assets/dev/db/sml:/docker-entrypoint-initdb.d:ro"
+    networks:
+      domibus-network:
+        ipv4_address: ${NET_PREFIX:-172.20.44}.13
+
+  domibus-blue:
+    build:
+      context: .
+      dockerfile: assets/dev/bus/domibus.Dockerfile
+      target: domibus-dev
+    env_file:
+      - "assets/dev/env/.uid.env"
+      - "assets/dev/env/.domibus.env"
+      - "assets/dev/env/.domibus.blue.env"
+    ports:
+      - "127.0.0.1:${DOMIBUS_BLUE_PORT:-8081}:8080"
+    volumes:
+      - "domibus-blue:/opt/domibus/conf"
+      - "./logs/blue:/opt/domibus/logs"
+    depends_on:
+      domibus-blue-db:
+        condition: service_healthy
+    dns:
+      - ${NET_PREFIX:-172.20.44}.2
+    networks:
+      domibus-network:
+        ipv4_address: ${NET_PREFIX:-172.20.44}.20
+
+  domibus-red:
+    build:
+      context: .
+      dockerfile: assets/dev/bus/domibus.Dockerfile
+      target: domibus-dev
+    env_file:
+      - "assets/dev/env/.uid.env"
+      - "assets/dev/env/.domibus.env"
+      - "assets/dev/env/.domibus.red.env"
+    ports:
+      - "127.0.0.1:${DOMIBUS_RED_PORT:-8082}:8080"
+    volumes:
+      - "domibus-red:/opt/domibus/conf"
+      - "./logs/red:/opt/domibus/logs"
+    depends_on:
+      domibus-red-db:
+        condition: service_healthy
+    dns:
+      - ${NET_PREFIX:-172.20.44}.2
+    networks:
+      domibus-network:
+        ipv4_address: ${NET_PREFIX:-172.20.44}.21
+
+  domismp:
+    build:
+      context: .
+      dockerfile: assets/dev/smp/domismp.Dockerfile
+      target: domismp-dev
+    env_file:
+      - "assets/dev/env/.uid.env"
+      - "assets/dev/env/.domismp.env"
+    ports:
+      - "127.0.0.1:${DOMISMP_PORT:-8083}:8080"
+    volumes:
+      - "domismp:/opt/smp"
+      - "./logs/smp:/opt/smp/logs"
+    depends_on:
+      domismp-db:
+        condition: service_healthy
+    dns:
+      - ${NET_PREFIX:-172.20.44}.2
+    networks:
+      domibus-network:
+        ipv4_address: ${NET_PREFIX:-172.20.44}.30
+
+  domisml:
+    build:
+      context: .
+      dockerfile: assets/dev/sml/domisml.Dockerfile
+      target: domisml-dev
+    env_file:
+      - "assets/dev/env/.uid.env"
+      - "assets/dev/env/.domisml.env"
+    ports:
+      - "127.0.0.1:${DOMISML_PORT:-8084}:8080"
+    volumes:
+      - "domisml:/opt/sml"
+      - "./logs/sml:/opt/sml/logs"
+    depends_on:
+      domisml-db:
+        condition: service_healthy
+      bind9:
+        condition: service_started
+    dns:
+      - ${NET_PREFIX:-172.20.44}.2
+    networks:
+      domibus-network:
+        ipv4_address: ${NET_PREFIX:-172.20.44}.31
+
+  bind9:
+    build:
+      context: .
+      dockerfile: assets/dev/bind/bind9.Dockerfile
+    networks:
+      domibus-network:
+        ipv4_address: ${NET_PREFIX:-172.20.44}.2
+
+  client:
+    image: node:lts
+    user: "1000:1000"
+    command: sh -c "npm install && npm start"
+    working_dir: /app
+    ports:
+      - "127.0.0.1:${CLIENT_PORT:-3000}:3000"
+    volumes:
+      - "./assets/dev/client:/app"
+    depends_on:
+      bind9:
+        condition: service_started
+    dns:
+      - ${NET_PREFIX:-172.20.44}.2
+    networks:
+      domibus-network:
+        ipv4_address: ${NET_PREFIX:-172.20.44}.50
+
+  backend-blue:
+    build:
+      context: .
+      dockerfile: assets/dev/backend/backend.Dockerfile
+    env_file:
+      - "assets/dev/env/.uid.env"
+      - "assets/dev/env/.backend.env"
+    dns:
+      - ${NET_PREFIX:-172.20.44}.2
+    networks:
+      domibus-network:
+        ipv4_address: ${NET_PREFIX:-172.20.44}.101
+    ports:
+      - "127.0.0.1:${BACKEND_BLUE_PORT:-3001}:3000"
+    volumes:
+      - "./assets/dev/backend:/app"
+      - "./logs/backend-blue:/tmp/received_messages"
+
+  backend-red:
+    build:
+      context: .
+      dockerfile: assets/dev/backend/backend.Dockerfile
+    env_file:
+      - "assets/dev/env/.uid.env"
+      - "assets/dev/env/.backend.env"
+    dns:
+      - ${NET_PREFIX:-172.20.44}.2
+    networks:
+      domibus-network:
+        ipv4_address: ${NET_PREFIX:-172.20.44}.102
+    ports:
+      - "127.0.0.1:${BACKEND_RED_PORT:-3002}:3000"
+    volumes:
+      - "./assets/dev/backend:/app"
+      - "./logs/backend-red:/tmp/received_messages"
+
+volumes:
+  domibus-blue-db:
+  domibus-red-db:
+  domismp-db:
+  domisml-db:
+  domibus-blue:
+  domibus-red:
+  domismp:
+  domisml:

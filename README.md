@@ -6,13 +6,13 @@ Cilj je pružiti strukturirane tehničke resurse, validacijska pravila i testnu 
 
 ## Struktura
 
-| Direktorij              | Opis                                                                                                          |
-|-------------------------|---------------------------------------------------------------------------------------------------------------|
-| `/docs`                 | Dokumentacija i primjeri preuzeti sa službenih izvora                                                         |
-| `/primjeri/as4-dev-env` | Primjer AS4 okruženja za razmjenu eRačuna sa dinamičnim otkrivanjem sudionika (docker, domibus)               |
-| `/schemas`              | XML sheme za validaciju poruka eFiskalizacije i eIzvještavanja                                                |
-| `/schematron`           | Neslužbena verzija schematron pravila za validaciju dokumenata prema HR poslovnim pravilima iz specifikacije. |
-| `/specifikacija `       | Neslužbena verzija poslovnih pravila i pojmova u Markdown i JSON formatu                                      |
+| Direktorij          | Opis                                                                                                          |
+|---------------------|---------------------------------------------------------------------------------------------------------------|
+| `/docs`             | Dokumentacija i primjeri preuzeti sa službenih izvora                                                         |
+| `/primjeri/as4-dev` | Primjer AS4 okruženja za razmjenu eRačuna sa dinamičnim otkrivanjem sudionika (docker, domibus)               |
+| `/schemas`          | XML sheme za validaciju poruka eFiskalizacije i eIzvještavanja                                                |
+| `/schematron`       | Neslužbena verzija schematron pravila za validaciju dokumenata prema HR poslovnim pravilima iz specifikacije. |
+| `/specifikacija `   | Neslužbena verzija poslovnih pravila i pojmova u Markdown i JSON formatu                                      |
 
 ## Povezani projekti
 
