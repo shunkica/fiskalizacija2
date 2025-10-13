@@ -1,5 +1,20 @@
 # Evidencija zapažanja promjena u službenoj dokumentaciji
 
+## 2025-10-13
+- __Tehnicka_specifikacija_eRacun_AMS.pdf__
+  - verzija 1.4 (09.10.2025.)
+  - Ažurirana produkcijska poveznica za AMS (`https://cis.porezna-uprava.hr:8513/proxy`)
+- __Tehnicka_specifikacija_eRacun_MPS.pdf__
+  - verzija 1.3 (08.10.2025.)
+  - Ažuriran dio upita prema MPS-u – dodan DNS upit prema AMS-u
+- __Tehnicka_specifikacija_eRacun_PT_AS4.pdf__
+  - verzija 1.4 (07.10.2025.)
+  - ažurirana fiksna vrijednost u polju PMode.Initiator.Party
+  - ažuriran PMode[].Security.X509.Signature.Algorithm
+  - ažuriran Message Correlation
+  - ažuriran PMode[].Security.X509.Signature.Algorithm
+  - ažuriran PMode[1].BusinessInfo.Service.type
+
 ## 2025-10-03
 - __Tehnicka_specifikacija_Fiskalizacija_eRacuna_i_eIzvjestavanje.pdf__
   - verzija 1.7 (30.09.2025.)

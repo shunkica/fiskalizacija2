@@ -54,7 +54,7 @@
     },
     {
       "Parametar": "PMode[].BusinessInfo.Service.type",
-      "Vrijednost": "Ne unosi se"
+      "Vrijednost": "cenbii-procid-ubl"
     },
     {
       "Parametar": "PMode[].BusinessInfo.Action",
@@ -102,7 +102,7 @@
     },
     {
       "Parametar": "PMode[].Security.X509.Signature.Algorithm",
-      "Vrijednost": "`https://www.ietf.org/internet-drafts/draft-eastlake-additional-xmlsec-uris-00.txt`"
+      "Vrijednost": "`https://www.rfc-editor.org/rfc/rfc9231#name-rsa-sha256`"
     },
     {
       "Parametar": "PMode[].Security.X509.Encryption.Encrypt",
