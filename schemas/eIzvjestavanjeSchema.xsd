@@ -378,27 +378,27 @@
             </xsd:element>
             <xsd:element name="PrijenosSredstava" type="tns:PrijenosSredstava" minOccurs="0" maxOccurs="unbounded">
                 <xsd:annotation>
-                    <xsd:documentation>Informacije o virmanskim plaćanjima.</xsd:documentation>
+                    <xsd:documentation>Informacije o virmanskim plaćanjima (BG-17 iz UBL 2.1).</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="DokumentUkupanIznos" type="tns:DokumentUkupanIznos">
                 <xsd:annotation>
-                    <xsd:documentation>Informacije o ukupnim novčanim iznosima za račun.</xsd:documentation>
+                    <xsd:documentation>Informacije o ukupnim novčanim iznosima za račun (BG-22 iz UBL 2.1).</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="RaspodjelaPdv" type="tns:RaspodjelaPdv" maxOccurs="unbounded">
                 <xsd:annotation>
-                    <xsd:documentation>Informacije o rekapitulaciji PDV-a po različitim kategorijama, stopama i razlozima izuzeća.</xsd:documentation>
+                    <xsd:documentation>Informacije o rekapitulaciji PDV-a po različitim kategorijama, stopama i razlozima izuzeća (BG-23 iz UBL 2.1).</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="DokumentPopust" type="tns:DokumentPopust" minOccurs="0" maxOccurs="unbounded">
                 <xsd:annotation>
-                    <xsd:documentation>Skupina poslovnih pojmova koji nude informacije o popustima.</xsd:documentation>
+                    <xsd:documentation>Skupina poslovnih pojmova koji nude informacije o popustima  (BG-20 iz UBL 2.1).</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="DokumentTrosak" type="tns:DokumentTrosak" minOccurs="0" maxOccurs="unbounded">
                 <xsd:annotation>
-                    <xsd:documentation>Skupina poslovnih pojmova koji pružaju informacije o troškovima i porezima osim PDV-a, primjenjivo na račun u cjelini.</xsd:documentation>
+                    <xsd:documentation>Skupina poslovnih pojmova koji pružaju informacije o troškovima i porezima osim PDV-a, primjenjivo na račun u cjelini  (BG-21 iz UBL 2.1).</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="StavkaRacuna" type="tns:StavkaRacuna" maxOccurs="unbounded">
@@ -919,10 +919,10 @@
 
     <xsd:simpleType name="razlogPopusta">
         <xsd:annotation>
-            <xsd:documentation>Razlog za popust po UNTIDID5305.</xsd:documentation>
+            <xsd:documentation>Razlog za popust po UNTDID5189.</xsd:documentation>
         </xsd:annotation>
         <xsd:restriction base="xsd:string">
-            <xsd:pattern value="([0-9]{4}|[A-Za-z]{2})"/>
+            <xsd:pattern value="[0-9]{1,3}"/>
         </xsd:restriction>
     </xsd:simpleType>
 

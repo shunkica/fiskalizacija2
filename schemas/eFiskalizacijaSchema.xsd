@@ -675,10 +675,10 @@
 
     <xsd:simpleType name="razlogPopusta">
         <xsd:annotation>
-            <xsd:documentation>Razlog za popust po UNTIDID5305.</xsd:documentation>
+            <xsd:documentation>Razlog za popust po UNTDID5189.</xsd:documentation>
         </xsd:annotation>
         <xsd:restriction base="xsd:string">
-            <xsd:pattern value="([0-9]{4}|[A-Za-z]{2})"/>
+            <xsd:pattern value="[0-9]{1,3}"/>
         </xsd:restriction>
     </xsd:simpleType>
 
