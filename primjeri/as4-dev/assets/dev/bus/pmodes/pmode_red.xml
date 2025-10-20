@@ -69,8 +69,8 @@
       </payloadProfile>
     </payloadProfiles>
     <securities>
-      <security name="eDeliveryAS4Policy"
-                policy="eDeliveryAS4Policy.xml"
+      <security name="eRacunPolicy"
+                policy="eRacunPolicy.xml"
                 signatureMethod="RSA_SHA256"/>
     </securities>
     <errorHandlings>
@@ -109,7 +109,7 @@
     <legConfigurations>
       <legConfiguration name="en16931UblInvoiceLeg"
                         reliability="AS4Reliability"
-                        security="eDeliveryAS4Policy"
+                        security="eRacunPolicy"
                         receptionAwareness="receptionAwareness"
                         service="hrBillingService"
                         action="en16931UblInvoiceAction"
@@ -120,7 +120,7 @@
                         compressPayloads="true"/>
       <legConfiguration name="en16931UblCreditNoteLeg"
                         reliability="AS4Reliability"
-                        security="eDeliveryAS4Policy"
+                        security="eRacunPolicy"
                         receptionAwareness="receptionAwareness"
                         service="hrBillingService"
                         action="en16931UblCreditNoteAction"
@@ -131,7 +131,7 @@
                         compressPayloads="true"/>
       <legConfiguration name="en16931CiiInvoiceLeg"
                         reliability="AS4Reliability"
-                        security="eDeliveryAS4Policy"
+                        security="eRacunPolicy"
                         receptionAwareness="receptionAwareness"
                         service="hrBillingService"
                         action="en16931CiiInvoiceAction"
