@@ -23,3 +23,4 @@ Cilj je pružiti strukturirane tehničke resurse, validacijska pravila i testnu 
 - _porezna.gov.hr_
 - _web.dzs.hr_
 - _ec.europa.eu_
+- _narodne-novine.nn.hr_
