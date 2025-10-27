@@ -178,7 +178,7 @@
             </xsd:element>
             <xsd:element name="nacinPlacanja" type="tns:nacinPlacanja">
                 <xsd:annotation>
-                    <xsd:documentation>Šifra načina plaćanja po UNCL4461.</xsd:documentation>
+                    <xsd:documentation>Šifra načina plaćanja (T – Transakcijski račun, O – Obračunsko plaćanje, Z – Ostalo).</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
         </xsd:sequence>
@@ -468,7 +468,7 @@
         <xsd:sequence>
             <xsd:element name="identifikatorRacunaZaPlacanje" type="tns:tekst34">
                 <xsd:annotation>
-                    <xsd:documentation>Jedinstveni identifikator financijskog platnog računa, kod pružatelja platnih usluga, na koji se plaćanje treba izvršiti, IBAN obavezno ako je kod tipa nacinPlacanja jednak 30 ili 58, (BT-84 iz UBL 2.1).</xsd:documentation>
+                    <xsd:documentation>Jedinstveni identifikator financijskog platnog računa, kod pružatelja platnih usluga, na koji se plaćanje treba izvršiti (BT-84 iz UBL 2.1).</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="nazivRacunaZaPlacanje" type="tns:tekst35" minOccurs="0">
@@ -883,10 +883,24 @@
 
     <xsd:simpleType name="nacinPlacanja">
         <xsd:annotation>
-            <xsd:documentation>Oznaka načina plaćanja po UNTID 4461.</xsd:documentation>
+            <xsd:documentation>Šifra načina plaćanja.</xsd:documentation>
         </xsd:annotation>
         <xsd:restriction base="xsd:string">
-            <xsd:pattern value="[A-Za-z0-9]{1,3}"/>
+            <xsd:enumeration value="T">
+                <xsd:annotation>
+                    <xsd:documentation>Transakcijski račun</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="O">
+                <xsd:annotation>
+                    <xsd:documentation>Obračunsko plaćanje</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="Z">
+                <xsd:annotation>
+                    <xsd:documentation>Ostalo</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
         </xsd:restriction>
     </xsd:simpleType>
 
