@@ -1,4 +1,4 @@
-FROM eclipse-temurin:11-jre-alpine AS domibus-base
+FROM eclipse-temurin:11-jre-alpine-3.22 AS domibus-base
 
 ADD https://ec.europa.eu/digital-building-blocks/artifact/repository/eDelivery/eu/domibus/domibus-msh-distribution/5.1.9/domibus-msh-distribution-5.1.9-tomcat-full.zip /tmp/domibus.zip
 
