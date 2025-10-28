@@ -1,6 +1,6 @@
 FROM eclipse-temurin:11-jre-alpine AS domibus-base
 
-ADD https://ec.europa.eu/digital-building-blocks/artifact/repository/eDelivery/eu/domibus/domibus-msh-distribution/5.1.8/domibus-msh-distribution-5.1.8-tomcat-full.zip /tmp/domibus.zip
+ADD https://ec.europa.eu/digital-building-blocks/artifact/repository/eDelivery/eu/domibus/domibus-msh-distribution/5.1.9/domibus-msh-distribution-5.1.9-tomcat-full.zip /tmp/domibus.zip
 
 RUN apk --no-cache add unzip && unzip /tmp/domibus.zip -d /opt/ && rm /tmp/domibus.zip  && apk del unzip
 
