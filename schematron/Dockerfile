@@ -7,11 +7,11 @@ RUN dnf install -y unzip java  && \
     unzip /saxon.zip -d /opt/ && \
     unzip /schxslt.zip -d /opt/ && \
     rm /saxon.zip /schxslt.zip && \
-    dnf clean all 
+    dnf clean all
 
-COPY HR-BR.sch /opt/
+COPY docs/HRUBLValidator/HRUBLSchematron/ /opt/
 
-RUN java -jar /opt/saxon-he-12.7.jar -s:/opt/HR-BR.sch -xsl:/opt/schxslt-1.10.1/2.0/compile-for-svrl.xsl -o:/opt/HR-BR.xsl
+RUN java -jar /opt/saxon-he-12.7.jar -s:/opt/HR_CIUS_EXT_EN16931_UBL.sch -xsl:/opt/schxslt-1.10.1/2.0/compile-for-svrl.xsl -o:/opt/HR_CIUS_EXT_EN16931_UBL.xsl
 
 # Create reports directory
 RUN mkdir -p /opt/reports

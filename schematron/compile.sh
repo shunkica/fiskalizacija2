@@ -3,9 +3,9 @@ set -e
 
 IMAGE_NAME=schematron-compiler
 CONTAINER_NAME=schematron-run
-OUTPUT_FILE=HR-BR.xsl
+OUTPUT_FILE=HR_CIUS_EXT_EN16931_UBL.xsl
 
-docker build -t $IMAGE_NAME .
+docker build -f Dockerfile -t $IMAGE_NAME ../
 
 docker create --name $CONTAINER_NAME $IMAGE_NAME
 
