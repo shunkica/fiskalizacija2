@@ -26,7 +26,7 @@ Logovi i poruke koje backend prima od domibusa, nalaze se u `logs` direktoriju.
 
 Za `Payload XML File` mogu se koristiti primjeri eRačuna iz direktorija `@/docs/Primjeri_eRacuna`.
 
-Po defaultu je konfiguriran participant `9934:00000000000` na instanci 1 (blue) i `9934:11111111111` na instanci 2 (red).
+Po defaultu je konfiguriran participant `9934:00000000001` na instanci 1 (blue) i `9934:11111111119` na instanci 2 (red).
 
 # Napomene
 

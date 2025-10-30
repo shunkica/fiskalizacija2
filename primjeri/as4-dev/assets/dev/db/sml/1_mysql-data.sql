@@ -61,5 +61,5 @@ INSERT INTO bdmsl_smp (id, created_on, last_updated_on, smp_disabled, dns_record
 VALUES (1, NOW(), NOW(), false, 'all', 'http://domismp:8080/smp/', '0.0.0.0', 'domismp1', 1, 1);
 
 INSERT INTO bdmsl_participant_identifier (id, created_on, last_updated_on, cname_hash, disabled, naptr_hash, naptr_services, participant_id, scheme, fk_smp_id)
-VALUES (1, NOW(), NOW(), 'f0cd33a02775d9f108bf01359ece875d', false, 'U6RCMPGUYFGICOENICFRZAUB4U764CJOTIZX6SR4FEKDTGCAK7VQ', 'Meta:SMP', '9934:00000000000', 'iso6523-actorid-upis', 1),
-       (2, NOW(), NOW(), 'a66df1049fc35d51cc77ae84bd06ba14', false, 'WBDEORSVAXTCNSV5IQBI6TWVVRRWYTV3NBVE3EKGWTMUASC52F7Q', 'Meta:SMP', '9934:11111111111', 'iso6523-actorid-upis', 1);
+VALUES (1, NOW(), NOW(), 'f0cd33a02775d9f108bf01359ece875d', false, 'NKWM764QK7IENID74UTU7RFKMJAZAU7GUBMMUYFMWFF6UXLPJM6A', 'Meta:SMP', '9934:00000000001', 'iso6523-actorid-upis', 1),
+       (2, NOW(), NOW(), 'a66df1049fc35d51cc77ae84bd06ba14', false, '5UZQY5SM4DGC5UFOLJX57NRW567D2BSDYMCGWXAQVH37LP5HUYCQ', 'Meta:SMP', '9934:11111111119', 'iso6523-actorid-upis', 1);

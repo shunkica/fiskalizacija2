@@ -9,8 +9,8 @@ test.eracun.local.      IN SOA  ns.test.eracun.local. root.test.eracun.local. (
                         NS      ns.test.eracun.local.
 $TTL 60 ; 1 minute
 B-f0cd33a02775d9f108bf01359ece875d.iso6523-actorid-upis.hr.test.eracun.local. CNAME	domismp1.publisher.hr.test.eracun.local.
-U6RCMPGUYFGICOENICFRZAUB4U764CJOTIZX6SR4FEKDTGCAK7VQ.iso6523-actorid-upis.hr.test.eracun.local.	NAPTR 100 10 "U" "Meta:SMP" "!.*!http://domismp:8080/smp/!" .
+NKWM764QK7IENID74UTU7RFKMJAZAU7GUBMMUYFMWFF6UXLPJM6A.iso6523-actorid-upis.hr.test.eracun.local.	NAPTR 100 10 "U" "Meta:SMP" "!.*!http://domismp:8080/smp/!" .
 B-a66df1049fc35d51cc77ae84bd06ba14.iso6523-actorid-upis.hr.test.eracun.local. CNAME domismp1.publisher.hr.test.eracun.local.
-WBDEORSVAXTCNSV5IQBI6TWVVRRWYTV3NBVE3EKGWTMUASC52F7Q.iso6523-actorid-upis.hr.test.eracun.local. NAPTR 100 10 "U" "Meta:SMP" "!.*!http://domismp:8080/smp/!" .
+5UZQY5SM4DGC5UFOLJX57NRW567D2BSDYMCGWXAQVH37LP5HUYCQ.iso6523-actorid-upis.hr.test.eracun.local. NAPTR 100 10 "U" "Meta:SMP" "!.*!http://domismp:8080/smp/!" .
 domismp1.publisher.hr.test.eracun.local. CNAME domismp.
 ns.test.eracun.local.   A       127.0.0.1

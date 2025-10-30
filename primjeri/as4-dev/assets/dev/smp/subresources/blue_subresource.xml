@@ -37,8 +37,8 @@
     <Extension>
       <ExtensionID>eRacunParticipantData</ExtensionID>
       <ex:HRMPS xmlns:ex="http://porezna-uprava.hr/mps/extension">
-        <ex:ParticipantOIB>00000000000</ex:ParticipantOIB>
-        <ex:AccessPointOIB>00000000000</ex:AccessPointOIB>
+        <ex:ParticipantOIB>00000000001</ex:ParticipantOIB>
+        <ex:AccessPointOIB>00000000001</ex:AccessPointOIB>
       </ex:HRMPS>
     </Extension>
   </ServiceInformation>
