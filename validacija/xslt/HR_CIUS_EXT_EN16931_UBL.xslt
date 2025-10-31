@@ -23,7 +23,7 @@
             <schxslt.compile.typed-variables xmlns="https://doi.org/10.5281/zenodo.1495494#">true</schxslt.compile.typed-variables>
          </dct:Agent>
       </dct:creator>
-      <dct:created>2025-10-30T14:25:33.212166408Z</dct:created>
+      
    </rdf:Description>
    <xsl:output indent="yes"/>
    <xsl:param name="schxslt.validate.initial-document-uri" as="xs:string?"/>
@@ -55,9 +55,7 @@
                         </skos:prefLabel>
                      </dct:Agent>
                   </dct:creator>
-                  <dct:created>
-                     <xsl:value-of select="current-dateTime()"/>
-                  </dct:created>
+                  
                   <dct:source>
                      <rdf:Description xmlns:dc="http://purl.org/dc/elements/1.1/">
                         <dct:creator>
@@ -66,7 +64,7 @@
                               <schxslt.compile.typed-variables xmlns="https://doi.org/10.5281/zenodo.1495494#">true</schxslt.compile.typed-variables>
                            </dct:Agent>
                         </dct:creator>
-                        <dct:created>2025-10-30T14:25:33.212166408Z</dct:created>
+                        
                      </rdf:Description>
                   </dct:source>
                </svrl:metadata>

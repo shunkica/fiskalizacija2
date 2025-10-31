@@ -10,10 +10,12 @@ RUN dnf install -y unzip java  && \
     dnf clean all
 
 COPY docs/HRUBLValidator/HRUBLSchematron/ /opt/
+COPY validacija/build/remove-timestamps.xsl /opt/
 
-RUN java -jar /opt/saxon-he-12.7.jar -s:/opt/HR_CIUS_EXT_EN16931_UBL.sch -xsl:/opt/schxslt-1.10.1/2.0/compile-for-svrl.xsl -o:/opt/HR_CIUS_EXT_EN16931_UBL.xsl
+RUN java -jar /opt/saxon-he-12.7.jar -s:/opt/HR_CIUS_EXT_EN16931_UBL.sch -xsl:/opt/schxslt-1.10.1/2.0/compile-for-svrl.xsl -o:/opt/HR_CIUS_EXT_EN16931_UBL.timestamps.xslt
 
-# Create reports directory
+RUN java -jar /opt/saxon-he-12.7.jar -s:/opt/HR_CIUS_EXT_EN16931_UBL.timestamps.xslt -xsl:/opt/remove-timestamps.xsl -o:/opt/HR_CIUS_EXT_EN16931_UBL.xslt
+
 RUN mkdir -p /opt/reports
 
 WORKDIR /opt
