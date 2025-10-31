@@ -41,6 +41,28 @@ download_external() {
     fi
 }
 
+copy_ubl_schemas() {
+    local source_dir="../../docs/UBL2.1_eRacun/ubl"
+    local dest_dir="../xsd/ubl"
+
+    echo "Copying UBL schemas from $source_dir to $dest_dir..."
+    
+    if [ ! -d "$source_dir" ]; then
+        echo "Source directory $source_dir not found"
+        return 1
+    fi
+
+    mkdir -p "$dest_dir"
+    
+    if ! cp -r "$source_dir"/* "$dest_dir"/; then
+        echo "Failed to copy UBL schemas"
+        return 1
+    fi
+
+    echo "UBL schemas copied successfully"
+}
+
 build_hr_xslt
 download_external "https://raw.githubusercontent.com/ConnectingEurope/eInvoicing-EN16931/refs/heads/master/ubl/xslt/EN16931-UBL-validation.xslt" "../xslt/EN16931-UBL-validation.xslt"
 download_external "https://raw.githubusercontent.com/ConnectingEurope/eInvoicing-EN16931/refs/heads/master/cii/xslt/EN16931-CII-validation.xslt" "../xslt/EN16931-CII-validation.xslt"
+copy_ubl_schemas
