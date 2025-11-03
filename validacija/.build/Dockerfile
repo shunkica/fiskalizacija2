@@ -10,7 +10,7 @@ RUN dnf install -y unzip java libxml2 && \
     dnf clean all
 
 COPY docs/HRUBLValidator/HRUBLSchematron/ /opt/
-COPY validacija/build/assets/remove-timestamps.xsl /opt/
+COPY validacija/.build/assets/remove-timestamps.xsl /opt/
 
 RUN java -jar /opt/saxon-he-12.7.jar -s:/opt/HR_CIUS_EXT_EN16931_UBL.sch -xsl:/opt/schxslt-1.10.1/2.0/compile-for-svrl.xsl -o:/opt/HR_CIUS_EXT_EN16931_UBL.timestamps.xslt
 
@@ -18,8 +18,8 @@ RUN java -jar /opt/saxon-he-12.7.jar -s:/opt/HR_CIUS_EXT_EN16931_UBL.timestamps.
 
 COPY validacija/xslt/ /opt/xslt/
 COPY validacija/xsd/ /opt/xsd/
-COPY validacija/build/assets/check-fatal-errors.xsl /opt/
-COPY validacija/build/assets/container-validate.sh /opt/validate.sh
+COPY validacija/.build/assets/check-fatal-errors.xsl /opt/
+COPY validacija/.build/assets/container-validate.sh /opt/validate.sh
 
 RUN chmod +x /opt/validate.sh && \
     mkdir -p /opt/reports

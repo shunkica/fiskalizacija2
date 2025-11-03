@@ -46,14 +46,14 @@ copy_ubl_schemas() {
     local dest_dir="../xsd/ubl"
 
     echo "Copying UBL schemas from $source_dir to $dest_dir..."
-    
+
     if [ ! -d "$source_dir" ]; then
         echo "Source directory $source_dir not found"
         return 1
     fi
 
     mkdir -p "$dest_dir"
-    
+
     if ! cp -r "$source_dir"/* "$dest_dir"/; then
         echo "Failed to copy UBL schemas"
         return 1
@@ -62,7 +62,42 @@ copy_ubl_schemas() {
     echo "UBL schemas copied successfully"
 }
 
+download_cii_xsd() {
+    local base_url="https://raw.githubusercontent.com/ConnectingEurope/eInvoicing-EN16931/master/cii/schema/D16B%20SCRDM%20(Subset)/uncoupled%20clm/CII/uncefact"
+    local dest_dir="../xsd/cii"
+
+    echo "Downloading CII XSDs to $dest_dir..."
+
+    # Clean up old structure if it exists
+    if [ -d "$dest_dir" ]; then
+        echo "Removing old CII XSD files..."
+        rm -rf "$dest_dir"
+    fi
+
+    mkdir -p "$dest_dir/data/standard"
+
+    # Main data schema files (4 files) - using "decoupled" schema approach
+    # These schemas define code lists inline and don't reference external codelist/identifierlist XSD files
+    echo "Downloading CII schema files (decoupled approach)..."
+    local data_files=(
+        "CrossIndustryInvoice_100pD16B.xsd"
+        "CrossIndustryInvoice_QualifiedDataType_100pD16B.xsd"
+        "CrossIndustryInvoice_ReusableAggregateBusinessInformationEntity_100pD16B.xsd"
+        "CrossIndustryInvoice_UnqualifiedDataType_100pD16B.xsd"
+    )
+    for f in "${data_files[@]}"; do
+        download_external "$base_url/data/standard/$f" "$dest_dir/data/standard/$f"
+    done
+
+    echo "CII XSD download complete (4 files in data/standard/)."
+    echo "Note: Using decoupled schema - codelist/identifierlist XSDs not required (saved 50 files)."
+}
+
+# Main execution
 build_hr_xslt
+
 download_external "https://raw.githubusercontent.com/ConnectingEurope/eInvoicing-EN16931/refs/heads/master/ubl/xslt/EN16931-UBL-validation.xslt" "../xslt/EN16931-UBL-validation.xslt"
 download_external "https://raw.githubusercontent.com/ConnectingEurope/eInvoicing-EN16931/refs/heads/master/cii/xslt/EN16931-CII-validation.xslt" "../xslt/EN16931-CII-validation.xslt"
+
 copy_ubl_schemas
+download_cii_xsd
