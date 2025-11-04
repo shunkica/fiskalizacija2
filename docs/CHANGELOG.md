@@ -1,5 +1,12 @@
 # Evidencija zapažanja promjena u službenoj dokumentaciji
 
+## 2025-11-04
+- __Tehnicka_specifikacija_Fiskalizacija_eRacuna_i_eIzvjestavanje.pdf__
+  - verzija 1.9 (30.10.2025.)
+    - Ažurirana obveznost podatka artiklStopaPdv
+  - verzija 1.10 (03.11.2025.)
+    - Ažuriran opis sigurnosnog preduvjeta: 'Certifikati za elektroničko potpisivanje poruka'
+
 ## 2025-10-13
 - __Tehnicka_specifikacija_eRacun_AMS.pdf__
   - verzija 1.4 (09.10.2025.)
