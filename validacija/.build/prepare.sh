@@ -93,6 +93,46 @@ download_cii_xsd() {
     echo "Note: Using decoupled schema - codelist/identifierlist XSDs not required (saved 50 files)."
 }
 
+filter_fatal_only() {
+    echo "Filtering EN16931 validation XSLTs to keep only fatal assertions..."
+
+    IMAGE_NAME=saxon-he-12-7
+    FILTER_XSL="filter-fatal-only.xslt"
+    XSLT_DIR="../xslt"
+
+    # Ensure Saxon image is built
+    if ! docker image inspect $IMAGE_NAME >/dev/null 2>&1; then
+        echo "Saxon image not found, building..."
+        docker build -f Dockerfile -t $IMAGE_NAME ../../
+    fi
+
+    # Filter UBL validation XSLT
+    echo "Processing EN16931-UBL-validation.xslt..."
+    docker run --rm \
+        --entrypoint java \
+        -v "$PWD/$FILTER_XSL:/opt/filter.xslt:ro" \
+        -v "$PWD/$XSLT_DIR:/opt/xslt" \
+        $IMAGE_NAME \
+        -jar /opt/saxon-he-12.7.jar \
+        -s:/opt/xslt/EN16931-UBL-validation.xslt \
+        -xsl:/opt/filter.xslt \
+        -o:/opt/xslt/EN16931-UBL-fatal.xslt
+
+    # Filter CII validation XSLT
+    echo "Processing EN16931-CII-validation.xslt..."
+    docker run --rm \
+        --entrypoint java \
+        -v "$PWD/$FILTER_XSL:/opt/filter.xslt:ro" \
+        -v "$PWD/$XSLT_DIR:/opt/xslt" \
+        $IMAGE_NAME \
+        -jar /opt/saxon-he-12.7.jar \
+        -s:/opt/xslt/EN16931-CII-validation.xslt \
+        -xsl:/opt/filter.xslt \
+        -o:/opt/xslt/EN16931-CII-fatal.xslt
+
+    echo "Fatal-only XSLT files created successfully."
+}
+
 # Main execution
 build_hr_xslt
 
@@ -101,3 +141,6 @@ download_external "https://raw.githubusercontent.com/ConnectingEurope/eInvoicing
 
 copy_ubl_schemas
 download_cii_xsd
+
+# Create fatal-only versions of EN16931 validation XSLTs
+filter_fatal_only
