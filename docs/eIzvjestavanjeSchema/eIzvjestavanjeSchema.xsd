@@ -10,6 +10,15 @@
     <xsd:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema.xsd"/>
 
     <!--
+    ==========================================================================
+    XSD Change Log
+    ==========================================================================
+    # Date        Description
+    ==========================================================================
+    2025-11-05    - Added minOccurs="0" to <artiklStopaPdv>
+    -->
+
+    <!--
         Evidentiranje naplate
     -->
 
@@ -676,7 +685,7 @@
                     <xsd:documentation>Šifra kategorije PDV-a za fakturirani artikl po UNCL5305 (BT-151 iz UBL 2.1).</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
-            <xsd:element name="artiklStopaPdv" type="xsd:decimal">
+            <xsd:element name="artiklStopaPdv" type="xsd:decimal" minOccurs="0">
                 <xsd:annotation>
                     <xsd:documentation>Stopa PDV-a prikazana u obliku postotka koji vrijedi za fakturirani artikl (BT-152 iz UBL 2.1).</xsd:documentation>
                 </xsd:annotation>
