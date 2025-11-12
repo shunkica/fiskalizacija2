@@ -57,6 +57,14 @@
 - HR-BR-31 - pogrešan BT: umjesto HR-BT-23 napisano je HR-BT-19
 - HR-BR-32 - pogrešan BT: umjesto HR-BT-24 napisano je HR-BT-20
 
+# Validator
+
+## Nema validaciju za pravila
+ - HR-BR-28
+ - HR-BR-30
+ - HR-BR-31
+ - HR-BR-35
+
 # Primjeri eRačuna 
 
 ## Odobrenje.xml
