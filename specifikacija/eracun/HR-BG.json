@@ -8,24 +8,24 @@
       "Grupa": "HR proširenja",
       "Min": "0",
       "Max": "1",
-      "Invoice": "/ext:Extensions/ext:Extension/ext:ExtensionContent/hrextac:HRFISK20Data",
-      "CreditNote": "/ext:Extensions/ext:Extension/ext:ExtensionContent/hrextac:HRFISK20Data"
+      "Invoice": "/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data",
+      "CreditNote": "/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data"
     },
     {
       "ID": "HR-BG-2",
       "Grupa": "HR Raspodjela PDV",
       "Min": "0",
       "Max": "n",
-      "Invoice": "/ext:Extensions/ext:Extension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal",
-      "CreditNote": "/ext:Extensions/ext:Extension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal"
+      "Invoice": "/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal",
+      "CreditNote": "/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal"
     },
     {
       "ID": "HR-BG-3",
       "Grupa": "HR ukupni iznosi",
       "Min": "0",
       "Max": "1",
-      "Invoice": "/ext:Extensions/ext:Extension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRLegalMonetaryTotal",
-      "CreditNote": "/ext:Extensions/ext:Extension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRLegalMonetaryTotal"
+      "Invoice": "/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRLegalMonetaryTotal",
+      "CreditNote": "/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRLegalMonetaryTotal"
     }
   ]
 }

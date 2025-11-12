@@ -120,88 +120,88 @@
       "Pojam": "Obračun PDV-a po naplaćenoj naknadi",
       "Min": "0",
       "Max": "1",
-      "Invoice": "/ext:Extensions/ext:Extension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRObracunPDVPoNaplati",
-      "CreditNote": "/ext:Extensions/ext:Extension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRObracunPDVPoNaplati"
+      "Invoice": "/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRObracunPDVPoNaplati",
+      "CreditNote": "/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRObracunPDVPoNaplati"
     },
     {
       "ID": "HR-BT-16",
       "Pojam": "HR iznos osnovice kategorije PDV",
       "Min": "1",
       "Max": "1",
-      "Invoice": "/ext:Extensions/ext:Extension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal/cbc:TaxableAmount",
-      "CreditNote": "/ext:Extensions/ext:Extension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal/cbc:TaxableAmount"
+      "Invoice": "/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal/cbc:TaxableAmount",
+      "CreditNote": "/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal/cbc:TaxableAmount"
     },
     {
       "ID": "HR-BT-17",
       "Pojam": "HR iznos kategorije PDV",
       "Min": "1",
       "Max": "1",
-      "Invoice": "/ext:Extensions/ext:Extension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal/cbc:TaxAmount",
-      "CreditNote": "/ext:Extensions/ext:Extension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxSubtotal/cbc:TaxAmount"
+      "Invoice": "/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal/cbc:TaxAmount",
+      "CreditNote": "/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxSubtotal/cbc:TaxAmount"
     },
     {
       "ID": "HR-BT-18",
       "Pojam": "HR kod kategorije PDV",
       "Min": "1",
       "Max": "1",
-      "Invoice": "/ext:Extensions/ext:Extension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal/hrextac:HRTaxCategory/cbc:ID",
-      "CreditNote": "/ext:Extensions/ext:Extension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal/hrextac:HRTaxCategory/cbc:ID"
+      "Invoice": "/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal/hrextac:HRTaxCategory/cbc:ID",
+      "CreditNote": "/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal/hrextac:HRTaxCategory/cbc:ID"
     },
     {
       "ID": "HR-BT-19",
       "Pojam": "HR stopa kategorije PDV",
       "Min": "0",
       "Max": "1",
-      "Invoice": "/ext:Extensions/ext:Extension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal/hrextac:HRTaxCategory/cbc:Percent",
-      "CreditNote": "/ext:Extensions/ext:Extension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal/hrextac:HRTaxCategory/cbc:Percent"
+      "Invoice": "/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal/hrextac:HRTaxCategory/cbc:Percent",
+      "CreditNote": "/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal/hrextac:HRTaxCategory/cbc:Percent"
     },
     {
       "ID": "HR-BT-20",
       "Pojam": "HR tekst razloga oslobođenja kategorije PDV",
       "Min": "0",
       "Max": "1",
-      "Invoice": "/ext:Extensions/ext:Extension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal/hrextac:HRTaxCategory/cbc:TaxExemptionReason",
-      "CreditNote": "/ext:Extensions/ext:Extension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal/hrextac:HRTaxCategory/cbc:TaxExemptionReason"
+      "Invoice": "/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal/hrextac:HRTaxCategory/cbc:TaxExemptionReason",
+      "CreditNote": "/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal/hrextac:HRTaxCategory/cbc:TaxExemptionReason"
     },
     {
       "ID": "HR-BT-21",
       "Pojam": "HR kod razloga oslobođenja kategorije PDV",
       "Min": "0",
       "Max": "1",
-      "Invoice": "/ext:Extensions/ext:Extension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal/hrextac:HRTaxCategory/cbc:TaxExemptionReasonCode",
-      "CreditNote": "/ext:Extensions/ext:Extension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal/hrextac:HRTaxCategory/cbc:TaxExemptionReasonCode"
+      "Invoice": "/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal/hrextac:HRTaxCategory/cbc:TaxExemptionReasonCode",
+      "CreditNote": "/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal/hrextac:HRTaxCategory/cbc:TaxExemptionReasonCode"
     },
     {
       "ID": "HR-BT-22",
       "Pojam": "HR Oznaka kategorije PDV",
       "Min": "0",
       "Max": "1",
-      "Invoice": "/ext:Extensions/ext:Extension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal/hrextac:HRTaxCategory/cbc:Name",
-      "CreditNote": "/ext:Extensions/ext:Extension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal/hrextac:HRTaxCategory/cbc:Name"
+      "Invoice": "/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal/hrextac:HRTaxCategory/cbc:Name",
+      "CreditNote": "/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal/hrextac:HRTaxCategory/cbc:Name"
     },
     {
       "ID": "HR-BT-23",
       "Pojam": "HR iznos osnovice za PDV",
       "Min": "1",
       "Max": "1",
-      "Invoice": "/ext:Extensions/ext:Extension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRLegalMonetaryTotal/hrextac:HRTaxExclusiveAmount",
-      "CreditNote": "/ext:Extensions/ext:Extension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRLegalMonetaryTotal/hrextac:HRTaxExclusiveAmount"
+      "Invoice": "/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRLegalMonetaryTotal/cbc:TaxExclusiveAmount",
+      "CreditNote": "/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRLegalMonetaryTotal/cbc:TaxExclusiveAmount"
     },
     {
       "ID": "HR-BT-24",
       "Pojam": "HR Neoporezivi iznos",
       "Min": "1",
       "Max": "1",
-      "Invoice": "/ext:Extensions/ext:Extension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRLegalMonetaryTotal/cbc:OutOfScopeOfVATAmount",
-      "CreditNote": "/ext:Extensions/ext:Extension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRLegalMonetaryTotal/cbc:OutOfScopeOfVATAmount"
+      "Invoice": "/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRLegalMonetaryTotal/hrextac:OutOfScopeOfVATAmount",
+      "CreditNote": "/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRLegalMonetaryTotal/hrextac:OutOfScopeOfVATAmount"
     },
     {
       "ID": "HR-BT-25",
       "Pojam": "HR ukupni iznos PDV",
       "Min": "1",
       "Max": "1",
-      "Invoice": "/ext:Extensions/ext:Extension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/cbc:TaxAmount",
-      "CreditNote": "/ext:Extensions/ext:Extension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/cbc:TaxAmount"
+      "Invoice": "/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/cbc:TaxAmount",
+      "CreditNote": "/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/cbc:TaxAmount"
     }
   ]
 }
