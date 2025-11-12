@@ -11,6 +11,8 @@
 - HR-BG-1, HR-BG-2, HR-BG-3, HR-BT-15 do HR-BT-25
  - specifikacija - `ext:Extensions/ext:Extension/ext:ExtensionContent/hrextac:HRFISK20Data`
  - schema i validator - `ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data` 
+- HR-BT-17
+  - u CreditNote putanji nedostaje dio `hrextac:HRTaxTotal`
 - HR-BT-23 
  - specifikacija - `hrextac:HRLegalMonetaryTotal/hrextac:HRTaxExclusiveAmount`
  - schema i validator - `hrextac:HRLegalMonetaryTotal/cbc:TaxExclusiveAmount`

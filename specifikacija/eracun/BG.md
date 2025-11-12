@@ -2,7 +2,7 @@
 
 | ID    | Pojam                                             | Min | Max | Invoice                                                  | CreditNote                                               |
 |-------|---------------------------------------------------|-----|-----|----------------------------------------------------------|----------------------------------------------------------|
-| BG-1  | Napomena za račun                                 | 0   | n   |                                                          |                                                          |
+| BG-1  | Napomena za račun                                 | 0   | n   | /cbc:Note                                                | /cbc:Note                                                |
 | BG-2  | Procesna kontrola                                 | 1   | 1   |                                                          |                                                          |
 | BG-3  | Referenca prethodnog računa                       | 0   | n   | /cac:BillingReference                                    | /cac:BillingReference                                    |
 | BG-4  | Prodavatelj                                       | 1   | 1   | /cac:AccountingSupplierParty                             | /cac:AccountingSupplierParty                             |

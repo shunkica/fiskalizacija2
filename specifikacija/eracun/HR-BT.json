@@ -137,7 +137,7 @@
       "Min": "1",
       "Max": "1",
       "Invoice": "/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal/cbc:TaxAmount",
-      "CreditNote": "/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxSubtotal/cbc:TaxAmount"
+      "CreditNote": "/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal/cbc:TaxAmount"
     },
     {
       "ID": "HR-BT-18",

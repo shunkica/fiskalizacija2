@@ -8,8 +8,8 @@
       "Pojam": "Napomena za račun",
       "Min": "0",
       "Max": "n",
-      "Invoice": "",
-      "CreditNote": ""
+      "Invoice": "/cbc:Note",
+      "CreditNote": "/cbc:Note"
     },
     {
       "ID": "BG-2",

@@ -15,7 +15,7 @@ XML_INPUT="$1"
 
 # Handle --primjeri flag
 if [ "$XML_INPUT" = "--primjeri" ]; then
-    XML_DIR="$SCRIPT_DIR/../../docs/Primjeri_eRacuna"
+    XML_DIR="$SCRIPT_DIR/../docs/Primjeri_eRacuna"
 
     if [ ! -d "$XML_DIR" ]; then
         echo "Error: Directory '$XML_DIR' not found"
@@ -54,7 +54,7 @@ fi
 for XML_FILE in "${XML_FILES[@]}"; do
     # Get original filename for display
     ORIGINAL_FILENAME=$(basename "$XML_FILE")
-    
+
     # Run validation in container
     docker run --rm \
         -e ORIGINAL_FILENAME="$ORIGINAL_FILENAME" \

@@ -1,5 +1,10 @@
 # Evidencija zapažanja promjena u službenoj dokumentaciji
 
+## 2025-11-26
+- __Tehnicka_specifikacija_Fiskalizacija_eRacuna_i_eIzvjestavanje.pdf__
+  - verzija 1.11 (24.11.2025.)
+    - Ažuriran opis za: artikl klasifikacija artikla – navedeni podatak se ne unosi za vrstuDokumenta Odobrenje (381) i Predujam (386)
+
 ## 2025-11-04
 - __Tehnicka_specifikacija_Fiskalizacija_eRacuna_i_eIzvjestavanje.pdf__
   - verzija 1.9 (30.10.2025.)

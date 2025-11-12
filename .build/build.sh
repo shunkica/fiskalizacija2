@@ -9,11 +9,11 @@ build_hr_xslt() {
   CONTAINER_NAME=saxon-he-12-7
   OUTPUT_FILE=HR_CIUS_EXT_EN16931_UBL.xslt
 
-  docker build -f Dockerfile -t $IMAGE_NAME ../../
+  docker build -f Dockerfile -t $IMAGE_NAME ../
 
   docker create --name $CONTAINER_NAME $IMAGE_NAME
 
-  docker cp $CONTAINER_NAME:/opt/$OUTPUT_FILE ../xslt/
+  docker cp $CONTAINER_NAME:/opt/$OUTPUT_FILE ../validacija/xslt/
 
   docker rm $CONTAINER_NAME
 }
@@ -42,8 +42,8 @@ download_external() {
 }
 
 copy_ubl_schemas() {
-    local source_dir="../../docs/UBL2.1_eRacun/ubl"
-    local dest_dir="../xsd/ubl"
+    local source_dir="../docs/UBL2.1_eRacun/ubl"
+    local dest_dir="../validacija/xsd/ubl"
 
     echo "Copying UBL schemas from $source_dir to $dest_dir..."
 
@@ -64,7 +64,7 @@ copy_ubl_schemas() {
 
 download_cii_xsd() {
     local base_url="https://raw.githubusercontent.com/ConnectingEurope/eInvoicing-EN16931/master/cii/schema/D16B%20SCRDM%20(Subset)/uncoupled%20clm/CII/uncefact"
-    local dest_dir="../xsd/cii"
+    local dest_dir="../validacija/xsd/cii"
 
     echo "Downloading CII XSDs to $dest_dir..."
 
@@ -97,13 +97,13 @@ filter_fatal_only() {
     echo "Filtering EN16931 validation XSLTs to keep only fatal assertions..."
 
     IMAGE_NAME=saxon-he-12-7
-    FILTER_XSL="filter-fatal-only.xslt"
-    XSLT_DIR="../xslt"
+    FILTER_XSL="assets/filter-fatal-only.xslt"
+    XSLT_DIR="../validacija/xslt"
 
     # Ensure Saxon image is built
     if ! docker image inspect $IMAGE_NAME >/dev/null 2>&1; then
         echo "Saxon image not found, building..."
-        docker build -f Dockerfile -t $IMAGE_NAME ../../
+        docker build -f Dockerfile -t $IMAGE_NAME ../
     fi
 
     # Filter UBL validation XSLT
@@ -133,14 +133,32 @@ filter_fatal_only() {
     echo "Fatal-only XSLT files created successfully."
 }
 
-# Main execution
+convert_spec_md() {
+    echo "Converting specification JSON files to Markdown (dockerized Node)..."
+    local NODE_IMAGE="node:20-alpine"
+    docker run --rm \
+        -u "$(id -u):$(id -g)" \
+        -v "$PWD:/work" \
+        -v "$PWD/../specifikacija:/specifikacija" \
+        -w /work \
+        $NODE_IMAGE \
+        sh -c "node assets/json2md.js"
+    echo "Markdown conversion complete."
+}
+
+# Build HR CIUS XSLT
 build_hr_xslt
 
-download_external "https://raw.githubusercontent.com/ConnectingEurope/eInvoicing-EN16931/refs/heads/master/ubl/xslt/EN16931-UBL-validation.xslt" "../xslt/EN16931-UBL-validation.xslt"
-download_external "https://raw.githubusercontent.com/ConnectingEurope/eInvoicing-EN16931/refs/heads/master/cii/xslt/EN16931-CII-validation.xslt" "../xslt/EN16931-CII-validation.xslt"
+# Download EN16931 validation XSLTs
+download_external "https://raw.githubusercontent.com/ConnectingEurope/eInvoicing-EN16931/refs/heads/master/ubl/xslt/EN16931-UBL-validation.xslt" "../validacija/xslt/EN16931-UBL-validation.xslt"
+download_external "https://raw.githubusercontent.com/ConnectingEurope/eInvoicing-EN16931/refs/heads/master/cii/xslt/EN16931-CII-validation.xslt" "../validacija/xslt/EN16931-CII-validation.xslt"
 
+# Copy UBL schemas from docs and download CII schemas
 copy_ubl_schemas
 download_cii_xsd
 
 # Create fatal-only versions of EN16931 validation XSLTs
 filter_fatal_only
+
+# Convert specification JSON files to Markdown via docker
+convert_spec_md
