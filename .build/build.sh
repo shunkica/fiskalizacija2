@@ -146,6 +146,43 @@ convert_spec_md() {
     echo "Markdown conversion complete."
 }
 
+generate_xsd_json_ts() {
+    echo "Generating JSON and TypeScript definitions from XSD schemas using xml-suite (dockerized Node)..."
+
+    local NODE_IMAGE="node:20-alpine"
+    local output_dir="../validacija/js"
+    
+    # Create output directory
+    mkdir -p "$output_dir"
+
+    # Run generation inside Docker container
+    docker run --rm \
+        -u "$(id -u):$(id -g)" \
+        -v "$PWD:/work" \
+        -v "$PWD/../validacija:/validacija" \
+        -w /work \
+        $NODE_IMAGE \
+        sh -c "
+            # Install xml-suite
+            npm install xml-suite &&
+            
+            # Create output directory
+            mkdir -p /validacija/js &&
+            
+            # Generate JSON files from XSD
+            ./node_modules/.bin/xsd2json /validacija/xsd/ubl/maindoc/UBL-Invoice-2.1.xsd /validacija/js/UBL-Invoice-2.1.json &&
+            ./node_modules/.bin/xsd2json /validacija/xsd/ubl/maindoc/UBL-CreditNote-2.1.xsd /validacija/js/UBL-CreditNote-2.1.json &&
+            ./node_modules/.bin/xsd2json /validacija/xsd/cii/data/standard/CrossIndustryInvoice_100pD16B.xsd /validacija/js/CrossIndustryInvoice_100pD16B.json &&
+            
+            # Generate TypeScript definition files from JSON
+            ./node_modules/.bin/json2ts /validacija/js/UBL-Invoice-2.1.json /validacija/js/UBL-Invoice-2.1.d.ts &&
+            ./node_modules/.bin/json2ts /validacija/js/UBL-CreditNote-2.1.json /validacija/js/UBL-CreditNote-2.1.d.ts &&
+            ./node_modules/.bin/json2ts /validacija/js/CrossIndustryInvoice_100pD16B.json /validacija/js/CrossIndustryInvoice_100pD16B.d.ts
+        "
+
+    echo "JSON and TypeScript definition files generated successfully."
+}
+
 # Build HR CIUS XSLT
 build_hr_xslt
 
@@ -162,3 +199,6 @@ filter_fatal_only
 
 # Convert specification JSON files to Markdown via docker
 convert_spec_md
+
+# Generate JSON and TypeScript definitions from XSD schemas
+generate_xsd_json_ts
