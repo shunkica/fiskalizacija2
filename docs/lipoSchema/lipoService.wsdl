@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="lipoService"
+                  targetNamespace="http://www.apis-it.hr/fin/2024/services/lipoService"
+                  xmlns:lipo="http://www.apis-it.hr/fin/2024/types/lipo"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  xmlns:tns="http://www.apis-it.hr/fin/2024/services/lipoService">
+
+    <wsdl:types>
+        <xsd:schema>
+            <xsd:import namespace="http://www.apis-it.hr/fin/2024/types/lipo" schemaLocation="../schema/lipoSchema.xsd"/>
+        </xsd:schema>
+    </wsdl:types>
+
+    <wsdl:message name="DodajPoslovniSubjektZahtjev">
+        <wsdl:documentation>Zahtjev za dodavanje novog poslovnog subjekta</wsdl:documentation>
+        <wsdl:part element="lipo:DodajPoslovniSubjektZahtjev" name="DodajPoslovniSubjektZahtjev"/>
+    </wsdl:message>
+    <wsdl:message name="DodajPoslovniSubjektOdgovor">
+        <wsdl:documentation>Odgovor na zahtjev za dodavanje novog poslovnog subjekta</wsdl:documentation>
+        <wsdl:part element="lipo:DodajPoslovniSubjektOdgovor" name="DodajPoslovniSubjektOdgovor"/>
+    </wsdl:message>
+    <wsdl:message name="UrediPoslovniSubjektZahtjev">
+        <wsdl:documentation>Zahtjev za dodavanje novog poslovnog subjekta</wsdl:documentation>
+        <wsdl:part element="lipo:UrediPoslovniSubjektZahtjev" name="UrediPoslovniSubjektZahtjev"/>
+    </wsdl:message>
+    <wsdl:message name="UrediPoslovniSubjektOdgovor">
+        <wsdl:documentation>Odgovor na zahtjev za dodavanje novog poslovnog subjekta</wsdl:documentation>
+        <wsdl:part element="lipo:UrediPoslovniSubjektOdgovor" name="UrediPoslovniSubjektOdgovor"/>
+    </wsdl:message>
+    <wsdl:message name="ObrisiPoslovniSubjektZahtjev">
+        <wsdl:documentation>Zahtjev za dodavanje novog poslovnog subjekta</wsdl:documentation>
+        <wsdl:part element="lipo:ObrisiPoslovniSubjektZahtjev" name="ObrisiPoslovniSubjektZahtjev"/>
+    </wsdl:message>
+    <wsdl:message name="ObrisiPoslovniSubjektOdgovor">
+        <wsdl:documentation>Odgovor na zahtjev za dodavanje novog poslovnog subjekta</wsdl:documentation>
+        <wsdl:part element="lipo:ObrisiPoslovniSubjektOdgovor" name="ObrisiPoslovniSubjektOdgovor"/>
+    </wsdl:message>
+
+    <wsdl:portType name="LipoServicePortTip">
+        <wsdl:operation name="DodajPoslovniSubjekt">
+            <wsdl:input message="tns:DodajPoslovniSubjektZahtjev" name="DodajPoslovniSubjektZahtjev"/>
+            <wsdl:output message="tns:DodajPoslovniSubjektOdgovor" name="DodajPoslovniSubjektOdgovor"/>
+        </wsdl:operation>
+        <wsdl:operation name="UrediPoslovniSubjekt">
+            <wsdl:input message="tns:UrediPoslovniSubjektZahtjev" name="UrediPoslovniSubjektZahtjev"/>
+            <wsdl:output message="tns:UrediPoslovniSubjektOdgovor" name="UrediPoslovniSubjektOdgovor"/>
+        </wsdl:operation>
+        <wsdl:operation name="ObrisiPoslovniSubjekt">
+            <wsdl:input message="tns:ObrisiPoslovniSubjektZahtjev" name="ObrisiPoslovniSubjektZahtjev"/>
+            <wsdl:output message="tns:ObrisiPoslovniSubjektOdgovor" name="ObrisiPoslovniSubjektOdgovor"/>
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="LipoServiceSoap" type="tns:LipoServicePortTip">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="DodajPoslovniSubjekt">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="DodajPoslovniSubjektZahtjev">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="DodajPoslovniSubjektOdgovor">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="UrediPoslovniSubjekt">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="UrediPoslovniSubjektZahtjev">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="UrediPoslovniSubjektOdgovor">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="ObrisiPoslovniSubjekt">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="ObrisiPoslovniSubjektZahtjev">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="ObrisiPoslovniSubjektOdgovor">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="LipoService">
+        <wsdl:port binding="tns:LipoServiceSoap" name="LipoService">
+            <soap:address location=""/>
+        </wsdl:port>
+    </wsdl:service>
+
+</wsdl:definitions>

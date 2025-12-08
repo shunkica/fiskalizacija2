@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.apis-it.hr/fin/2024/types/lipo"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:tns="http://www.apis-it.hr/fin/2024/types/lipo"
+            attributeFormDefault="qualified"
+            elementFormDefault="qualified"
+            version="1.0">
+
+<!--
+    Dodaj poslovni subjekt
+-->
+
+    <xsd:element name="DodajPoslovniSubjektZahtjev">
+        <xsd:annotation>
+            <xsd:documentation>Zahtjev za dodavanjem novog poslovnog subjekta.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="Zaglavlje" type="tns:Zaglavlje">
+                    <xsd:annotation>
+                        <xsd:documentation>Zaglavlje zahtjeva.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="PoslovniSubjekt" type="tns:PoslovniSubjekt" maxOccurs="100">
+                    <xsd:annotation>
+                        <xsd:documentation>Podaci o jednom ili više poslovnih subjekata.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="DodajPoslovniSubjektOdgovor">
+        <xsd:annotation>
+            <xsd:documentation>Odgovor na zahtjev za dodavanjem novog poslovnog subjekta.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="datumVrijemeSlanja" type="tns:datumVrijemeDeci">
+                    <xsd:annotation>
+                        <xsd:documentation>Datum i vrijeme slanja odgovora</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="Odgovor" type="tns:Odgovor">
+                    <xsd:annotation>
+                        <xsd:documentation>Odgovor na zahtjev.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+<!--
+    Uredi poslovni subjekt
+-->
+
+    <xsd:element name="UrediPoslovniSubjektZahtjev">
+        <xsd:annotation>
+            <xsd:documentation>Zahtjev za uređivanjem poslovnog subjekta.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="Zaglavlje" type="tns:Zaglavlje">
+                    <xsd:annotation>
+                        <xsd:documentation>Zaglavlje zahtjeva.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="PoslovniSubjekt" type="tns:PoslovniSubjekt" maxOccurs="100">
+                    <xsd:annotation>
+                        <xsd:documentation>Podaci o jednom ili više poslovnih subjekata.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="UrediPoslovniSubjektOdgovor">
+        <xsd:annotation>
+            <xsd:documentation>Odgovor na zahtjev za uređivanjem poslovnog subjekta.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="datumVrijemeSlanja" type="tns:datumVrijemeDeci">
+                    <xsd:annotation>
+                        <xsd:documentation>Datum i vrijeme slanja odgovora</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="Odgovor" type="tns:Odgovor">
+                    <xsd:annotation>
+                        <xsd:documentation>Odgovor na zahtjev.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+<!--
+    Obriši poslovni subjekt
+-->
+
+    <xsd:element name="ObrisiPoslovniSubjektZahtjev">
+        <xsd:annotation>
+            <xsd:documentation>Zahtjev za brisanjem poslovnog subjekta.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="Zaglavlje" type="tns:Zaglavlje">
+                    <xsd:annotation>
+                        <xsd:documentation>Zaglavlje zahtjeva.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="posSubIdentifikator" type="tns:posSubIdentifikator" maxOccurs="100">
+                    <xsd:annotation>
+                        <xsd:documentation>Identifikator jednog ili više poslovnih subjekata.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="ObrisiPoslovniSubjektOdgovor">
+        <xsd:annotation>
+            <xsd:documentation>Odgovor na zahtjev za brisanjem poslovnog subjekta.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="datumVrijemeSlanja" type="tns:datumVrijemeDeci">
+                    <xsd:annotation>
+                        <xsd:documentation>Datum i vrijeme slanja odgovora</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="Odgovor" type="tns:Odgovor">
+                    <xsd:annotation>
+                        <xsd:documentation>Odgovor na zahtjev.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+	
+<!--
+    Poslovni subjekt kompleksni tip podataka
+-->
+
+    <xsd:complexType name="PoslovniSubjekt">
+        <xsd:annotation>
+            <xsd:documentation>Podaci o poslovnom subjektu.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="identifikator" type="tns:posSubIdentifikator">
+                <xsd:annotation>
+                    <xsd:documentation>Identifikator poslovnog subjekta.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="naziv" type="tns:tekst100" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation>Jedan ili više naziva poslovnog subjekta.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="adresa" type="tns:tekst500" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Adresa poslovnog subjekta.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="webStranica" type="tns:tekst500" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Web stranica poslovnog subjekta.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="telefon" type="tns:tekst20" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation>Jedan ili više telefonskih brojeva.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="email" type="tns:tekst50" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation>Jedna ili više email adresa.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+	</xsd:complexType>
+
+<!--
+    Zajednički kompleksni tipovi podataka
+-->
+
+    <xsd:complexType name="Zaglavlje">
+        <xsd:annotation>
+            <xsd:documentation>Zaglavlje zahtjeva</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="datumVrijemeSlanja" type="tns:datumVrijemeDeci">
+                <xsd:annotation>
+                    <xsd:documentation>Datum i vrijeme slanja zahtjeva</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="mpsIdentifikator" type="tns:mpsIdentifikator">
+                <xsd:annotation>
+                    <xsd:documentation>Identifikator MPS-a koji šalje zahtjev.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="obvIdentifikator" type="tns:obvIdentifikator">
+                <xsd:annotation>
+                    <xsd:documentation>Identifikator obveznika u AMS-u za koji se šalje zahtjev.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="Odgovor">
+        <xsd:annotation>
+            <xsd:documentation>Odgovor na zahtjev</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="idZahtjeva" type="tns:uuid">
+                <xsd:annotation>
+                    <xsd:documentation>Jedinstveni identifikator primljenog zahtjeva</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="prihvacenZahtjev" type="xsd:boolean">
+                <xsd:annotation>
+                    <xsd:documentation>Status prihvaćanja zahtjeva</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="greska" minOccurs="0">
+                <xsd:complexType>
+                    <xsd:annotation>
+                        <xsd:documentation>Greška prilikom obrade zahtjeva</xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:sequence>
+                        <xsd:element name="sifra" type="tns:greska">
+                            <xsd:annotation>
+                                <xsd:documentation>Šifra greške</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="redniBrojZapisa" type="xsd:integer">
+                            <xsd:annotation>
+                                <xsd:documentation>Redni broj zapisa na koji se odnosi greška.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="opis" type="tns:tekst1024">
+                            <xsd:annotation>
+                                <xsd:documentation>Opis greške</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+<!--
+    Jednostavni tipovi podataka
+-->
+
+    <xsd:simpleType name="datumVrijemeDeci">
+        <xsd:annotation>
+            <xsd:documentation>Datum i vrijeme s decimalama zapisano u formatu YYYY-MM-DDTHH:MM:SS.SSSS npr. 2024-04-01T08:04:02.1234</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:dateTime">
+            <xsd:pattern value="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{4}"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="uuid">
+        <xsd:annotation>
+            <xsd:documentation>UUID kreiran po RFC4122 (https://tools.ietf.org/html/rfc4122).</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="mpsIdentifikator">
+        <xsd:annotation>
+            <xsd:documentation>MPS identifikator.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="MPS[0-9]{11}"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="obvIdentifikator">
+        <xsd:annotation>
+            <xsd:documentation>Identifikator obveznika u AMS-u.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:normalizedString">
+            <xsd:pattern value="[0-9]{4}:.{0,20}"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+	
+    <xsd:simpleType name="posSubIdentifikator">
+        <xsd:annotation>
+            <xsd:documentation>Identifikator poslovnog subjekta.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:normalizedString">
+            <xsd:minLength value="1"/>
+            <xsd:maxLength value="20"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="tekst20">
+        <xsd:annotation>
+            <xsd:documentation>Tekst od 1 do 20 znakova.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:minLength value="1"/>
+            <xsd:maxLength value="20"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="tekst50">
+        <xsd:annotation>
+            <xsd:documentation>Tekst od 1 do 50 znakova.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:minLength value="1"/>
+            <xsd:maxLength value="50"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="tekst100">
+        <xsd:annotation>
+            <xsd:documentation>Tekst od 1 do 100 znakova.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:minLength value="1"/>
+            <xsd:maxLength value="100"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="tekst500">
+        <xsd:annotation>
+            <xsd:documentation>Tekst od 1 do 500 znakova.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:minLength value="1"/>
+            <xsd:maxLength value="500"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="greska">
+        <xsd:annotation>
+            <xsd:documentation>Sifrarnik gresaka odgovora.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="P01"><xsd:annotation><xsd:documentation>Sistemska pogreška prilikom obrade zahtjeva</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="P02"><xsd:annotation><xsd:documentation>Neautoriziran pristup sustavu</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="P03"><xsd:annotation><xsd:documentation>Neispravan zahtjev</xsd:documentation></xsd:annotation></xsd:enumeration>
+            <xsd:enumeration value="P04"><xsd:annotation><xsd:documentation>Identifikator sudionika nije pronađen</xsd:documentation></xsd:annotation></xsd:enumeration>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+</xsd:schema>

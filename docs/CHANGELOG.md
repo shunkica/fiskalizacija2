@@ -1,5 +1,13 @@
 # Evidencija zapažanja promjena u službenoj dokumentaciji
 
+## 2025-12-08
+- __Tehnicka_specifikacija_Fiskalizacija_eRacuna_i_eIzvjestavanje.pdf__
+  - verzija 1.12 (04.12.2025.)
+    - Ažuriran primjer elementa razlogPopusta (promijenjen regex u /[0-9]{1,3}/)
+- __Tehnicka_specifikacija_LIPO.pdf__
+  - verzija 1.0 (03.12.2025.)
+    - Novi dokument - Web servis - Lista identifikatora poreznih obveznika
+
 ## 2025-11-26
 - __Tehnicka_specifikacija_Fiskalizacija_eRacuna_i_eIzvjestavanje.pdf__
   - verzija 1.11 (24.11.2025.)
