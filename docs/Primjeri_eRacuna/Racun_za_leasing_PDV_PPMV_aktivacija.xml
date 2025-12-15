@@ -5,10 +5,10 @@
   		<ext:ExtensionContent>
   			<hrextac:HRFISK20Data>
   				<hrextac:HRTaxTotal>
-  					<cbc:TaxAmount currencyID="EUR">25.00</cbc:TaxAmount>
+  					<cbc:TaxAmount currencyID="EUR">2500.00</cbc:TaxAmount>
   					<hrextac:HRTaxSubtotal>
-  						<cbc:TaxableAmount currencyID="EUR">100.00</cbc:TaxableAmount>
-  						<cbc:TaxAmount currencyID="EUR">25.00</cbc:TaxAmount>
+  						<cbc:TaxableAmount currencyID="EUR">10000.00</cbc:TaxableAmount>
+  						<cbc:TaxAmount currencyID="EUR">2500.00</cbc:TaxAmount>
   						<hrextac:HRTaxCategory>
   							<cbc:ID>S</cbc:ID>
   							<cbc:Name>HR:PDV25</cbc:Name>
@@ -19,21 +19,21 @@
   						</hrextac:HRTaxCategory>
   					</hrextac:HRTaxSubtotal>
   					<hrextac:HRTaxSubtotal>
-  						<cbc:TaxableAmount currencyID="EUR">3.00</cbc:TaxableAmount>
+  						<cbc:TaxableAmount currencyID="EUR">2000.00</cbc:TaxableAmount>
   						<cbc:TaxAmount currencyID="EUR">0.00</cbc:TaxAmount>
   						<hrextac:HRTaxCategory>
   							<cbc:ID>O</cbc:ID>
-  							<cbc:Name>HR:PP</cbc:Name>
+  							<cbc:Name>HR:PPMV</cbc:Name>
   							<cbc:Percent>0</cbc:Percent>
   							<hrextac:HRTaxScheme>
-  								<cbc:ID>LOC</cbc:ID>
+  								<cbc:ID>CAR</cbc:ID>
   							</hrextac:HRTaxScheme>
   						</hrextac:HRTaxCategory>
   					</hrextac:HRTaxSubtotal>
   				</hrextac:HRTaxTotal>
   				<hrextac:HRLegalMonetaryTotal>
-  					<cbc:TaxExclusiveAmount currencyID="EUR">100.00</cbc:TaxExclusiveAmount>
-  					<hrextac:OutOfScopeOfVATAmount currencyID="EUR">3.00</hrextac:OutOfScopeOfVATAmount>
+  					<cbc:TaxExclusiveAmount currencyID="EUR">10000.00</cbc:TaxExclusiveAmount>
+  					<hrextac:OutOfScopeOfVATAmount currencyID="EUR">2000.00</hrextac:OutOfScopeOfVATAmount>
   				</hrextac:HRLegalMonetaryTotal>
   			</hrextac:HRFISK20Data>
   		</ext:ExtensionContent>
@@ -48,11 +48,11 @@
   </ext:UBLExtensions>
 	<cbc:CustomizationID>urn:cen.eu:en16931:2017#compliant#urn:mfin.gov.hr:cius-2025:1.0#conformant#urn:mfin.gov.hr:ext-2025:1.0</cbc:CustomizationID>
 	<cbc:ProfileID>P1</cbc:ProfileID>
-	<cbc:ID>1-P1-1</cbc:ID>
-	<cbc:IssueDate>2025-12-01</cbc:IssueDate>
+	<cbc:ID>15-1-1</cbc:ID>
+	<cbc:IssueDate>2025-10-01</cbc:IssueDate>
 	<cbc:IssueTime>12:00:00</cbc:IssueTime>
-	<cbc:DueDate>2025-12-31</cbc:DueDate>
-	<cbc:InvoiceTypeCode>380</cbc:InvoiceTypeCode>
+	<cbc:DueDate>2025-10-01</cbc:DueDate>
+	<cbc:InvoiceTypeCode>394</cbc:InvoiceTypeCode>
 	<cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
 	<cac:AccountingSupplierParty>
 		<cac:Party>
@@ -103,9 +103,6 @@
 			</cac:PartyLegalEntity>
 		</cac:Party>
 	</cac:AccountingCustomerParty>
-	<cac:Delivery>
-		<cbc:ActualDeliveryDate>2025-09-25</cbc:ActualDeliveryDate>
-	</cac:Delivery>
 	<cac:PaymentMeans>
 		<cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
 		<cbc:InstructionNote>Opis plaćanja</cbc:InstructionNote>
@@ -116,25 +113,23 @@
 	</cac:PaymentMeans>
 	<cac:AllowanceCharge>
 		<cbc:ChargeIndicator>true</cbc:ChargeIndicator>
-		<cbc:AllowanceChargeReason>#HR:PP#Porez na potrošnju</cbc:AllowanceChargeReason>
-		<cbc:MultiplierFactorNumeric>3</cbc:MultiplierFactorNumeric>
-		<cbc:Amount currencyID="EUR">3.00</cbc:Amount>
-		<cbc:BaseAmount currencyID="EUR">100.00</cbc:BaseAmount>
+		<cbc:AllowanceChargeReason>#HR:PPMV#Posebni porez na motorna vozila</cbc:AllowanceChargeReason>
+		<cbc:Amount currencyID="EUR">2000.00</cbc:Amount>
 		<cac:TaxCategory>
 			<cbc:ID>E</cbc:ID>
-			<cbc:Name>HR:PP</cbc:Name>
+			<cbc:Name>HR:PPMV</cbc:Name>
 			<cbc:Percent>0.00</cbc:Percent>
-			<cbc:TaxExemptionReason>Porez na potrošnju</cbc:TaxExemptionReason>
+			<cbc:TaxExemptionReason>Posebni porez na motorna vozila</cbc:TaxExemptionReason>
 			<cac:TaxScheme>
 				<cbc:ID>VAT</cbc:ID>
 			</cac:TaxScheme>
 		</cac:TaxCategory>
 	</cac:AllowanceCharge>
 	<cac:TaxTotal>
-		<cbc:TaxAmount currencyID="EUR">25.00</cbc:TaxAmount>
+		<cbc:TaxAmount currencyID="EUR">2500.00</cbc:TaxAmount>
 		<cac:TaxSubtotal>
-			<cbc:TaxableAmount currencyID="EUR">100.00</cbc:TaxableAmount>
-			<cbc:TaxAmount currencyID="EUR">25.00</cbc:TaxAmount>
+			<cbc:TaxableAmount currencyID="EUR">10000.00</cbc:TaxableAmount>
+			<cbc:TaxAmount currencyID="EUR">2500.00</cbc:TaxAmount>
 			<cac:TaxCategory>
 				<cbc:ID>S</cbc:ID>
 				<cbc:Percent>25</cbc:Percent>
@@ -144,12 +139,12 @@
 			</cac:TaxCategory>
 		</cac:TaxSubtotal>
 		<cac:TaxSubtotal>
-			<cbc:TaxableAmount currencyID="EUR">3.00</cbc:TaxableAmount>
+			<cbc:TaxableAmount currencyID="EUR">2000.00</cbc:TaxableAmount>
 			<cbc:TaxAmount currencyID="EUR">0.00</cbc:TaxAmount>
 			<cac:TaxCategory>
 				<cbc:ID>E</cbc:ID>
 				<cbc:Percent>0.00</cbc:Percent>
-				<cbc:TaxExemptionReason>#HR:PP#Porez na potrošnju</cbc:TaxExemptionReason>
+				<cbc:TaxExemptionReason>#HR:PPMV#Posebni porez na motorna vozila</cbc:TaxExemptionReason>
 				<cac:TaxScheme>
 					<cbc:ID>VAT</cbc:ID>
 				</cac:TaxScheme>
@@ -157,21 +152,18 @@
 		</cac:TaxSubtotal>
 	</cac:TaxTotal>
 	<cac:LegalMonetaryTotal>
-		<cbc:LineExtensionAmount currencyID="EUR">100.00</cbc:LineExtensionAmount>
-		<cbc:TaxExclusiveAmount currencyID="EUR">103.00</cbc:TaxExclusiveAmount>
-		<cbc:TaxInclusiveAmount currencyID="EUR">128.00</cbc:TaxInclusiveAmount>
-		<cbc:ChargeTotalAmount currencyID="EUR">3.00</cbc:ChargeTotalAmount>
-		<cbc:PayableAmount currencyID="EUR">128.00</cbc:PayableAmount>
+		<cbc:LineExtensionAmount currencyID="EUR">10000.00</cbc:LineExtensionAmount>
+		<cbc:TaxExclusiveAmount currencyID="EUR">12000.00</cbc:TaxExclusiveAmount>
+		<cbc:TaxInclusiveAmount currencyID="EUR">14500.00</cbc:TaxInclusiveAmount>
+		<cbc:ChargeTotalAmount currencyID="EUR">2000.00</cbc:ChargeTotalAmount>
+		<cbc:PayableAmount currencyID="EUR">14500.00</cbc:PayableAmount>
 	</cac:LegalMonetaryTotal>
 	<cac:InvoiceLine>
 		<cbc:ID>1</cbc:ID>
 		<cbc:InvoicedQuantity unitCode="H87">1.000</cbc:InvoicedQuantity>
-		<cbc:LineExtensionAmount currencyID="EUR">100.00</cbc:LineExtensionAmount>
+		<cbc:LineExtensionAmount currencyID="EUR">10000.00</cbc:LineExtensionAmount>
 		<cac:Item>
-			<cbc:Name>Proizvod</cbc:Name>
-			<cac:CommodityClassification>
-				<cbc:ItemClassificationCode listID="CG">62.20.20</cbc:ItemClassificationCode>
-			</cac:CommodityClassification>
+			<cbc:Name>Automobil</cbc:Name>
 			<cac:ClassifiedTaxCategory>
 				<cbc:ID>S</cbc:ID>
 				<cbc:Name>HR:PDV25</cbc:Name>
@@ -182,7 +174,7 @@
 			</cac:ClassifiedTaxCategory>
 		</cac:Item>
 		<cac:Price>
-			<cbc:PriceAmount currencyID="EUR">100.000000</cbc:PriceAmount>
+			<cbc:PriceAmount currencyID="EUR">10000.000000</cbc:PriceAmount>
 			<cbc:BaseQuantity unitCode="H87">1.000</cbc:BaseQuantity>
 		</cac:Price>
 	</cac:InvoiceLine>

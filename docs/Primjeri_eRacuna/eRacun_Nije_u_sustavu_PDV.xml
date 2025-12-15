@@ -1,7 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Invoice xmlns="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns:sac="urn:oasis:names:specification:ubl:schema:xsd:SignatureAggregateComponents-2" xmlns:sig="urn:oasis:names:specification:ubl:schema:xsd:CommonSignatureComponents-2">
+<Invoice xmlns="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns:sac="urn:oasis:names:specification:ubl:schema:xsd:SignatureAggregateComponents-2" xmlns:sig="urn:oasis:names:specification:ubl:schema:xsd:CommonSignatureComponents-2" xmlns:hrextac="urn:mfin.gov.hr:schema:xsd:HRExtensionAggregateComponents-1">
   <ext:UBLExtensions>
   	<ext:UBLExtension>
+  		<ext:ExtensionContent>
+  			<hrextac:HRFISK20Data>
+  				<hrextac:HRTaxTotal>
+  					<cbc:TaxAmount currencyID="EUR">0.00</cbc:TaxAmount>
+  					<hrextac:HRTaxSubtotal>
+  						<cbc:TaxableAmount currencyID="EUR">100.00</cbc:TaxableAmount>
+  						<cbc:TaxAmount currencyID="EUR">0.00</cbc:TaxAmount>
+  						<hrextac:HRTaxCategory>
+  							<cbc:ID>E</cbc:ID>
+  							<cbc:Name>HR:E</cbc:Name>
+  							<cbc:Percent>0</cbc:Percent>
+							<cbc:TaxExemptionReason>Nije u sustavu PDV čl...</cbc:TaxExemptionReason>
+  							<hrextac:HRTaxScheme>
+  								<cbc:ID>VAT</cbc:ID>
+  							</hrextac:HRTaxScheme>
+  						</hrextac:HRTaxCategory>
+  					</hrextac:HRTaxSubtotal>
+  				</hrextac:HRTaxTotal>
+  				<hrextac:HRLegalMonetaryTotal>
+  					<cbc:TaxExclusiveAmount currencyID="EUR">100.00</cbc:TaxExclusiveAmount>
+  					<hrextac:OutOfScopeOfVATAmount currencyID="EUR">0.00</hrextac:OutOfScopeOfVATAmount>
+  				</hrextac:HRLegalMonetaryTotal>
+  			</hrextac:HRFISK20Data>
+  		</ext:ExtensionContent>
+  	</ext:UBLExtension>
+	<ext:UBLExtension>
 		<ext:ExtensionContent>
 			<sig:UBLDocumentSignatures>
 				<sac:SignatureInformation></sac:SignatureInformation>
@@ -29,13 +55,14 @@
 				</cac:Country>
 			</cac:PostalAddress>
 			<cac:PartyTaxScheme>
-				<cbc:CompanyID>HR12345678901</cbc:CompanyID>
+				<cbc:CompanyID>12345678901</cbc:CompanyID>
 				<cac:TaxScheme>
-					<cbc:ID>VAT</cbc:ID>
+					<cbc:ID>FRE</cbc:ID>
 				</cac:TaxScheme>
 			</cac:PartyTaxScheme>
 			<cac:PartyLegalEntity>
 				<cbc:RegistrationName>TVRTKA A d.o.o.</cbc:RegistrationName>
+				<cbc:CompanyID>12345678901</cbc:CompanyID>
 				<cbc:CompanyLegalForm>Osnovano na trgovačkom sudu, temeljni kapital</cbc:CompanyLegalForm>
 			</cac:PartyLegalEntity>
 		</cac:Party>
@@ -78,13 +105,14 @@
 		</cac:PayeeFinancialAccount>
 	</cac:PaymentMeans>
 	<cac:TaxTotal>
-		<cbc:TaxAmount currencyID="EUR">13.00</cbc:TaxAmount>
+		<cbc:TaxAmount currencyID="EUR">0.00</cbc:TaxAmount>
 		<cac:TaxSubtotal>
 			<cbc:TaxableAmount currencyID="EUR">100.00</cbc:TaxableAmount>
-			<cbc:TaxAmount currencyID="EUR">13.00</cbc:TaxAmount>
+			<cbc:TaxAmount currencyID="EUR">0.00</cbc:TaxAmount>
 			<cac:TaxCategory>
-				<cbc:ID>S</cbc:ID>
-				<cbc:Percent>13</cbc:Percent>
+				<cbc:ID>E</cbc:ID>
+				<cbc:Percent>0</cbc:Percent>
+				<cbc:TaxExemptionReason>Nije u sustavu PDV čl...</cbc:TaxExemptionReason>
 				<cac:TaxScheme>
 					<cbc:ID>VAT</cbc:ID>
 				</cac:TaxScheme>
@@ -94,8 +122,8 @@
 	<cac:LegalMonetaryTotal>
 		<cbc:LineExtensionAmount currencyID="EUR">100.00</cbc:LineExtensionAmount>
 		<cbc:TaxExclusiveAmount currencyID="EUR">100.00</cbc:TaxExclusiveAmount>
-		<cbc:TaxInclusiveAmount currencyID="EUR">113.00</cbc:TaxInclusiveAmount>
-		<cbc:PayableAmount currencyID="EUR">113.00</cbc:PayableAmount>
+		<cbc:TaxInclusiveAmount currencyID="EUR">100.00</cbc:TaxInclusiveAmount>
+		<cbc:PayableAmount currencyID="EUR">100.00</cbc:PayableAmount>
 	</cac:LegalMonetaryTotal>
 	<cac:InvoiceLine>
 		<cbc:ID>1</cbc:ID>
@@ -107,9 +135,10 @@
 				<cbc:ItemClassificationCode listID="CG">62.20.20</cbc:ItemClassificationCode>
 			</cac:CommodityClassification>
 			<cac:ClassifiedTaxCategory>
-				<cbc:ID>S</cbc:ID>
-				<cbc:Name>HR:PDV13</cbc:Name>
-				<cbc:Percent>13</cbc:Percent>
+				<cbc:ID>E</cbc:ID>
+				<cbc:Name>HR:E</cbc:Name>
+				<cbc:Percent>0</cbc:Percent>
+				<cbc:TaxExemptionReason>Nije u sustavu PDV čl...</cbc:TaxExemptionReason>
 				<cac:TaxScheme>
 					<cbc:ID>VAT</cbc:ID>
 				</cac:TaxScheme>

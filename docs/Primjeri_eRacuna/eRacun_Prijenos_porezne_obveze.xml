@@ -1,28 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Invoice xmlns="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:cct="urn:un:unece:uncefact:data:specification:CoreComponentTypeSchemaModule:2" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns:hrextac="urn:mfin.gov.hr:schema:xsd:HRExtensionAggregateComponents-1" xmlns:p3="urn:oasis:names:specification:ubl:schema:xsd:UnqualifiedDataTypes-2" xmlns:sac="urn:oasis:names:specification:ubl:schema:xsd:SignatureAggregateComponents-2" xmlns:sig="urn:oasis:names:specification:ubl:schema:xsd:CommonSignatureComponents-2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2 ../xsd/ubl/maindoc/UBL-Invoice-2.1.xsd ">
+<Invoice xmlns="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns:sac="urn:oasis:names:specification:ubl:schema:xsd:SignatureAggregateComponents-2" xmlns:sig="urn:oasis:names:specification:ubl:schema:xsd:CommonSignatureComponents-2">
   <ext:UBLExtensions>
   	<ext:UBLExtension>
-			<ext:ExtensionContent>
-				<sig:UBLDocumentSignatures>
-					<sac:SignatureInformation></sac:SignatureInformation>
-				</sig:UBLDocumentSignatures>
-			</ext:ExtensionContent>
-		</ext:UBLExtension>
+		<ext:ExtensionContent>
+			<sig:UBLDocumentSignatures>
+				<sac:SignatureInformation></sac:SignatureInformation>
+			</sig:UBLDocumentSignatures>
+		</ext:ExtensionContent>
+	</ext:UBLExtension>
   </ext:UBLExtensions>
 	<cbc:CustomizationID>urn:cen.eu:en16931:2017#compliant#urn:mfin.gov.hr:cius-2025:1.0#conformant#urn:mfin.gov.hr:ext-2025:1.0</cbc:CustomizationID>
 	<cbc:ProfileID>P1</cbc:ProfileID>
-	<cbc:ID>13-P1-1</cbc:ID>
-	<cbc:IssueDate>2025-05-01</cbc:IssueDate>
+	<cbc:ID>1-P1-1</cbc:ID>
+	<cbc:IssueDate>2025-12-01</cbc:IssueDate>
 	<cbc:IssueTime>12:00:00</cbc:IssueTime>
-	<cbc:DueDate>2025-05-31</cbc:DueDate>
+	<cbc:DueDate>2025-12-31</cbc:DueDate>
 	<cbc:InvoiceTypeCode>380</cbc:InvoiceTypeCode>
 	<cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
 	<cac:AccountingSupplierParty>
 		<cac:Party>
 			<cbc:EndpointID schemeID="9934">12345678901</cbc:EndpointID>
-			<cac:PartyIdentification>
-				<cbc:ID>9934:12345678901</cbc:ID>
-			</cac:PartyIdentification>
 			<cac:PostalAddress>
 				<cbc:StreetName>Ulica 1</cbc:StreetName>
 				<cbc:CityName>ZAGREB</cbc:CityName>
@@ -38,16 +35,12 @@
 				</cac:TaxScheme>
 			</cac:PartyTaxScheme>
 			<cac:PartyLegalEntity>
-				<cbc:RegistrationName>Tvrtka A d.o.o.</cbc:RegistrationName>
-				<cbc:CompanyLegalForm>Tvrtka A d.o.o. osnovana na Trgovačkom sudu u Osijeku, temeljni kapital 20.000,00 EUR, direktor Ivan Perić, Odgovorna osoba: Marica Horvat</cbc:CompanyLegalForm>
+				<cbc:RegistrationName>TVRTKA A d.o.o.</cbc:RegistrationName>
+				<cbc:CompanyLegalForm>Osnovano na trgovačkom sudu, temeljni kapital</cbc:CompanyLegalForm>
 			</cac:PartyLegalEntity>
-			<cac:Contact>
-				<cbc:Name>IME PREZIME</cbc:Name>
-				<cbc:ElectronicMail>ii@mail.hr</cbc:ElectronicMail>
-			</cac:Contact>
 		</cac:Party>
 		<cac:SellerContact>
-			<cbc:ID>51634872748</cbc:ID>
+			<cbc:ID>12345678901</cbc:ID>
 			<cbc:Name>Operater1</cbc:Name>
 		</cac:SellerContact>
 	</cac:AccountingSupplierParty>
@@ -73,6 +66,9 @@
 			</cac:PartyLegalEntity>
 		</cac:Party>
 	</cac:AccountingCustomerParty>
+	<cac:Delivery>
+		<cbc:ActualDeliveryDate>2025-09-25</cbc:ActualDeliveryDate>
+	</cac:Delivery>
 	<cac:PaymentMeans>
 		<cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
 		<cbc:InstructionNote>Opis plaćanja</cbc:InstructionNote>
@@ -89,7 +85,7 @@
 			<cac:TaxCategory>
 				<cbc:ID>AE</cbc:ID>
 				<cbc:Percent>0</cbc:Percent>
-				<cbc:TaxExemptionReason>Prijenos porezne obveze po članku...</cbc:TaxExemptionReason>
+				<cbc:TaxExemptionReason>Prijenos porezne obveze čl...</cbc:TaxExemptionReason>
 				<cac:TaxScheme>
 					<cbc:ID>VAT</cbc:ID>
 				</cac:TaxScheme>
@@ -109,7 +105,7 @@
 		<cac:Item>
 			<cbc:Name>Proizvod</cbc:Name>
 			<cac:CommodityClassification>
-				<cbc:ItemClassificationCode listID="CG">41.00.11</cbc:ItemClassificationCode>
+				<cbc:ItemClassificationCode listID="CG">62.20.20</cbc:ItemClassificationCode>
 			</cac:CommodityClassification>
 			<cac:ClassifiedTaxCategory>
 				<cbc:ID>AE</cbc:ID>

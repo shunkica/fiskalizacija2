@@ -28,14 +28,9 @@
 					<cbc:IdentificationCode>HR</cbc:IdentificationCode>
 				</cac:Country>
 			</cac:PostalAddress>
-			<cac:PartyTaxScheme>
-				<cbc:CompanyID>HR12345678901</cbc:CompanyID>
-				<cac:TaxScheme>
-					<cbc:ID>VAT</cbc:ID>
-				</cac:TaxScheme>
-			</cac:PartyTaxScheme>
 			<cac:PartyLegalEntity>
 				<cbc:RegistrationName>TVRTKA A d.o.o.</cbc:RegistrationName>
+				<cbc:CompanyID>12345678901</cbc:CompanyID>
 				<cbc:CompanyLegalForm>Osnovano na trgovačkom sudu, temeljni kapital</cbc:CompanyLegalForm>
 			</cac:PartyLegalEntity>
 		</cac:Party>
@@ -55,14 +50,9 @@
 					<cbc:IdentificationCode>HR</cbc:IdentificationCode>
 				</cac:Country>
 			</cac:PostalAddress>
-			<cac:PartyTaxScheme>
-				<cbc:CompanyID>HR11111111119</cbc:CompanyID>
-				<cac:TaxScheme>
-					<cbc:ID>VAT</cbc:ID>
-				</cac:TaxScheme>
-			</cac:PartyTaxScheme>
 			<cac:PartyLegalEntity>
 				<cbc:RegistrationName>Tvrtka B d.o.o.</cbc:RegistrationName>
+				<cbc:CompanyID>11111111119</cbc:CompanyID>
 			</cac:PartyLegalEntity>
 		</cac:Party>
 	</cac:AccountingCustomerParty>
@@ -78,13 +68,13 @@
 		</cac:PayeeFinancialAccount>
 	</cac:PaymentMeans>
 	<cac:TaxTotal>
-		<cbc:TaxAmount currencyID="EUR">13.00</cbc:TaxAmount>
+		<cbc:TaxAmount currencyID="EUR">0.00</cbc:TaxAmount>
 		<cac:TaxSubtotal>
 			<cbc:TaxableAmount currencyID="EUR">100.00</cbc:TaxableAmount>
-			<cbc:TaxAmount currencyID="EUR">13.00</cbc:TaxAmount>
+			<cbc:TaxAmount currencyID="EUR">0.00</cbc:TaxAmount>
 			<cac:TaxCategory>
-				<cbc:ID>S</cbc:ID>
-				<cbc:Percent>13</cbc:Percent>
+				<cbc:ID>O</cbc:ID>
+				<cbc:TaxExemptionReason>Neoporezivo po čl. ...</cbc:TaxExemptionReason>
 				<cac:TaxScheme>
 					<cbc:ID>VAT</cbc:ID>
 				</cac:TaxScheme>
@@ -94,22 +84,22 @@
 	<cac:LegalMonetaryTotal>
 		<cbc:LineExtensionAmount currencyID="EUR">100.00</cbc:LineExtensionAmount>
 		<cbc:TaxExclusiveAmount currencyID="EUR">100.00</cbc:TaxExclusiveAmount>
-		<cbc:TaxInclusiveAmount currencyID="EUR">113.00</cbc:TaxInclusiveAmount>
-		<cbc:PayableAmount currencyID="EUR">113.00</cbc:PayableAmount>
+		<cbc:TaxInclusiveAmount currencyID="EUR">100.00</cbc:TaxInclusiveAmount>
+		<cbc:PayableAmount currencyID="EUR">100.00</cbc:PayableAmount>
 	</cac:LegalMonetaryTotal>
 	<cac:InvoiceLine>
 		<cbc:ID>1</cbc:ID>
 		<cbc:InvoicedQuantity unitCode="H87">1.000</cbc:InvoicedQuantity>
 		<cbc:LineExtensionAmount currencyID="EUR">100.00</cbc:LineExtensionAmount>
 		<cac:Item>
-			<cbc:Name>Proizvod</cbc:Name>
+			<cbc:Name>Kamata</cbc:Name>
 			<cac:CommodityClassification>
 				<cbc:ItemClassificationCode listID="CG">62.20.20</cbc:ItemClassificationCode>
 			</cac:CommodityClassification>
 			<cac:ClassifiedTaxCategory>
-				<cbc:ID>S</cbc:ID>
-				<cbc:Name>HR:PDV13</cbc:Name>
-				<cbc:Percent>13</cbc:Percent>
+				<cbc:ID>O</cbc:ID>
+				<cbc:Name>HR:O</cbc:Name>
+				<cbc:TaxExemptionReason>Neoporezivo po čl. ...</cbc:TaxExemptionReason>
 				<cac:TaxScheme>
 					<cbc:ID>VAT</cbc:ID>
 				</cac:TaxScheme>
