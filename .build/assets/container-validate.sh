@@ -76,6 +76,7 @@ if [ "$DOC_TYPE" = "UBL" ]; then
     
     if [ "$VALIDATION_RESULT" = "FATAL" ]; then
         echo "  ✗ EN16931-UBL-validation.xslt - failed asserts ($FATAL_COUNT)"
+        java -jar /opt/saxon-he-12.7.jar -xsl:/opt/extract-errors.xsl -s:/opt/reports/$REPORT_FILE 2>/dev/null
         exit 1
     else
         echo "  ✓ EN16931-UBL-validation.xslt"
@@ -99,6 +100,7 @@ if [ "$DOC_TYPE" = "UBL" ]; then
     
     if [ "$VALIDATION_RESULT" = "FATAL" ]; then
         echo "  ✗ HR_CIUS_EXT_EN16931_UBL.xslt - failed asserts ($FATAL_COUNT)"
+        java -jar /opt/saxon-he-12.7.jar -xsl:/opt/extract-errors.xsl -s:/opt/reports/$REPORT_FILE 2>/dev/null
         exit 1
     else
         echo "  ✓ HR_CIUS_EXT_EN16931_UBL.xslt"
@@ -122,6 +124,7 @@ elif [ "$DOC_TYPE" = "CII" ]; then
     
     if [ "$VALIDATION_RESULT" = "FATAL" ]; then
         echo "  ✗ EN16931-CII-validation.xslt - failed asserts ($FATAL_COUNT)"
+        java -jar /opt/saxon-he-12.7.jar -xsl:/opt/extract-errors.xsl -s:/opt/reports/$REPORT_FILE 2>/dev/null
         exit 1
     else
         echo "  ✓ EN16931-CII-validation.xslt"

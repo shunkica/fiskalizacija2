@@ -19,6 +19,7 @@ RUN java -jar /opt/saxon-he-12.7.jar -s:/opt/HR_CIUS_EXT_EN16931_UBL.timestamps.
 COPY validacija/xslt/ /opt/xslt/
 COPY validacija/xsd/ /opt/xsd/
 COPY .build/assets/check-fatal-errors.xsl /opt/
+COPY .build/assets/extract-errors.xsl /opt/
 COPY .build/assets/container-validate.sh /opt/validate.sh
 
 RUN chmod +x /opt/validate.sh && \
