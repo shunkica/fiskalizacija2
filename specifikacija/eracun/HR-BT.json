@@ -30,7 +30,7 @@
     {
       "ID": "HR-BT-4",
       "Pojam": "Oznaka operatera",
-      "Min": "1",
+      "Min": "0",
       "Max": "1",
       "Invoice": "/cac:AccountingSupplierParty/cac:SellerContact/cbc:Name",
       "CreditNote": "/cac:AccountingSupplierParty/cac:SellerContact/cbc:Name"
@@ -38,7 +38,7 @@
     {
       "ID": "HR-BT-5",
       "Pojam": "OIB operatera",
-      "Min": "1",
+      "Min": "0",
       "Max": "1",
       "Invoice": "/cac:AccountingSupplierParty/cac:SellerContact/cbc:ID",
       "CreditNote": "/cac:AccountingSupplierParty/cac:SellerContact/cbc:ID"

@@ -1,6 +1,38 @@
 # Evidencija zapažanja promjena u službenoj dokumentaciji
 
+## 2025-12-15
+
+- __ Specifikacija_osnovne_uporabe_eRacuna_s_prosirenjima.pdf__
+  - verzija 1.4 (12.12.2025.)
+    - Ažuriranje poslovnih pravila
+      - HR-BT-4 Oznaka operatera;
+      - HR-BT-5 OIB operatera;
+      - BT-105 (BG-21 Troškovi na razini dokumenta);
+      - BR-E-1(Poslovna pravila - Nulta stopa PDV-a);
+      - BR-AE-1(Poslovna pravila - Prijenos porezne obveze);
+      - BR-Z-1 (Poslovna pravila - Drugi razlozi oslobađanja PDV-a);
+      - HR-BR-25 (BT-158 Identifikator klasifikacije artikla);
+      - HR-BT-23 (HR iznos osnovice za PDV;
+      - HR-BG-3 HR ukupni iznosi;
+      - HR-BT-16 HR iznos osnovice kategorije PDV;
+      - HR-BG-2 HR raspodjela PDV
+    - Izmijenjeni primjeri 'Primjer računa sa stavkom od 25% PDV i povratnom naknadom prikazanom kao stavka računa', 'Primjer računa sa stavkom od 25% PDV i porezom na potrošnju 3% kao trošak na razini dokumenta', 'Primjer računa sa stavkom od 25% PDV'.
+  - verzija 1.5 (14.12.2025.)
+    - Obrisano pravilo HR-BT-12. Ažurirano pravilo BR-O-2 ispravljena ref. na pravilo za Kupca; BR-O-2; BR-O-3; BR-O-4
+  - __ !!! PROMJENE KOJE NISU NAVEDENE U OPISU PROMJENA !!! __
+    - Obrisano pravilo HR-BR-37 ( Račun mora sadržavati oznaku operatera HR-BT-4 )
+    - Obrisano pravilo HR-BR-9 ( Račun mora sadržavati OIB operatera HR-BT-5 )
+    - Obrisano pravilo HR-BR-35 ( Svaka stavka računa (BG-25) koji ne podliježe PDV-u ili je oslobođena od PDV-a mora imati kod kategorije PDV-a „E“ (BT-151) i stopu PDV-a (BT-152) jednaku 0
+    - Promjena šifre pravila HR-BR-31 u HR-BR-27
+    - Promjena `hrextac:HRTaxCategory` > `cac:TaxCategory` - u xpath izrazima je izmijenjeno, ali u primjerima je ostalo hrextac:HRTaxCategory. Pretpostavljam da je izmijenjeno greškom te da i dalje mora ostati `hrextac:HRTaxCategory`
+    - Promjena `hrextac:HRTaxExclusiveAmount` > `cbc:TaxExclusiveAmount`
+    - Promjena `cbc:OutOfScopeOfVatAmount` > `hrextac:OutOfScopeOfVatAmount`
+- __ Lipo schema __
+  - Promjena ns iz `http://www.apis-it.hr/fin/2024/types/lipo` u `http://www.porezna-uprava.gov.hr/fin/2024/types/lipo`
+  - Promjena ns iz `http://www.apis-it.hr/fin/2024/services/lipoService` u `http://www.porezna-uprava.gov.hr/fin/2024/services/lipoService`
+
 ## 2025-12-08
+
 - __Tehnicka_specifikacija_Fiskalizacija_eRacuna_i_eIzvjestavanje.pdf__
   - verzija 1.12 (04.12.2025.)
     - Ažuriran primjer elementa razlogPopusta (promijenjen regex u /[0-9]{1,3}/)
@@ -9,11 +41,13 @@
     - Novi dokument - Web servis - Lista identifikatora poreznih obveznika
 
 ## 2025-11-26
+
 - __Tehnicka_specifikacija_Fiskalizacija_eRacuna_i_eIzvjestavanje.pdf__
   - verzija 1.11 (24.11.2025.)
     - Ažuriran opis za: artikl klasifikacija artikla – navedeni podatak se ne unosi za vrstuDokumenta Odobrenje (381) i Predujam (386)
 
 ## 2025-11-04
+
 - __Tehnicka_specifikacija_Fiskalizacija_eRacuna_i_eIzvjestavanje.pdf__
   - verzija 1.9 (30.10.2025.)
     - Ažurirana obveznost podatka artiklStopaPdv
@@ -21,6 +55,7 @@
     - Ažuriran opis sigurnosnog preduvjeta: 'Certifikati za elektroničko potpisivanje poruka'
 
 ## 2025-10-13
+
 - __Tehnicka_specifikacija_eRacun_AMS.pdf__
   - verzija 1.4 (09.10.2025.)
   - Ažurirana produkcijska poveznica za AMS (`https://cis.porezna-uprava.hr:8513/proxy`)
@@ -36,6 +71,7 @@
   - ažuriran PMode[1].BusinessInfo.Service.type
 
 ## 2025-10-03
+
 - __Tehnicka_specifikacija_Fiskalizacija_eRacuna_i_eIzvjestavanje.pdf__
   - verzija 1.7 (30.09.2025.)
   - Ažurirano mapiranje na EU normu i pojavnost podataka: datum isporuke, prijenos sredstava, dokument popust, dokument trošak, indikator kopije
@@ -52,6 +88,7 @@
     - 8449 -> 8509
 
 ## 2025-09-29
+
 - __Tehnicka_specifikacija_Fiskalizacija_eRacuna_i_eIzvjestavanje.pdf__
   - verzija 1.6 (26.9.2025.)
   - Ažurirana metoda `EvidentirajEracun`: dodani elementi `DokumentUkupanIznos`, `DokumentPopust`, `DokumentTrosak` nadopunjena `RaspodjelaPdv` i `StavkaERacuna`; ažurirani primjeri
@@ -61,6 +98,7 @@
   - Promijenjen je security u `eDeliveryAS4PolicyBST`
 
 ## 2025-09-18
+
 - __Tehnicka_specifikacija_eRacun_PT_AS4.pdf__
   - verzija 1.2 (16.9.2025.)
   - promjena party.type u `urn:oasis:names:tc:ebcore:partyid-type:unregistered`
@@ -76,15 +114,16 @@
   - specificiran baseline `XAdES Baseline B, ETSI EN 319 132-1`
 
 ## 2025-08-13
+
 - __eFiskalizacijaSchema.xsd__
   - dodan element `oibOperatera` u element `Izdavatelj`
   - promjena regex patterna:
-      - `jedinicaMjere`: `[A-Z0-9]{2,3}` -> `[A-Za-z0-9]{2,3}`
-      - `izuzecePdv`: `[A-Z-]{1,20}` -> `[A-Za-z0-9-]{1,20}`
-      - `valuta`: `[A-Z]{3}` -> `[A-Za-z]{3}`
-      - `nacinPlacanja`: `[A-Z0-9]{1,3}` -> `[A-Za-z0-9]{1,3}`
-      - `kategorijaPdv`: `[A-Z]{1,2}` -> `[A-Za-z]{1,2}`
-      - `klasifikacijaArtikla`: `[A-Z]{2,3}` -> `[A-Za-z]{2,3}`
+    - `jedinicaMjere`: `[A-Z0-9]{2,3}` -> `[A-Za-z0-9]{2,3}`
+    - `izuzecePdv`: `[A-Z-]{1,20}` -> `[A-Za-z0-9-]{1,20}`
+    - `valuta`: `[A-Z]{3}` -> `[A-Za-z]{3}`
+    - `nacinPlacanja`: `[A-Z0-9]{1,3}` -> `[A-Za-z0-9]{1,3}`
+    - `kategorijaPdv`: `[A-Z]{1,2}` -> `[A-Za-z]{1,2}`
+    - `klasifikacijaArtikla`: `[A-Z]{2,3}` -> `[A-Za-z]{2,3}`
 - __eIzvjestavanjeSchema.xsd__
   - dodan element `datumVrijemeSlanja` u `EvidentirajNaplatuOdgovor`
   - dodan element `oibOperatera` u element `Izdavatelj`
@@ -118,15 +157,15 @@
 
 ## 2025-07-28
 
- - __Tehnicka_specifikacija_eRacun_MPS.pdf__
-   - Dodan prilog 2 sa primjerom odgovora MPS-a
-   - Izmjena poglavlja 3. promjena navoda AMS i MPS su bazirani na standardu eDelivery BDXL 1.61 
- - __Tehnicka_specifikacija_eRacun_AMS.pdf__
-   - Izmjena poglavlja 4. promjena navoda AMS i MPS su bazirani na standardu eDelivery BDXL 1.61
-   - Ažurirano poglavlje 5.3. dodani su linkovi za AMS produkcijsku okolinu, linkovi AMS-a unutar Portala za testiranje sukladnosti 
-     - Demo:
-       - dig +short @dns1.hitronet.hr 3IC5RWEJIATNSZ5UY56HVGWEIH4NMQZL5UXVNSYQFJSH5Z6SEJKA.iso6523-actorid-upis.demo.ams.porezna-uprava.hr. NAPTR
-       - AMS: https://cis.porezna-uprava.hr:8515/proxy
-     - Produkcija:
-       - dig +short @dns1.hitronet.hr 3IC5RWEJIATNSZ5UY56HVGWEIH4NMQZL5UXVNSYQFJSH5Z6SEJKA.iso6523-actorid-upis.prod.ams.porezna-uprava.hr. NAPTR
-       - AMS: https://cis.porezna-uprava.hr:8512/proxy
+- __Tehnicka_specifikacija_eRacun_MPS.pdf__
+  - Dodan prilog 2 sa primjerom odgovora MPS-a
+  - Izmjena poglavlja 3. promjena navoda AMS i MPS su bazirani na standardu eDelivery BDXL 1.61
+- __Tehnicka_specifikacija_eRacun_AMS.pdf__
+  - Izmjena poglavlja 4. promjena navoda AMS i MPS su bazirani na standardu eDelivery BDXL 1.61
+  - Ažurirano poglavlje 5.3. dodani su linkovi za AMS produkcijsku okolinu, linkovi AMS-a unutar Portala za testiranje sukladnosti
+    - Demo:
+      - dig +short @dns1.hitronet.hr 3IC5RWEJIATNSZ5UY56HVGWEIH4NMQZL5UXVNSYQFJSH5Z6SEJKA.iso6523-actorid-upis.demo.ams.porezna-uprava.hr. NAPTR
+      - AMS: https://cis.porezna-uprava.hr:8515/proxy
+    - Produkcija:
+      - dig +short @dns1.hitronet.hr 3IC5RWEJIATNSZ5UY56HVGWEIH4NMQZL5UXVNSYQFJSH5Z6SEJKA.iso6523-actorid-upis.prod.ams.porezna-uprava.hr. NAPTR
+      - AMS: https://cis.porezna-uprava.hr:8512/proxy
