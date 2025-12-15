@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <wsdl:definitions name="lipoService"
-                  targetNamespace="http://www.apis-it.hr/fin/2024/services/lipoService"
-                  xmlns:lipo="http://www.apis-it.hr/fin/2024/types/lipo"
+                  targetNamespace="http://www.porezna-uprava.gov.hr/fin/2024/services/lipoService"
+                  xmlns:lipo="http://www.porezna-uprava.gov.hr/fin/2024/types/lipo"
                   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
                   xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
                   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-                  xmlns:tns="http://www.apis-it.hr/fin/2024/services/lipoService">
+                  xmlns:tns="http://www.porezna-uprava.gov.hr/fin/2024/services/lipoService">
 
     <wsdl:types>
         <xsd:schema>
-            <xsd:import namespace="http://www.apis-it.hr/fin/2024/types/lipo" schemaLocation="../schema/lipoSchema.xsd"/>
+            <xsd:import namespace="http://www.porezna-uprava.gov.hr/fin/2024/types/lipo" schemaLocation="../schema/lipoSchema.xsd"/>
         </xsd:schema>
     </wsdl:types>
 

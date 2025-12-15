@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsd:schema targetNamespace="http://www.apis-it.hr/fin/2024/types/lipo"
+<xsd:schema targetNamespace="http://www.porezna-uprava.gov.hr/fin/2024/types/lipo"
             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-            xmlns:tns="http://www.apis-it.hr/fin/2024/types/lipo"
+            xmlns:tns="http://www.porezna-uprava.gov.hr/fin/2024/types/lipo"
             attributeFormDefault="qualified"
             elementFormDefault="qualified"
             version="1.0">
@@ -336,6 +336,16 @@
         <xsd:restriction base="xsd:string">
             <xsd:minLength value="1"/>
             <xsd:maxLength value="500"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="tekst1024">
+        <xsd:annotation>
+            <xsd:documentation>Tekst od 1 do 1024 znakova.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:minLength value="1"/>
+            <xsd:maxLength value="1024"/>
         </xsd:restriction>
     </xsd:simpleType>
 
