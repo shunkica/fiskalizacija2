@@ -64,7 +64,7 @@ function jsonToMd(jsonFile) {
 }
 
 function processDirs() {
-    const baseDir = path.join(__dirname, '..', 'specifikacija');
+    const baseDir = path.join(__dirname, '..', '..', 'specifikacija');
     const subdirs = ['eracun', 'as4'];
 
     for (const subdir of subdirs) {
