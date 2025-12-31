@@ -1,5 +1,23 @@
 # Evidencija zapažanja promjena u službenoj dokumentaciji
 
+## 2025-12-31
+- __Tehnicka_specifikacija_Fiskalizacija_eRacuna_i_eIzvjestavanje.pdf__
+  - verzija 1.13 (18.12.2025.)
+    - Ažurirano poglavlje Distinguished name (DN) u kontekstu aplikativnog digitalnog certifikata
+- __ Specifikacija_osnovne_uporabe_eRacuna_s_prosirenjima.pdf__
+  - __objavljene su izmjene u specifikaciji bez promjene verzije dokumenta__
+    - HR-BT-4 Oznaka operatera: Vraćeno kao obevezan element!
+    - HR-BT-5 OIB operatera: Vraćeno kao obevezan element!
+    - HR-BR-9 Račun mora sadržavati OIB operatera HR-BT-5: Vraćeno kao obvezno pravilo!
+    - HR-BR-37 Račun mora sadržavati oznaku operatera HR-BT-4: Vraćeno kao obvezno pravilo!
+- __eFiskalizacijaSchema.xsd__
+  - 15.12.2025.
+    - promjena Primatelj.oibPorezniBroj, Izdavatelj.oibPorezniBroj i Izdavatelj.oibOperatera iz tekst20 u tekst200
+    - promjena artiklBrutoCijena i artiklNetoCijena iz decimal2 u xsd:decimal
+- __ eIzvjestavanjeSchema.xsd__
+  - 15.12.2025.
+    - promjena Primatelj.oibPorezniBroj, Izdavatelj.oibPorezniBroj i Izdavatelj.oibOperatera iz tekst20 u tekst200
+
 ## 2025-12-15
 
 - __ Specifikacija_osnovne_uporabe_eRacuna_s_prosirenjima.pdf__

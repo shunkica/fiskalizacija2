@@ -15,7 +15,15 @@
     ==========================================================================
     # Date        Description
     ==========================================================================
+    2025-12-15    - remove old (unused) type decimalPositive2
+                  - add tekst200 data type
+                  - Changed Primatelj.oibPorezniBroj type tekst20 to tekst200
+                  - Changed Izdavatelj.oibPorezniBroj type tekst20 to tekst200
+                  - Changed Izdavatelj.oibOperatera type tekst20 to tekst200
+                  - Changed artiklBrutoCijena, artiklNetoCijena type to decimal
+    ==========================================================================
     2025-11-05    - Added minOccurs="0" to <artiklStopaPdv>
+    ==========================================================================
     -->
 
     <!--
@@ -206,12 +214,12 @@
                     <xsd:documentation>Puno ime pod kojim je izdavatelj registriran u nacionalnom registru pravnih osoba ili kao porezni obveznik ili na neki drugi način trguje kao osoba ili osobe (BT-27 iz UBL 2.1).</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
-            <xsd:element name="oibPorezniBroj" type="tns:tekst20">
+            <xsd:element name="oibPorezniBroj" type="tns:tekst200">
                 <xsd:annotation>
                     <xsd:documentation>OIB ili porezni broj izdavatelja, dio identifikatora eRačuna (BT-31 iz UBL 2.1).</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
-            <xsd:element name="oibOperatera" type="tns:tekst20">
+            <xsd:element name="oibOperatera" type="tns:tekst200">
                 <xsd:annotation>
                     <xsd:documentation>OIB operatera sukladno Zakonu o fiskalizaciji (HR-BT-5 iz UBL 2.1).</xsd:documentation>
                 </xsd:annotation>
@@ -226,7 +234,7 @@
                     <xsd:documentation>Puno ime primatelja (BT-44 iz UBL2.1).</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
-            <xsd:element name="oibPorezniBroj" type="tns:tekst20">
+            <xsd:element name="oibPorezniBroj" type="tns:tekst200">
                 <xsd:annotation>
                     <xsd:documentation>Za porezne obveznike u RH je polje obavezno i izričito OIB (BT-48 iz UBL 2.1).</xsd:documentation>
                 </xsd:annotation>
@@ -427,7 +435,7 @@
                     <xsd:documentation>Cijena artikla bez PDV-a, nakon oduzimanja popusta na cijenu artikla (BT-146 iz UBL 2.1).</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
-            <xsd:element name="artiklBrutoCijena" type="tns:decimal2" minOccurs="0">
+            <xsd:element name="artiklBrutoCijena" type="xsd:decimal" minOccurs="0">
                 <xsd:annotation>
                     <xsd:documentation>Jedinična cijena bez PDV-a prije oduzimanja popusta na cijenu artikla (BT-148 iz UBL 2.1).</xsd:documentation>
                 </xsd:annotation>
@@ -765,11 +773,21 @@
 
     <xsd:simpleType name="tekst120">
         <xsd:annotation>
-            <xsd:documentation>Tekst od 1 do 100 znakova.</xsd:documentation>
+            <xsd:documentation>Tekst od 1 do 120 znakova.</xsd:documentation>
         </xsd:annotation>
         <xsd:restriction base="xsd:string">
             <xsd:minLength value="1"/>
             <xsd:maxLength value="120"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="tekst200">
+        <xsd:annotation>
+            <xsd:documentation>Tekst od 1 do 200 znakova.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:minLength value="1"/>
+            <xsd:maxLength value="200"/>
         </xsd:restriction>
     </xsd:simpleType>
 
@@ -808,16 +826,6 @@
             <xsd:documentation>Decimalni broj s dvije decimale.</xsd:documentation>
         </xsd:annotation>
         <xsd:restriction base="xsd:decimal">
-            <xsd:fractionDigits value="2"/>
-        </xsd:restriction>
-    </xsd:simpleType>
-
-    <xsd:simpleType name="decimalPositive2">
-        <xsd:annotation>
-            <xsd:documentation>Pozitivni decimalni broj s dvije decimale.</xsd:documentation>
-        </xsd:annotation>
-        <xsd:restriction base="xsd:decimal">
-            <xsd:minExclusive value="0"/>
             <xsd:fractionDigits value="2"/>
         </xsd:restriction>
     </xsd:simpleType>
