@@ -44,7 +44,7 @@
     - Promjena šifre pravila HR-BR-31 u HR-BR-27
     - Promjena `hrextac:HRTaxCategory` > `cac:TaxCategory` - u xpath izrazima je izmijenjeno, ali u primjerima je ostalo hrextac:HRTaxCategory. Pretpostavljam da je izmijenjeno greškom te da i dalje mora ostati `hrextac:HRTaxCategory`
     - Promjena `hrextac:HRTaxExclusiveAmount` > `cbc:TaxExclusiveAmount`
-    - Promjena `cbc:OutOfScopeOfVatAmount` > `hrextac:OutOfScopeOfVatAmount`
+    - Promjena `cbc:OutOfScopeOfVATAmount` > `hrextac:OutOfScopeOfVATAmount`
 - __ Lipo schema __
   - Promjena ns iz `http://www.apis-it.hr/fin/2024/types/lipo` u `http://www.porezna-uprava.gov.hr/fin/2024/types/lipo`
   - Promjena ns iz `http://www.apis-it.hr/fin/2024/services/lipoService` u `http://www.porezna-uprava.gov.hr/fin/2024/services/lipoService`
