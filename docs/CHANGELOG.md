@@ -1,5 +1,46 @@
 # Evidencija zapažanja promjena u službenoj dokumentaciji
 
+## 2026-01-22
+- __Specifikacija_osnovne_uporabe_eRacuna_s_prosirenjima.pdf__
+  - verzija 1.6 (20.01.2026.) (u dokumentu piše 2025)
+    - ispravljena greška s validacijom klasifikacija artikla koje nisu KPD
+    - ispravljena greška s izračunima za pravilo HR-BR-27
+    - dodana kontrola 11 znamenki u pravilo HR-BR-37 OIB operatera 11 znamenki
+    - Nova pravila:
+      - HR-BR-40 - Datum izdavanja računa (BT-2) mora biti veći od 01.01.2026 i manji od 01.01.2100.
+      - HR-BR-41 - Datum dospijeća plaćanja (BT-9) mora biti manji od 01.01.2100.
+      - HR-BR-42 - Oznaka procesa (BT-23) ne smije biti veća od 200 znakova
+      - HR-BR-43 - Referenca ugovora (BT-12) ne smije imati više od 1024 znakova
+      - HR-BR-44 - Stvarni datum isporuke (BT-72) mora biti manji od 01.01.2100.
+      - HR-BR-45 - Datum izdavanja prethodnog računa (BT-26) mora biti manji od 01.01.2100.
+      - HR-BR-46 - Naziv artikla (BT-153) mora imati manje od 1024 znakova
+      - HR-BR-47 - Opis artikla (BT-154) mora imati manje od 4096 znakova
+    - Stope:
+      - HR-BR-S-10 - Za svaku HR raspodjelu PDV u kojoj je kategorija PDV-a (HR-BT-18) "Standard rated" stopa PDV mora biti veća od 0
+      - HR-BR-Z-10 - Za svaku HR raspodjelu PDV u kojoj je kategorija PDV-a (HR-BT-18) "Zero rated" stopa PDV mora biti 0
+      - HR-BR-E-10 - Za svaku HR raspodjelu PDV u kojoj je kategorija PDV-a (HR-BT-18) "Oslobođeno PDV" stopa PDV mora biti 0
+      - HR-BR-AE-10 - Za svaku HR raspodjelu PDV u kojoj je kategorija PDV-a (HR-BT-18) "Prijenos porezne obveze" stopa PDV mora biti 0
+    - __Nedokumentirane izmjene:__
+      - BT-146 - ograničenje na 10 decimala
+      - BT-147 - ograničenje na 10 decimala
+      - BT-148 - ograničenje na 10 decimala
+  - __Tehnicka_specifikacija_Fiskalizacija_eRacuna_i_eIzvjestavanje.pdf__
+    - verzija 1.14 (20.01.2026.)
+      - Ažurirana duljina znakova (dozvoljena vrijednost) za elemente:
+        - ime (izdavatelja i primatelja)
+        - referencaNaUgovor
+        - razlogOdbijanja
+        - nazivRacunaZaPlacanje
+        - vrstaPoslovnogProcesa
+        - identifikatorPruzateljaPlatnihUsluga
+        - identifikatorRacunaZaPlacanje
+        - artiklNetoCijena
+        - artiklBrutoCijena
+        - artiklOsnovnaKolicina
+        - artiklStopaPdv
+        - artiklNaziv
+        - artiklOpis
+
 ## 2025-12-31
 - __Tehnicka_specifikacija_Fiskalizacija_eRacuna_i_eIzvjestavanje.pdf__
   - verzija 1.13 (18.12.2025.)
