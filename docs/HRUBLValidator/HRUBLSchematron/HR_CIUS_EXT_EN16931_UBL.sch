@@ -42,15 +42,12 @@ This schematron uses business terms defined the CEN/EN16931-1 and is reproduced 
 			<assert test="string-length(cbc:ProfileID) &lt;= 200"
 				flag="fatal"
 				id="HR-BR-42">[HR-BR-42] - Oznaka procesa (BT-23) ne smije biti veća od 200 znakova</assert>
-			<assert test="string-length(cac:OrderReference/cbc:ID) &lt;= 1024"
+			<assert test="string-length(cac:ContractDocumentReference/cbc:ID) &lt;= 1024"
 				flag="fatal"
 				id="HR-BR-43">[HR-BR-43] - Referenca ugovora (BT-12) ne smije imati više od 1024 znakova</assert>
 			<assert test="xs:date(cac:Delivery/cbc:ActualDeliveryDate) &lt;= xs:date('2100-01-01') or (not(exists(cac:Delivery/cbc:ActualDeliveryDate)))"
 				flag="fatal"
 				id="HR-BR-44">[HR-BR-44] - Stvarni datum isporuke (BT-72) mora biti manji od 01.01.2100.</assert>
-			<assert test="xs:date(cac:BillingReference/cac:InvoiceDocumentReference/cbc:IssueDate) &lt;= xs:date('2100-01-01') or (not(exists(cac:BillingReference/cac:InvoiceDocumentReference/cbc:IssueDate)))"
-				flag="fatal"
-				id="HR-BR-45">[HR-BR-45] - Datum izdavanja prethodnog računa (BT-26) mora biti manji od 01.01.2100.</assert>
 			
 			<assert test="normalize-space(cbc:CustomizationID) = 'urn:cen.eu:en16931:2017#compliant#urn:mfin.gov.hr:cius-2025:1.0#conformant#urn:mfin.gov.hr:ext-2025:1.0'"
 				flag="fatal"
@@ -108,7 +105,11 @@ This schematron uses business terms defined the CEN/EN16931-1 and is reproduced 
                  flag="fatal"
                  id="HR-BR-29">[HR-BR-29] - Stavke računa, troškovi ili popusti koji ne ulaze u poreznu osnovicu HR kod kategorije PDV-a (HR-BT-18) mora biti „O“, a HR iznos kategorije poreza (HR-BT-17) mora biti 0</assert>
             
-            <assert test="(//ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRLegalMonetaryTotal/hrextac:OutOfScopeOfVATAmount = sum(ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal[hrextac:HRTaxCategory/normalize-space(cbc:ID) = 'O']/cbc:TaxableAmount)) or (not(exists(//ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRLegalMonetaryTotal)))"
+            <assert test="((exists(//cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory[normalize-space(cbc:Name) = 'HR:POVNAK']) or exists(//cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory[normalize-space(cbc:Name) = 'HR:PP']) or exists(//cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory[normalize-space(cbc:Name) = 'HR:PPMV']) or exists(//cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory[normalize-space(cbc:Name) = 'HR:N']) or exists(//cac:AllowanceCharge[cbc:ChargeIndicator='true']/cac:TaxCategory[normalize-space(cbc:Name) = 'HR:POVNAK']) or exists(//cac:AllowanceCharge[cbc:ChargeIndicator='true']/cac:TaxCategory[normalize-space(cbc:Name) = 'HR:PP']) or exists(//cac:AllowanceCharge[cbc:ChargeIndicator='true']/cac:TaxCategory[normalize-space(cbc:Name) = 'HR:PPMV']) or exists(//cac:AllowanceCharge[cbc:ChargeIndicator='true']/cac:TaxCategory[normalize-space(cbc:Name) = 'HR:N'])) and (exists(//ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRLegalMonetaryTotal))) or (not(exists(//cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory[normalize-space(cbc:Name) = 'HR:POVNAK'])) and not(exists(//cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory[normalize-space(cbc:Name) = 'HR:PP'])) and not(exists(//cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory[normalize-space(cbc:Name) = 'HR:PPMV'])) and not(exists(//cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory[normalize-space(cbc:Name) = 'HR:N'])) and not(exists(//cac:AllowanceCharge[cbc:ChargeIndicator='true']/cac:TaxCategory[normalize-space(cbc:Name) = 'HR:POVNAK'])) and not(exists(//cac:AllowanceCharge[cbc:ChargeIndicator='true']/cac:TaxCategory[normalize-space(cbc:Name) = 'HR:PP'])) and not(exists(//cac:AllowanceCharge[cbc:ChargeIndicator='true']/cac:TaxCategory[normalize-space(cbc:Name) = 'HR:PPMV'])) and not(exists(//cac:AllowanceCharge[cbc:ChargeIndicator='true']/cac:TaxCategory[normalize-space(cbc:Name) = 'HR:N'])))"
+                 flag="fatal"
+                 id="HR-BR-30">[HR-BR-30] - HR Ukupni iznosi računa (HR-BG-3) se navodi na računu ako račun sadrži stavke računa (BG-25) ili troškove na razini dokumenta (BG-21) koji ne ulaze u poreznu osnovicu računa osim ako je EN porezna kategorija (O) Neoporeziva prodaja I Oznaka porezne kategorije HR:O.</assert>
+            
+            <assert test="(xs:decimal(//ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRLegalMonetaryTotal/hrextac:OutOfScopeOfVATAmount) = round(sum(ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal[hrextac:HRTaxCategory/normalize-space(cbc:ID) = 'O']/xs:decimal(cbc:TaxableAmount)) * 10 * 10) div 100) or (not(exists(//ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRLegalMonetaryTotal)))"
             	flag="fatal"
             	id="HR-BR-32">[HR-BR-32] - HR neoporezivi iznos (HR-BT-24) jednak je zbroju neto iznosa stavki računa (BT-131) koje NE ulaze u poreznu osnovicu umanjen za zbroj iznosa popusta na razini dokumenta (BT-92) i uvećan za zbroj iznosa troškova na razini dokumenta (BT-99) koje NE ulaze u poreznu osnovicu</assert>
             
@@ -149,6 +150,9 @@ This schematron uses business terms defined the CEN/EN16931-1 and is reproduced 
 				test="exists(cac:InvoiceDocumentReference/cbc:ID) and exists(cac:InvoiceDocumentReference/cbc:IssueDate)" 
 				flag="fatal"
 				id="HR-BR-6">[HR-BR-6] - Svaka referenca prethodnog računa (BG-3) mora imati datum izdavanja prethodnog računa (BT-26)</assert>
+			<assert test="xs:date(cac:InvoiceDocumentReference/cbc:IssueDate) &lt;= xs:date('2100-01-01')"
+				flag="fatal"
+				id="HR-BR-45">[HR-BR-45] - Datum izdavanja prethodnog računa (BT-26) mora biti manji od 01.01.2100.</assert>
 		</rule>
 		
 		<!-- Accounting supplier -->
@@ -187,10 +191,6 @@ This schematron uses business terms defined the CEN/EN16931-1 and is reproduced 
 				flag="fatal"
 				id="HR-BR-20">[HR-BR-20] - Jedinična količina za cijenu artikla, ako je iskazana, MORA biti pozitivan broj veći od nule</assert>
 			
-			<assert test="((exists(cac:Item/cac:ClassifiedTaxCategory[normalize-space(cbc:ID) = 'E']) or exists(cac:Item/cac:ClassifiedTaxCategory[normalize-space(cbc:ID) = 'O'])) and exists(cac:Item/cac:ClassifiedTaxCategory/cbc:Name)) or (exists(cac:Item/cac:ClassifiedTaxCategory[normalize-space(cbc:ID) != 'E']) and exists(cac:Item/cac:ClassifiedTaxCategory[normalize-space(cbc:ID) != 'O']))"
-                 flag="fatal"
-                 id="HR-BR-16">[HR-BR-16] - Svaka stavka računa (BG-25) koja ne podliježe PDV-u ili je oslobođena od PDV-a mora imati oznaku kategorije PDV-a obračunate stavke HR-BT-12</assert>
-			
 		</rule>
 		
 		<rule context="cac:Price/cbc:BaseQuantity[@unitCode]">
@@ -213,11 +213,16 @@ This schematron uses business terms defined the CEN/EN16931-1 and is reproduced 
 				../../cbc:InvoiceTypeCode
 			else
 				../../cbc:CreditNoteTypeCode"/>
+			
+			<assert test="((exists(cac:ClassifiedTaxCategory[normalize-space(cbc:ID) = 'E']) or exists(cac:ClassifiedTaxCategory[normalize-space(cbc:ID) = 'O'])) and exists(cac:ClassifiedTaxCategory/cbc:Name)) or (exists(cac:ClassifiedTaxCategory[normalize-space(cbc:ID) != 'E']) and exists(cac:ClassifiedTaxCategory[normalize-space(cbc:ID) != 'O']))"
+                 flag="fatal"
+                 id="HR-BR-16">[HR-BR-16] - Stavka <value-of select="$lineID"/>: Svaka stavka računa (BG-25) koja ne podliježe PDV-u ili je oslobođena od PDV-a mora imati oznaku kategorije PDV-a obračunate stavke HR-BT-12</assert>
+			
 			<assert test="(exists(cac:CommodityClassification/cbc:ItemClassificationCode) and (cac:CommodityClassification/cbc:ItemClassificationCode/@listID = 'CG')) or (not(exists(cac:CommodityClassification/cbc:ItemClassificationCode)) and $documentTypeCode[contains(' 386 81 83 261 262 296 308 381 396 420 458 532 ', concat(' ', normalize-space(.), ' '))]) or ($documentTypeCode[contains(' 386 81 83 261 262 296 308 381 396 420 458 532 ', concat(' ', normalize-space(.), ' '))] and (cac:CommodityClassification/cbc:ItemClassificationCode/@listID != 'CG'))"
 				flag="fatal"
 				id="HR-BR-25">[HR-BR-25] - Stavka <value-of select="$lineID"/>: Svaki artikl MORA imati identifikator klasifikacije artikla iz sheme Klasifikacija proizvoda po djelatnostima: KPD (CPA) – listID „CG“, osim u slučaju računa za predujam i odobrenja.</assert>
 			
-			<assert test="(exists(cac:ClassifiedTaxCategory[normalize-space(cbc:ID) = 'E'] or exists(cac:ClassifiedTaxCategory[normalize-space(cbc:ID) = 'O'])) and (exists(cac:ClassifiedTaxCategory/cbc:TaxExemptionReason) or exists(cac:ClassifiedTaxCategory/cbc:TaxExemptionReasonCode))) or (not(exists(cac:ClassifiedTaxCategory[normalize-space(cbc:ID) = 'E'])) and (not(exists(cac:ClassifiedTaxCategory[normalize-space(cbc:ID) = 'O']))))"
+			<assert test="(exists(cac:ClassifiedTaxCategory[normalize-space(cbc:ID) = 'E'] or exists(cac:ClassifiedTaxCategory[normalize-space(cbc:ID) = 'O'])) and (exists(cac:ClassifiedTaxCategory/cbc:TaxExemptionReason) or exists(cac:ClassifiedTaxCategory/cbc:TaxExemptionReasonCode))) or ((cac:ClassifiedTaxCategory[normalize-space(cbc:ID) != 'E']) and (cac:ClassifiedTaxCategory[normalize-space(cbc:ID) != 'O']))"
                  flag="fatal"
                  id="HR-BR-36">[HR-BR-36] - Stavka <value-of select="$lineID"/>: Svaka stavka računa (BG-25) koja ne podliježe PDV-u ili je oslobođena od PDV-a mora imati razlog oslobođenja PDV-a (HR-BT-13) ili kod razloga oslobođenja PDV-a (HR-BT-14)</assert>
             
@@ -231,6 +236,10 @@ This schematron uses business terms defined the CEN/EN16931-1 and is reproduced 
 		</rule>
 		
 		<rule context="ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal">
+			
+			<assert test="(((exists(hrextac:HRTaxCategory/cbc:ID)) or (hrextac:HRTaxCategory/cbc:ID = 'E') or (hrextac:HRTaxCategory/cbc:ID = 'O')) and (xs:decimal(cbc:TaxAmount) = 0)) or ((hrextac:HRTaxCategory/cbc:ID != 'E') and (hrextac:HRTaxCategory/cbc:ID != 'O'))"
+				 flag="fatal"
+				 id="HR-BR-28">[HR-BR-28] - Za cac:TaxScheme = „VAT“ i kod porezne kategorije „E“ ili „O“ HR iznos porezne kategorije mora biti 0</assert>
 			
 			<assert test="(exists(hrextac:HRTaxCategory/cbc:ID)) and (hrextac:HRTaxCategory/cbc:ID = 'S') and (hrextac:HRTaxCategory/cbc:Percent &gt; 0) or (hrextac:HRTaxCategory/cbc:ID != 'S')"
                  flag="fatal"

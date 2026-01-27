@@ -1,5 +1,21 @@
 # Evidencija zapažanja promjena u službenoj dokumentaciji
 
+## 2026-01-27
+- __HRUBLValidator__
+  - PROMJENA:
+    - HR-BR-42 - Promjena `cac:OrderReference` u `cac:ContractDocumentReference`
+    - HR-BR-36 - ispravak testa
+    - HR-BR-16 - ispravak lokacije
+    - HR-BR-45 - ispravak lokacije
+  - DODANO:
+    - HR-BR-30 - HR Ukupni iznosi računa (HR-BG-3) se navodi na računu ako račun sadrži stavke računa (BG-25) ili troškove na razini dokumenta (BG-21) koji ne ulaze u poreznu osnovicu računa osim ako je EN porezna kategorija (O) Neoporeziva prodaja I Oznaka porezne kategorije HR:O.
+    - HR-BR-20 - Za cac:TaxScheme = „VAT“ i kod porezne kategorije „E“ ili „O“ HR iznos porezne kategorije mora biti 0
+- __Specifikacija_osnovne_uporabe_eRacuna_s_prosirenjima.pdf__
+  - verzija 1.7 (24.01.2026.)
+    - HR-BR-30 izmjena pravila za neoporezive račune u skladu s EN
+  - NEDOKUMENTIRANE IZMJENE:
+    - Izbrisana su sva nova pravila koja su dodana u prošloj verziji (HR-BR-40 do HR-BR-47 i HR-BR-S-10, HR-BR-Z-10, HR-BR-E-10, HR-BR-AE-10) ali pravila su ostala u validatoru .?!
+
 ## 2026-01-22
 - __Specifikacija_osnovne_uporabe_eRacuna_s_prosirenjima.pdf__
   - verzija 1.6 (20.01.2026.) (u dokumentu piše 2025)
