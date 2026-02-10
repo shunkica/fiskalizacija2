@@ -37,6 +37,14 @@
         <wsdl:documentation>Odgovor na zahtjev za evidentiranje isporuke za koju nije izdan eRačun</wsdl:documentation>
         <wsdl:part element="izv:EvidentirajIsporukuZaKojuNijeIzdanERacunOdgovor" name="EvidentirajIsporukuZaKojuNijeIzdanERacunOdgovor"/>
     </wsdl:message>
+    <wsdl:message name="OvlastenjaFiskalizacijeZahtjev">
+        <wsdl:documentation>Zahtjev za ovlastenja fiskalizacije</wsdl:documentation>
+        <wsdl:part element="izv:OvlastenjaFiskalizacijeZahtjev" name="OvlastenjaFiskalizacijeZahtjev"/>
+    </wsdl:message>
+    <wsdl:message name="OvlastenjaFiskalizacijeOdgovor">
+        <wsdl:documentation>Odgovor na zahtjev za ovlastenja fiskalizacije</wsdl:documentation>
+        <wsdl:part element="izv:OvlastenjaFiskalizacijeOdgovor" name="OvlastenjaFiskalizacijeOdgovor"/>
+    </wsdl:message>
 
     <wsdl:portType name="EIzvjestavanjeServicePortTip">
         <wsdl:operation name="EvidentirajOdbijanje">
@@ -50,6 +58,10 @@
         <wsdl:operation name="EvidentirajIsporukuZaKojuNijeIzdanERacun">
             <wsdl:input message="tns:EvidentirajIsporukuZaKojuNijeIzdanERacunZahtjev" name="EvidentirajIsporukuZaKojuNijeIzdanERacunZahtjev"/>
             <wsdl:output message="tns:EvidentirajIsporukuZaKojuNijeIzdanERacunOdgovor" name="EvidentirajIsporukuZaKojuNijeIzdanERacunOdgovor"/>
+        </wsdl:operation>
+        <wsdl:operation name="OvlastenjaFiskalizacije">
+            <wsdl:input message="tns:OvlastenjaFiskalizacijeZahtjev" name="OvlastenjaFiskalizacijeZahtjev"/>
+            <wsdl:output message="tns:OvlastenjaFiskalizacijeOdgovor" name="OvlastenjaFiskalizacijeOdgovor"/>
         </wsdl:operation>
     </wsdl:portType>
 
@@ -79,6 +91,15 @@
                 <soap:body use="literal"/>
             </wsdl:input>
             <wsdl:output name="EvidentirajIsporukuZaKojuNijeIzdanERacunOdgovor">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="OvlastenjaFiskalizacije">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="OvlastenjaFiskalizacijeZahtjev">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="OvlastenjaFiskalizacijeOdgovor">
                 <soap:body use="literal"/>
             </wsdl:output>
         </wsdl:operation>
