@@ -9,6 +9,7 @@
                xmlns:schxslt="https://doi.org/10.5281/zenodo.1495494"
                xmlns:schxslt-api="https://doi.org/10.5281/zenodo.1495494#api"
                xmlns:sig="urn:oasis:names:specification:ubl:schema:xsd:CommonSignatureComponents-2"
+               xmlns:u="utils"
                xmlns:ubl-creditnote="urn:oasis:names:specification:ubl:schema:xsd:CreditNote-2"
                xmlns:ubl-invoice="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2"
                xmlns:xs="http://www.w3.org/2001/XMLSchema"
@@ -26,6 +27,68 @@
       
    </rdf:Description>
    <xsl:output indent="yes"/>
+   <function xmlns="http://www.w3.org/1999/XSL/Transform"
+             name="u:ctrlOIB"
+             as="xs:boolean">
+      <param name="oib"/>
+      <variable name="prefix"
+                select="if (substring($oib, 1, 2) = 'HR') then true() else false()"/>
+      <variable name="z1"
+                select="if ($prefix) then number(substring($oib, 3, 1)) else number(substring($oib, 1, 1))"/>
+      <variable name="z2"
+                select="if ($prefix) then number(substring($oib, 4, 1)) else number(substring($oib, 2, 1))"/>
+      <variable name="z3"
+                select="if ($prefix) then number(substring($oib, 5, 1)) else number(substring($oib, 3, 1))"/>
+      <variable name="z4"
+                select="if ($prefix) then number(substring($oib, 6, 1)) else number(substring($oib, 4, 1))"/>
+      <variable name="z5"
+                select="if ($prefix) then number(substring($oib, 7, 1)) else number(substring($oib, 5, 1))"/>
+      <variable name="z6"
+                select="if ($prefix) then number(substring($oib, 8, 1)) else number(substring($oib, 6, 1))"/>
+      <variable name="z7"
+                select="if ($prefix) then number(substring($oib, 9, 1)) else number(substring($oib, 7, 1))"/>
+      <variable name="z8"
+                select="if ($prefix) then number(substring($oib, 10, 1)) else number(substring($oib, 8, 1))"/>
+      <variable name="z9"
+                select="if ($prefix) then number(substring($oib, 11, 1)) else number(substring($oib, 9, 1))"/>
+      <variable name="z10"
+                select="if ($prefix) then number(substring($oib, 12, 1)) else number(substring($oib, 10, 1))"/>
+      <variable name="ctrl"
+                select="if ($prefix) then number(substring($oib, 13, 1)) else number(substring($oib, 11, 1))"/>
+      <variable name="inter1"
+                select="if ((number($z1) + 10) mod 10 = 0) then (10 * 2) mod 11 else (((number($z1) + 10) mod 10) * 2) mod 11"/>
+      <variable name="inter2"
+                select="if ((number($z2) + $inter1) mod 10 = 0) then (10 * 2) mod 11 else (((number($z2) + $inter1) mod 10) * 2) mod 11"/>
+      <variable name="inter3"
+                select="if ((number($z3) + $inter2) mod 10 = 0) then (10 * 2) mod 11 else (((number($z3) + $inter2) mod 10) * 2) mod 11"/>
+      <variable name="inter4"
+                select="if ((number($z4) + $inter3) mod 10 = 0) then (10 * 2) mod 11 else (((number($z4) + $inter3) mod 10) * 2) mod 11"/>
+      <variable name="inter5"
+                select="if ((number($z5) + $inter4) mod 10 = 0) then (10 * 2) mod 11 else (((number($z5) + $inter4) mod 10) * 2) mod 11"/>
+      <variable name="inter6"
+                select="if ((number($z6) + $inter5) mod 10 = 0) then (10 * 2) mod 11 else (((number($z6) + $inter5) mod 10) * 2) mod 11"/>
+      <variable name="inter7"
+                select="if ((number($z7) + $inter6) mod 10 = 0) then (10 * 2) mod 11 else (((number($z7) + $inter6) mod 10) * 2) mod 11"/>
+      <variable name="inter8"
+                select="if ((number($z8) + $inter7) mod 10 = 0) then (10 * 2) mod 11 else (((number($z8) + $inter7) mod 10) * 2) mod 11"/>
+      <variable name="inter9"
+                select="if ((number($z9) + $inter8) mod 10 = 0) then (10 * 2) mod 11 else (((number($z9) + $inter8) mod 10) * 2) mod 11"/>
+      <variable name="inter10"
+                select="if ((number($z10) + $inter9) mod 10 = 0) then (10 * 2) mod 11 else (((number($z10) + $inter9) mod 10) * 2) mod 11"/>
+      <variable name="calcCtrl"
+                select="if (11 - $inter10 = 10) then 0 else 11 - $inter10"/>
+      <value-of select="$calcCtrl = $ctrl"/>
+   </function>
+   <function xmlns="http://www.w3.org/1999/XSL/Transform"
+             name="u:check3010"
+             as="xs:boolean">
+      <param name="broj"/>
+      <variable name="duljina"
+                select="if (string-length($broj) &lt; 30) then true() else false()"/>
+      <variable name="decimale"
+                select="if (string-length(substring-after($broj, '.')) &lt;= 10) then true() else false()"/>
+      <value-of select="$duljina and $decimale"/>
+   </function>
    <xsl:param name="schxslt.validate.initial-document-uri" as="xs:string?"/>
    <xsl:template name="schxslt.validate">
       <xsl:apply-templates select="document($schxslt.validate.initial-document-uri)"/>
@@ -71,7 +134,7 @@
             </xsl:variable>
             <xsl:variable name="report" as="element(schxslt:report)">
                <schxslt:report>
-                  <xsl:call-template name="d7e25"/>
+                  <xsl:call-template name="d7e96"/>
                </schxslt:report>
             </xsl:variable>
             <xsl:variable name="schxslt:report" as="node()*">
@@ -100,6 +163,7 @@
                                                    uri="urn:oasis:names:specification:ubl:schema:xsd:CreditNote-2"/>
                <svrl:ns-prefix-in-attribute-values prefix="ubl-invoice"
                                                    uri="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2"/>
+               <svrl:ns-prefix-in-attribute-values prefix="u" uri="utils"/>
                <svrl:ns-prefix-in-attribute-values prefix="xs" uri="http://www.w3.org/2001/XMLSchema"/>
                <xsl:sequence select="$schxslt:report"/>
             </svrl:schematron-output>
@@ -114,9 +178,9 @@
       <xsl:apply-templates mode="#current" select="@*"/>
       <xsl:apply-templates mode="#current" select="node()"/>
    </xsl:template>
-   <xsl:template name="d7e25">
+   <xsl:template name="d7e96">
       <schxslt:document>
-         <schxslt:pattern id="d7e25">
+         <schxslt:pattern id="d7e96">
             <xsl:if test="exists(base-uri(root()))">
                <xsl:attribute name="documents" select="base-uri(root())"/>
             </xsl:if>
@@ -126,7 +190,7 @@
                </svrl:active-pattern>
             </xsl:for-each>
          </schxslt:pattern>
-         <schxslt:pattern id="d7e35">
+         <schxslt:pattern id="d7e105">
             <xsl:if test="exists(base-uri(root()))">
                <xsl:attribute name="documents" select="base-uri(root())"/>
             </xsl:if>
@@ -136,16 +200,16 @@
                </svrl:active-pattern>
             </xsl:for-each>
          </schxslt:pattern>
-         <xsl:apply-templates mode="d7e25" select="root()"/>
+         <xsl:apply-templates mode="d7e96" select="root()"/>
       </schxslt:document>
    </xsl:template>
    <xsl:template match="//*[not(*) and not(normalize-space()) and not(ancestor-or-self::sig:UBLDocumentSignatures)]"
-                 priority="9"
-                 mode="d7e25">
+                 priority="15"
+                 mode="d7e96">
       <xsl:param name="schxslt:patterns-matched" as="xs:string*"/>
       <xsl:choose>
-         <xsl:when test="$schxslt:patterns-matched[. = 'd7e25']">
-            <schxslt:rule pattern="d7e25">
+         <xsl:when test="$schxslt:patterns-matched[. = 'd7e96']">
+            <schxslt:rule pattern="d7e96">
                <xsl:comment xmlns:svrl="http://purl.oclc.org/dsdl/svrl">WARNING: Rule for context "//*[not(*) and not(normalize-space()) and not(ancestor-or-self::sig:UBLDocumentSignatures)]" shadowed by preceding rule</xsl:comment>
                <svrl:suppressed-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl">
                   <xsl:attribute name="context">//*[not(*) and not(normalize-space()) and not(ancestor-or-self::sig:UBLDocumentSignatures)]</xsl:attribute>
@@ -162,7 +226,7 @@
             </xsl:next-match>
          </xsl:when>
          <xsl:otherwise>
-            <schxslt:rule pattern="d7e25">
+            <schxslt:rule pattern="d7e96">
                <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl">
                   <xsl:attribute name="context">//*[not(*) and not(normalize-space()) and not(ancestor-or-self::sig:UBLDocumentSignatures)]</xsl:attribute>
                   <xsl:variable name="documentUri" as="xs:anyURI?" select="document-uri()"/>
@@ -183,14 +247,14 @@
             <xsl:next-match>
                <xsl:with-param name="schxslt:patterns-matched"
                                as="xs:string*"
-                               select="($schxslt:patterns-matched, 'd7e25')"/>
+                               select="($schxslt:patterns-matched, 'd7e96')"/>
             </xsl:next-match>
          </xsl:otherwise>
       </xsl:choose>
    </xsl:template>
    <xsl:template match="ubl-creditnote:CreditNote | ubl-invoice:Invoice"
-                 priority="8"
-                 mode="d7e25">
+                 priority="14"
+                 mode="d7e96">
       <xsl:param name="schxslt:patterns-matched" as="xs:string*"/>
       <xsl:variable name="issueDate" select="xs:date(cbc:IssueDate)"/>
       <xsl:variable name="payableAmount"
@@ -198,8 +262,8 @@
       <xsl:variable name="dueDate"
                     select="             if (/ubl-invoice:Invoice) then               cbc:DueDate             else               cac:PaymentMeans/cbc:PaymentDueDate"/>
       <xsl:choose>
-         <xsl:when test="$schxslt:patterns-matched[. = 'd7e35']">
-            <schxslt:rule pattern="d7e35">
+         <xsl:when test="$schxslt:patterns-matched[. = 'd7e105']">
+            <schxslt:rule pattern="d7e105">
                <xsl:comment xmlns:svrl="http://purl.oclc.org/dsdl/svrl">WARNING: Rule for context "ubl-creditnote:CreditNote | ubl-invoice:Invoice" shadowed by preceding rule</xsl:comment>
                <svrl:suppressed-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl">
                   <xsl:attribute name="context">ubl-creditnote:CreditNote | ubl-invoice:Invoice</xsl:attribute>
@@ -216,7 +280,7 @@
             </xsl:next-match>
          </xsl:when>
          <xsl:otherwise>
-            <schxslt:rule pattern="d7e35">
+            <schxslt:rule pattern="d7e105">
                <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl">
                   <xsl:attribute name="context">ubl-creditnote:CreditNote | ubl-invoice:Invoice</xsl:attribute>
                   <xsl:variable name="documentUri" as="xs:anyURI?" select="document-uri()"/>
@@ -241,6 +305,36 @@
                                       id="HR-BR-40">
                      <xsl:attribute name="test">(xs:date(cbc:IssueDate) &gt;= xs:date('2026-01-01')) and (xs:date(cbc:IssueDate) &lt;= xs:date('2100-01-01'))</xsl:attribute>
                      <svrl:text>[HR-BR-40] - Datum izdavanja računa (BT-2) - (<xsl:value-of select="$issueDate"/>) mora biti veći od 01.01.2026 i manji od 01.01.2100.
+			</svrl:text>
+                  </svrl:failed-assert>
+               </xsl:if>
+               <xsl:if test="not(((xs:date(cbc:TaxPointDate) &gt;= xs:date('1900-01-01')) and (xs:date(cbc:TaxPointDate) &lt; xs:date('2100-01-01'))) or not(exists(cbc:TaxPointDate)))">
+                  <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                      location="{schxslt:location(.)}"
+                                      flag="fatal"
+                                      id="HR-BR-48">
+                     <xsl:attribute name="test">((xs:date(cbc:TaxPointDate) &gt;= xs:date('1900-01-01')) and (xs:date(cbc:TaxPointDate) &lt; xs:date('2100-01-01'))) or not(exists(cbc:TaxPointDate))</xsl:attribute>
+                     <svrl:text>[HR-BR-48] - Datum nastanka obveze PDV (BT-7) mora biti veći od 01.01.1900. i manji od 01.01.2100.
+			</svrl:text>
+                  </svrl:failed-assert>
+               </xsl:if>
+               <xsl:if test="not(((xs:date(cac:InvoicePeriod/cbc:StartDate) &gt;= xs:date('1900-01-01')) and (xs:date(cac:InvoicePeriod/cbc:StartDate) &lt; xs:date('2100-01-01'))) or (not(exists(cac:InvoicePeriod/cbc:StartDate))))">
+                  <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                      location="{schxslt:location(.)}"
+                                      flag="fatal"
+                                      id="HR-BR-49">
+                     <xsl:attribute name="test">((xs:date(cac:InvoicePeriod/cbc:StartDate) &gt;= xs:date('1900-01-01')) and (xs:date(cac:InvoicePeriod/cbc:StartDate) &lt; xs:date('2100-01-01'))) or (not(exists(cac:InvoicePeriod/cbc:StartDate)))</xsl:attribute>
+                     <svrl:text>[HR-BR-49] - Početni datum obračunskog razdoblja (BT-73) mora biti veći od 01.01.1900. i manji od 01.01.2100.
+			</svrl:text>
+                  </svrl:failed-assert>
+               </xsl:if>
+               <xsl:if test="not(((xs:date(cac:InvoicePeriod/cbc:EndDate) &gt;= xs:date('1900-01-01')) and (xs:date(cac:InvoicePeriod/cbc:EndDate) &lt; xs:date('2100-01-01'))) or (not(exists(cac:InvoicePeriod/cbc:EndDate))))">
+                  <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                      location="{schxslt:location(.)}"
+                                      flag="fatal"
+                                      id="HR-BR-50">
+                     <xsl:attribute name="test">((xs:date(cac:InvoicePeriod/cbc:EndDate) &gt;= xs:date('1900-01-01')) and (xs:date(cac:InvoicePeriod/cbc:EndDate) &lt; xs:date('2100-01-01'))) or (not(exists(cac:InvoicePeriod/cbc:EndDate)))</xsl:attribute>
+                     <svrl:text>[HR-BR-50] - Završni datum obračunskog razdoblja (BT-74) mora biti veći od 01.01.1900. i manji od 01.01.2100.
 			</svrl:text>
                   </svrl:failed-assert>
                </xsl:if>
@@ -280,13 +374,13 @@
                      <svrl:text>[HR-BR-43] - Referenca ugovora (BT-12) ne smije imati više od 1024 znakova</svrl:text>
                   </svrl:failed-assert>
                </xsl:if>
-               <xsl:if test="not(xs:date(cac:Delivery/cbc:ActualDeliveryDate) &lt;= xs:date('2100-01-01') or (not(exists(cac:Delivery/cbc:ActualDeliveryDate))))">
+               <xsl:if test="not((xs:date(cac:Delivery/cbc:ActualDeliveryDate) &gt;= xs:date('1900-01-01') and xs:date(cac:Delivery/cbc:ActualDeliveryDate) &lt; xs:date('2100-01-01')) or (not(exists(cac:Delivery/cbc:ActualDeliveryDate))))">
                   <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                       location="{schxslt:location(.)}"
                                       flag="fatal"
                                       id="HR-BR-44">
-                     <xsl:attribute name="test">xs:date(cac:Delivery/cbc:ActualDeliveryDate) &lt;= xs:date('2100-01-01') or (not(exists(cac:Delivery/cbc:ActualDeliveryDate)))</xsl:attribute>
-                     <svrl:text>[HR-BR-44] - Stvarni datum isporuke (BT-72) mora biti manji od 01.01.2100.</svrl:text>
+                     <xsl:attribute name="test">(xs:date(cac:Delivery/cbc:ActualDeliveryDate) &gt;= xs:date('1900-01-01') and xs:date(cac:Delivery/cbc:ActualDeliveryDate) &lt; xs:date('2100-01-01')) or (not(exists(cac:Delivery/cbc:ActualDeliveryDate)))</xsl:attribute>
+                     <svrl:text>[HR-BR-44] - Stvarni datum isporuke (BT-72) mora biti veći od 01.01.1900. i manji od 01.01.2100.</svrl:text>
                   </svrl:failed-assert>
                </xsl:if>
                <xsl:if test="not(normalize-space(cbc:CustomizationID) = 'urn:cen.eu:en16931:2017#compliant#urn:mfin.gov.hr:cius-2025:1.0#conformant#urn:mfin.gov.hr:ext-2025:1.0')">
@@ -451,6 +545,15 @@
                      <svrl:text>[HR-BR-32] - HR neoporezivi iznos (HR-BT-24) jednak je zbroju neto iznosa stavki računa (BT-131) koje NE ulaze u poreznu osnovicu umanjen za zbroj iznosa popusta na razini dokumenta (BT-92) i uvećan za zbroj iznosa troškova na razini dokumenta (BT-99) koje NE ulaze u poreznu osnovicu</svrl:text>
                   </svrl:failed-assert>
                </xsl:if>
+               <xsl:if test="not((xs:decimal(//ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/cbc:TaxAmount) = round(sum(ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal/xs:decimal(cbc:TaxAmount)) * 10 * 10) div 100) or (not(exists(//ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal))))">
+                  <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                      location="{schxslt:location(.)}"
+                                      flag="fatal"
+                                      id="HR-BR-54">
+                     <xsl:attribute name="test">(xs:decimal(//ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/cbc:TaxAmount) = round(sum(ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal/xs:decimal(cbc:TaxAmount)) * 10 * 10) div 100) or (not(exists(//ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal)))</xsl:attribute>
+                     <svrl:text>[HR-BR-54] - HR Ukupni iznos PDV (HR-BT-25) mora biti jednak zbroju HR iznosa kategorije PDV (HR-BT-17)</svrl:text>
+                  </svrl:failed-assert>
+               </xsl:if>
                <xsl:if test="not(($payableAmount &gt; 0) and (exists(cbc:DueDate) or exists(cac:PaymentMeans/cbc:PaymentDueDate)) or (($payableAmount &lt;= 0)))">
                   <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                       location="{schxslt:location(.)}"
@@ -460,31 +563,174 @@
                      <svrl:text>[HR-BR-4] - U slučaju pozitivnog iznosa koji dospijeva na plaćanje (BT-115), datum dospijeća plaćanja (BT-9) mora biti naveden</svrl:text>
                   </svrl:failed-assert>
                </xsl:if>
-               <xsl:if test="not((xs:date($dueDate) &lt;= xs:date('2100-01-01')) or ($payableAmount &lt;= 0))">
+               <xsl:if test="not((xs:date($dueDate) &gt;= xs:date('1900-01-01') and xs:date($dueDate) &lt; xs:date('2100-01-01')) or ($payableAmount &lt;= 0))">
                   <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                       location="{schxslt:location(.)}"
                                       flag="fatal"
                                       id="HR-BR-41">
-                     <xsl:attribute name="test">(xs:date($dueDate) &lt;= xs:date('2100-01-01')) or ($payableAmount &lt;= 0)</xsl:attribute>
-                     <svrl:text>[HR-BR-41] - Datum dospijeća plaćanja (BT-9) -(<xsl:value-of select="$dueDate"/>) - mora biti manji od 01.01.2100.</svrl:text>
+                     <xsl:attribute name="test">(xs:date($dueDate) &gt;= xs:date('1900-01-01') and xs:date($dueDate) &lt; xs:date('2100-01-01')) or ($payableAmount &lt;= 0)</xsl:attribute>
+                     <svrl:text>[HR-BR-41] - Datum dospijeća plaćanja (BT-9) -(<xsl:value-of select="$dueDate"/>) - mora biti veći od 01.01.1900. i manji od 01.01.2100.</svrl:text>
                   </svrl:failed-assert>
                </xsl:if>
             </schxslt:rule>
             <xsl:next-match>
                <xsl:with-param name="schxslt:patterns-matched"
                                as="xs:string*"
-                               select="($schxslt:patterns-matched, 'd7e35')"/>
+                               select="($schxslt:patterns-matched, 'd7e105')"/>
+            </xsl:next-match>
+         </xsl:otherwise>
+      </xsl:choose>
+   </xsl:template>
+   <xsl:template match="cac:TaxTotal" priority="13" mode="d7e96">
+      <xsl:param name="schxslt:patterns-matched" as="xs:string*"/>
+      <xsl:choose>
+         <xsl:when test="$schxslt:patterns-matched[. = 'd7e105']">
+            <schxslt:rule pattern="d7e105">
+               <xsl:comment xmlns:svrl="http://purl.oclc.org/dsdl/svrl">WARNING: Rule for context "cac:TaxTotal" shadowed by preceding rule</xsl:comment>
+               <svrl:suppressed-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl">
+                  <xsl:attribute name="context">cac:TaxTotal</xsl:attribute>
+                  <xsl:variable name="documentUri" as="xs:anyURI?" select="document-uri()"/>
+                  <xsl:if test="exists($documentUri)">
+                     <xsl:attribute name="document" select="$documentUri"/>
+                  </xsl:if>
+               </svrl:suppressed-rule>
+            </schxslt:rule>
+            <xsl:next-match>
+               <xsl:with-param name="schxslt:patterns-matched"
+                               as="xs:string*"
+                               select="$schxslt:patterns-matched"/>
+            </xsl:next-match>
+         </xsl:when>
+         <xsl:otherwise>
+            <schxslt:rule pattern="d7e105">
+               <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl">
+                  <xsl:attribute name="context">cac:TaxTotal</xsl:attribute>
+                  <xsl:variable name="documentUri" as="xs:anyURI?" select="document-uri()"/>
+                  <xsl:if test="exists($documentUri)">
+                     <xsl:attribute name="document" select="$documentUri"/>
+                  </xsl:if>
+               </svrl:fired-rule>
+               <xsl:if test="not((xs:decimal(../ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/cbc:TaxAmount) = xs:decimal(cbc:TaxAmount) or (cbc:TaxAmount/@currencyID != ../cbc:DocumentCurrencyCode)) or (not(exists(../ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal))))">
+                  <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                      location="{schxslt:location(.)}"
+                                      flag="fatal"
+                                      id="HR-BR-55">
+                     <xsl:attribute name="test">(xs:decimal(../ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/cbc:TaxAmount) = xs:decimal(cbc:TaxAmount) or (cbc:TaxAmount/@currencyID != ../cbc:DocumentCurrencyCode)) or (not(exists(../ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal)))</xsl:attribute>
+                     <svrl:text>[HR-BR-55] - HR Ukupni iznos PDV (HR-BT-25) mora biti jednak ukupni iznos PDV (HR-BT-110)</svrl:text>
+                  </svrl:failed-assert>
+               </xsl:if>
+            </schxslt:rule>
+            <xsl:next-match>
+               <xsl:with-param name="schxslt:patterns-matched"
+                               as="xs:string*"
+                               select="($schxslt:patterns-matched, 'd7e105')"/>
+            </xsl:next-match>
+         </xsl:otherwise>
+      </xsl:choose>
+   </xsl:template>
+   <xsl:template match="cac:TaxTotal/cac:TaxSubtotal" priority="12" mode="d7e96">
+      <xsl:param name="schxslt:patterns-matched" as="xs:string*"/>
+      <xsl:choose>
+         <xsl:when test="$schxslt:patterns-matched[. = 'd7e105']">
+            <schxslt:rule pattern="d7e105">
+               <xsl:comment xmlns:svrl="http://purl.oclc.org/dsdl/svrl">WARNING: Rule for context "cac:TaxTotal/cac:TaxSubtotal" shadowed by preceding rule</xsl:comment>
+               <svrl:suppressed-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl">
+                  <xsl:attribute name="context">cac:TaxTotal/cac:TaxSubtotal</xsl:attribute>
+                  <xsl:variable name="documentUri" as="xs:anyURI?" select="document-uri()"/>
+                  <xsl:if test="exists($documentUri)">
+                     <xsl:attribute name="document" select="$documentUri"/>
+                  </xsl:if>
+               </svrl:suppressed-rule>
+            </schxslt:rule>
+            <xsl:next-match>
+               <xsl:with-param name="schxslt:patterns-matched"
+                               as="xs:string*"
+                               select="$schxslt:patterns-matched"/>
+            </xsl:next-match>
+         </xsl:when>
+         <xsl:otherwise>
+            <schxslt:rule pattern="d7e105">
+               <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl">
+                  <xsl:attribute name="context">cac:TaxTotal/cac:TaxSubtotal</xsl:attribute>
+                  <xsl:variable name="documentUri" as="xs:anyURI?" select="document-uri()"/>
+                  <xsl:if test="exists($documentUri)">
+                     <xsl:attribute name="document" select="$documentUri"/>
+                  </xsl:if>
+               </svrl:fired-rule>
+               <xsl:if test="not(u:check3010(cac:TaxCategory/cbc:Percent))">
+                  <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                      location="{schxslt:location(.)}"
+                                      flag="fatal"
+                                      id="HR-BR-56">
+                     <xsl:attribute name="test">u:check3010(cac:TaxCategory/cbc:Percent)</xsl:attribute>
+                     <svrl:text>[HR-BR-56] - Cijene artikla (BT-146, BT-147, BT-148), stope PDV (BT-119, BT-96, BT-103, BT-152, HR-BT-19), količine (BT-129, BT-149) ne smiju imati više od 10 decimala i 30 znamenki</svrl:text>
+                  </svrl:failed-assert>
+               </xsl:if>
+            </schxslt:rule>
+            <xsl:next-match>
+               <xsl:with-param name="schxslt:patterns-matched"
+                               as="xs:string*"
+                               select="($schxslt:patterns-matched, 'd7e105')"/>
+            </xsl:next-match>
+         </xsl:otherwise>
+      </xsl:choose>
+   </xsl:template>
+   <xsl:template match="ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal"
+                 priority="11"
+                 mode="d7e96">
+      <xsl:param name="schxslt:patterns-matched" as="xs:string*"/>
+      <xsl:choose>
+         <xsl:when test="$schxslt:patterns-matched[. = 'd7e105']">
+            <schxslt:rule pattern="d7e105">
+               <xsl:comment xmlns:svrl="http://purl.oclc.org/dsdl/svrl">WARNING: Rule for context "ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal" shadowed by preceding rule</xsl:comment>
+               <svrl:suppressed-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl">
+                  <xsl:attribute name="context">ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal</xsl:attribute>
+                  <xsl:variable name="documentUri" as="xs:anyURI?" select="document-uri()"/>
+                  <xsl:if test="exists($documentUri)">
+                     <xsl:attribute name="document" select="$documentUri"/>
+                  </xsl:if>
+               </svrl:suppressed-rule>
+            </schxslt:rule>
+            <xsl:next-match>
+               <xsl:with-param name="schxslt:patterns-matched"
+                               as="xs:string*"
+                               select="$schxslt:patterns-matched"/>
+            </xsl:next-match>
+         </xsl:when>
+         <xsl:otherwise>
+            <schxslt:rule pattern="d7e105">
+               <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl">
+                  <xsl:attribute name="context">ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal</xsl:attribute>
+                  <xsl:variable name="documentUri" as="xs:anyURI?" select="document-uri()"/>
+                  <xsl:if test="exists($documentUri)">
+                     <xsl:attribute name="document" select="$documentUri"/>
+                  </xsl:if>
+               </svrl:fired-rule>
+               <xsl:if test="not(u:check3010(hrextac:HRTaxCategory/cbc:Percent))">
+                  <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                      location="{schxslt:location(.)}"
+                                      flag="fatal"
+                                      id="HR-BR-56">
+                     <xsl:attribute name="test">u:check3010(hrextac:HRTaxCategory/cbc:Percent)</xsl:attribute>
+                     <svrl:text>[HR-BR-56] - Cijene artikla (BT-146, BT-147, BT-148), stope PDV (BT-119, BT-96, BT-103, BT-152, HR-BT-19), količine (BT-129, BT-149) ne smiju imati više od 10 decimala i 30 znamenki</svrl:text>
+                  </svrl:failed-assert>
+               </xsl:if>
+            </schxslt:rule>
+            <xsl:next-match>
+               <xsl:with-param name="schxslt:patterns-matched"
+                               as="xs:string*"
+                               select="($schxslt:patterns-matched, 'd7e105')"/>
             </xsl:next-match>
          </xsl:otherwise>
       </xsl:choose>
    </xsl:template>
    <xsl:template match="/ubl-invoice:Invoice/cac:AllowanceCharge[cbc:ChargeIndicator = true()] | /ubl-creditnote:CreditNote/cac:AllowanceCharge[cbc:ChargeIndicator = true()]"
-                 priority="7"
-                 mode="d7e25">
+                 priority="10"
+                 mode="d7e96">
       <xsl:param name="schxslt:patterns-matched" as="xs:string*"/>
       <xsl:choose>
-         <xsl:when test="$schxslt:patterns-matched[. = 'd7e35']">
-            <schxslt:rule pattern="d7e35">
+         <xsl:when test="$schxslt:patterns-matched[. = 'd7e105']">
+            <schxslt:rule pattern="d7e105">
                <xsl:comment xmlns:svrl="http://purl.oclc.org/dsdl/svrl">WARNING: Rule for context "/ubl-invoice:Invoice/cac:AllowanceCharge[cbc:ChargeIndicator = true()] | /ubl-creditnote:CreditNote/cac:AllowanceCharge[cbc:ChargeIndicator = true()]" shadowed by preceding rule</xsl:comment>
                <svrl:suppressed-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl">
                   <xsl:attribute name="context">/ubl-invoice:Invoice/cac:AllowanceCharge[cbc:ChargeIndicator = true()] | /ubl-creditnote:CreditNote/cac:AllowanceCharge[cbc:ChargeIndicator = true()]</xsl:attribute>
@@ -501,7 +747,7 @@
             </xsl:next-match>
          </xsl:when>
          <xsl:otherwise>
-            <schxslt:rule pattern="d7e35">
+            <schxslt:rule pattern="d7e105">
                <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl">
                   <xsl:attribute name="context">/ubl-invoice:Invoice/cac:AllowanceCharge[cbc:ChargeIndicator = true()] | /ubl-creditnote:CreditNote/cac:AllowanceCharge[cbc:ChargeIndicator = true()]</xsl:attribute>
                   <xsl:variable name="documentUri" as="xs:anyURI?" select="document-uri()"/>
@@ -527,20 +773,78 @@
                      <svrl:text>[HR-BR-13] - Svaki troškak na razini dokumenta (BG-21) koji ne podliježe PDV-u ili je oslobođen mora imati razlog oslobođenja PDV-a troška na razini dokumenta (HR-BT-6) ili kod razloga oslobođenja PDV-a a troška na razini dokumenta (HR-BT-7)</svrl:text>
                   </svrl:failed-assert>
                </xsl:if>
+               <xsl:if test="not(u:check3010(cac:TaxCategory/cbc:Percent))">
+                  <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                      location="{schxslt:location(.)}"
+                                      flag="fatal"
+                                      id="HR-BR-56">
+                     <xsl:attribute name="test">u:check3010(cac:TaxCategory/cbc:Percent)</xsl:attribute>
+                     <svrl:text>[HR-BR-56] - Cijene artikla (BT-146, BT-147, BT-148), stope PDV (BT-119, BT-96, BT-103, BT-152), količine (BT-129, BT-149) ne smiju imati više od 10 decimala i 30 znamenki</svrl:text>
+                  </svrl:failed-assert>
+               </xsl:if>
             </schxslt:rule>
             <xsl:next-match>
                <xsl:with-param name="schxslt:patterns-matched"
                                as="xs:string*"
-                               select="($schxslt:patterns-matched, 'd7e35')"/>
+                               select="($schxslt:patterns-matched, 'd7e105')"/>
             </xsl:next-match>
          </xsl:otherwise>
       </xsl:choose>
    </xsl:template>
-   <xsl:template match="cac:BillingReference" priority="6" mode="d7e25">
+   <xsl:template match="/ubl-invoice:Invoice/cac:AllowanceCharge[cbc:ChargeIndicator = false()] | /ubl-creditnote:CreditNote/cac:AllowanceCharge[cbc:ChargeIndicator = false()]"
+                 priority="9"
+                 mode="d7e96">
       <xsl:param name="schxslt:patterns-matched" as="xs:string*"/>
       <xsl:choose>
-         <xsl:when test="$schxslt:patterns-matched[. = 'd7e35']">
-            <schxslt:rule pattern="d7e35">
+         <xsl:when test="$schxslt:patterns-matched[. = 'd7e105']">
+            <schxslt:rule pattern="d7e105">
+               <xsl:comment xmlns:svrl="http://purl.oclc.org/dsdl/svrl">WARNING: Rule for context "/ubl-invoice:Invoice/cac:AllowanceCharge[cbc:ChargeIndicator = false()] | /ubl-creditnote:CreditNote/cac:AllowanceCharge[cbc:ChargeIndicator = false()]" shadowed by preceding rule</xsl:comment>
+               <svrl:suppressed-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl">
+                  <xsl:attribute name="context">/ubl-invoice:Invoice/cac:AllowanceCharge[cbc:ChargeIndicator = false()] | /ubl-creditnote:CreditNote/cac:AllowanceCharge[cbc:ChargeIndicator = false()]</xsl:attribute>
+                  <xsl:variable name="documentUri" as="xs:anyURI?" select="document-uri()"/>
+                  <xsl:if test="exists($documentUri)">
+                     <xsl:attribute name="document" select="$documentUri"/>
+                  </xsl:if>
+               </svrl:suppressed-rule>
+            </schxslt:rule>
+            <xsl:next-match>
+               <xsl:with-param name="schxslt:patterns-matched"
+                               as="xs:string*"
+                               select="$schxslt:patterns-matched"/>
+            </xsl:next-match>
+         </xsl:when>
+         <xsl:otherwise>
+            <schxslt:rule pattern="d7e105">
+               <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl">
+                  <xsl:attribute name="context">/ubl-invoice:Invoice/cac:AllowanceCharge[cbc:ChargeIndicator = false()] | /ubl-creditnote:CreditNote/cac:AllowanceCharge[cbc:ChargeIndicator = false()]</xsl:attribute>
+                  <xsl:variable name="documentUri" as="xs:anyURI?" select="document-uri()"/>
+                  <xsl:if test="exists($documentUri)">
+                     <xsl:attribute name="document" select="$documentUri"/>
+                  </xsl:if>
+               </svrl:fired-rule>
+               <xsl:if test="not(u:check3010(cac:TaxCategory/cbc:Percent))">
+                  <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                      location="{schxslt:location(.)}"
+                                      flag="fatal"
+                                      id="HR-BR-56">
+                     <xsl:attribute name="test">u:check3010(cac:TaxCategory/cbc:Percent)</xsl:attribute>
+                     <svrl:text>[HR-BR-56] - Cijene artikla (BT-146, BT-147, BT-148), stope PDV (BT-119, BT-96, BT-103, BT-152), količine (BT-129, BT-149) ne smiju imati više od 10 decimala i 30 znamenki</svrl:text>
+                  </svrl:failed-assert>
+               </xsl:if>
+            </schxslt:rule>
+            <xsl:next-match>
+               <xsl:with-param name="schxslt:patterns-matched"
+                               as="xs:string*"
+                               select="($schxslt:patterns-matched, 'd7e105')"/>
+            </xsl:next-match>
+         </xsl:otherwise>
+      </xsl:choose>
+   </xsl:template>
+   <xsl:template match="cac:BillingReference" priority="8" mode="d7e96">
+      <xsl:param name="schxslt:patterns-matched" as="xs:string*"/>
+      <xsl:choose>
+         <xsl:when test="$schxslt:patterns-matched[. = 'd7e105']">
+            <schxslt:rule pattern="d7e105">
                <xsl:comment xmlns:svrl="http://purl.oclc.org/dsdl/svrl">WARNING: Rule for context "cac:BillingReference" shadowed by preceding rule</xsl:comment>
                <svrl:suppressed-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl">
                   <xsl:attribute name="context">cac:BillingReference</xsl:attribute>
@@ -557,7 +861,7 @@
             </xsl:next-match>
          </xsl:when>
          <xsl:otherwise>
-            <schxslt:rule pattern="d7e35">
+            <schxslt:rule pattern="d7e105">
                <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl">
                   <xsl:attribute name="context">cac:BillingReference</xsl:attribute>
                   <xsl:variable name="documentUri" as="xs:anyURI?" select="document-uri()"/>
@@ -574,29 +878,29 @@
                      <svrl:text>[HR-BR-6] - Svaka referenca prethodnog računa (BG-3) mora imati datum izdavanja prethodnog računa (BT-26)</svrl:text>
                   </svrl:failed-assert>
                </xsl:if>
-               <xsl:if test="not(xs:date(cac:InvoiceDocumentReference/cbc:IssueDate) &lt;= xs:date('2100-01-01'))">
+               <xsl:if test="not(xs:date(cac:InvoiceDocumentReference/cbc:IssueDate) &gt;= xs:date('1900-01-01') and xs:date(cac:InvoiceDocumentReference/cbc:IssueDate) &lt; xs:date('2100-01-01'))">
                   <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                       location="{schxslt:location(.)}"
                                       flag="fatal"
                                       id="HR-BR-45">
-                     <xsl:attribute name="test">xs:date(cac:InvoiceDocumentReference/cbc:IssueDate) &lt;= xs:date('2100-01-01')</xsl:attribute>
-                     <svrl:text>[HR-BR-45] - Datum izdavanja prethodnog računa (BT-26) mora biti manji od 01.01.2100.</svrl:text>
+                     <xsl:attribute name="test">xs:date(cac:InvoiceDocumentReference/cbc:IssueDate) &gt;= xs:date('1900-01-01') and xs:date(cac:InvoiceDocumentReference/cbc:IssueDate) &lt; xs:date('2100-01-01')</xsl:attribute>
+                     <svrl:text>[HR-BR-45] - Datum izdavanja prethodnog računa (BT-26) mora biti mora biti veći od 01.01.1900. i manji od 01.01.2100.</svrl:text>
                   </svrl:failed-assert>
                </xsl:if>
             </schxslt:rule>
             <xsl:next-match>
                <xsl:with-param name="schxslt:patterns-matched"
                                as="xs:string*"
-                               select="($schxslt:patterns-matched, 'd7e35')"/>
+                               select="($schxslt:patterns-matched, 'd7e105')"/>
             </xsl:next-match>
          </xsl:otherwise>
       </xsl:choose>
    </xsl:template>
-   <xsl:template match="cac:AccountingSupplierParty" priority="5" mode="d7e25">
+   <xsl:template match="cac:AccountingSupplierParty" priority="7" mode="d7e96">
       <xsl:param name="schxslt:patterns-matched" as="xs:string*"/>
       <xsl:choose>
-         <xsl:when test="$schxslt:patterns-matched[. = 'd7e35']">
-            <schxslt:rule pattern="d7e35">
+         <xsl:when test="$schxslt:patterns-matched[. = 'd7e105']">
+            <schxslt:rule pattern="d7e105">
                <xsl:comment xmlns:svrl="http://purl.oclc.org/dsdl/svrl">WARNING: Rule for context "cac:AccountingSupplierParty" shadowed by preceding rule</xsl:comment>
                <svrl:suppressed-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl">
                   <xsl:attribute name="context">cac:AccountingSupplierParty</xsl:attribute>
@@ -613,7 +917,7 @@
             </xsl:next-match>
          </xsl:when>
          <xsl:otherwise>
-            <schxslt:rule pattern="d7e35">
+            <schxslt:rule pattern="d7e105">
                <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl">
                   <xsl:attribute name="context">cac:AccountingSupplierParty</xsl:attribute>
                   <xsl:variable name="documentUri" as="xs:anyURI?" select="document-uri()"/>
@@ -639,34 +943,41 @@
                      <svrl:text>[HR-BR-37] - Račun mora sadržavati oznaku operatera (HR-BT-4)</svrl:text>
                   </svrl:failed-assert>
                </xsl:if>
-               <xsl:if test="not(cac:SellerContact/cbc:ID and matches(cac:SellerContact/cbc:ID, '^[0-9]{11}$'))">
+               <xsl:if test="not(cac:SellerContact/cbc:ID and u:ctrlOIB(cac:SellerContact/cbc:ID) and matches(cac:SellerContact/cbc:ID, '^[0-9]{11}$'))">
                   <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                       location="{schxslt:location(.)}"
                                       flag="fatal"
                                       id="HR-BR-9">
-                     <xsl:attribute name="test">cac:SellerContact/cbc:ID and matches(cac:SellerContact/cbc:ID, '^[0-9]{11}$')</xsl:attribute>
-                     <svrl:text>[HR-BR-9] - Račun mora sadržavati OIB operatera (HR-BT-5)</svrl:text>
+                     <xsl:attribute name="test">cac:SellerContact/cbc:ID and u:ctrlOIB(cac:SellerContact/cbc:ID) and matches(cac:SellerContact/cbc:ID, '^[0-9]{11}$')</xsl:attribute>
+                     <svrl:text>[HR-BR-9] - Račun mora sadržavati ispravan OIB operatera (HR-BT-5)</svrl:text>
+                  </svrl:failed-assert>
+               </xsl:if>
+               <xsl:if test="not(((u:ctrlOIB(cac:Party/cac:PartyTaxScheme/cbc:CompanyID)) or (cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode != 'HR')) or (not(exists(cac:Party/cac:PartyTaxScheme))))">
+                  <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                      location="{schxslt:location(.)}"
+                                      flag="fatal"
+                                      id="HR-BR-54">
+                     <xsl:attribute name="test">((u:ctrlOIB(cac:Party/cac:PartyTaxScheme/cbc:CompanyID)) or (cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode != 'HR')) or (not(exists(cac:Party/cac:PartyTaxScheme)))</xsl:attribute>
+                     <svrl:text>[HR-BR-53] - HR PDV identifikacijski broj (BT-31, BT-48, BT-63) ili porezni identifikator (BT-32) mora biti ispravan OIB</svrl:text>
                   </svrl:failed-assert>
                </xsl:if>
             </schxslt:rule>
             <xsl:next-match>
                <xsl:with-param name="schxslt:patterns-matched"
                                as="xs:string*"
-                               select="($schxslt:patterns-matched, 'd7e35')"/>
+                               select="($schxslt:patterns-matched, 'd7e105')"/>
             </xsl:next-match>
          </xsl:otherwise>
       </xsl:choose>
    </xsl:template>
-   <xsl:template match="cac:AccountingCustomerParty/cac:Party"
-                 priority="4"
-                 mode="d7e25">
+   <xsl:template match="cac:AccountingCustomerParty" priority="6" mode="d7e96">
       <xsl:param name="schxslt:patterns-matched" as="xs:string*"/>
       <xsl:choose>
-         <xsl:when test="$schxslt:patterns-matched[. = 'd7e35']">
-            <schxslt:rule pattern="d7e35">
-               <xsl:comment xmlns:svrl="http://purl.oclc.org/dsdl/svrl">WARNING: Rule for context "cac:AccountingCustomerParty/cac:Party" shadowed by preceding rule</xsl:comment>
+         <xsl:when test="$schxslt:patterns-matched[. = 'd7e105']">
+            <schxslt:rule pattern="d7e105">
+               <xsl:comment xmlns:svrl="http://purl.oclc.org/dsdl/svrl">WARNING: Rule for context "cac:AccountingCustomerParty" shadowed by preceding rule</xsl:comment>
                <svrl:suppressed-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl">
-                  <xsl:attribute name="context">cac:AccountingCustomerParty/cac:Party</xsl:attribute>
+                  <xsl:attribute name="context">cac:AccountingCustomerParty</xsl:attribute>
                   <xsl:variable name="documentUri" as="xs:anyURI?" select="document-uri()"/>
                   <xsl:if test="exists($documentUri)">
                      <xsl:attribute name="document" select="$documentUri"/>
@@ -680,44 +991,102 @@
             </xsl:next-match>
          </xsl:when>
          <xsl:otherwise>
-            <schxslt:rule pattern="d7e35">
+            <schxslt:rule pattern="d7e105">
                <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl">
-                  <xsl:attribute name="context">cac:AccountingCustomerParty/cac:Party</xsl:attribute>
+                  <xsl:attribute name="context">cac:AccountingCustomerParty</xsl:attribute>
                   <xsl:variable name="documentUri" as="xs:anyURI?" select="document-uri()"/>
                   <xsl:if test="exists($documentUri)">
                      <xsl:attribute name="document" select="$documentUri"/>
                   </xsl:if>
                </svrl:fired-rule>
-               <xsl:if test="not(cbc:EndpointID)">
+               <xsl:if test="not(cac:Party/cbc:EndpointID)">
                   <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                       location="{schxslt:location(.)}"
                                       flag="fatal"
                                       id="HR-BR-10">
-                     <xsl:attribute name="test">cbc:EndpointID</xsl:attribute>
+                     <xsl:attribute name="test">cac:Party/cbc:EndpointID</xsl:attribute>
                      <svrl:text>[HR-BR-10] - Elektronička adresa Kupca (BT-49) mora biti navedena</svrl:text>
+                  </svrl:failed-assert>
+               </xsl:if>
+               <xsl:if test="not(((u:ctrlOIB(cac:Party/cac:PartyTaxScheme/cbc:CompanyID)) or (cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode != 'HR')) or (not(exists(cac:Party/cac:PartyTaxScheme))))">
+                  <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                      location="{schxslt:location(.)}"
+                                      flag="fatal"
+                                      id="HR-BR-53">
+                     <xsl:attribute name="test">((u:ctrlOIB(cac:Party/cac:PartyTaxScheme/cbc:CompanyID)) or (cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode != 'HR')) or (not(exists(cac:Party/cac:PartyTaxScheme)))</xsl:attribute>
+                     <svrl:text>[HR-BR-53] - HR PDV identifikacijski broj (BT-31, BT-48, BT-63) ili porezni identifikator (BT-32) mora biti ispravan OIB</svrl:text>
                   </svrl:failed-assert>
                </xsl:if>
             </schxslt:rule>
             <xsl:next-match>
                <xsl:with-param name="schxslt:patterns-matched"
                                as="xs:string*"
-                               select="($schxslt:patterns-matched, 'd7e35')"/>
+                               select="($schxslt:patterns-matched, 'd7e105')"/>
+            </xsl:next-match>
+         </xsl:otherwise>
+      </xsl:choose>
+   </xsl:template>
+   <xsl:template match="cac:TaxRepresentativeParty" priority="5" mode="d7e96">
+      <xsl:param name="schxslt:patterns-matched" as="xs:string*"/>
+      <xsl:choose>
+         <xsl:when test="$schxslt:patterns-matched[. = 'd7e105']">
+            <schxslt:rule pattern="d7e105">
+               <xsl:comment xmlns:svrl="http://purl.oclc.org/dsdl/svrl">WARNING: Rule for context "cac:TaxRepresentativeParty" shadowed by preceding rule</xsl:comment>
+               <svrl:suppressed-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl">
+                  <xsl:attribute name="context">cac:TaxRepresentativeParty</xsl:attribute>
+                  <xsl:variable name="documentUri" as="xs:anyURI?" select="document-uri()"/>
+                  <xsl:if test="exists($documentUri)">
+                     <xsl:attribute name="document" select="$documentUri"/>
+                  </xsl:if>
+               </svrl:suppressed-rule>
+            </schxslt:rule>
+            <xsl:next-match>
+               <xsl:with-param name="schxslt:patterns-matched"
+                               as="xs:string*"
+                               select="$schxslt:patterns-matched"/>
+            </xsl:next-match>
+         </xsl:when>
+         <xsl:otherwise>
+            <schxslt:rule pattern="d7e105">
+               <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl">
+                  <xsl:attribute name="context">cac:TaxRepresentativeParty</xsl:attribute>
+                  <xsl:variable name="documentUri" as="xs:anyURI?" select="document-uri()"/>
+                  <xsl:if test="exists($documentUri)">
+                     <xsl:attribute name="document" select="$documentUri"/>
+                  </xsl:if>
+               </svrl:fired-rule>
+               <xsl:if test="not((u:ctrlOIB(cac:PartyTaxScheme/cbc:CompanyID)) or (cac:PostalAddress/cac:Country/cbc:IdentificationCode != 'HR'))">
+                  <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                      location="{schxslt:location(.)}"
+                                      flag="fatal"
+                                      id="HR-BR-53">
+                     <xsl:attribute name="test">(u:ctrlOIB(cac:PartyTaxScheme/cbc:CompanyID)) or (cac:PostalAddress/cac:Country/cbc:IdentificationCode != 'HR')</xsl:attribute>
+                     <svrl:text>[HR-BR-53] - HR PDV identifikacijski broj (BT-31, BT-48, BT-63) ili porezni identifikator (BT-32) mora biti ispravan OIB</svrl:text>
+                  </svrl:failed-assert>
+               </xsl:if>
+            </schxslt:rule>
+            <xsl:next-match>
+               <xsl:with-param name="schxslt:patterns-matched"
+                               as="xs:string*"
+                               select="($schxslt:patterns-matched, 'd7e105')"/>
             </xsl:next-match>
          </xsl:otherwise>
       </xsl:choose>
    </xsl:template>
    <xsl:template match="cac:InvoiceLine | cac:CreditNoteLine"
-                 priority="3"
-                 mode="d7e25">
+                 priority="4"
+                 mode="d7e96">
       <xsl:param name="schxslt:patterns-matched" as="xs:string*"/>
       <xsl:variable name="hasOrderReference" select="../cac:OrderReference/cbc:ID"/>
       <xsl:variable name="hasDespatchDocumentReference"
                     select="../cac:DespatchDocumentReference/cbc:ID"/>
       <xsl:variable name="hasReceiptDocumentReference"
                     select="../cac:ReceiptDocumentReference/cbc:ID"/>
+      <xsl:variable name="quantity"
+                    select="             if (/ubl-invoice:Invoice) then cbc:InvoicedQuantity             else cbc:CreditedQuantity"/>
       <xsl:choose>
-         <xsl:when test="$schxslt:patterns-matched[. = 'd7e35']">
-            <schxslt:rule pattern="d7e35">
+         <xsl:when test="$schxslt:patterns-matched[. = 'd7e105']">
+            <schxslt:rule pattern="d7e105">
                <xsl:comment xmlns:svrl="http://purl.oclc.org/dsdl/svrl">WARNING: Rule for context "cac:InvoiceLine | cac:CreditNoteLine" shadowed by preceding rule</xsl:comment>
                <svrl:suppressed-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl">
                   <xsl:attribute name="context">cac:InvoiceLine | cac:CreditNoteLine</xsl:attribute>
@@ -734,7 +1103,7 @@
             </xsl:next-match>
          </xsl:when>
          <xsl:otherwise>
-            <schxslt:rule pattern="d7e35">
+            <schxslt:rule pattern="d7e105">
                <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl">
                   <xsl:attribute name="context">cac:InvoiceLine | cac:CreditNoteLine</xsl:attribute>
                   <xsl:variable name="documentUri" as="xs:anyURI?" select="document-uri()"/>
@@ -778,18 +1147,130 @@
                      <svrl:text>[HR-BR-20] - Jedinična količina za cijenu artikla, ako je iskazana, MORA biti pozitivan broj veći od nule</svrl:text>
                   </svrl:failed-assert>
                </xsl:if>
+               <xsl:if test="not(((xs:date(cac:InvoicePeriod/cbc:StartDate) &gt;= xs:date('1900-01-01')) and (xs:date(cac:InvoicePeriod/cbc:StartDate) &lt; xs:date('2100-01-01'))) or (not(exists(cac:InvoicePeriod/cbc:StartDate))))">
+                  <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                      location="{schxslt:location(.)}"
+                                      flag="fatal"
+                                      id="HR-BR-51">
+                     <xsl:attribute name="test">((xs:date(cac:InvoicePeriod/cbc:StartDate) &gt;= xs:date('1900-01-01')) and (xs:date(cac:InvoicePeriod/cbc:StartDate) &lt; xs:date('2100-01-01'))) or (not(exists(cac:InvoicePeriod/cbc:StartDate)))</xsl:attribute>
+                     <svrl:text>[HR-BR-51] - Početni datum obračunskog razdoblja stavke računa (BT-134) mora biti veći od 01.01.1900. i manji od 01.01.2100.
+			</svrl:text>
+                  </svrl:failed-assert>
+               </xsl:if>
+               <xsl:if test="not(((xs:date(cac:InvoicePeriod/cbc:EndDate) &gt;= xs:date('1900-01-01')) and (xs:date(cac:InvoicePeriod/cbc:EndDate) &lt; xs:date('2100-01-01'))) or (not(exists(cac:InvoicePeriod/cbc:EndDate))))">
+                  <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                      location="{schxslt:location(.)}"
+                                      flag="fatal"
+                                      id="HR-BR-52">
+                     <xsl:attribute name="test">((xs:date(cac:InvoicePeriod/cbc:EndDate) &gt;= xs:date('1900-01-01')) and (xs:date(cac:InvoicePeriod/cbc:EndDate) &lt; xs:date('2100-01-01'))) or (not(exists(cac:InvoicePeriod/cbc:EndDate)))</xsl:attribute>
+                     <svrl:text>[HR-BR-52] - Završni datum obračunskog razdoblja stavke računa (BT-135) mora biti veći od 01.01.1900. i manji od 01.01.2100.
+			</svrl:text>
+                  </svrl:failed-assert>
+               </xsl:if>
+               <xsl:if test="not(u:check3010($quantity))">
+                  <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                      location="{schxslt:location(.)}"
+                                      flag="fatal"
+                                      id="HR-BR-56">
+                     <xsl:attribute name="test">u:check3010($quantity)</xsl:attribute>
+                     <svrl:text>[HR-BR-56] - Cijene artikla (BT-146, BT-147, BT-148), stope PDV (BT-119, BT-96, BT-103, BT-152, HR-BT-19), količine (BT-129, BT-149) ne smiju imati više od 10 decimala i 30 znamenki</svrl:text>
+                  </svrl:failed-assert>
+               </xsl:if>
+               <xsl:if test="not(u:check3010(cac:Item/cac:ClassifiedTaxCategory/cbc:Percent))">
+                  <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                      location="{schxslt:location(.)}"
+                                      flag="fatal"
+                                      id="HR-BR-56">
+                     <xsl:attribute name="test">u:check3010(cac:Item/cac:ClassifiedTaxCategory/cbc:Percent)</xsl:attribute>
+                     <svrl:text>[HR-BR-56] - Cijene artikla (BT-146, BT-147, BT-148), stope PDV (BT-119, BT-96, BT-103, BT-152, HR-BT-19), količine (BT-129, BT-149) ne smiju imati više od 10 decimala i 30 znamenki</svrl:text>
+                  </svrl:failed-assert>
+               </xsl:if>
             </schxslt:rule>
             <xsl:next-match>
                <xsl:with-param name="schxslt:patterns-matched"
                                as="xs:string*"
-                               select="($schxslt:patterns-matched, 'd7e35')"/>
+                               select="($schxslt:patterns-matched, 'd7e105')"/>
+            </xsl:next-match>
+         </xsl:otherwise>
+      </xsl:choose>
+   </xsl:template>
+   <xsl:template match="cac:Price" priority="3" mode="d7e96">
+      <xsl:param name="schxslt:patterns-matched" as="xs:string*"/>
+      <xsl:choose>
+         <xsl:when test="$schxslt:patterns-matched[. = 'd7e105']">
+            <schxslt:rule pattern="d7e105">
+               <xsl:comment xmlns:svrl="http://purl.oclc.org/dsdl/svrl">WARNING: Rule for context "cac:Price" shadowed by preceding rule</xsl:comment>
+               <svrl:suppressed-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl">
+                  <xsl:attribute name="context">cac:Price</xsl:attribute>
+                  <xsl:variable name="documentUri" as="xs:anyURI?" select="document-uri()"/>
+                  <xsl:if test="exists($documentUri)">
+                     <xsl:attribute name="document" select="$documentUri"/>
+                  </xsl:if>
+               </svrl:suppressed-rule>
+            </schxslt:rule>
+            <xsl:next-match>
+               <xsl:with-param name="schxslt:patterns-matched"
+                               as="xs:string*"
+                               select="$schxslt:patterns-matched"/>
+            </xsl:next-match>
+         </xsl:when>
+         <xsl:otherwise>
+            <schxslt:rule pattern="d7e105">
+               <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl">
+                  <xsl:attribute name="context">cac:Price</xsl:attribute>
+                  <xsl:variable name="documentUri" as="xs:anyURI?" select="document-uri()"/>
+                  <xsl:if test="exists($documentUri)">
+                     <xsl:attribute name="document" select="$documentUri"/>
+                  </xsl:if>
+               </svrl:fired-rule>
+               <xsl:if test="not(u:check3010(cbc:PriceAmount))">
+                  <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                      location="{schxslt:location(.)}"
+                                      flag="fatal"
+                                      id="HR-BR-56">
+                     <xsl:attribute name="test">u:check3010(cbc:PriceAmount)</xsl:attribute>
+                     <svrl:text>[HR-BR-56] - Cijene artikla (BT-146, BT-147, BT-148), stope PDV (BT-119, BT-96, BT-103, BT-152, HR-BT-19), količine (BT-129, BT-149) ne smiju imati više od 10 decimala i 30 znamenki</svrl:text>
+                  </svrl:failed-assert>
+               </xsl:if>
+               <xsl:if test="not(u:check3010(cac:AllowanceCharge/cbc:Amount))">
+                  <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                      location="{schxslt:location(.)}"
+                                      flag="fatal"
+                                      id="HR-BR-56">
+                     <xsl:attribute name="test">u:check3010(cac:AllowanceCharge/cbc:Amount)</xsl:attribute>
+                     <svrl:text>[HR-BR-56] - Cijene artikla (BT-146, BT-147, BT-148), stope PDV (BT-119, BT-96, BT-103, BT-152, HR-BT-19), količine (BT-129, BT-149) ne smiju imati više od 10 decimala i 30 znamenki</svrl:text>
+                  </svrl:failed-assert>
+               </xsl:if>
+               <xsl:if test="not(u:check3010(cac:AllowanceCharge/cbc:BaseAmount))">
+                  <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                      location="{schxslt:location(.)}"
+                                      flag="fatal"
+                                      id="HR-BR-56">
+                     <xsl:attribute name="test">u:check3010(cac:AllowanceCharge/cbc:BaseAmount)</xsl:attribute>
+                     <svrl:text>[HR-BR-56] - Cijene artikla (BT-146, BT-147, BT-148), stope PDV (BT-119, BT-96, BT-103, BT-152, HR-BT-19), količine (BT-129, BT-149) ne smiju imati više od 10 decimala i 30 znamenki</svrl:text>
+                  </svrl:failed-assert>
+               </xsl:if>
+               <xsl:if test="not(u:check3010(cbc:BaseQuantity))">
+                  <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                      location="{schxslt:location(.)}"
+                                      flag="fatal"
+                                      id="HR-BR-56">
+                     <xsl:attribute name="test">u:check3010(cbc:BaseQuantity)</xsl:attribute>
+                     <svrl:text>[HR-BR-56] - Cijene artikla (BT-146, BT-147, BT-148), stope PDV (BT-119, BT-96, BT-103, BT-152, HR-BT-19), količine (BT-129, BT-149) ne smiju imati više od 10 decimala i 30 znamenki</svrl:text>
+                  </svrl:failed-assert>
+               </xsl:if>
+            </schxslt:rule>
+            <xsl:next-match>
+               <xsl:with-param name="schxslt:patterns-matched"
+                               as="xs:string*"
+                               select="($schxslt:patterns-matched, 'd7e105')"/>
             </xsl:next-match>
          </xsl:otherwise>
       </xsl:choose>
    </xsl:template>
    <xsl:template match="cac:Price/cbc:BaseQuantity[@unitCode]"
                  priority="2"
-                 mode="d7e25">
+                 mode="d7e96">
       <xsl:param name="schxslt:patterns-matched" as="xs:string*"/>
       <xsl:variable name="hasQuantity"
                     select="../../cbc:InvoicedQuantity or ../../cbc:CreditedQuantity"/>
@@ -797,8 +1278,8 @@
       <xsl:variable name="quantity"
                     select="           if (/ubl-invoice:Invoice) then             ../../cbc:InvoicedQuantity           else             ../../cbc:CreditedQuantity"/>
       <xsl:choose>
-         <xsl:when test="$schxslt:patterns-matched[. = 'd7e35']">
-            <schxslt:rule pattern="d7e35">
+         <xsl:when test="$schxslt:patterns-matched[. = 'd7e105']">
+            <schxslt:rule pattern="d7e105">
                <xsl:comment xmlns:svrl="http://purl.oclc.org/dsdl/svrl">WARNING: Rule for context "cac:Price/cbc:BaseQuantity[@unitCode]" shadowed by preceding rule</xsl:comment>
                <svrl:suppressed-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl">
                   <xsl:attribute name="context">cac:Price/cbc:BaseQuantity[@unitCode]</xsl:attribute>
@@ -815,7 +1296,7 @@
             </xsl:next-match>
          </xsl:when>
          <xsl:otherwise>
-            <schxslt:rule pattern="d7e35">
+            <schxslt:rule pattern="d7e105">
                <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl">
                   <xsl:attribute name="context">cac:Price/cbc:BaseQuantity[@unitCode]</xsl:attribute>
                   <xsl:variable name="documentUri" as="xs:anyURI?" select="document-uri()"/>
@@ -836,19 +1317,19 @@
             <xsl:next-match>
                <xsl:with-param name="schxslt:patterns-matched"
                                as="xs:string*"
-                               select="($schxslt:patterns-matched, 'd7e35')"/>
+                               select="($schxslt:patterns-matched, 'd7e105')"/>
             </xsl:next-match>
          </xsl:otherwise>
       </xsl:choose>
    </xsl:template>
-   <xsl:template match="cac:Item" priority="1" mode="d7e25">
+   <xsl:template match="cac:Item" priority="1" mode="d7e96">
       <xsl:param name="schxslt:patterns-matched" as="xs:string*"/>
       <xsl:variable name="lineID" select="../cbc:ID"/>
       <xsl:variable name="documentTypeCode"
                     select="    if (/ubl-invoice:Invoice) then     ../../cbc:InvoiceTypeCode    else     ../../cbc:CreditNoteTypeCode"/>
       <xsl:choose>
-         <xsl:when test="$schxslt:patterns-matched[. = 'd7e35']">
-            <schxslt:rule pattern="d7e35">
+         <xsl:when test="$schxslt:patterns-matched[. = 'd7e105']">
+            <schxslt:rule pattern="d7e105">
                <xsl:comment xmlns:svrl="http://purl.oclc.org/dsdl/svrl">WARNING: Rule for context "cac:Item" shadowed by preceding rule</xsl:comment>
                <svrl:suppressed-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl">
                   <xsl:attribute name="context">cac:Item</xsl:attribute>
@@ -865,7 +1346,7 @@
             </xsl:next-match>
          </xsl:when>
          <xsl:otherwise>
-            <schxslt:rule pattern="d7e35">
+            <schxslt:rule pattern="d7e105">
                <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl">
                   <xsl:attribute name="context">cac:Item</xsl:attribute>
                   <xsl:variable name="documentUri" as="xs:anyURI?" select="document-uri()"/>
@@ -922,18 +1403,18 @@
             <xsl:next-match>
                <xsl:with-param name="schxslt:patterns-matched"
                                as="xs:string*"
-                               select="($schxslt:patterns-matched, 'd7e35')"/>
+                               select="($schxslt:patterns-matched, 'd7e105')"/>
             </xsl:next-match>
          </xsl:otherwise>
       </xsl:choose>
    </xsl:template>
    <xsl:template match="ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal"
                  priority="0"
-                 mode="d7e25">
+                 mode="d7e96">
       <xsl:param name="schxslt:patterns-matched" as="xs:string*"/>
       <xsl:choose>
-         <xsl:when test="$schxslt:patterns-matched[. = 'd7e35']">
-            <schxslt:rule pattern="d7e35">
+         <xsl:when test="$schxslt:patterns-matched[. = 'd7e105']">
+            <schxslt:rule pattern="d7e105">
                <xsl:comment xmlns:svrl="http://purl.oclc.org/dsdl/svrl">WARNING: Rule for context "ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal" shadowed by preceding rule</xsl:comment>
                <svrl:suppressed-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl">
                   <xsl:attribute name="context">ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal</xsl:attribute>
@@ -950,7 +1431,7 @@
             </xsl:next-match>
          </xsl:when>
          <xsl:otherwise>
-            <schxslt:rule pattern="d7e35">
+            <schxslt:rule pattern="d7e105">
                <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl">
                   <xsl:attribute name="context">ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal</xsl:attribute>
                   <xsl:variable name="documentUri" as="xs:anyURI?" select="document-uri()"/>
@@ -1007,7 +1488,7 @@
             <xsl:next-match>
                <xsl:with-param name="schxslt:patterns-matched"
                                as="xs:string*"
-                               select="($schxslt:patterns-matched, 'd7e35')"/>
+                               select="($schxslt:patterns-matched, 'd7e105')"/>
             </xsl:next-match>
          </xsl:otherwise>
       </xsl:choose>

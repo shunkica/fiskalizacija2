@@ -1,5 +1,28 @@
 # Evidencija zapažanja promjena u službenoj dokumentaciji
 
+## 2026-03-07
+- __HRUBLValidator__
+  - DODANO:
+    - XSLT funkcija `u:ctrlOIB` - validacija kontrolne znamenke OIB-a (MOD 11,10), podržava i prefiks `HR`
+    - XSLT funkcija `u:check3010` - validacija da broj nema više od 30 znamenki i 10 decimala
+    - HR-BR-48 - Datum nastanka obveze PDV (BT-7) mora biti veći od 01.01.1900. i manji od 01.01.2100.
+    - HR-BR-49 - Početni datum obračunskog razdoblja (BT-73) mora biti veći od 01.01.1900. i manji od 01.01.2100.
+    - HR-BR-50 - Završni datum obračunskog razdoblja (BT-74) mora biti veći od 01.01.1900. i manji od 01.01.2100.
+    - HR-BR-51 - Početni datum obračunskog razdoblja stavke računa (BT-134) mora biti veći od 01.01.1900. i manji od 01.01.2100.
+    - HR-BR-52 - Završni datum obračunskog razdoblja stavke računa (BT-135) mora biti veći od 01.01.1900. i manji od 01.01.2100.
+    - HR-BR-53 - PDV identifikacijski broj (BT-31, BT-48, BT-63) ili porezni identifikator (BT-32) mora biti ispravan OIB - primjenjuje se na Prodavatelja, Kupca i Poreznog zastupnika (samo za HR entitete)
+    - HR-BR-54 - HR Ukupni iznos PDV (HR-BT-25) mora biti jednak zbroju HR iznosa kategorije PDV (HR-BT-17)
+    - HR-BR-55 - HR Ukupni iznos PDV (HR-BT-25) mora biti jednak ukupni iznos PDV (BT-110)
+    - HR-BR-56 - Cijene artikla (BT-146, BT-147, BT-148), stope PDV (BT-119, BT-96, BT-103, BT-152, HR-BT-19), količine (BT-129, BT-149) ne smiju imati više od 10 decimala i 30 znamenki - primjenjuje se na stavke računa, cijene, troškove, popuste i porezne raščlambe
+    - Novo pravilo za `cac:AllowanceCharge[cbc:ChargeIndicator = false()]` (popusti na razini dokumenta) - dodana validacija HR-BR-56
+    - Novi kontekst `cac:TaxRepresentativeParty` - dodana OIB validacija (HR-BR-53)
+  - PROMJENA:
+    - HR-BR-9 - Dodana validacija kontrolne znamenke OIB-a operatera (`u:ctrlOIB`), poruka promijenjena u "mora sadržavati ispravan OIB"
+    - HR-BR-44 - Dodana donja granica datuma isporuke (>= 01.01.1900.)
+    - HR-BR-41 - Dodana donja granica datuma dospijeća plaćanja (>= 01.01.1900.)
+    - HR-BR-45 - Dodana donja granica datuma izdavanja prethodnog računa (>= 01.01.1900.)
+    - HR-BR-10 - Kontekst pravila promijenjen iz `cac:AccountingCustomerParty/cac:Party` u `cac:AccountingCustomerParty`
+
 ## 2026-01-27
 - __HRUBLValidator__
   - PROMJENA:
