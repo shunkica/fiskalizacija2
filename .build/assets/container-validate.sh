@@ -86,7 +86,7 @@ if [ "$DOC_TYPE" = "UBL" ]; then
     REPORT_FILE="${TIMESTAMP}_${BASENAME}_HR-CIUS.report.xml"
     
     java -jar /opt/saxon-he-12.7.jar \
-        -xsl:/opt/xslt/HR_CIUS_EXT_EN16931_UBL.xslt \
+        -xsl:/opt/xslt/HR-CIUS-EXT-EN16931-UBL.xslt \
         -s:"$INPUT_FILE" \
         -o:/opt/reports/$REPORT_FILE 2>/dev/null
     
@@ -99,11 +99,11 @@ if [ "$DOC_TYPE" = "UBL" ]; then
     FATAL_COUNT=$(grep '<svrl:failed-assert' "/opt/reports/$REPORT_FILE" | grep -v 'flag="warning"' | wc -l || echo "0")
     
     if [ "$VALIDATION_RESULT" = "FATAL" ]; then
-        echo "  ✗ HR_CIUS_EXT_EN16931_UBL.xslt - failed asserts ($FATAL_COUNT)"
+        echo "  ✗ HR-CIUS-EXT-EN16931-UBL.xslt - failed asserts ($FATAL_COUNT)"
         java -jar /opt/saxon-he-12.7.jar -xsl:/opt/extract-errors.xsl -s:/opt/reports/$REPORT_FILE 2>/dev/null
         exit 1
     else
-        echo "  ✓ HR_CIUS_EXT_EN16931_UBL.xslt"
+        echo "  ✓ HR-CIUS-EXT-EN16931-UBL.xslt"
     fi
 
 elif [ "$DOC_TYPE" = "CII" ]; then

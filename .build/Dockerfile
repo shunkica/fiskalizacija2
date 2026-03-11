@@ -9,12 +9,12 @@ RUN dnf install -y unzip java libxml2 && \
     rm /saxon.zip /schxslt.zip && \
     dnf clean all
 
-COPY docs/HRUBLValidator/HRUBLSchematron/ /opt/
+COPY docs/HRUBLSchematron/ /opt/
 COPY .build/assets/remove-timestamps.xsl /opt/
 
-RUN java -jar /opt/saxon-he-12.7.jar -s:/opt/HR_CIUS_EXT_EN16931_UBL.sch -xsl:/opt/schxslt-1.10.1/2.0/compile-for-svrl.xsl -o:/opt/HR_CIUS_EXT_EN16931_UBL.timestamps.xslt
+RUN java -jar /opt/saxon-he-12.7.jar -s:/opt/HR-CIUS-EXT-EN16931-UBL.sch -xsl:/opt/schxslt-1.10.1/2.0/pipeline-for-svrl.xsl -o:/opt/HR-CIUS-EXT-EN16931-UBL.timestamps.xslt
 
-RUN java -jar /opt/saxon-he-12.7.jar -s:/opt/HR_CIUS_EXT_EN16931_UBL.timestamps.xslt -xsl:/opt/remove-timestamps.xsl -o:/opt/HR_CIUS_EXT_EN16931_UBL.xslt
+RUN java -jar /opt/saxon-he-12.7.jar -s:/opt/HR-CIUS-EXT-EN16931-UBL.timestamps.xslt -xsl:/opt/remove-timestamps.xsl -o:/opt/HR-CIUS-EXT-EN16931-UBL.xslt
 
 COPY validacija/xslt/ /opt/xslt/
 COPY validacija/xsd/ /opt/xsd/

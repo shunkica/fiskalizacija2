@@ -7,7 +7,7 @@ cd "$SCRIPT_DIR" || exit 1
 build_hr_xslt() {
   IMAGE_NAME=saxon-he-12-7
   CONTAINER_NAME=saxon-he-12-7
-  OUTPUT_FILE=HR_CIUS_EXT_EN16931_UBL.xslt
+  OUTPUT_FILE=HR-CIUS-EXT-EN16931-UBL.xslt
 
   docker build -f Dockerfile -t $IMAGE_NAME ../
 
