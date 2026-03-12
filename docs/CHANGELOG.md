@@ -1,5 +1,39 @@
 # Evidencija zapažanja promjena u službenoj dokumentaciji
 
+## 2026-03-12
+- __Specifikacija_osnovne_uporabe_eRacuna_s_prosirenjima.pdf__
+  - verzija 1.8 (12.03.2026.)
+    - Nova pravila:
+      - HR-BR-48 - Datum nastanka obveze PDV (BT-7) mora biti veći od 01.01.1900. i manji od 01.01.2100.
+      - HR-BR-49 - Početni datum obračunskog razdoblja (BT-73) mora biti veći od 01.01.1900. i manji od 01.01.2100.
+      - HR-BR-50 - Završni datum obračunskog razdoblja (BT-74) mora biti veći od 01.01.1900. i manji od 01.01.2100.
+      - HR-BR-51 - Početni datum obračunskog razdoblja stavke računa (BT-134) mora biti veći od 01.01.1900. i manji od 01.01.2100.
+      - HR-BR-52 - Završni datum obračunskog razdoblja stavke računa (BT-135) mora biti veći od 01.01.1900. i manji od 01.01.2100.
+      - HR-BR-53 - HR PDV identifikacijski broj (BT-31, BT-48, BT-63) ili porezni identifikator (BT-32) mora biti ispravan OIB
+      - HR-BR-54 - HR Ukupni iznos PDV (HR-BT-25) mora biti jednak zbroju HR iznosa kategorije PDV (HR-BT-17)
+      - HR-BR-55 - HR Ukupni iznos PDV (HR-BT-25) mora biti jednak ukupni iznos PDV (BT-110)
+      - HR-BR-56 - Cijene artikla (BT-146, BT-147, BT-148), stope PDV (BT-119, BT-96, BT-103, BT-152), količine (BT-129, BT-149) ne smiju imati više od 10 decimala i 30 znamenki
+  - __NEDOKUMENTIRANE IZMJENE:__
+    - Vraćena pravila (izbrisana u v1.7):
+      - HR-BR-40 - Datum izdavanja računa (BT-2) mora biti veći od 01.01.2026 i manji od 01.01.2100.
+      - HR-BR-41 - Datum dospijeća plaćanja (BT-9) mora biti veći od 01.01.1900. i manji od 01.01.2100.
+      - HR-BR-42 - Oznaka procesa (BT-23) ne smije biti veća od 200 znakova
+      - HR-BR-43 - Referenca ugovora (BT-12) ne smije imati više od 1024 znakova
+      - HR-BR-44 - Stvarni datum isporuke (BT-72) mora biti veći od 01.01.1900. i manji od 01.01.2100.
+      - HR-BR-45 - Datum izdavanja prethodnog računa (BT-26) mora biti veći od 01.01.1900. i manji od 01.01.2100.
+    - Promjene:
+      - HR-BR-9 - Promijenjeno u "mora sadržavati ispravan OIB operatera" (dodana validacija ispravnosti OIB-a)
+      - HR-BR-41, HR-BR-44, HR-BR-45 - Dodana donja granica datuma (>= 01.01.1900.) u odnosu na v1.6
+      - BT-146, BT-147, BT-148 - "Iznos se može upisivati s više decimala" promijenjeno u "Iznos se može upisivati s maksimalno 10 decimala"
+      - Ispravak tipfelera: "Spot payment" umjesto "Sport payment" (P5)
+      - Primjeri ažurirani s datumima iz 2026. umjesto 2025.
+      - Primjer za HR-BR-9 OIB operatera promijenjen iz 11111111111 u 11111111119 (ispravan OIB)
+    - Pravila iz v1.6 koja NISU vraćena:
+      - HR-BR-46, HR-BR-47, HR-BR-S-10, HR-BR-Z-10, HR-BR-E-10, HR-BR-AE-10
+  - __GREŠKE:__
+    - HR-BR-56 (validacija decimala/znamenki) u tijelu dokumenta pogrešno označena kao HR-BR-55 na svim mjestima
+    - HR-BR-50 u tijelu dokumenta referencira BT-73 umjesto BT-74 (Završni datum obračunskog razdoblja)
+
 ## 2026-03-07
 - __HRUBLValidator__
   - DODANO:

@@ -1,4 +1,4 @@
-# Specifikacija upotrebe eRačuna s proširenjima - verzija 1.5 (2025-12-14)
+# Specifikacija upotrebe eRačuna s proširenjima - verzija 1.8 (2026-03-12)
 
 ## Greške u specifikaciji
 
@@ -46,14 +46,17 @@
 - HR-BR-10 - pogrešan BT: umjesto BT-49 napisano je BT-37
 - HR-BR-13 - pogrešan BT: umjesto HR-BT-7 napisano je HR-BT-6, umjesto HR-BT-8 napisano je HR-BT-7
 - HR-BR-32 - pogrešan BT: umjesto HR-BT-24 napisano je HR-BT-20
+- HR-BR-50 - pogrešan BT: u tijelu dokumenta piše BT-73 umjesto BT-74 (Završni datum obračunskog razdoblja)
+
+#### Pogrešna oznaka pravila
+
+- HR-BR-56 (Cijene artikla, stope PDV, količine ne smiju imati više od 10 decimala i 30 znamenki) - u tijelu dokumenta pogrešno označena kao HR-BR-55 na svim mjestima gdje se pojavljuje. U opisu promjena verzije 1.8 ispravno navedena kao HR-BR-56.
 
 # Validator
 
 ## Nema validaciju za pravila
+ - HR-BR-27 (bivši HR-BR-31)
  - HR-BR-28
- - HR-BR-30
- - HR-BR-31
- - HR-BR-35
 
 # Primjeri eRačuna 
 
