@@ -30,64 +30,51 @@
    <function xmlns="http://www.w3.org/1999/XSL/Transform"
              name="u:ctrlOIB"
              as="xs:boolean">
-      <param name="oib"/>
-      <variable name="prefix"
-                select="if (substring($oib, 1, 2) = 'HR') then true() else false()"/>
-      <variable name="z1"
-                select="if ($prefix) then number(substring($oib, 3, 1)) else number(substring($oib, 1, 1))"/>
-      <variable name="z2"
-                select="if ($prefix) then number(substring($oib, 4, 1)) else number(substring($oib, 2, 1))"/>
-      <variable name="z3"
-                select="if ($prefix) then number(substring($oib, 5, 1)) else number(substring($oib, 3, 1))"/>
-      <variable name="z4"
-                select="if ($prefix) then number(substring($oib, 6, 1)) else number(substring($oib, 4, 1))"/>
-      <variable name="z5"
-                select="if ($prefix) then number(substring($oib, 7, 1)) else number(substring($oib, 5, 1))"/>
-      <variable name="z6"
-                select="if ($prefix) then number(substring($oib, 8, 1)) else number(substring($oib, 6, 1))"/>
-      <variable name="z7"
-                select="if ($prefix) then number(substring($oib, 9, 1)) else number(substring($oib, 7, 1))"/>
-      <variable name="z8"
-                select="if ($prefix) then number(substring($oib, 10, 1)) else number(substring($oib, 8, 1))"/>
-      <variable name="z9"
-                select="if ($prefix) then number(substring($oib, 11, 1)) else number(substring($oib, 9, 1))"/>
-      <variable name="z10"
-                select="if ($prefix) then number(substring($oib, 12, 1)) else number(substring($oib, 10, 1))"/>
-      <variable name="ctrl"
-                select="if ($prefix) then number(substring($oib, 13, 1)) else number(substring($oib, 11, 1))"/>
+      <param name="o"/>
+      <variable name="oib"
+                select="if (starts-with($o, 'HR')) then substring($o, 3) else $o"/>
+      <variable name="valid" select="matches($oib,'^[0-9]{11}$')"/>
+      <variable name="z1" select="number(substring($oib, 1, 1))"/>
+      <variable name="z2" select="number(substring($oib, 2, 1))"/>
+      <variable name="z3" select="number(substring($oib, 3, 1))"/>
+      <variable name="z4" select="number(substring($oib, 4, 1))"/>
+      <variable name="z5" select="number(substring($oib, 5, 1))"/>
+      <variable name="z6" select="number(substring($oib, 6, 1))"/>
+      <variable name="z7" select="number(substring($oib, 7, 1))"/>
+      <variable name="z8" select="number(substring($oib, 8, 1))"/>
+      <variable name="z9" select="number(substring($oib, 9, 1))"/>
+      <variable name="z10" select="number(substring($oib, 10, 1))"/>
+      <variable name="ctrl" select="number(substring($oib, 11, 1))"/>
       <variable name="inter1"
-                select="if ((number($z1) + 10) mod 10 = 0) then (10 * 2) mod 11 else (((number($z1) + 10) mod 10) * 2) mod 11"/>
+                select="if (($z1 + 10) mod 10 = 0) then 9 else (($z1 + 10) mod 10 * 2) mod 11"/>
       <variable name="inter2"
-                select="if ((number($z2) + $inter1) mod 10 = 0) then (10 * 2) mod 11 else (((number($z2) + $inter1) mod 10) * 2) mod 11"/>
+                select="if (($z2 + $inter1) mod 10 = 0) then 9 else (($z2 + $inter1) mod 10 * 2) mod 11"/>
       <variable name="inter3"
-                select="if ((number($z3) + $inter2) mod 10 = 0) then (10 * 2) mod 11 else (((number($z3) + $inter2) mod 10) * 2) mod 11"/>
+                select="if (($z3 + $inter2) mod 10 = 0) then 9 else (($z3 + $inter2) mod 10 * 2) mod 11"/>
       <variable name="inter4"
-                select="if ((number($z4) + $inter3) mod 10 = 0) then (10 * 2) mod 11 else (((number($z4) + $inter3) mod 10) * 2) mod 11"/>
+                select="if (($z4 + $inter3) mod 10 = 0) then 9 else (($z4 + $inter3) mod 10 * 2) mod 11"/>
       <variable name="inter5"
-                select="if ((number($z5) + $inter4) mod 10 = 0) then (10 * 2) mod 11 else (((number($z5) + $inter4) mod 10) * 2) mod 11"/>
+                select="if (($z5 + $inter4) mod 10 = 0) then 9 else (($z5 + $inter4) mod 10 * 2) mod 11"/>
       <variable name="inter6"
-                select="if ((number($z6) + $inter5) mod 10 = 0) then (10 * 2) mod 11 else (((number($z6) + $inter5) mod 10) * 2) mod 11"/>
+                select="if (($z6 + $inter5) mod 10 = 0) then 9 else (($z6 + $inter5) mod 10 * 2) mod 11"/>
       <variable name="inter7"
-                select="if ((number($z7) + $inter6) mod 10 = 0) then (10 * 2) mod 11 else (((number($z7) + $inter6) mod 10) * 2) mod 11"/>
+                select="if (($z7 + $inter6) mod 10 = 0) then 9 else (($z7 + $inter6) mod 10 * 2) mod 11"/>
       <variable name="inter8"
-                select="if ((number($z8) + $inter7) mod 10 = 0) then (10 * 2) mod 11 else (((number($z8) + $inter7) mod 10) * 2) mod 11"/>
+                select="if (($z8 + $inter7) mod 10 = 0) then 9 else (($z8 + $inter7) mod 10 * 2) mod 11"/>
       <variable name="inter9"
-                select="if ((number($z9) + $inter8) mod 10 = 0) then (10 * 2) mod 11 else (((number($z9) + $inter8) mod 10) * 2) mod 11"/>
+                select="if (($z9 + $inter8) mod 10 = 0) then 9 else (($z9 + $inter8) mod 10 * 2) mod 11"/>
       <variable name="inter10"
-                select="if ((number($z10) + $inter9) mod 10 = 0) then (10 * 2) mod 11 else (((number($z10) + $inter9) mod 10) * 2) mod 11"/>
+                select="if (($z10 + $inter9) mod 10 = 0) then 9 else (($z10 + $inter9) mod 10 * 2) mod 11"/>
       <variable name="calcCtrl"
                 select="if (11 - $inter10 = 10) then 0 else 11 - $inter10"/>
-      <value-of select="$calcCtrl = $ctrl"/>
+      <sequence select="$valid and ($calcCtrl = $ctrl)"/>
    </function>
    <function xmlns="http://www.w3.org/1999/XSL/Transform"
              name="u:check3010"
              as="xs:boolean">
-      <param name="broj"/>
-      <variable name="duljina"
-                select="if (string-length($broj) &lt; 30) then true() else false()"/>
-      <variable name="decimale"
-                select="if (string-length(substring-after($broj, '.')) &lt;= 10) then true() else false()"/>
-      <value-of select="$duljina and $decimale"/>
+      <param name="broj" as="xs:anyAtomicType?"/>
+      <variable name="d" select="string($broj)"/>
+      <sequence select="string-length($d) &lt;= 30 and string-length(substring-after($d,'.')) &lt;= 10"/>
    </function>
    <xsl:param name="schxslt.validate.initial-document-uri" as="xs:string?"/>
    <xsl:template name="schxslt.validate">
@@ -200,7 +187,7 @@
                </svrl:active-pattern>
             </xsl:for-each>
          </schxslt:pattern>
-         <schxslt:pattern id="d13e422">
+         <schxslt:pattern id="d13e425">
             <xsl:if test="exists(base-uri(root()))">
                <xsl:attribute name="documents" select="base-uri(root())"/>
             </xsl:if>
@@ -216,7 +203,7 @@
       </schxslt:document>
    </xsl:template>
    <xsl:template match="//*[not(*) and not(normalize-space()) and not(ancestor-or-self::sig:UBLDocumentSignatures)]"
-                 priority="17"
+                 priority="18"
                  mode="d13e94">
       <xsl:param name="schxslt:patterns-matched" as="xs:string*"/>
       <xsl:choose>
@@ -265,14 +252,12 @@
       </xsl:choose>
    </xsl:template>
    <xsl:template match="ubl-creditnote:CreditNote | ubl-invoice:Invoice"
-                 priority="16"
+                 priority="17"
                  mode="d13e94">
       <xsl:param name="schxslt:patterns-matched" as="xs:string*"/>
       <xsl:variable name="issueDate" select="xs:date(cbc:IssueDate)"/>
       <xsl:variable name="payableAmount"
                     select="             if (/ubl-invoice:Invoice) then               cac:LegalMonetaryTotal/cbc:PayableAmount             else               cac:LegalMonetaryTotal/cbc:PayableAmount * -1"/>
-      <xsl:variable name="dueDate"
-                    select="             if (/ubl-invoice:Invoice) then               cbc:DueDate             else               cac:PaymentMeans/cbc:PaymentDueDate"/>
       <xsl:choose>
          <xsl:when test="$schxslt:patterns-matched[. = 'd13e103']">
             <schxslt:rule pattern="d13e103">
@@ -575,12 +560,54 @@
                      <svrl:text>[HR-BR-4] - U slučaju pozitivnog iznosa koji dospijeva na plaćanje (BT-115), datum dospijeća plaćanja (BT-9) mora biti naveden</svrl:text>
                   </svrl:failed-assert>
                </xsl:if>
-               <xsl:if test="not((xs:date($dueDate) &gt;= xs:date('1900-01-01') and xs:date($dueDate) &lt; xs:date('2100-01-01')) or ($payableAmount &lt;= 0))">
+            </schxslt:rule>
+            <xsl:next-match>
+               <xsl:with-param name="schxslt:patterns-matched"
+                               as="xs:string*"
+                               select="($schxslt:patterns-matched, 'd13e103')"/>
+            </xsl:next-match>
+         </xsl:otherwise>
+      </xsl:choose>
+   </xsl:template>
+   <xsl:template match="/ubl-invoice:Invoice | /ubl-creditnote:CreditNote/cac:PaymentMeans"
+                 priority="16"
+                 mode="d13e94">
+      <xsl:param name="schxslt:patterns-matched" as="xs:string*"/>
+      <xsl:variable name="dueDate"
+                    select="             if (/ubl-invoice:Invoice) then               cbc:DueDate             else               cbc:PaymentDueDate"/>
+      <xsl:choose>
+         <xsl:when test="$schxslt:patterns-matched[. = 'd13e103']">
+            <schxslt:rule pattern="d13e103">
+               <xsl:comment xmlns:svrl="http://purl.oclc.org/dsdl/svrl">WARNING: Rule for context "/ubl-invoice:Invoice | /ubl-creditnote:CreditNote/cac:PaymentMeans" shadowed by preceding rule</xsl:comment>
+               <svrl:suppressed-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl">
+                  <xsl:attribute name="context">/ubl-invoice:Invoice | /ubl-creditnote:CreditNote/cac:PaymentMeans</xsl:attribute>
+                  <xsl:variable name="documentUri" as="xs:anyURI?" select="document-uri()"/>
+                  <xsl:if test="exists($documentUri)">
+                     <xsl:attribute name="document" select="$documentUri"/>
+                  </xsl:if>
+               </svrl:suppressed-rule>
+            </schxslt:rule>
+            <xsl:next-match>
+               <xsl:with-param name="schxslt:patterns-matched"
+                               as="xs:string*"
+                               select="$schxslt:patterns-matched"/>
+            </xsl:next-match>
+         </xsl:when>
+         <xsl:otherwise>
+            <schxslt:rule pattern="d13e103">
+               <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl">
+                  <xsl:attribute name="context">/ubl-invoice:Invoice | /ubl-creditnote:CreditNote/cac:PaymentMeans</xsl:attribute>
+                  <xsl:variable name="documentUri" as="xs:anyURI?" select="document-uri()"/>
+                  <xsl:if test="exists($documentUri)">
+                     <xsl:attribute name="document" select="$documentUri"/>
+                  </xsl:if>
+               </svrl:fired-rule>
+               <xsl:if test="not((xs:date($dueDate) &gt;= xs:date('1900-01-01') and xs:date($dueDate) &lt; xs:date('2100-01-01')))">
                   <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                       location="{schxslt:location(.)}"
                                       flag="fatal"
                                       id="HR-BR-41">
-                     <xsl:attribute name="test">(xs:date($dueDate) &gt;= xs:date('1900-01-01') and xs:date($dueDate) &lt; xs:date('2100-01-01')) or ($payableAmount &lt;= 0)</xsl:attribute>
+                     <xsl:attribute name="test">(xs:date($dueDate) &gt;= xs:date('1900-01-01') and xs:date($dueDate) &lt; xs:date('2100-01-01'))</xsl:attribute>
                      <svrl:text>[HR-BR-41] - Datum dospijeća plaćanja (BT-9) -(<xsl:value-of select="$dueDate"/>) - mora biti veći od 01.01.1900. i manji od 01.01.2100.</svrl:text>
                   </svrl:failed-assert>
                </xsl:if>
@@ -968,7 +995,7 @@
                   <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                       location="{schxslt:location(.)}"
                                       flag="fatal"
-                                      id="HR-BR-54">
+                                      id="HR-BR-53">
                      <xsl:attribute name="test">((u:ctrlOIB(cac:Party/cac:PartyTaxScheme/cbc:CompanyID)) or (cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode != 'HR')) or (not(exists(cac:Party/cac:PartyTaxScheme)))</xsl:attribute>
                      <svrl:text>[HR-BR-53] - HR PDV identifikacijski broj (BT-31, BT-48, BT-63) ili porezni identifikator (BT-32) mora biti ispravan OIB</svrl:text>
                   </svrl:failed-assert>
@@ -1510,8 +1537,8 @@
                  mode="d13e94">
       <xsl:param name="schxslt:patterns-matched" as="xs:string*"/>
       <xsl:choose>
-         <xsl:when test="$schxslt:patterns-matched[. = 'd13e422']">
-            <schxslt:rule pattern="d13e422">
+         <xsl:when test="$schxslt:patterns-matched[. = 'd13e425']">
+            <schxslt:rule pattern="d13e425">
                <xsl:comment xmlns:svrl="http://purl.oclc.org/dsdl/svrl">WARNING: Rule for context "cac:TaxCategory/cbc:Name | cac:ClassifiedTaxCategory/cbc:Name | hrextac:HRTaxCategory/cbc:Name" shadowed by preceding rule</xsl:comment>
                <svrl:suppressed-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl">
                   <xsl:attribute name="context">cac:TaxCategory/cbc:Name | cac:ClassifiedTaxCategory/cbc:Name | hrextac:HRTaxCategory/cbc:Name</xsl:attribute>
@@ -1528,7 +1555,7 @@
             </xsl:next-match>
          </xsl:when>
          <xsl:otherwise>
-            <schxslt:rule pattern="d13e422">
+            <schxslt:rule pattern="d13e425">
                <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl">
                   <xsl:attribute name="context">cac:TaxCategory/cbc:Name | cac:ClassifiedTaxCategory/cbc:Name | hrextac:HRTaxCategory/cbc:Name</xsl:attribute>
                   <xsl:variable name="documentUri" as="xs:anyURI?" select="document-uri()"/>
@@ -1549,7 +1576,7 @@
             <xsl:next-match>
                <xsl:with-param name="schxslt:patterns-matched"
                                as="xs:string*"
-                               select="($schxslt:patterns-matched, 'd13e422')"/>
+                               select="($schxslt:patterns-matched, 'd13e425')"/>
             </xsl:next-match>
          </xsl:otherwise>
       </xsl:choose>
@@ -1560,8 +1587,8 @@
       <xsl:param name="schxslt:patterns-matched" as="xs:string*"/>
       <xsl:variable name="lineID" select="../../../cbc:ID"/>
       <xsl:choose>
-         <xsl:when test="$schxslt:patterns-matched[. = 'd13e422']">
-            <schxslt:rule pattern="d13e422">
+         <xsl:when test="$schxslt:patterns-matched[. = 'd13e425']">
+            <schxslt:rule pattern="d13e425">
                <xsl:comment xmlns:svrl="http://purl.oclc.org/dsdl/svrl">WARNING: Rule for context "cac:CommodityClassification/cbc:ItemClassificationCode" shadowed by preceding rule</xsl:comment>
                <svrl:suppressed-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" flag="fatal">
                   <xsl:attribute name="context">cac:CommodityClassification/cbc:ItemClassificationCode</xsl:attribute>
@@ -1578,7 +1605,7 @@
             </xsl:next-match>
          </xsl:when>
          <xsl:otherwise>
-            <schxslt:rule pattern="d13e422">
+            <schxslt:rule pattern="d13e425">
                <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" flag="fatal">
                   <xsl:attribute name="context">cac:CommodityClassification/cbc:ItemClassificationCode</xsl:attribute>
                   <xsl:variable name="documentUri" as="xs:anyURI?" select="document-uri()"/>
@@ -1599,7 +1626,7 @@
             <xsl:next-match>
                <xsl:with-param name="schxslt:patterns-matched"
                                as="xs:string*"
-                               select="($schxslt:patterns-matched, 'd13e422')"/>
+                               select="($schxslt:patterns-matched, 'd13e425')"/>
             </xsl:next-match>
          </xsl:otherwise>
       </xsl:choose>

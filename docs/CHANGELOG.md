@@ -1,6 +1,12 @@
 # Evidencija zapažanja promjena u službenoj dokumentaciji
 
 ## 2026-03-12
+- __HRUBLValidator__
+  - PROMJENA:
+    - `u:ctrlOIB` - refaktorirana: pojednostavljeno uklanjanje HR prefiksa (`starts-with`/`substring`), dodana validacija formata (`matches('^[0-9]{11}$')`), pojednostavljeni međuizračuni, `value-of` zamijenjen sa `sequence`
+    - `u:check3010` - ispravljena granica: `string-length < 30` promijenjeno u `<= 30` (dopušteno 30 znamenki umjesto 29), dodan tip parametra `xs:anyAtomicType?`, eksplicitna konverzija u `string()`
+    - HR-BR-41 - premješten u zasebno pravilo s kontekstom `/ubl-invoice:Invoice | /ubl-creditnote:CreditNote/cac:PaymentMeans`, ispravljena CreditNote putanja u `cbc:PaymentDueDate`, uklonjen uvjet `$payableAmount <= 0`
+    - HR-BR-53 (AccountingSupplierParty) - ispravljen `id` atribut iz `HR-BR-54` u `HR-BR-53`
 - __Specifikacija_osnovne_uporabe_eRacuna_s_prosirenjima.pdf__
   - verzija 1.8 (12.03.2026.)
     - Nova pravila:

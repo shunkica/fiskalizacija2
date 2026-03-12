@@ -51,14 +51,42 @@
 #### Pogrešna oznaka pravila
 
 - HR-BR-56 (Cijene artikla, stope PDV, količine ne smiju imati više od 10 decimala i 30 znamenki) - u tijelu dokumenta pogrešno označena kao HR-BR-55 na svim mjestima gdje se pojavljuje. U opisu promjena verzije 1.8 ispravno navedena kao HR-BR-56.
+- Na stranici 120 u sekciji HR-BT-25, pravilo HR-BR-54 („HR Ukupni iznos PDV mora biti jednak zbroju HR iznosa kategorije PDV (HR-BT-17)") pogrešno je označeno kao HR-BR-53, a pravilo HR-BR-55 („HR Ukupni iznos PDV mora biti jednak ukupni iznos PDV (HR-BT-110)") pogrešno je označeno kao HR-BR-54. U validatoru oznaka HR-BR-53 se koristi za validaciju OIB-a.
+
+#### Pogrešan tekst u tablicama
+
+- Tablica 55, P5 - piše „Sport payment" umjesto „Spot payment"
 
 # Validator
 
-## Nema validaciju za pravila
- - HR-BR-27 (bivši HR-BR-31)
- - HR-BR-28
+## Shadowing pravila (dead code)
 
-# Primjeri eRačuna 
+Unutar istog `<pattern>` bloka u schematronu, ako više `<rule>` elemenata odgovara istom XML čvoru, samo prvi se izvršava (ISO Schematron specifikacija). Sljedeća pravila su nedostupna:
+
+### HRTaxSubtotal kontekst (redak 191 vs redak 347)
+
+Oba pravila imaju identičan kontekst `ext:UBLExtensions/.../hrextac:HRTaxSubtotal`. Prvo pravilo (redak 191) sadrži samo HR-BR-56 (check3010), pa su pravila iz drugog bloka (redak 347) potpuno nedostupna:
+ - HR-BR-28 - Za kategorije „E" ili „O" HR iznos porezne kategorije mora biti 0
+ - HR-BR-S-10 - Za kategoriju „S" stopa PDV mora biti veća od 0
+ - HR-BR-Z-10 - Za kategoriju „Z" stopa PDV mora biti 0
+ - HR-BR-E-10 - Za kategoriju „E" stopa PDV mora biti 0
+ - HR-BR-AE-10 - Za kategoriju „AE" stopa PDV mora biti 0
+
+### Invoice kontekst za HR-BR-41 (redak 168 vs redak 63)
+
+Pravilo na retku 168 ima kontekst `/ubl-invoice:Invoice | /ubl-creditnote:CreditNote/cac:PaymentMeans`. Za Invoice dokumente, kontekst `/ubl-invoice:Invoice` je zasjenjen pravilom na retku 63 (`ubl-invoice:Invoice | ubl-creditnote:CreditNote`). Posljedica: HR-BR-41 (validacija raspona datuma dospijeća) se nikada ne izvršava za Invoice dokumente. Za CreditNote dokumente radi ispravno jer je kontekst `CreditNote/cac:PaymentMeans` različit čvor.
+
+## Nekonzistentnosti u validatoru
+
+### HR-BR-40 gornja granica datuma
+
+Koristi `<=` (manje ili jednako) za usporedbu s 2100-01-01, dok sva ostala pravila za validaciju datuma (HR-BR-48, HR-BR-49, HR-BR-50, HR-BR-44, HR-BR-45, HR-BR-51, HR-BR-52) koriste `<` (strogo manje). Tekst poruke kaže „manji od 01.01.2100" što odgovara `<`, ne `<=`.
+
+### HR-BR-56 nedostaje HR-BT-19 u poruci
+
+U kontekstu troškova na razini dokumenta (AllowanceCharge, ChargeIndicator=true, redak 206) i popusta na razini dokumenta (AllowanceCharge, ChargeIndicator=false, redak 212), poruka pravila HR-BR-56 ne sadrži „HR-BT-19" u popisu BT elemenata, dok svi ostali konteksti za HR-BR-56 sadrže „HR-BT-19".
+
+# Primjeri eRačuna
 
 ## Racun_za_leasing_PDV_PPMV_aktivacija.xml
  - [HR-BR-25] - Svaki artikl MORA imati identifikator klasifikacije artikla iz sheme Klasifikacija proizvoda po djelatnostima: KPD (CPA) – listID „CG“, osim u slučaju računa za predujam i odobrenja.

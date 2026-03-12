@@ -15,38 +15,39 @@ This schematron uses business terms defined the CEN/EN16931-1 and is reproduced 
 	<ns uri="http://www.w3.org/2001/XMLSchema" prefix="xs"/>
 	
 	<function xmlns="http://www.w3.org/1999/XSL/Transform" name="u:ctrlOIB" as="xs:boolean">
-	    <param name="oib" />
-	    <variable name="prefix" select="if (substring($oib, 1, 2) = 'HR') then true() else false()"/>
-	    <variable name="z1" select="if ($prefix) then number(substring($oib, 3, 1)) else number(substring($oib, 1, 1))"/>
-	    <variable name="z2" select="if ($prefix) then number(substring($oib, 4, 1)) else number(substring($oib, 2, 1))"/>
-		<variable name="z3" select="if ($prefix) then number(substring($oib, 5, 1)) else number(substring($oib, 3, 1))"/>
-	    <variable name="z4" select="if ($prefix) then number(substring($oib, 6, 1)) else number(substring($oib, 4, 1))"/>
-	    <variable name="z5" select="if ($prefix) then number(substring($oib, 7, 1)) else number(substring($oib, 5, 1))"/>
-	    <variable name="z6" select="if ($prefix) then number(substring($oib, 8, 1)) else number(substring($oib, 6, 1))"/>
-	    <variable name="z7" select="if ($prefix) then number(substring($oib, 9, 1)) else number(substring($oib, 7, 1))"/>
-	    <variable name="z8" select="if ($prefix) then number(substring($oib, 10, 1)) else number(substring($oib, 8, 1))"/>
-	    <variable name="z9" select="if ($prefix) then number(substring($oib, 11, 1)) else number(substring($oib, 9, 1))"/>
-	    <variable name="z10" select="if ($prefix) then number(substring($oib, 12, 1)) else number(substring($oib, 10, 1))"/>
-	    <variable name="ctrl" select="if ($prefix) then number(substring($oib, 13, 1)) else number(substring($oib, 11, 1))"/>
-	    <variable name="inter1" select="if ((number($z1) + 10) mod 10 = 0) then (10 * 2) mod 11 else (((number($z1) + 10) mod 10) * 2) mod 11"/>
-	    <variable name="inter2" select="if ((number($z2) + $inter1) mod 10 = 0) then (10 * 2) mod 11 else (((number($z2) + $inter1) mod 10) * 2) mod 11"/>
-	    <variable name="inter3" select="if ((number($z3) + $inter2) mod 10 = 0) then (10 * 2) mod 11 else (((number($z3) + $inter2) mod 10) * 2) mod 11"/>
-	    <variable name="inter4" select="if ((number($z4) + $inter3) mod 10 = 0) then (10 * 2) mod 11 else (((number($z4) + $inter3) mod 10) * 2) mod 11"/>
-	    <variable name="inter5" select="if ((number($z5) + $inter4) mod 10 = 0) then (10 * 2) mod 11 else (((number($z5) + $inter4) mod 10) * 2) mod 11"/>
-	    <variable name="inter6" select="if ((number($z6) + $inter5) mod 10 = 0) then (10 * 2) mod 11 else (((number($z6) + $inter5) mod 10) * 2) mod 11"/>
-	    <variable name="inter7" select="if ((number($z7) + $inter6) mod 10 = 0) then (10 * 2) mod 11 else (((number($z7) + $inter6) mod 10) * 2) mod 11"/>
-	    <variable name="inter8" select="if ((number($z8) + $inter7) mod 10 = 0) then (10 * 2) mod 11 else (((number($z8) + $inter7) mod 10) * 2) mod 11"/>
-	    <variable name="inter9" select="if ((number($z9) + $inter8) mod 10 = 0) then (10 * 2) mod 11 else (((number($z9) + $inter8) mod 10) * 2) mod 11"/>
-	    <variable name="inter10" select="if ((number($z10) + $inter9) mod 10 = 0) then (10 * 2) mod 11 else (((number($z10) + $inter9) mod 10) * 2) mod 11"/>
+	    <param name="o" />
+	    <variable name="oib" select="if (starts-with($o, 'HR')) then substring($o, 3) else $o"/>
+	    <variable name="valid" select="matches($oib,'^[0-9]{11}$')"/>
+	    
+	    <variable name="z1" select="number(substring($oib, 1, 1))"/>
+	    <variable name="z2" select="number(substring($oib, 2, 1))"/>
+		<variable name="z3" select="number(substring($oib, 3, 1))"/>
+	    <variable name="z4" select="number(substring($oib, 4, 1))"/>
+	    <variable name="z5" select="number(substring($oib, 5, 1))"/>
+	    <variable name="z6" select="number(substring($oib, 6, 1))"/>
+	    <variable name="z7" select="number(substring($oib, 7, 1))"/>
+	    <variable name="z8" select="number(substring($oib, 8, 1))"/>
+	    <variable name="z9" select="number(substring($oib, 9, 1))"/>
+	    <variable name="z10" select="number(substring($oib, 10, 1))"/>
+	    <variable name="ctrl" select="number(substring($oib, 11, 1))"/>
+	    <variable name="inter1" select="if (($z1 + 10) mod 10 = 0) then 9 else (($z1 + 10) mod 10 * 2) mod 11"/>
+	    <variable name="inter2" select="if (($z2 + $inter1) mod 10 = 0) then 9 else (($z2 + $inter1) mod 10 * 2) mod 11"/>
+	    <variable name="inter3" select="if (($z3 + $inter2) mod 10 = 0) then 9 else (($z3 + $inter2) mod 10 * 2) mod 11"/>
+	    <variable name="inter4" select="if (($z4 + $inter3) mod 10 = 0) then 9 else (($z4 + $inter3) mod 10 * 2) mod 11"/>
+	    <variable name="inter5" select="if (($z5 + $inter4) mod 10 = 0) then 9 else (($z5 + $inter4) mod 10 * 2) mod 11"/>
+	    <variable name="inter6" select="if (($z6 + $inter5) mod 10 = 0) then 9 else (($z6 + $inter5) mod 10 * 2) mod 11"/>
+	    <variable name="inter7" select="if (($z7 + $inter6) mod 10 = 0) then 9 else (($z7 + $inter6) mod 10 * 2) mod 11"/>
+	    <variable name="inter8" select="if (($z8 + $inter7) mod 10 = 0) then 9 else (($z8 + $inter7) mod 10 * 2) mod 11"/>
+	    <variable name="inter9" select="if (($z9 + $inter8) mod 10 = 0) then 9 else (($z9 + $inter8) mod 10 * 2) mod 11"/>
+	    <variable name="inter10" select="if (($z10 + $inter9) mod 10 = 0) then 9 else (($z10 + $inter9) mod 10 * 2) mod 11"/>
 	    <variable name="calcCtrl" select="if (11 - $inter10 = 10) then 0 else 11 - $inter10"/>
-	    <value-of select="$calcCtrl = $ctrl"/>
+	    <sequence select="$valid and ($calcCtrl = $ctrl)"/>
 	</function>
 	
 	<function xmlns="http://www.w3.org/1999/XSL/Transform" name="u:check3010" as="xs:boolean">
-		<param name="broj" />
-		<variable name="duljina" select="if (string-length($broj) &lt; 30) then true() else false()" />
-		<variable name="decimale" select="if (string-length(substring-after($broj, '.')) &lt;= 10) then true() else false()" />
-		<value-of select="$duljina and $decimale"/>
+		<param name="broj" as="xs:anyAtomicType?"/>
+		<variable name="d" select="string($broj)"/>
+		<sequence select="string-length($d) &lt;= 30 and string-length(substring-after($d,'.')) &lt;= 10"/>
 	</function>
 	
 	<!-- Empty elements -->
@@ -162,16 +163,18 @@ This schematron uses business terms defined the CEN/EN16931-1 and is reproduced 
             <assert test="($payableAmount &gt; 0) and (exists(cbc:DueDate) or exists(cac:PaymentMeans/cbc:PaymentDueDate)) or (($payableAmount &lt;= 0))"
             	flag="fatal"
             	id="HR-BR-4">[HR-BR-4] - U slučaju pozitivnog iznosa koji dospijeva na plaćanje (BT-115), datum dospijeća plaćanja (BT-9) mora biti naveden</assert>
-            <let name="dueDate" value="
+		</rule>
+		
+		<rule context="/ubl-invoice:Invoice | /ubl-creditnote:CreditNote/cac:PaymentMeans">
+			<let name="dueDate" value="
           		if (/ubl-invoice:Invoice) then
             		cbc:DueDate
           		else
-            		cac:PaymentMeans/cbc:PaymentDueDate"/>
-            <assert test="(xs:date($dueDate) &gt;= xs:date('1900-01-01') and xs:date($dueDate) &lt; xs:date('2100-01-01')) or ($payableAmount &lt;= 0)"
+            		cbc:PaymentDueDate"/>
+			<assert test="(xs:date($dueDate) &gt;= xs:date('1900-01-01') and xs:date($dueDate) &lt; xs:date('2100-01-01'))"
             	flag="fatal"
             	id="HR-BR-41">[HR-BR-41] - Datum dospijeća plaćanja (BT-9) -(<value-of select="$dueDate"/>) - mora biti veći od 01.01.1900. i manji od 01.01.2100.</assert>
-            
-		</rule>
+        </rule>
 		 
         <rule context="cac:TaxTotal">
         	<assert test="(xs:decimal(../ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/cbc:TaxAmount) = xs:decimal(cbc:TaxAmount) or (cbc:TaxAmount/@currencyID != ../cbc:DocumentCurrencyCode)) or (not(exists(../ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal)))"
@@ -233,7 +236,7 @@ This schematron uses business terms defined the CEN/EN16931-1 and is reproduced 
 				id="HR-BR-9">[HR-BR-9] - Račun mora sadržavati ispravan OIB operatera (HR-BT-5)</assert>
 			<assert test="((u:ctrlOIB(cac:Party/cac:PartyTaxScheme/cbc:CompanyID)) or (cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode != 'HR')) or (not(exists(cac:Party/cac:PartyTaxScheme)))" 
 				flag="fatal"
-				id="HR-BR-54">[HR-BR-53] - HR PDV identifikacijski broj (BT-31, BT-48, BT-63) ili porezni identifikator (BT-32) mora biti ispravan OIB</assert>
+				id="HR-BR-53">[HR-BR-53] - HR PDV identifikacijski broj (BT-31, BT-48, BT-63) ili porezni identifikator (BT-32) mora biti ispravan OIB</assert>
 		</rule>
 		
 		<!-- Accounting customer -->
