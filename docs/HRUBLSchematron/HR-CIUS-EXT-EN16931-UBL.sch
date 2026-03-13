@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-This schematron uses business terms defined the CEN/EN16931-1 and is reproduced with permission from CEN. CEN bears no liability from the use of the content and implementation of this schematron and gives no warranties expressed or implied for any purpose.
- -->
+
 <schema xmlns="http://purl.oclc.org/dsdl/schematron" schemaVersion="iso" xmlns:u="utils" queryBinding="xslt2">
 	<title>Rules for CIUS-HR and EXT-HR 2025 (1.0.0)</title>
 	<ns uri="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" prefix="cbc"/>
@@ -66,7 +64,7 @@ This schematron uses business terms defined the CEN/EN16931-1 and is reproduced 
 				id="HR-BR-1">[HR-BR-1] - Broj računa ne smije sadržavati bjeline (whitespace znakove)
 			</assert>
 			<let name="issueDate" value="xs:date(cbc:IssueDate)"/>
-			<assert test="(xs:date(cbc:IssueDate) &gt;= xs:date('2026-01-01')) and (xs:date(cbc:IssueDate) &lt;= xs:date('2100-01-01'))" 
+			<assert test="(xs:date(cbc:IssueDate) &gt;= xs:date('2026-01-01')) and (xs:date(cbc:IssueDate) &lt; xs:date('2100-01-01'))" 
 				flag="fatal"
 				id="HR-BR-40">[HR-BR-40] - Datum izdavanja računa (BT-2) - (<value-of select="$issueDate"/>) mora biti veći od 01.01.2026 i manji od 01.01.2100.
 			</assert>
@@ -165,17 +163,17 @@ This schematron uses business terms defined the CEN/EN16931-1 and is reproduced 
             	id="HR-BR-4">[HR-BR-4] - U slučaju pozitivnog iznosa koji dospijeva na plaćanje (BT-115), datum dospijeća plaćanja (BT-9) mora biti naveden</assert>
 		</rule>
 		
-		<rule context="/ubl-invoice:Invoice | /ubl-creditnote:CreditNote/cac:PaymentMeans">
+		<rule context="/ubl-invoice:Invoice/cac:PaymentMeans | /ubl-creditnote:CreditNote/cac:PaymentMeans">
 			<let name="dueDate" value="
           		if (/ubl-invoice:Invoice) then
-            		cbc:DueDate
+            		../cbc:DueDate
           		else
             		cbc:PaymentDueDate"/>
-			<assert test="(xs:date($dueDate) &gt;= xs:date('1900-01-01') and xs:date($dueDate) &lt; xs:date('2100-01-01'))"
+			<assert test="(xs:date($dueDate) &gt;= xs:date('1900-01-01') and xs:date($dueDate) &lt; xs:date('2100-01-01')) or not(exists(cbc:PaymentDueDate))"
             	flag="fatal"
             	id="HR-BR-41">[HR-BR-41] - Datum dospijeća plaćanja (BT-9) -(<value-of select="$dueDate"/>) - mora biti veći od 01.01.1900. i manji od 01.01.2100.</assert>
         </rule>
-		 
+		
         <rule context="cac:TaxTotal">
         	<assert test="(xs:decimal(../ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/cbc:TaxAmount) = xs:decimal(cbc:TaxAmount) or (cbc:TaxAmount/@currencyID != ../cbc:DocumentCurrencyCode)) or (not(exists(../ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal)))"
         		flag="fatal"
@@ -184,12 +182,6 @@ This schematron uses business terms defined the CEN/EN16931-1 and is reproduced 
 		
 		<rule context="cac:TaxTotal/cac:TaxSubtotal">
 			<assert test="u:check3010(cac:TaxCategory/cbc:Percent)" 
-				flag="fatal"
-				id="HR-BR-56">[HR-BR-56] - Cijene artikla (BT-146, BT-147, BT-148), stope PDV (BT-119, BT-96, BT-103, BT-152, HR-BT-19), količine (BT-129, BT-149) ne smiju imati više od 10 decimala i 30 znamenki</assert>
-		</rule>
-		
-		<rule context="ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/hrextac:HRFISK20Data/hrextac:HRTaxTotal/hrextac:HRTaxSubtotal">
-			<assert test="u:check3010(hrextac:HRTaxCategory/cbc:Percent)" 
 				flag="fatal"
 				id="HR-BR-56">[HR-BR-56] - Cijene artikla (BT-146, BT-147, BT-148), stope PDV (BT-119, BT-96, BT-103, BT-152, HR-BT-19), količine (BT-129, BT-149) ne smiju imati više od 10 decimala i 30 znamenki</assert>
 		</rule>
@@ -231,10 +223,13 @@ This schematron uses business terms defined the CEN/EN16931-1 and is reproduced 
 			<assert test="cac:SellerContact/cbc:Name" 
 				flag="fatal"
 				id="HR-BR-37">[HR-BR-37] - Račun mora sadržavati oznaku operatera (HR-BT-4)</assert>
-			<assert test="cac:SellerContact/cbc:ID and u:ctrlOIB(cac:SellerContact/cbc:ID) and matches(cac:SellerContact/cbc:ID, '^[0-9]{11}$')" 
+			<assert test="cac:SellerContact/cbc:ID and u:ctrlOIB(cac:SellerContact/cbc:ID)" 
 				flag="fatal"
 				id="HR-BR-9">[HR-BR-9] - Račun mora sadržavati ispravan OIB operatera (HR-BT-5)</assert>
-			<assert test="((u:ctrlOIB(cac:Party/cac:PartyTaxScheme/cbc:CompanyID)) or (cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode != 'HR')) or (not(exists(cac:Party/cac:PartyTaxScheme)))" 
+		</rule>
+		
+		<rule context="cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme">
+			<assert test="(u:ctrlOIB(cbc:CompanyID)) or (../cac:PostalAddress/cac:Country/cbc:IdentificationCode != 'HR')" 
 				flag="fatal"
 				id="HR-BR-53">[HR-BR-53] - HR PDV identifikacijski broj (BT-31, BT-48, BT-63) ili porezni identifikator (BT-32) mora biti ispravan OIB</assert>
 		</rule>
@@ -244,14 +239,17 @@ This schematron uses business terms defined the CEN/EN16931-1 and is reproduced 
 			<assert test="cac:Party/cbc:EndpointID" 
 				flag="fatal"
 				id="HR-BR-10">[HR-BR-10] - Elektronička adresa Kupca (BT-49) mora biti navedena</assert>
-			<assert test="((u:ctrlOIB(cac:Party/cac:PartyTaxScheme/cbc:CompanyID)) or (cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode != 'HR')) or (not(exists(cac:Party/cac:PartyTaxScheme)))" 
+		</rule>
+		
+		<rule context="cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme">
+			<assert test="(u:ctrlOIB(cbc:CompanyID)) or (../cac:PostalAddress/cac:Country/cbc:IdentificationCode != 'HR')" 
 				flag="fatal"
 				id="HR-BR-53">[HR-BR-53] - HR PDV identifikacijski broj (BT-31, BT-48, BT-63) ili porezni identifikator (BT-32) mora biti ispravan OIB</assert>
 		</rule>
 		
 		<!--  TaxRepresentativeParty -->
-		<rule context="cac:TaxRepresentativeParty">
-			<assert test="(u:ctrlOIB(cac:PartyTaxScheme/cbc:CompanyID)) or (cac:PostalAddress/cac:Country/cbc:IdentificationCode != 'HR')" 
+		<rule context="cac:TaxRepresentativeParty/cac:PartyTaxScheme">
+			<assert test="(u:ctrlOIB(cbc:CompanyID)) or (../cac:PostalAddress/cac:Country/cbc:IdentificationCode != 'HR')" 
 				flag="fatal"
 				id="HR-BR-53">[HR-BR-53] - HR PDV identifikacijski broj (BT-31, BT-48, BT-63) ili porezni identifikator (BT-32) mora biti ispravan OIB</assert>
 		</rule>
@@ -361,8 +359,11 @@ This schematron uses business terms defined the CEN/EN16931-1 and is reproduced 
 			<assert test="(exists(hrextac:HRTaxCategory/cbc:ID)) and (hrextac:HRTaxCategory/cbc:ID = 'AE') and (hrextac:HRTaxCategory/cbc:Percent = 0) or (hrextac:HRTaxCategory/cbc:ID != 'AE')"
                  flag="fatal"
                  id="HR-BR-AE-10">[HR-BR-AE-10] - Za svaku HR raspodjelu PDV u kojoj je kategorija PDV-a (HR-BT-18) "Prijenos porezne obveze" stopa PDV mora biti 0</assert>
-			</rule>
-		
+            <assert test="u:check3010(hrextac:HRTaxCategory/cbc:Percent)" 
+				flag="fatal"
+				id="HR-BR-56">[HR-BR-56] - Cijene artikla (BT-146, BT-147, BT-148), stope PDV (BT-119, BT-96, BT-103, BT-152, HR-BT-19), količine (BT-129, BT-149) ne smiju imati više od 10 decimala i 30 znamenki</assert>
+		</rule>
+			
 	</pattern>
 	
 	<include href="codelist/HR-CIUS-EXT-EN16931-UBL-codes.sch"/>
